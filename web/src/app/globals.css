@@ -2626,6 +2626,113 @@ body.has-room-lightbox .reserve-float {
 
 }
 
+/* —— Meetings & Weddings: venue facts + enquiry —— */
+
+.event-facts {
+  background: var(--band);
+  padding: clamp(64px, 8vh, 96px) var(--page-gutter);
+}
+
+.event-facts__inner {
+  width: min(1080px, 100%);
+  margin-inline: auto;
+}
+
+.event-facts__heading {
+  margin: 0 0 clamp(36px, 5vh, 52px);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 2.8vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.event-facts__grid {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(28px, 4vw, 48px);
+}
+
+.event-facts__item {
+  text-align: center;
+}
+
+.event-facts__value {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.event-facts__label {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.event-enquiry {
+  background: var(--paper);
+  padding: clamp(72px, 9vh, 108px) var(--page-gutter);
+  text-align: center;
+}
+
+.event-enquiry__title {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 2.8vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.event-enquiry__body {
+  margin: 18px auto 0;
+  max-width: 52ch;
+  color: var(--ink-soft);
+  font-family: var(--serif);
+  font-size: clamp(0.98rem, 1.05vw, 1.08rem);
+  line-height: 1.7;
+}
+
+.event-enquiry__button {
+  margin-top: 32px;
+  min-height: 46px;
+  padding: 0 30px;
+  border: 0;
+  background: var(--reserve);
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.event-enquiry__button:hover {
+  background: #1f1f1f;
+}
+
+.event-enquiry__button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  .event-facts__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 /* —— Room detail modal —— */
 
 .room-detail {

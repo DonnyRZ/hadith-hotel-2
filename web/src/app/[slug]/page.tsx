@@ -1,23 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PageHeroCarousel } from "@/components/PageHeroCarousel";
 
 const pages = {
-  "meetings-weddings": "Meetings & Weddings",
   reviews: "Reviews & Testimonies",
   gallery: "Gallery",
 } as const;
 
 type PageSlug = keyof typeof pages;
-
-const heroPages = {
-  "meetings-weddings": [
-    "Meetings & Weddings hero image 1",
-    "Meetings & Weddings hero image 2",
-  ],
-} as const;
-
-type HeroPageSlug = keyof typeof heroPages;
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -37,17 +26,6 @@ export default async function PlaceholderPage({ params }: PageProps) {
   const title = pages[slug as PageSlug];
 
   if (!title) notFound();
-
-  if (slug in heroPages) {
-    return (
-      <main className="content-page">
-        <PageHeroCarousel
-          title={title}
-          slides={heroPages[slug as HeroPageSlug]}
-        />
-      </main>
-    );
-  }
 
   return (
     <main className="placeholder-page">
