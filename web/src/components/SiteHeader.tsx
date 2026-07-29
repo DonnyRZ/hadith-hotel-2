@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ComingSoonModal } from "@/components/ComingSoonModal";
 import { navItems } from "@/lib/navigation";
 
@@ -27,12 +27,24 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
   const [showFloatReserve, setShowFloatReserve] = useState(false);
-  const utilityRef = useRef<HTMLDivElement>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const el = utilityRef.current;
-    if (!el) return;
+    if (!mobileMenuOpen) return;
 
+    document.body.classList.add("has-mobile-menu");
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileMenuOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.body.classList.remove("has-mobile-menu");
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
     const primaryH =
       parseFloat(
         getComputedStyle(document.documentElement).getPropertyValue(
@@ -40,21 +52,42 @@ export function SiteHeader() {
         ),
       ) || 92;
 
-    // Treat utility as "gone" once it scrolls under the sticky primary nav
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setShowFloatReserve(!entry.isIntersecting);
-      },
-      {
-        root: null,
-        threshold: 0,
-        rootMargin: `-${primaryH}px 0px 0px 0px`,
-      },
-    );
+    let observer: IntersectionObserver | null = null;
+    const frame = window.requestAnimationFrame(() => {
+      const anchors = Array.from(
+        document.querySelectorAll<HTMLElement>("[data-reserve-anchor]"),
+      );
+      if (anchors.length === 0) return;
 
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+      const visibility = new Map<Element, boolean>();
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            visibility.set(entry.target, entry.isIntersecting);
+          });
+
+          if (visibility.size === anchors.length) {
+            setShowFloatReserve(
+              !Array.from(visibility.values()).some(Boolean),
+            );
+          }
+        },
+        {
+          root: null,
+          threshold: 0,
+          rootMargin: `-${primaryH}px 0px 0px 0px`,
+        },
+      );
+
+      anchors.forEach((anchor) => observer?.observe(anchor));
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      observer?.disconnect();
+    };
+  }, [pathname]);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -90,11 +123,68 @@ export function SiteHeader() {
                 </Link>
               ))}
             </nav>
+
+            <div className="site-header__mobile-actions">
+              <button
+                type="button"
+                className="site-header__mobile-reserve"
+                data-reserve-anchor
+                onClick={openComingSoon}
+              >
+                Reserve
+              </button>
+              <button
+                type="button"
+                className={`site-header__menu-toggle${mobileMenuOpen ? " is-open" : ""}`}
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-navigation"
+                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                onClick={() => setMobileMenuOpen((open) => !open)}
+              >
+                <span />
+                <span />
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
-      <div className="site-header__utility" ref={utilityRef}>
+      {mobileMenuOpen ? (
+        <div className="mobile-menu" id="mobile-navigation">
+          <button
+            type="button"
+            className="mobile-menu__backdrop"
+            aria-label="Close menu"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          <div className="mobile-menu__panel">
+            <p className="mobile-menu__eyebrow">Explore HADITH Hotel</p>
+            <nav className="mobile-menu__nav" aria-label="Mobile primary">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={isActive(item.href) ? "is-active" : undefined}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+            <a
+              className="mobile-menu__map"
+              href="https://maps.app.goo.gl/71EH9gqP3kGgsMAB6"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <PinIcon />
+              View Map
+            </a>
+          </div>
+        </div>
+      ) : null}
+
+      <div className="site-header__utility">
         <div className="site-header__utility-inner site-header__utility-inner--actions-only">
           <div className="site-header__actions">
             <a
@@ -109,6 +199,7 @@ export function SiteHeader() {
             <button
               type="button"
               className="site-header__reserve"
+              data-reserve-anchor
               onClick={openComingSoon}
             >
               <span>Reserve</span>

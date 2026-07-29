@@ -19,18 +19,18 @@ const destinations: Destination[] = [
       "A major Islamic pilgrimage complex featuring the mausoleum of Imam al-Bukhari, a mosque, museum, library, and research centre.",
   },
   {
-    id: "shah-i-zinda",
-    name: "Shah-i-Zinda",
-    distance: "16.5 km",
+    id: "makhdumi-azam",
+    name: "Makhdumi A’zam Complex",
+    distance: "5.8 km",
     description:
-      "A remarkable avenue of historic mausoleums renowned for its intricate blue tilework and Timurid architecture.",
+      "A historic Sufi religious complex in Dahbed, known for its mausoleum, mosque, traditional architecture, and peaceful setting.",
   },
   {
-    id: "registan",
-    name: "Registan Square",
-    distance: "17.2 km",
+    id: "ulugh-beg-observatory",
+    name: "Ulugh Beg Observatory",
+    distance: "15.6 km",
     description:
-      "Samarkand’s most iconic landmark, surrounded by three monumental madrasas decorated with elaborate mosaics and turquoise tiles.",
+      "A 15th-century astronomical observatory built by the scholar and ruler Ulugh Beg, highlighting Samarkand’s scientific heritage.",
   },
 ];
 

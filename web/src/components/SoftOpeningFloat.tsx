@@ -1,25 +1,31 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 
 const STORAGE_KEY = "hadith-soft-opening-dismissed";
+
+const subscribeToDismissal = () => () => {};
+
+function wasDismissed() {
+  try {
+    return sessionStorage.getItem(STORAGE_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
 
 type SoftOpeningFloatProps = {
   className?: string;
 };
 
 export function SoftOpeningFloat({ className = "" }: SoftOpeningFloatProps) {
-  const [visible, setVisible] = useState(false);
+  const dismissedBefore = useSyncExternalStore(
+    subscribeToDismissal,
+    wasDismissed,
+    () => true,
+  );
+  const [visible, setVisible] = useState(true);
   const [leaving, setLeaving] = useState(false);
-
-  useEffect(() => {
-    try {
-      if (sessionStorage.getItem(STORAGE_KEY) === "1") return;
-    } catch {
-      /* ignore */
-    }
-    setVisible(true);
-  }, []);
 
   const dismiss = () => {
     setLeaving(true);
@@ -31,7 +37,7 @@ export function SoftOpeningFloat({ className = "" }: SoftOpeningFloatProps) {
     window.setTimeout(() => setVisible(false), 320);
   };
 
-  if (!visible) return null;
+  if (dismissedBefore || !visible) return null;
 
   return (
     <div

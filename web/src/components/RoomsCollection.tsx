@@ -18,13 +18,14 @@ function RoomCard({
 }) {
   return (
     <article className="room-card">
-      <div
+      <button
+        type="button"
         className={`media-placeholder room-card__media media-placeholder--tone-${tone}`}
-        role="img"
         aria-label={`${room.name} image placeholder`}
+        onClick={onViewDetails}
       >
         <span>{room.name}</span>
-      </div>
+      </button>
 
       <h3 className="room-card__name">{room.name}</h3>
       <p className="room-card__detail">
@@ -122,7 +123,11 @@ export function RoomsCollection() {
         )}
       </section>
 
-      <RoomDetailModal room={detailRoom} onClose={() => setDetailRoom(null)} />
+      <RoomDetailModal
+        key={detailRoom?.id ?? "closed"}
+        room={detailRoom}
+        onClose={() => setDetailRoom(null)}
+      />
 
       <ComingSoonModal
         open={comingSoonOpen}

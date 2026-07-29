@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 type Venue = {
   id: string;
   heading: string;
@@ -7,6 +11,7 @@ type Venue = {
   highlights: string[];
   variant: "blue" | "paper";
   reversed?: boolean;
+  gallery?: string[];
 };
 
 const venues: Venue[] = [
@@ -39,8 +44,62 @@ const venues: Venue[] = [
     ],
     variant: "paper",
     reversed: true,
+    gallery: ["The Cafe", "Indonesian Coffee & Pastries", "Cafe Social Lounge"],
   },
 ];
+
+function VenueMediaCarousel({ venue }: { venue: Venue }) {
+  const slides = venue.gallery ?? [venue.name];
+  const [index, setIndex] = useState(0);
+  const count = slides.length;
+  const wrap = (value: number) => (value + count) % count;
+  const progress = ((index + 1) / count) * 100;
+
+  return (
+    <div
+      className="venue-carousel"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label={`${venue.name} gallery`}
+    >
+      <div
+        className={`media-placeholder venue__placeholder venue-carousel__slide media-placeholder--tone-${(index % 3) + 1}`}
+        role="img"
+        aria-label={`${slides[index]} image placeholder`}
+      >
+        <span>{slides[index]}</span>
+      </div>
+
+      <div className="venue-carousel__controls">
+        <button
+          type="button"
+          className="venue-carousel__nav"
+          onClick={() => setIndex((current) => wrap(current - 1))}
+          aria-label={`Previous ${venue.name} photo`}
+        >
+          <span aria-hidden="true">‹</span> Previous
+        </button>
+
+        <div className="venue-carousel__progress" aria-hidden="true">
+          <span style={{ width: `${progress}%` }} />
+        </div>
+
+        <button
+          type="button"
+          className="venue-carousel__nav"
+          onClick={() => setIndex((current) => wrap(current + 1))}
+          aria-label={`Next ${venue.name} photo`}
+        >
+          Next <span aria-hidden="true">›</span>
+        </button>
+
+        <p className="venue-carousel__counter">
+          {String(index + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
+        </p>
+      </div>
+    </div>
+  );
+}
 
 export function CafeDiningVenues() {
   return (
@@ -58,13 +117,17 @@ export function CafeDiningVenues() {
 
             <div className={`venue__layout${venue.reversed ? " is-reversed" : ""}`}>
               <div className="venue__media">
-                <div
-                  className={`media-placeholder venue__placeholder media-placeholder--tone-${(index % 3) + 1}`}
-                  role="img"
-                  aria-label={`${venue.name} image placeholder`}
-                >
-                  <span>{venue.name}</span>
-                </div>
+                {venue.gallery ? (
+                  <VenueMediaCarousel venue={venue} />
+                ) : (
+                  <div
+                    className={`media-placeholder venue__placeholder media-placeholder--tone-${(index % 3) + 1}`}
+                    role="img"
+                    aria-label={`${venue.name} image placeholder`}
+                  >
+                    <span>{venue.name}</span>
+                  </div>
+                )}
               </div>
 
               <div className="venue__card">

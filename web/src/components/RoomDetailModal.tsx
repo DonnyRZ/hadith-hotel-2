@@ -36,10 +36,6 @@ export function RoomDetailModal({ room, onClose }: RoomDetailModalProps) {
   }, []);
 
   useEffect(() => {
-    setPhoto(0);
-  }, [room?.id]);
-
-  useEffect(() => {
     if (!open) return;
 
     const previousOverflow = document.body.style.overflow;

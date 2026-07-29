@@ -19,50 +19,57 @@ type Testimonial = {
 const videoReviews: VideoReview[] = [
   {
     id: "review-1",
-    title: "A Stay to Remember",
+    title: "Review Title",
     name: "Guest Name",
-    role: "Guest from Germany",
+    role: "Guest Title",
   },
   {
     id: "review-2",
-    title: "Comfort in Every Detail",
+    title: "Review Title",
     name: "Guest Name",
-    role: "Guest from Uzbekistan",
+    role: "Guest Title",
   },
   {
     id: "review-3",
-    title: "Hospitality at Its Finest",
+    title: "Review Title",
     name: "Guest Name",
-    role: "Guest from Indonesia",
+    role: "Guest Title",
   },
   {
     id: "review-4",
-    title: "The Heart of Samarkand",
+    title: "Review Title",
     name: "Guest Name",
-    role: "Guest from Turkey",
+    role: "Guest Title",
   },
   {
     id: "review-5",
-    title: "An Unforgettable Experience",
+    title: "Review Title",
     name: "Guest Name",
-    role: "Guest from Malaysia",
+    role: "Guest Title",
   },
 ];
 
+const landscapeReview: VideoReview = {
+  id: "review-landscape",
+  title: "Review Title",
+  name: "Guest Name",
+  role: "Guest Title",
+};
+
 const testimonials: Testimonial[] = [
   {
-    id: "steinmeier",
+    id: "testimonial-1",
     quote:
-      "We are now standing in front of the Islamic Civilization Center. Please pay attention to its name — it is not about religion itself, but about Islamic civilization. This is a major scientific...",
-    name: "Frank-Walter Steinmeier",
-    role: "President of the Federal Republic of Germany",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...",
+    name: "Guest Name",
+    role: "Guest Title",
   },
   {
-    id: "pena",
+    id: "testimonial-2",
     quote:
-      "The history of Uzbekistan is truly unparalleled. It is a great civilization encompassing five thousand years of development. To understand a nation, one must know its history, and here th...",
-    name: "Santiago Peña",
-    role: "President of the Republic of Paraguay",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...",
+    name: "Guest Name",
+    role: "Guest Title",
   },
   {
     id: "testimonial-3",
@@ -115,10 +122,18 @@ function ChevronRight() {
   );
 }
 
-function VideoPlaceholder({ label, tone }: { label: string; tone: number }) {
+function VideoPlaceholder({
+  label,
+  tone,
+  orientation = "portrait",
+}: {
+  label: string;
+  tone: number;
+  orientation?: "portrait" | "landscape";
+}) {
   return (
     <div
-      className={`media-placeholder video-frame media-placeholder--tone-${tone}`}
+      className={`media-placeholder video-frame video-frame--${orientation} media-placeholder--tone-${tone}`}
       role="img"
       aria-label={`${label} video placeholder`}
     >
@@ -127,7 +142,6 @@ function VideoPlaceholder({ label, tone }: { label: string; tone: number }) {
           <path d="M8 5.5v13l11-6.5-11-6.5Z" />
         </svg>
       </span>
-      <span className="video-frame__label">{label}</span>
     </div>
   );
 }
@@ -261,9 +275,7 @@ function VideoReviewsCarousel() {
   const endDrag = (event: React.PointerEvent<HTMLDivElement>) => {
     if (dragState.current?.pointerId !== event.pointerId) return;
     dragState.current = null;
-    if (!carouselRef.current?.matches(":hover")) {
-      setPaused(false);
-    }
+    setPaused(false);
   };
 
   const loopedReviews = [...videoReviews, ...videoReviews];
@@ -275,10 +287,6 @@ function VideoReviewsCarousel() {
       role="region"
       aria-roledescription="carousel"
       aria-label="Guest video reviews"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => {
-        if (!dragState.current) setPaused(false);
-      }}
     >
       <div
         ref={viewportRef}
@@ -296,7 +304,7 @@ function VideoReviewsCarousel() {
             >
               <h3 className="video-reviews__slide-title">{review.title}</h3>
               <VideoPlaceholder
-                label={`${review.title} video`}
+                label={`${review.title} by ${review.name}`}
                 tone={(i % 3) + 1}
               />
               <p className="video-reviews__slide-name">{review.name}</p>
@@ -310,7 +318,7 @@ function VideoReviewsCarousel() {
         <button
           type="button"
           className="carousel-arrow"
-          aria-label="Previous video review"
+          aria-label="Previous story"
           onClick={() => nudge(-1)}
         >
           <ChevronLeft />
@@ -318,7 +326,7 @@ function VideoReviewsCarousel() {
         <button
           type="button"
           className="carousel-arrow"
-          aria-label="Next video review"
+          aria-label="Next story"
           onClick={() => nudge(1)}
         >
           <ChevronRight />
@@ -343,15 +351,18 @@ function TestimonialsCarousel() {
   }, []);
 
   const maxIndex = Math.max(0, count - perView);
-
-  useEffect(() => {
-    setIndex((current) => Math.min(current, Math.max(0, count - perView)));
-  }, [count, perView]);
+  const visibleIndex = Math.min(index, maxIndex);
 
   const goPrevious = () =>
-    setIndex((current) => (current <= 0 ? maxIndex : current - 1));
+    setIndex((current) => {
+      const safeIndex = Math.min(current, maxIndex);
+      return safeIndex <= 0 ? maxIndex : safeIndex - 1;
+    });
   const goNext = () =>
-    setIndex((current) => (current >= maxIndex ? 0 : current + 1));
+    setIndex((current) => {
+      const safeIndex = Math.min(current, maxIndex);
+      return safeIndex >= maxIndex ? 0 : safeIndex + 1;
+    });
 
   return (
     <div
@@ -363,13 +374,13 @@ function TestimonialsCarousel() {
       <div className="testimonials__viewport">
         <div
           className="testimonials__track"
-          style={{ "--i": index } as React.CSSProperties}
+          style={{ "--i": visibleIndex } as React.CSSProperties}
         >
           {testimonials.map((testimonial, i) => (
             <figure
               key={testimonial.id}
               className="testimonial-card"
-              aria-hidden={i < index || i >= index + perView}
+              aria-hidden={i < visibleIndex || i >= visibleIndex + perView}
             >
               <div className="testimonial-card__content">
                 <span className="testimonial-card__mark" aria-hidden="true">
@@ -420,37 +431,49 @@ function TestimonialsCarousel() {
 export function ReviewsTestimonies() {
   return (
     <>
+      <section className="video-reviews" aria-labelledby="video-reviews-heading">
+        <div className="video-reviews__intro">
+          <p className="video-reviews__eyebrow">HADITH Stories</p>
+          <h1 id="video-reviews-heading" className="video-reviews__heading">
+            Reviews
+          </h1>
+        </div>
+        <VideoReviewsCarousel />
+
+        <article className="video-reviews__landscape">
+          <h3 className="video-reviews__slide-title">
+            {landscapeReview.title}
+          </h3>
+          <VideoPlaceholder
+            label={`${landscapeReview.title} by ${landscapeReview.name}`}
+            tone={2}
+            orientation="landscape"
+          />
+          <p className="video-reviews__slide-name">{landscapeReview.name}</p>
+          <p className="video-reviews__slide-role">{landscapeReview.role}</p>
+        </article>
+      </section>
+
       <section
         className="video-showcase"
         aria-labelledby="video-showcase-heading"
       >
         <div className="video-showcase__inner">
           <div className="video-showcase__card">
-            <p className="video-showcase__eyebrow">Inside HADITH Hotel</p>
+            <p className="video-showcase__eyebrow">Featured Event</p>
             <h2 id="video-showcase-heading" className="video-showcase__title">
-              A Glimpse of the Hotel
+              The First International Conference
             </h2>
             <p className="video-showcase__body">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              <cite>Al-Jami&rsquo; al-Musnad al-Sahih: The Book of an Ummah</cite>,
+              held at HADITH Hotel, Imam al-Bukhari Memorial Complex,
+              Samarkand, Uzbekistan, on 9–10 July 2026.
             </p>
           </div>
           <div className="video-showcase__media">
-            <VideoPlaceholder label="Hotel showcase video" tone={1} />
+            <VideoPlaceholder label="Conference highlights" tone={1} />
           </div>
         </div>
-      </section>
-
-      <section className="video-reviews" aria-labelledby="video-reviews-heading">
-        <div className="video-reviews__intro">
-          <p className="video-reviews__eyebrow">Guest Stories</p>
-          <h2 id="video-reviews-heading" className="video-reviews__heading">
-            Video Reviews
-          </h2>
-        </div>
-        <VideoReviewsCarousel />
       </section>
 
       <section className="testimonials" aria-labelledby="testimonials-heading">
@@ -458,7 +481,7 @@ export function ReviewsTestimonies() {
           <div className="testimonials__intro">
             <p className="testimonials__eyebrow">In Their Words</p>
             <h2 id="testimonials-heading" className="testimonials__heading">
-              Testimonials
+              Guest Perspectives
             </h2>
           </div>
           <TestimonialsCarousel />

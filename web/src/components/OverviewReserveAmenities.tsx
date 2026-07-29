@@ -95,6 +95,7 @@ export function OverviewReserveAmenities() {
             <button
               type="button"
               className="overview-amenities__reserve-btn"
+              data-reserve-anchor
               onClick={() => setComingSoonOpen(true)}
             >
               <span>Reserve</span>

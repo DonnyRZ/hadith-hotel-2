@@ -15,6 +15,18 @@ export default function SuitesRoomsPage() {
   return (
     <main className="content-page">
       <PageHeroCarousel title="Suites & Rooms" slides={heroSlides} />
+      <section className="rooms-page-intro" aria-labelledby="rooms-page-intro-title">
+        <p className="rooms-page-intro__count" aria-hidden="true">
+          114
+        </p>
+        <h2 id="rooms-page-intro-title" className="rooms-page-intro__title">
+          Rooms & Suites
+        </h2>
+        <p className="rooms-page-intro__body">
+          Thoughtfully designed spaces for restful stays within the Imam Al
+          Bukhari Complex.
+        </p>
+      </section>
       <RoomsCollection />
     </main>
   );

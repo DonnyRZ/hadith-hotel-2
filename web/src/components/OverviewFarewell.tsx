@@ -75,6 +75,7 @@ export function OverviewFarewell() {
             <button
               type="button"
               className="overview-farewell__reserve"
+              data-reserve-anchor
               onClick={() => setComingSoon("reserve")}
             >
               <span>Reserve</span>

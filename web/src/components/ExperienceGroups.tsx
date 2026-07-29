@@ -21,9 +21,9 @@ const wellnessSlides: WellnessSlide[] = [
 ];
 
 const exploreItems = [
-  { id: "bukhari", name: "Imam Al-Bukhari Complex" },
-  { id: "registan", name: "Registan Square" },
-  { id: "shahizinda", name: "Shah-i-Zinda" },
+  { id: "imam-al-bukhari", name: "Imam al-Bukhari Memorial Complex" },
+  { id: "makhdumi-azam", name: "Makhdumi A’zam Complex" },
+  { id: "ulugh-beg-observatory", name: "Ulugh Beg Observatory" },
 ];
 
 function WellnessPlaceholder({
