@@ -27,12 +27,6 @@ const slides: FeatureSlide[] = [
     description: placeholderDescription,
   },
   {
-    id: "salon-spa",
-    title: "Salon & Spa",
-    href: "/salon-spa",
-    description: placeholderDescription,
-  },
-  {
     id: "experience",
     title: "Experience",
     href: "/experience",

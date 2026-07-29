@@ -2,7 +2,6 @@ export const navItems = [
   { href: "/", label: "Overview" },
   { href: "/suites-rooms", label: "Suites & Rooms" },
   { href: "/cafe-dining", label: "Cafe & Dining" },
-  { href: "/salon-spa", label: "Salon & Spa" },
   { href: "/experience", label: "Experience" },
   { href: "/meetings-weddings", label: "Meetings & Weddings" },
   { href: "/reviews", label: "Reviews & Testimonies" },

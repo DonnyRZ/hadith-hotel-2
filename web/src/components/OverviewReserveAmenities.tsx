@@ -4,37 +4,74 @@ import { useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
   Ban,
+  BedDouble,
   CalendarDays,
-  ConciergeBell,
-  Dumbbell,
   Flower2,
-  KeyRound,
-  Plane,
-  SquareParking,
   UtensilsCrossed,
-  Waves,
-  Wifi,
 } from "lucide-react";
 import { ComingSoonModal } from "@/components/ComingSoonModal";
 
-type Amenity = {
-  id: string;
+type AmenityRow = {
   label: string;
-  icon: LucideIcon;
+  value?: string;
 };
 
-const amenities: Amenity[] = [
-  { id: "pool", label: "Indoor Swimming Pool", icon: Waves },
-  { id: "spa", label: "Spa, Sauna & Hammam", icon: Flower2 },
-  { id: "fitness", label: "Fitness Centre", icon: Dumbbell },
-  { id: "dining", label: "Restaurant & Cafe", icon: UtensilsCrossed },
-  { id: "wifi", label: "Complimentary Wi-Fi", icon: Wifi },
-  { id: "room-service", label: "24-Hour Room Service", icon: ConciergeBell },
-  { id: "concierge", label: "Concierge Service", icon: KeyRound },
-  { id: "events", label: "Event Spaces", icon: CalendarDays },
-  { id: "parking", label: "On-Site Parking", icon: SquareParking },
-  { id: "transfer", label: "Airport Transfer", icon: Plane },
-  { id: "no-pets", label: "No Pets", icon: Ban },
+type AmenityGroup = {
+  id: string;
+  title: string;
+  icon: LucideIcon;
+  rows: AmenityRow[];
+};
+
+/* Mirrors the hotel fact sheet, with room names kept consistent site-wide */
+const groups: AmenityGroup[] = [
+  {
+    id: "accommodation",
+    title: "Accommodation",
+    icon: BedDouble,
+    rows: [
+      { label: "Rooms & Suites", value: "114" },
+      { label: "Standard Room", value: "62" },
+      { label: "Balcony Room", value: "23" },
+      { label: "Suite", value: "18" },
+      { label: "Junior Suite", value: "9" },
+      { label: "President Suite", value: "2" },
+    ],
+  },
+  {
+    id: "dining",
+    title: "Dining",
+    icon: UtensilsCrossed,
+    rows: [
+      { label: "Restaurant", value: "120 seats" },
+      { label: "Bar & Lounge", value: "20 seats" },
+      { label: "Indoor Cafe", value: "20 seats" },
+      { label: "Cuisine", value: "Uzbek · Indonesian · Continental" },
+      { label: "Certification", value: "Halal" },
+    ],
+  },
+  {
+    id: "wellness",
+    title: "Wellness & Sport",
+    icon: Flower2,
+    rows: [
+      { label: "Indoor Pool" },
+      { label: "Spa Center" },
+      { label: "Sauna" },
+      { label: "Turkish Hammam" },
+      { label: "Fitness Centre" },
+      { label: "Beauty Salon" },
+    ],
+  },
+  {
+    id: "events",
+    title: "Events & Culture",
+    icon: CalendarDays,
+    rows: [
+      { label: "Event Space", value: "350 m²" },
+      { label: "Occupancy", value: "250 persons" },
+    ],
+  },
 ];
 
 export function OverviewReserveAmenities() {
@@ -66,20 +103,45 @@ export function OverviewReserveAmenities() {
 
           <div className="overview-amenities__list-wrap">
             <p className="overview-amenities__label">Amenities</p>
-            <ul className="overview-amenities__list">
-              {amenities.map(({ id, label, icon: Icon }) => (
-                <li key={id} className="overview-amenities__item">
-                  <span className="overview-amenities__icon">
+
+            <div className="overview-amenities__groups">
+              {groups.map(({ id, title, icon: Icon, rows }) => (
+                <div key={id} className="overview-amenities__group">
+                  <p className="overview-amenities__group-title">
                     <Icon
-                      className="overview-amenities__icon-svg"
+                      className="overview-amenities__group-icon"
                       strokeWidth={1.25}
                       aria-hidden
                     />
-                  </span>
-                  <span className="overview-amenities__text">{label}</span>
-                </li>
+                    {title}
+                  </p>
+
+                  <ul className="overview-amenities__rows">
+                    {rows.map((row) => (
+                      <li key={row.label} className="overview-amenities__row">
+                        <span className="overview-amenities__row-label">
+                          {row.label}
+                        </span>
+                        {row.value ? (
+                          <span className="overview-amenities__row-value">
+                            {row.value}
+                          </span>
+                        ) : null}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
+
+            <p className="overview-amenities__note">
+              <Ban
+                className="overview-amenities__note-icon"
+                strokeWidth={1.25}
+                aria-hidden
+              />
+              No Pets
+            </p>
           </div>
         </div>
       </section>

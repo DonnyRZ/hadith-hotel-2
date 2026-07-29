@@ -3,8 +3,6 @@ import { notFound } from "next/navigation";
 import { PageHeroCarousel } from "@/components/PageHeroCarousel";
 
 const pages = {
-  "salon-spa": "Salon & Spa",
-  experience: "Experience",
   "meetings-weddings": "Meetings & Weddings",
   reviews: "Reviews & Testimonies",
   gallery: "Gallery",
@@ -13,8 +11,6 @@ const pages = {
 type PageSlug = keyof typeof pages;
 
 const heroPages = {
-  "salon-spa": ["Salon & Spa hero image 1", "Salon & Spa hero image 2"],
-  experience: ["Experience hero image 1", "Experience hero image 2"],
   "meetings-weddings": [
     "Meetings & Weddings hero image 1",
     "Meetings & Weddings hero image 2",
