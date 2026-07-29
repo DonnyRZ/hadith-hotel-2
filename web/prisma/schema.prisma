@@ -1,0 +1,31 @@
+// HADITH Hotel 2 — Prisma schema
+// Ready for later CMS/API use; pages start with static structure + media placeholders.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Hotel {
+  id        String   @id @default(cuid())
+  name      String   @default("HADITH Hotel")
+  tagline   String?
+  location  String   @default("Samarkand, Uzbekistan")
+  complex   String   @default("Complex of Imam Al Bukhari")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ContactInfo {
+  id        String   @id @default(cuid())
+  label     String
+  value     String
+  type      String // email | phone | address
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

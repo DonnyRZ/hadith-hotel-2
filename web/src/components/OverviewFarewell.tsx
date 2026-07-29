@@ -1,0 +1,94 @@
+"use client";
+
+import { useState } from "react";
+import { ComingSoonModal } from "@/components/ComingSoonModal";
+
+/* Static placeholders until live counters are wired to the database */
+const stats = [
+  { id: "downloads", value: 8, label: "Profile Downloads" },
+  { id: "visitors", value: 28, label: "Profile Visitors" },
+];
+
+const comingSoonCopy = {
+  profile: {
+    eyebrow: "Hotel Profile",
+    body: "Our hotel profile document is being finalised and will be available for download shortly.",
+  },
+  reserve: {
+    eyebrow: "Reservations",
+    body: "Online booking will be available shortly. Thank you for your interest in HADITH Hotel.",
+  },
+} as const;
+
+export function OverviewFarewell() {
+  const [comingSoon, setComingSoon] = useState<
+    keyof typeof comingSoonCopy | null
+  >(null);
+
+  return (
+    <>
+      <section
+        className="overview-farewell"
+        aria-labelledby="overview-farewell-heading"
+      >
+        <div className="overview-farewell__visual">
+          <div
+            className="overview-farewell__photo media-placeholder"
+            role="img"
+            aria-label="Hotel night photo placeholder"
+          >
+            <span>Hotel photo placeholder</span>
+          </div>
+
+          <div className="overview-farewell__copy">
+            <p className="overview-farewell__eyebrow">Until we welcome you</p>
+            <h2
+              id="overview-farewell-heading"
+              className="overview-farewell__title"
+            >
+              Some hotels give you somewhere to stay. HADITH Hotel gives you
+              peace worth remembering at the Complex of Imam Al Bukhari.
+            </h2>
+          </div>
+
+          <div className="overview-farewell__fade" aria-hidden="true" />
+        </div>
+
+        <div className="overview-farewell__footer">
+          <dl className="overview-farewell__stats">
+            {stats.map((stat) => (
+              <div key={stat.id} className="overview-farewell__stat">
+                <dd className="overview-farewell__stat-value">{stat.value}</dd>
+                <dt className="overview-farewell__stat-label">{stat.label}</dt>
+              </div>
+            ))}
+          </dl>
+
+          <div className="overview-farewell__actions">
+            <button
+              type="button"
+              className="overview-farewell__download"
+              onClick={() => setComingSoon("profile")}
+            >
+              Download Profile
+            </button>
+            <button
+              type="button"
+              className="overview-farewell__reserve"
+              onClick={() => setComingSoon("reserve")}
+            >
+              <span>Reserve</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <ComingSoonModal
+        open={comingSoon !== null}
+        onClose={() => setComingSoon(null)}
+        eyebrow={comingSoon ? comingSoonCopy[comingSoon].eyebrow : undefined}
+        body={comingSoon ? comingSoonCopy[comingSoon].body : undefined}
+      />
+    </>
+  );
+}
