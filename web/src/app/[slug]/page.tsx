@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 const pages = {
-  reviews: "Reviews & Testimonies",
   gallery: "Gallery",
 } as const;
 
