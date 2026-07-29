@@ -2881,9 +2881,30 @@ body.has-room-lightbox .reserve-float {
 }
 
 .video-reviews__viewport {
+  position: relative;
   overflow: hidden;
   cursor: grab;
   touch-action: pan-y;
+}
+
+/* Wide gradient veil so only the middle videos stay fully lit. */
+.video-reviews__viewport::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    var(--paper) 0%,
+    color-mix(in srgb, var(--paper) 90%, transparent) 10%,
+    color-mix(in srgb, var(--paper) 55%, transparent) 22%,
+    transparent 32%,
+    transparent 68%,
+    color-mix(in srgb, var(--paper) 55%, transparent) 78%,
+    color-mix(in srgb, var(--paper) 90%, transparent) 90%,
+    var(--paper) 100%
+  );
 }
 
 .video-reviews__viewport:active {
@@ -3057,6 +3078,20 @@ body.has-room-lightbox .reserve-float {
 }
 
 @media (max-width: 760px) {
+  .video-reviews__viewport::after {
+    background: linear-gradient(
+      to right,
+      var(--paper) 0%,
+      color-mix(in srgb, var(--paper) 90%, transparent) 12%,
+      color-mix(in srgb, var(--paper) 55%, transparent) 26%,
+      transparent 40%,
+      transparent 60%,
+      color-mix(in srgb, var(--paper) 55%, transparent) 74%,
+      color-mix(in srgb, var(--paper) 90%, transparent) 88%,
+      var(--paper) 100%
+    );
+  }
+
   .testimonials {
     --tst-per-view: 1;
   }
