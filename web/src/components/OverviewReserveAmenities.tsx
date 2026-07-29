@@ -102,7 +102,7 @@ export function OverviewReserveAmenities() {
           </div>
 
           <div className="overview-amenities__list-wrap">
-            <p className="overview-amenities__label">Amenities</p>
+            <p className="overview-amenities__label">Amenities &amp; Hotel Information</p>
 
             <div className="overview-amenities__groups">
               {groups.map(({ id, title, icon: Icon, rows }) => (
