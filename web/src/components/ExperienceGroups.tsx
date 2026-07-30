@@ -48,10 +48,16 @@ const wellnessSlides: WellnessSlide[] = [
 ];
 
 const activeFamilyItems = [
-  { id: "tennis", name: "Tennis Court" },
-  { id: "padel", name: "Padel Court" },
-  { id: "kids-playground", name: "Kids’ Playground" },
+  { id: "tennis", name: "Tennis Court", src: "/images/experience/tennis.webp" },
+  { id: "padel", name: "Padel Court", src: "/images/experience/padel.webp" },
+  {
+    id: "kids-playground",
+    name: "Kids’ Playground",
+    src: "/images/experience/playground.webp",
+  },
 ];
+
+type ActiveFamilyItem = (typeof activeFamilyItems)[number];
 
 const exploreItems = [
   { id: "imam-al-bukhari", name: "Imam al-Bukhari Memorial Complex" },
@@ -85,6 +91,132 @@ function WellnessMedia({
           <span>Photo Coming Soon</span>
         </div>
       )}
+    </div>
+  );
+}
+
+function ActiveFamilyMedia({
+  item,
+  featured = false,
+}: {
+  item: ActiveFamilyItem;
+  featured?: boolean;
+}) {
+  return (
+    <div
+      className={`overview-rooms__media${featured ? " overview-rooms__media--featured" : ""}`}
+    >
+      <Image
+        className="overview-rooms__image"
+        src={item.src}
+        alt={item.name}
+        fill
+        sizes={
+          featured ? "(max-width: 960px) 100vw, 58vw" : "(max-width: 960px) 0px, 22vw"
+        }
+      />
+      <span className="experience-active__badge">Coming Soon</span>
+    </div>
+  );
+}
+
+function ActiveFamilyCarousel() {
+  const [index, setIndex] = useState(0);
+  const count = activeFamilyItems.length;
+
+  const wrap = useCallback(
+    (value: number) => ((value % count) + count) % count,
+    [count],
+  );
+
+  const goPrevious = () => setIndex((current) => wrap(current - 1));
+  const goNext = () => setIndex((current) => wrap(current + 1));
+
+  const previous = activeFamilyItems[wrap(index - 1)]!;
+  const current = activeFamilyItems[index]!;
+  const next = activeFamilyItems[wrap(index + 1)]!;
+  const progress = ((index + 1) / count) * 100;
+
+  return (
+    <div
+      className="overview-rooms__carousel"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Active and family facilities"
+    >
+      <div className="overview-rooms__stage">
+        <button
+          type="button"
+          className="overview-rooms__slide overview-rooms__slide--side"
+          onClick={goPrevious}
+          aria-label={`Previous: ${previous.name}`}
+        >
+          <ActiveFamilyMedia item={previous} />
+        </button>
+
+        <div
+          className="overview-rooms__slide overview-rooms__slide--center"
+          aria-current="true"
+        >
+          <ActiveFamilyMedia item={current} featured />
+        </div>
+
+        <button
+          type="button"
+          className="overview-rooms__slide overview-rooms__slide--side"
+          onClick={goNext}
+          aria-label={`Next: ${next.name}`}
+        >
+          <ActiveFamilyMedia item={next} />
+        </button>
+      </div>
+
+      <div className="overview-rooms__meta-row">
+        <div className="overview-rooms__meta-spacer" aria-hidden="true" />
+        <div className="overview-rooms__meta">
+          <p className="overview-rooms__room-name">{current.name}</p>
+        </div>
+        <div className="overview-rooms__meta-spacer" aria-hidden="true" />
+      </div>
+
+      <div className="overview-rooms__controls">
+        <button
+          type="button"
+          className="overview-rooms__nav overview-rooms__nav--prev"
+          onClick={goPrevious}
+          aria-label="Previous facility"
+        >
+          <span aria-hidden="true">‹</span> Previous
+        </button>
+
+        <div
+          className="overview-rooms__progress"
+          role="progressbar"
+          aria-valuemin={1}
+          aria-valuemax={count}
+          aria-valuenow={index + 1}
+          aria-label="Carousel progress"
+        >
+          <span
+            className="overview-rooms__progress-fill"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+
+        <button
+          type="button"
+          className="overview-rooms__nav overview-rooms__nav--next"
+          onClick={goNext}
+          aria-label="Next facility"
+        >
+          Next <span aria-hidden="true">›</span>
+        </button>
+
+        <p className="overview-rooms__counter">
+          {String(index + 1).padStart(2, "0")} /{" "}
+          {String(count).padStart(2, "0")}
+        </p>
+      </div>
     </div>
   );
 }
@@ -238,35 +370,20 @@ export function ExperienceGroups() {
       </section>
 
       <section
-        className="experience-group experience-group--band"
-        aria-labelledby="experience-active"
+        className="experience-active"
+        aria-labelledby="experience-active-heading"
       >
-        <div className="experience-group__inner">
-          <div className="experience-group__intro">
-            <h2 id="experience-active" className="experience-group__title">
-              Active &amp; Family
-            </h2>
-            <p className="experience-group__lede">
-              Courts and play spaces for guests who prefer to stay active during
-              their stay.
-            </p>
-          </div>
-
-          <ul className="experience-group__grid">
-            {activeFamilyItems.map((item, itemIndex) => (
-              <li key={item.id} className="experience-group__item">
-                <div
-                  className={`media-placeholder experience-group__media experience-group__media--soon media-placeholder--tone-${(itemIndex % 3) + 1}`}
-                  role="img"
-                  aria-label={`${item.name} — coming soon`}
-                >
-                  <span className="experience-group__soon">Coming Soon</span>
-                </div>
-                <h3 className="experience-group__name">{item.name}</h3>
-              </li>
-            ))}
-          </ul>
+        <div className="experience-active__intro">
+          <h2 id="experience-active-heading" className="experience-group__title">
+            Active &amp; Family
+          </h2>
+          <p className="experience-group__lede">
+            Courts and play spaces for guests who prefer to stay active during
+            their stay.
+          </p>
         </div>
+
+        <ActiveFamilyCarousel />
       </section>
     </>
   );

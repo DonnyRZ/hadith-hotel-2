@@ -2685,34 +2685,34 @@ body.has-room-lightbox .reserve-float {
   line-height: 1.45;
 }
 
-.experience-group__media--soon {
-  background: #171614;
-  color: #fff;
+/* Active & Family carousel borrows the rooms carousel stage */
+.experience-active {
+  overflow: hidden;
+  background: var(--band);
+  padding: clamp(72px, 9vh, 108px) 0;
 }
 
-.experience-group__media--soon.media-placeholder {
-  background:
-    linear-gradient(
-      to top,
-      rgba(12, 12, 12, 0.96) 0%,
-      rgba(12, 12, 12, 0.9) 45%,
-      rgba(12, 12, 12, 0.84) 100%
-    ),
-    repeating-linear-gradient(
-      -45deg,
-      #2a2824,
-      #2a2824 12px,
-      #221f1b 12px,
-      #221f1b 24px
-    );
+.experience-active__intro {
+  width: min(1080px, calc(100% - (var(--page-gutter) * 2)));
+  margin: 0 auto clamp(48px, 6vh, 72px);
 }
 
-.experience-group__soon {
+.experience-active__intro .experience-group__lede {
+  max-width: 52ch;
+}
+
+.experience-active__badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  padding: 7px 12px;
+  background: color-mix(in srgb, #0c0c0c 68%, transparent);
   color: #fff;
   font-family: var(--sans);
-  font-size: clamp(11px, 1.1vw, 13px);
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
@@ -4490,7 +4490,8 @@ body.has-room-lightbox .reserve-float {
   }
 
   .overview-features,
-  .experience-wellness {
+  .experience-wellness,
+  .experience-active {
     padding: 72px 0 68px;
   }
 
@@ -4655,11 +4656,13 @@ body.has-room-lightbox .reserve-float {
   }
 
   .experience-wellness__intro,
+  .experience-active__intro,
   .experience-group__inner {
     width: 100%;
   }
 
-  .experience-wellness__intro {
+  .experience-wellness__intro,
+  .experience-active__intro {
     padding-inline: var(--page-gutter);
     margin-bottom: 40px;
   }
