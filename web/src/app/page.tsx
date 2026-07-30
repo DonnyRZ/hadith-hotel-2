@@ -12,9 +12,46 @@ export const metadata: Metadata = {
 };
 
 const heroSlides = [
-  { id: "hero-1", label: "Hero image placeholder 1" },
-  { id: "hero-2", label: "Hero image placeholder 2" },
-  { id: "hero-3", label: "Hero image placeholder 3" },
+  {
+    id: "hotel-exterior",
+    label: "HADITH Hotel exterior at sunset",
+    src: "/images/overview-hero/hotel-exterior.webp",
+  },
+  {
+    id: "resto",
+    label: "Saji Nusantara restaurant dining room",
+    src: "/images/overview-hero/resto.webp",
+  },
+  {
+    id: "buffet",
+    label: "Breakfast buffet at HADITH Hotel",
+    src: "/images/overview-hero/buffet.webp",
+  },
+  {
+    id: "junior-suite",
+    label: "Junior Suite living and dining area",
+    src: "/images/overview-hero/junior-suite.webp",
+  },
+  {
+    id: "suite",
+    label: "HADITH Hotel Suite",
+    src: "/images/overview-hero/suite.webp",
+  },
+  {
+    id: "pool",
+    label: "HADITH Hotel swimming pool",
+    src: "/images/overview-hero/pool.webp",
+  },
+  {
+    id: "massage",
+    label: "Massage treatment room",
+    src: "/images/overview-hero/massage.webp",
+  },
+  {
+    id: "sauna",
+    label: "Hotel sauna",
+    src: "/images/overview-hero/sauna.webp",
+  },
 ];
 
 export default function OverviewPage() {

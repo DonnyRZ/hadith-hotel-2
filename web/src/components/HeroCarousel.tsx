@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { SoftOpeningFloat } from "@/components/SoftOpeningFloat";
 import { ScrollCue } from "@/components/ScrollCue";
@@ -7,6 +8,7 @@ import { ScrollCue } from "@/components/ScrollCue";
 export type HeroSlide = {
   id: string;
   label: string;
+  src: string;
 };
 
 type HeroCarouselProps = {
@@ -84,12 +86,23 @@ export function HeroCarousel({ slides, intervalMs = 3000 }: HeroCarouselProps) {
             className={`hero-carousel__slide${i === index ? " is-active" : ""}`}
             aria-hidden={i !== index}
           >
-            <div
-              className={`media-placeholder media-placeholder--hero media-placeholder--tone-${(i % 3) + 1}`}
-              role="img"
-              aria-label={slide.label}
-            >
-              <span>{slide.label}</span>
+            <div className="hero-carousel__image-shell">
+              <Image
+                className="hero-carousel__image-backdrop"
+                src={slide.src}
+                alt=""
+                fill
+                sizes="100vw"
+                aria-hidden="true"
+              />
+              <Image
+                className="hero-carousel__image"
+                src={slide.src}
+                alt={slide.label}
+                fill
+                sizes="100vw"
+                priority={i === 0}
+              />
             </div>
           </div>
         ))}
