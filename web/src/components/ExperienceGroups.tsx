@@ -50,10 +50,107 @@ const activeFamilyItems = [
 
 type ActiveFamilyItem = (typeof activeFamilyItems)[number];
 
-const exploreItems = [
-  { id: "imam-al-bukhari", name: "Imam al-Bukhari Memorial Complex" },
-  { id: "makhdumi-azam", name: "Makhdumi A’zam Complex" },
-  { id: "ulugh-beg-observatory", name: "Ulugh Beg Observatory" },
+type DestinationSlide = {
+  id: string;
+  src: string;
+  alt: string;
+  position?: string;
+};
+
+type DestinationJourney = {
+  id: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  destinations: Array<{ name: string; distance: string }>;
+  highlights: string[];
+  slides: DestinationSlide[];
+};
+
+const destinationJourneys: DestinationJourney[] = [
+  {
+    id: "imam-al-bukhari-legacy",
+    eyebrow: "A short visit · approximately 0.9 km",
+    title: "The Legacy of Imam Al-Bukhari",
+    description:
+      "Visit the resting place of Imam Muhammad Al-Bukhari, then continue into a centre dedicated to scholarship, manuscripts, research, and international exchange.",
+    destinations: [
+      { name: "Imam Al-Bukhari Mausoleum", distance: "0.9 km" },
+      { name: "Imam Bukhari International Centre", distance: "0.9 km" },
+    ],
+    highlights: [
+      "Spiritual pilgrimage",
+      "Islamic scholarship",
+      "Monumental architecture",
+    ],
+    slides: [
+      {
+        id: "imam-bukhari-1",
+        src: "/images/experience/destinations/imam-bukhari-1.png",
+        alt: "Imam Al-Bukhari Mausoleum and its blue dome",
+      },
+      {
+        id: "imam-bukhari-2",
+        src: "/images/experience/destinations/imam-bukhari-2.png",
+        alt: "Interior hall at the Imam Al-Bukhari complex",
+      },
+      {
+        id: "imam-bukhari-3",
+        src: "/images/experience/destinations/imam-bukhari-3.png",
+        alt: "Exhibition at the Imam Bukhari International Centre",
+      },
+      {
+        id: "imam-bukhari-4",
+        src: "/images/experience/destinations/imam-bukhari-4.png",
+        alt: "Islamic manuscripts displayed at the Imam Bukhari International Centre",
+      },
+      {
+        id: "imam-bukhari-5",
+        src: "/images/experience/destinations/imam-bukhari-5.png",
+        alt: "Mosque and gardens within the Imam Al-Bukhari complex",
+      },
+    ],
+  },
+  {
+    id: "timurid-samarkand",
+    eyebrow: "A half-day journey · approximately 16.5–16.6 km",
+    title: "Timurid Samarkand",
+    description:
+      "Walk through Shah-i-Zinda's avenue of mausoleums and discover the monumental scale of Bibi-Khanym Mosque—two landmarks shaped by Samarkand's Timurid heritage.",
+    destinations: [
+      { name: "Shah-i-Zinda", distance: "16.5 km" },
+      { name: "Bibi-Khanym Mosque", distance: "16.6 km" },
+    ],
+    highlights: ["Timurid architecture", "Blue tilework", "Historic Samarkand"],
+    slides: [
+      {
+        id: "samarkand-1",
+        src: "/images/experience/destinations/samarkand-1.jpg",
+        alt: "Monumental Islamic architecture in historic Samarkand",
+      },
+      {
+        id: "samarkand-2",
+        src: "/images/experience/destinations/samarkand-2.jpg",
+        alt: "Illuminated historic monument in Samarkand",
+      },
+      {
+        id: "samarkand-3",
+        src: "/images/experience/destinations/samarkand-3.jpg",
+        alt: "Detailed blue tilework along the Shah-i-Zinda ensemble",
+        position: "50% 58%",
+      },
+      {
+        id: "samarkand-4",
+        src: "/images/experience/destinations/samarkand-4.jpg",
+        alt: "Historic domes and monumental architecture in Samarkand",
+      },
+      {
+        id: "samarkand-5",
+        src: "/images/experience/destinations/samarkand-5.jpg",
+        alt: "Panoramic view of a historic landmark in Samarkand",
+      },
+    ],
+  },
 ];
 
 function WellnessMedia({
@@ -302,6 +399,145 @@ function WellnessCarousel() {
   );
 }
 
+function DestinationCarousel({
+  slides,
+  title,
+}: {
+  slides: DestinationSlide[];
+  title: string;
+}) {
+  const [index, setIndex] = useState(0);
+  const count = slides.length;
+  const progress = ((index + 1) / count) * 100;
+
+  const goPrevious = () =>
+    setIndex((currentIndex) => (currentIndex - 1 + count) % count);
+  const goNext = () =>
+    setIndex((currentIndex) => (currentIndex + 1) % count);
+
+  return (
+    <div
+      className="destination-carousel"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label={`${title} gallery`}
+    >
+      <div className="destination-carousel__viewport">
+        {slides.map((slide, slideIndex) => (
+          <div
+            key={slide.id}
+            className={`destination-carousel__slide${slideIndex === index ? " is-active" : ""}`}
+            aria-hidden={slideIndex !== index}
+          >
+            <Image
+              className="destination-carousel__image"
+              src={slide.src}
+              alt={slideIndex === index ? slide.alt : ""}
+              fill
+              sizes="(max-width: 920px) 100vw, 58vw"
+              style={{ objectPosition: slide.position ?? "50% 50%" }}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="destination-carousel__controls">
+        <button
+          type="button"
+          className="destination-carousel__nav"
+          onClick={goPrevious}
+          aria-label={`Previous image in ${title} gallery`}
+        >
+          <span aria-hidden="true">‹</span> Previous
+        </button>
+
+        <div
+          className="destination-carousel__progress"
+          role="progressbar"
+          aria-valuemin={1}
+          aria-valuemax={count}
+          aria-valuenow={index + 1}
+          aria-label={`${title} gallery progress`}
+        >
+          <span style={{ width: `${progress}%` }} />
+        </div>
+
+        <button
+          type="button"
+          className="destination-carousel__nav"
+          onClick={goNext}
+          aria-label={`Next image in ${title} gallery`}
+        >
+          Next <span aria-hidden="true">›</span>
+        </button>
+
+        <p className="destination-carousel__counter" aria-live="polite">
+          {String(index + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function DestinationsSection() {
+  return (
+    <section
+      id="destinations"
+      className="experience-destinations"
+      aria-labelledby="experience-destinations-heading"
+    >
+      <div className="experience-destinations__intro">
+        <p className="experience-destinations__eyebrow">Beyond the Hotel</p>
+        <h2
+          id="experience-destinations-heading"
+          className="experience-group__title"
+        >
+          Explore Samarkand
+        </h2>
+        <p className="experience-group__lede">
+          From the spiritual heart of the Imam Al-Bukhari complex to the
+          monumental architecture of historic Samarkand, discover two journeys
+          shaped around the hotel&apos;s setting.
+        </p>
+      </div>
+
+      <div className="experience-destinations__journeys">
+        {destinationJourneys.map((journey, journeyIndex) => (
+          <article
+            key={journey.id}
+            className={`destination-journey${journeyIndex % 2 === 1 ? " is-reversed" : ""}`}
+          >
+            <DestinationCarousel slides={journey.slides} title={journey.title} />
+
+            <div className="destination-journey__copy">
+              <p className="destination-journey__eyebrow">{journey.eyebrow}</p>
+              <h3 className="destination-journey__title">{journey.title}</h3>
+              <p className="destination-journey__description">
+                {journey.description}
+              </p>
+
+              <dl className="destination-journey__places">
+                {journey.destinations.map((destination) => (
+                  <div key={destination.name} className="destination-journey__place">
+                    <dt>{destination.name}</dt>
+                    <dd>{destination.distance} from the hotel</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <ul className="destination-journey__highlights" aria-label="Highlights">
+                {journey.highlights.map((highlight) => (
+                  <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function ExperienceGroups() {
   return (
     <>
@@ -325,37 +561,7 @@ export function ExperienceGroups() {
         <WellnessCarousel />
       </section>
 
-      <section
-        className="experience-group experience-group--paper"
-        aria-labelledby="experience-explore"
-      >
-        <div className="experience-group__inner">
-          <div className="experience-group__intro">
-            <h2 id="experience-explore" className="experience-group__title">
-              Explore Samarkand
-            </h2>
-            <p className="experience-group__lede">
-              Step beyond the hotel into the spiritual and architectural
-              landmarks of Samarkand.
-            </p>
-          </div>
-
-          <ul className="experience-group__grid">
-            {exploreItems.map((item, itemIndex) => (
-              <li key={item.id} className="experience-group__item">
-                <div
-                  className={`media-placeholder experience-group__media media-placeholder--tone-${(itemIndex % 3) + 1}`}
-                  role="img"
-                  aria-label={`${item.name} image placeholder`}
-                >
-                  <span>{item.name}</span>
-                </div>
-                <h3 className="experience-group__name">{item.name}</h3>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      <DestinationsSection />
 
       <section
         className="experience-active"

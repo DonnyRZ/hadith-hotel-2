@@ -1,109 +1,44 @@
-"use client";
-
-import { useState } from "react";
-import { ComingSoonModal } from "@/components/ComingSoonModal";
-
-type Destination = {
-  id: string;
-  name: string;
-  distance: string;
-  description: string;
-};
-
-const destinations: Destination[] = [
-  {
-    id: "imam-al-bukhari",
-    name: "Imam al-Bukhari Memorial Complex",
-    distance: "0.9 km",
-    description:
-      "A major Islamic pilgrimage complex featuring the mausoleum of Imam al-Bukhari, a mosque, museum, library, and research centre.",
-  },
-  {
-    id: "makhdumi-azam",
-    name: "Makhdumi A’zam Complex",
-    distance: "5.8 km",
-    description:
-      "A historic Sufi religious complex in Dahbed, known for its mausoleum, mosque, traditional architecture, and peaceful setting.",
-  },
-  {
-    id: "ulugh-beg-observatory",
-    name: "Ulugh Beg Observatory",
-    distance: "15.6 km",
-    description:
-      "A 15th-century astronomical observatory built by the scholar and ruler Ulugh Beg, highlighting Samarkand’s scientific heritage.",
-  },
-];
+import Image from "next/image";
+import Link from "next/link";
 
 export function OverviewDestinations() {
-  const [comingSoonOpen, setComingSoonOpen] = useState(false);
-
   return (
-    <>
-      <section
-        className="overview-destinations"
-        aria-labelledby="overview-destinations-heading"
-      >
-        <div className="overview-destinations__intro">
-          <p className="overview-destinations__eyebrow">
-            Samarkand
-          </p>
+    <section
+      className="overview-destinations"
+      aria-labelledby="overview-destinations-heading"
+    >
+      <div className="overview-destinations__inner">
+        <div className="overview-destinations__media">
+          <Image
+            className="overview-destinations__image"
+            src="/images/experience/destinations/imam-bukhari-1.png"
+            alt="Imam Al-Bukhari Mausoleum complex near HADITH Hotel"
+            fill
+            sizes="(max-width: 820px) 100vw, 58vw"
+          />
+        </div>
+
+        <div className="overview-destinations__copy">
+          <p className="overview-destinations__eyebrow">Beyond the Hotel</p>
           <h2
             id="overview-destinations-heading"
             className="overview-destinations__heading"
           >
-            Nearby Destinations
+            Discover Samarkand&apos;s living heritage
           </h2>
+          <p className="overview-destinations__body">
+            From the Imam Al-Bukhari Mausoleum and International Centre just
+            0.9 km away to Shah-i-Zinda and Bibi-Khanym Mosque in historic
+            Samarkand, meaningful journeys begin close to HADITH Hotel.
+          </p>
+          <Link
+            href="/experience#destinations"
+            className="overview-destinations__explore"
+          >
+            Explore Destinations <span aria-hidden="true">→</span>
+          </Link>
         </div>
-
-        <div className="overview-destinations__list">
-          {destinations.map((place, index) => {
-            const reversed = index % 2 === 1;
-            const tone = (index % 3) + 1;
-
-            return (
-              <article
-                key={place.id}
-                className={`overview-destinations__row${reversed ? " is-reversed" : ""}`}
-              >
-                <div className="overview-destinations__copy">
-                  <p className="overview-destinations__distance">
-                    {place.distance} from the hotel
-                  </p>
-                  <h3 className="overview-destinations__title">{place.name}</h3>
-                  <p className="overview-destinations__body">
-                    {place.description}
-                  </p>
-                  <button
-                    type="button"
-                    className="overview-destinations__explore"
-                    onClick={() => setComingSoonOpen(true)}
-                  >
-                    Explore
-                    <span aria-hidden="true"> →</span>
-                  </button>
-                </div>
-
-                <div className="overview-destinations__media">
-                  <div
-                    className={`media-placeholder media-placeholder--destination media-placeholder--tone-${tone}`}
-                    role="img"
-                    aria-label={`${place.name} image placeholder`}
-                  >
-                    <span>{place.name}</span>
-                  </div>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
-      <ComingSoonModal
-        open={comingSoonOpen}
-        onClose={() => setComingSoonOpen(false)}
-        eyebrow="Destinations"
-        body="Guides to the destinations around HADITH Hotel are being prepared and will be available shortly."
-      />
-    </>
+      </div>
+    </section>
   );
 }
