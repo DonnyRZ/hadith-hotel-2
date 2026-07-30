@@ -65,7 +65,7 @@ const testimonials: Testimonial[] = [
   {
     id: "syekh-mohamed-el-duwaini",
     quote:
-      "Alhamdulillah, MashaAllah. This hotel is truly outstanding, with excellent service and a welcoming atmosphere. We pray that Allah blesses this hotel with continued success and helps it improve even further, InshaAllah.",
+      "Outstanding hotel with excellent service. May Allah bless its continued success.",
     name: "Syekh Mohamed El Duwaini",
     role: "Undersecretary of Al-Azhar Al-Sharif",
     photo: "/images/testimonials/syekh-mohamed-el-duwaini.webp",
@@ -74,7 +74,7 @@ const testimonials: Testimonial[] = [
   {
     id: "mohamed-shaheem-ali-saeed",
     quote:
-      "MashaAllah, this is my first time visiting Samarkand, and staying at Hadith Hotel has been an amazing experience. Its location near the Imam Al-Bukhari Complex makes it especially meaningful for pilgrims, Islamic scholars, and visitors. The service is excellent, and I highly recommend this hotel as one of the best places to stay in Samarkand.",
+      "An amazing hotel with excellent service and a strategic location near the Imam Al-Bukhari Complex.",
     name: "Mohamed Shaheem Ali Saeed",
     role: "Minister of Islamic Affairs, Republic of Maldives",
     photo: "/images/testimonials/mohamed-shaheem-ali-saeed.webp",
@@ -82,7 +82,7 @@ const testimonials: Testimonial[] = [
   {
     id: "shady-al-suleiman",
     quote:
-      "A very nice hotel in a wonderful environment, located right in front of the Imam Al-Bukhari Complex. We have truly enjoyed our stay here. I highly recommend this hotel to everyone visiting Samarkand.",
+      "A very nice hotel in a wonderful location. Highly recommended for visitors to Samarkand.",
     name: "Shady Al Suleiman",
     role: "President of United Muslims of Australia",
     photo: "/images/testimonials/shady-al-suleiman.webp",
@@ -91,7 +91,7 @@ const testimonials: Testimonial[] = [
   {
     id: "emad-al-din-hamdan",
     quote:
-      "I was genuinely impressed by this hotel. It is beautifully designed, well-equipped, and very well managed. With its modern facilities, new furnishings, and excellent location next to the Imam Al-Bukhari Tomb, I believe this hotel has great potential to become a major destination for visitors and tourists in the future.",
+      "Beautiful, modern, well-managed, and perfectly located near the Imam Al-Bukhari Complex.",
     name: "Emad Al-Din Hamdan",
     role: "Minister of Culture of the State of Palestine",
     photo: "/images/testimonials/emad-al-din-hamdan.webp",
@@ -100,7 +100,7 @@ const testimonials: Testimonial[] = [
   {
     id: "dr-zulkifli-hasan",
     quote:
-      "I am truly impressed to find an Indonesian hotel here in Samarkand. Its strategic location and excellent facilities make it a wonderful place to stay and an important presence for Indonesians visiting Samarkand.",
+      "An impressive Indonesian hotel in Samarkand with a very strategic location.",
     name: "Dr. Zulkifli Hasan",
     role: "Minister of Religious Affairs, Malaysia",
     photo: "/images/testimonials/dr-zulkifli-hasan.webp",

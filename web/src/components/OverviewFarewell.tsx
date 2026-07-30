@@ -42,19 +42,17 @@ export function OverviewFarewell() {
               sizes="100vw"
             />
           </div>
+        </div>
 
-          <div className="overview-farewell__copy">
-            <p className="overview-farewell__eyebrow">Until we welcome you</p>
-            <h2
-              id="overview-farewell-heading"
-              className="overview-farewell__title"
-            >
-              Some hotels give you somewhere to stay. HADITH Hotel gives you
-              peace worth remembering at the Complex of Imam Al Bukhari.
-            </h2>
-          </div>
-
-          <div className="overview-farewell__fade" aria-hidden="true" />
+        <div className="overview-farewell__copy">
+          <p className="overview-farewell__eyebrow">Until we welcome you</p>
+          <h2
+            id="overview-farewell-heading"
+            className="overview-farewell__title"
+          >
+            Some hotels give you somewhere to stay. HADITH Hotel gives you
+            peace worth remembering at the Complex of Imam Al Bukhari.
+          </h2>
         </div>
 
         <div className="overview-farewell__footer">

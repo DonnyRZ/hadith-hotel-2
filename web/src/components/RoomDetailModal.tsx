@@ -5,14 +5,31 @@ import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
 import { createPortal } from "react-dom";
 import type { RoomType } from "@/lib/rooms";
 
-const COMING_SOON_SLIDES = 1;
-
 const roomPhotos: Record<string, string[]> = {
-  suite: ["/images/overview-rooms/suite.webp"],
+  suite: [
+    "/images/rooms/suite/suite-main.jpeg",
+    "/images/rooms/suite/suite-2.png",
+    "/images/rooms/suite/suite-3.png",
+    "/images/rooms/suite/suite-4.png",
+  ],
   balcony: ["/images/overview-rooms/balcony.webp"],
-  standard: ["/images/overview-rooms/standard.webp"],
-  junior: ["/images/overview-hero/junior-suite.webp"],
+  standard: [
+    "/images/rooms/standard/standard-main.jpeg",
+    "/images/rooms/standard/standard-2.png",
+    "/images/rooms/standard/standard-3.png",
+    "/images/rooms/standard/standard-4.png",
+  ],
+  junior: [
+    "/images/rooms/junior/junior-1.png",
+    "/images/rooms/junior/junior-2.png",
+    "/images/rooms/junior/junior-3.png",
+    "/images/rooms/junior/junior-4.png",
+    "/images/rooms/junior/junior-5.png",
+  ],
 };
+
+const completeGalleries = new Set(["junior", "suite", "standard"]);
+const EMPTY_PHOTOS: string[] = [];
 
 function CloseIcon() {
   return (
@@ -38,8 +55,9 @@ export function RoomDetailModal({ room, onClose }: RoomDetailModalProps) {
   const [photo, setPhoto] = useState(0);
 
   const open = room !== null;
-  const photos = room ? (roomPhotos[room.id] ?? []) : [];
-  const slideCount = Math.max(photos.length + COMING_SOON_SLIDES, 1);
+  const photos = room ? (roomPhotos[room.id] ?? EMPTY_PHOTOS) : EMPTY_PHOTOS;
+  const hasComingSoonSlide = room ? !completeGalleries.has(room.id) : false;
+  const slideCount = Math.max(photos.length + Number(hasComingSoonSlide), 1);
 
   const move = useCallback(
     (direction: number) => {

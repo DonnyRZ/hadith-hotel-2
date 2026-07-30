@@ -10,11 +10,17 @@ export type PageHeroSlide = HeroMediaSlide;
 type PageHeroCarouselProps = {
   title: string;
   slides: readonly PageHeroSlide[];
+  intro?: {
+    eyebrow: string;
+    heading: string;
+    body: string;
+  };
 };
 
 export function PageHeroCarousel({
   title,
   slides,
+  intro,
 }: PageHeroCarouselProps) {
   const [index, setIndex] = useState(0);
   const count = slides.length;
@@ -50,7 +56,7 @@ export function PageHeroCarousel({
           </div>
         ))}
 
-        <div className="page-hero__controls">
+        {count > 1 ? <div className="page-hero__controls">
           <div className="page-hero__navigation">
             <button
               type="button"
@@ -82,7 +88,15 @@ export function PageHeroCarousel({
             </span>
             <Link href="/gallery">Gallery</Link>
           </div>
-        </div>
+        </div> : null}
+
+        {intro ? (
+          <div className="page-hero__intro">
+            <p className="page-hero__intro-eyebrow">{intro.eyebrow}</p>
+            <h2 className="page-hero__intro-heading">{intro.heading}</h2>
+            <p className="page-hero__intro-body">{intro.body}</p>
+          </div>
+        ) : null}
 
         <ScrollCue />
       </div>

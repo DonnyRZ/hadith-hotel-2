@@ -3,46 +3,38 @@
 import { useState } from "react";
 import { ComingSoonModal } from "@/components/ComingSoonModal";
 
-type EventVenue = {
+type EventUse = {
   id: string;
-  heading: string;
   eyebrow: string;
-  name: string;
+  title: string;
   description: string;
   highlights: string[];
-  variant: "blue" | "paper";
-  reversed?: boolean;
 };
 
-const eventVenues: EventVenue[] = [
+const eventUses: EventUse[] = [
   {
     id: "meetings",
-    heading: "Meetings & Conferences",
-    eyebrow: "Events · Business",
-    name: "Meetings & Conferences",
+    eyebrow: "Business Events",
+    title: "Meetings & Conferences",
     description:
-      "Flexible spaces for corporate meetings, conferences, and business events, supported by adaptable room arrangements and modern facilities.",
+      "Configure the hall for focused meetings, conferences, and corporate gatherings, with adaptable arrangements supported by modern facilities.",
     highlights: [
       "Flexible event setups",
       "Modern facilities",
       "Dedicated events team",
     ],
-    variant: "blue",
   },
   {
     id: "weddings",
-    heading: "Weddings & Celebrations",
-    eyebrow: "Events · Celebrations",
-    name: "Weddings & Celebrations",
+    eyebrow: "Social Events",
+    title: "Weddings & Celebrations",
     description:
-      "An elegant ballroom for weddings and social celebrations, offering a refined setting for up to 250 guests.",
+      "Transform the same hall into an elegant setting for weddings and social celebrations, welcoming up to 250 guests.",
     highlights: [
       "Elegant ballroom",
       "Up to 250 guests",
       "Weddings and social events",
     ],
-    variant: "paper",
-    reversed: true,
   },
 ];
 
@@ -58,43 +50,36 @@ export function MeetingsWeddings() {
 
   return (
     <>
-      {eventVenues.map((venue, index) => (
-        <section
-          key={venue.id}
-          className={`venue venue--${venue.variant}`}
-          aria-labelledby={`venue-heading-${venue.id}`}
-        >
-          <div className="venue__inner">
-            <h2 id={`venue-heading-${venue.id}`} className="venue__heading">
-              {venue.heading}
+      <section className="event-uses" aria-labelledby="event-uses-heading">
+        <div className="event-uses__inner">
+          <header className="event-uses__intro">
+            <p className="event-uses__eyebrow">Meetings &amp; Weddings</p>
+            <h2 id="event-uses-heading" className="event-uses__heading">
+              One Hall, Many Possibilities
             </h2>
+            <p className="event-uses__lead">
+              One adaptable venue, thoughtfully arranged around the character
+              and scale of each occasion.
+            </p>
+          </header>
 
-            <div className={`venue__layout${venue.reversed ? " is-reversed" : ""}`}>
-              <div className="venue__media">
-                <div
-                  className={`media-placeholder venue__placeholder media-placeholder--tone-${(index % 3) + 1}`}
-                  role="img"
-                  aria-label={`${venue.name} image placeholder`}
-                >
-                  <span>{venue.name}</span>
-                </div>
-              </div>
+          <div className="event-uses__grid">
+            {eventUses.map((eventUse) => (
+              <article key={eventUse.id} className="event-use">
+                <p className="event-use__eyebrow">{eventUse.eyebrow}</p>
+                <h3 className="event-use__title">{eventUse.title}</h3>
+                <p className="event-use__body">{eventUse.description}</p>
 
-              <div className="venue__card">
-                <p className="venue__eyebrow">{venue.eyebrow}</p>
-                <h3 className="venue__name">{venue.name}</h3>
-                <p className="venue__body">{venue.description}</p>
-
-                <ul className="venue__highlights">
-                  {venue.highlights.map((highlight) => (
+                <ul className="event-use__highlights">
+                  {eventUse.highlights.map((highlight) => (
                     <li key={highlight}>{highlight}</li>
                   ))}
                 </ul>
-              </div>
-            </div>
+              </article>
+            ))}
           </div>
-        </section>
-      ))}
+        </div>
+      </section>
 
       <section className="event-facts" aria-labelledby="event-facts-heading">
         <div className="event-facts__inner">

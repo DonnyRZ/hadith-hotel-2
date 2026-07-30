@@ -12,10 +12,10 @@ const BALCONY_SRC = "/images/overview-rooms/balcony.webp";
 
 const roomImages: Record<string, string> = {
   president: BALCONY_SRC,
-  junior: BALCONY_SRC,
-  suite: "/images/overview-rooms/suite.webp",
+  junior: "/images/rooms/junior/junior-1.png",
+  suite: "/images/rooms/suite/suite-main.jpeg",
   balcony: BALCONY_SRC,
-  standard: "/images/overview-rooms/standard.webp",
+  standard: "/images/rooms/standard/standard-main.jpeg",
 };
 
 function RoomCard({
@@ -117,12 +117,7 @@ export function RoomsCollection() {
                 <RoomCard
                   key={room.id}
                   room={room}
-                  comingSoon={room.id === "junior"}
-                  onViewDetails={() =>
-                    room.id === "junior"
-                      ? setComingSoonRoom(room)
-                      : setDetailRoom(room)
-                  }
+                  onViewDetails={() => setDetailRoom(room)}
                 />
               ))}
             </div>

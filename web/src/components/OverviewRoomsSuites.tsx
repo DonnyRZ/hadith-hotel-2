@@ -4,54 +4,48 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
-import { ComingSoonModal } from "@/components/ComingSoonModal";
 
-type RoomSlide = {
+type GallerySlide = {
   id: string;
-  name: string;
-  units: number;
   src: string;
-  comingSoon?: boolean;
+  alt: string;
 };
 
-const BALCONY_SRC = "/images/overview-rooms/balcony.webp";
-
-const rooms: RoomSlide[] = [
-  {
-    id: "standard",
-    name: "Standard Room",
-    units: 62,
-    src: "/images/overview-rooms/standard.webp",
-  },
-  {
-    id: "suite",
-    name: "Suite",
-    units: 18,
-    src: "/images/overview-rooms/suite.webp",
-  },
-  {
-    id: "balcony",
-    name: "Balcony Room",
-    units: 23,
-    src: BALCONY_SRC,
-  },
-  {
-    id: "junior",
-    name: "Junior Suite",
-    units: 9,
-    src: BALCONY_SRC,
-    comingSoon: true,
-  },
-  {
-    id: "president",
-    name: "President Suite",
-    units: 2,
-    src: BALCONY_SRC,
-    comingSoon: true,
-  },
+const roomTypes = [
+  { name: "Standard Room", units: 62 },
+  { name: "Balcony Room", units: 23 },
+  { name: "Suite", units: 18 },
+  { name: "Junior Suite", units: 9 },
+  { name: "President Suite", units: 2 },
 ];
 
-const DEFAULT_INDEX = rooms.findIndex((r) => r.id === "suite");
+const gallerySlides: GallerySlide[] = [
+  {
+    id: "guest-room-1",
+    src: "/images/overview-rooms/junior-1.png",
+    alt: "Guest room with an illuminated arched headboard",
+  },
+  {
+    id: "guest-room-2",
+    src: "/images/overview-rooms/junior-3.png",
+    alt: "Spacious guest room interior at HADITH Hotel",
+  },
+  {
+    id: "guest-room-3",
+    src: "/images/overview-rooms/suite-3.png",
+    alt: "Guest room bathroom at HADITH Hotel",
+  },
+  {
+    id: "guest-room-4",
+    src: "/images/overview-rooms/suite-4.png",
+    alt: "Contemporary guest room interior at HADITH Hotel",
+  },
+  {
+    id: "guest-room-5",
+    src: "/images/overview-rooms/suite-main.jpeg",
+    alt: "Refined guest room interior at HADITH Hotel",
+  },
+];
 
 function ExpandIcon() {
   return (
@@ -80,13 +74,13 @@ function CloseIcon() {
   );
 }
 
-function RoomMedia({
-  room,
+function GalleryMedia({
+  slide,
   featured = false,
   fullscreen = false,
   priority = false,
 }: {
-  room: RoomSlide;
+  slide: GallerySlide;
   featured?: boolean;
   fullscreen?: boolean;
   priority?: boolean;
@@ -97,21 +91,14 @@ function RoomMedia({
         "overview-rooms__media",
         featured ? "overview-rooms__media--featured" : "",
         fullscreen ? "overview-rooms__media--fullscreen" : "",
-        room.comingSoon ? "overview-rooms__media--coming-soon" : "",
       ]
         .filter(Boolean)
         .join(" ")}
-      role="img"
-      aria-label={
-        room.comingSoon
-          ? `${room.name} — coming soon`
-          : `${room.name} — ${room.units} units`
-      }
     >
       <Image
         className="overview-rooms__image"
-        src={room.src}
-        alt=""
+        src={slide.src}
+        alt={slide.alt}
         fill
         sizes={
           fullscreen
@@ -121,24 +108,17 @@ function RoomMedia({
               : "(max-width: 720px) 0px, 22vw"
         }
         priority={priority}
-        aria-hidden="true"
       />
-
-      {room.comingSoon ? (
-        <div className="overview-rooms__soon" aria-hidden="true">
-          <span className="overview-rooms__soon-label">Coming Soon</span>
-        </div>
-      ) : null}
     </div>
   );
 }
 
 function RoomLightbox({
-  room,
+  slide,
   open,
   onClose,
 }: {
-  room: RoomSlide;
+  slide: GallerySlide;
   open: boolean;
   onClose: () => void;
 }) {
@@ -183,7 +163,7 @@ function RoomLightbox({
       >
         <div className="room-lightbox__toolbar">
           <p id={titleId} className="room-lightbox__title">
-            {room.name}
+            Rooms &amp; Suites Gallery
           </p>
           <button
             ref={closeRef}
@@ -196,7 +176,7 @@ function RoomLightbox({
           </button>
         </div>
         <div className="room-lightbox__media">
-          <RoomMedia room={room} fullscreen />
+          <GalleryMedia slide={slide} fullscreen />
         </div>
       </div>
     </div>,
@@ -205,12 +185,9 @@ function RoomLightbox({
 }
 
 export function OverviewRoomsSuites() {
-  const [index, setIndex] = useState(
-    DEFAULT_INDEX >= 0 ? DEFAULT_INDEX : 0,
-  );
-  const [comingSoonOpen, setComingSoonOpen] = useState(false);
+  const [index, setIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const count = rooms.length;
+  const count = gallerySlides.length;
 
   const wrap = useCallback(
     (i: number) => ((i % count) + count) % count,
@@ -220,9 +197,9 @@ export function OverviewRoomsSuites() {
   const goPrev = () => setIndex((i) => wrap(i - 1));
   const goNext = () => setIndex((i) => wrap(i + 1));
 
-  const current = rooms[index]!;
-  const prev = rooms[wrap(index - 1)]!;
-  const next = rooms[wrap(index + 1)]!;
+  const current = gallerySlides[index]!;
+  const prev = gallerySlides[wrap(index - 1)]!;
+  const next = gallerySlides[wrap(index + 1)]!;
   const counter = `${String(index + 1).padStart(2, "0")} / ${String(count).padStart(2, "0")}`;
   const progress = ((index + 1) / count) * 100;
 
@@ -233,40 +210,55 @@ export function OverviewRoomsSuites() {
         aria-labelledby="overview-rooms-heading"
       >
         <div className="overview-rooms__intro">
-          <div className="overview-rooms__intro-copy">
-            <p className="overview-rooms__lede">Escape to a sanctuary of luxury</p>
-            <h2 id="overview-rooms-heading" className="overview-rooms__title">
-              Rooms and Suites
-            </h2>
-          </div>
-          <div className="overview-rooms__intro-aside">
-            <p className="overview-rooms__blurb">
-              From refined Standard rooms to the President Suite — 114 rooms and
-              suites designed for rest after a day within the Imam Al Bukhari
-              Complex.
-            </p>
-            <Link href="/suites-rooms" className="overview-rooms__learn-more">
-              Learn More
-            </Link>
-          </div>
+          <p className="overview-rooms__lede">Escape to a sanctuary of luxury</p>
+          <h2 id="overview-rooms-heading" className="overview-rooms__title">
+            Rooms and Suites
+          </h2>
+          <p className="overview-rooms__blurb">
+            From refined Standard rooms to the President Suite — 114 rooms and
+            suites designed for rest after a day within the Imam Al Bukhari
+            Complex.
+          </p>
+
+          <ul className="overview-rooms__types" aria-label="Room types">
+            {roomTypes.map((roomType, roomIndex) => (
+              <li key={roomType.name} className="overview-rooms__type">
+                <span className="overview-rooms__type-number" aria-hidden="true">
+                  {String(roomIndex + 1).padStart(2, "0")}
+                </span>
+                <span className="overview-rooms__type-name">{roomType.name}</span>
+                <span className="overview-rooms__type-units">
+                  {roomType.units} units
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <Link href="/suites-rooms" className="overview-rooms__learn-more">
+            Learn More
+          </Link>
         </div>
 
-        <div className="overview-rooms__carousel" aria-roledescription="carousel">
+        <div
+          className="overview-rooms__carousel"
+          aria-roledescription="carousel"
+          aria-label="Rooms and suites gallery"
+        >
           <div className="overview-rooms__stage">
             <button
               type="button"
               className="overview-rooms__slide overview-rooms__slide--side"
               onClick={goPrev}
-              aria-label={`Previous: ${prev.name}`}
+              aria-label="Show previous gallery image"
             >
-              <RoomMedia room={prev} />
+              <GalleryMedia slide={prev} />
             </button>
 
             <div
               className="overview-rooms__slide overview-rooms__slide--center"
               aria-current="true"
             >
-              <RoomMedia room={current} featured priority />
+              <GalleryMedia slide={current} featured priority />
               <button
                 type="button"
                 className="overview-rooms__expand"
@@ -281,26 +273,10 @@ export function OverviewRoomsSuites() {
               type="button"
               className="overview-rooms__slide overview-rooms__slide--side"
               onClick={goNext}
-              aria-label={`Next: ${next.name}`}
+              aria-label="Show next gallery image"
             >
-              <RoomMedia room={next} />
+              <GalleryMedia slide={next} />
             </button>
-          </div>
-
-          <div className="overview-rooms__meta-row">
-            <div className="overview-rooms__meta-spacer" aria-hidden="true" />
-            <div className="overview-rooms__meta">
-              <p className="overview-rooms__room-name">{current.name}</p>
-              <button
-                type="button"
-                className="overview-rooms__rates"
-                onClick={() => setComingSoonOpen(true)}
-              >
-                View Rates
-                <span aria-hidden="true"> →</span>
-              </button>
-            </div>
-            <div className="overview-rooms__meta-spacer" aria-hidden="true" />
           </div>
 
           <div className="overview-rooms__controls">
@@ -308,7 +284,7 @@ export function OverviewRoomsSuites() {
               type="button"
               className="overview-rooms__nav overview-rooms__nav--prev"
               onClick={goPrev}
-              aria-label="Previous room"
+              aria-label="Previous image"
             >
               <span aria-hidden="true">‹</span> Previous
             </button>
@@ -331,7 +307,7 @@ export function OverviewRoomsSuites() {
               type="button"
               className="overview-rooms__nav overview-rooms__nav--next"
               onClick={goNext}
-              aria-label="Next room"
+              aria-label="Next image"
             >
               Next <span aria-hidden="true">›</span>
             </button>
@@ -342,16 +318,9 @@ export function OverviewRoomsSuites() {
       </section>
 
       <RoomLightbox
-        room={current}
+        slide={current}
         open={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
-      />
-
-      <ComingSoonModal
-        open={comingSoonOpen}
-        onClose={() => setComingSoonOpen(false)}
-        eyebrow="Room Rates"
-        body="Rates for our rooms and suites will be published shortly. Thank you for your interest in HADITH Hotel."
       />
     </>
   );
