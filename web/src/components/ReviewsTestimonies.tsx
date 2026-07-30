@@ -1,12 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import Image from "next/image";
 
 type VideoReview = {
   id: string;
-  title: string;
-  name: string;
-  role: string;
+  name?: string;
+  role?: string;
+  src?: string;
+  poster?: string;
 };
 
 type Testimonial = {
@@ -18,42 +21,36 @@ type Testimonial = {
 
 const videoReviews: VideoReview[] = [
   {
-    id: "review-1",
-    title: "Review Title",
-    name: "Guest Name",
-    role: "Guest Title",
+    id: "mohamed-shaheem-ali-saeed",
+    name: "Mohamed Shaheem Ali Saeed",
+    role: "Minister of Islamic Affairs, Republic of Maldives",
+    src: "/videos/mohamed-shaheem-ali-saeed.mp4",
+    poster: "/videos/mohamed-shaheem-ali-saeed-poster.jpg",
   },
   {
-    id: "review-2",
-    title: "Review Title",
-    name: "Guest Name",
-    role: "Guest Title",
+    id: "shady-al-suleiman",
+    name: "Shady Al Suleiman",
+    role: "President of United Muslims of Australia",
+    src: "/videos/shady-al-suleiman.mp4",
+    poster: "/videos/shady-al-suleiman-poster.jpg",
   },
   {
-    id: "review-3",
-    title: "Review Title",
-    name: "Guest Name",
-    role: "Guest Title",
+    id: "syekh-mohamed-el-duwaini",
+    name: "Syekh Mohamed El Duwaini",
+    role: "Undersecretary of Al-Azhar Al-Sharif",
+    src: "/videos/syekh-mohamed-el-duwaini.mp4",
+    poster: "/videos/syekh-mohamed-el-duwaini-poster.jpg",
   },
-  {
-    id: "review-4",
-    title: "Review Title",
-    name: "Guest Name",
-    role: "Guest Title",
-  },
-  {
-    id: "review-5",
-    title: "Review Title",
-    name: "Guest Name",
-    role: "Guest Title",
-  },
+  { id: "review-4" },
+  { id: "review-5" },
 ];
 
-const landscapeReview: VideoReview = {
+const landscapeReview = {
   id: "review-landscape",
-  title: "Review Title",
-  name: "Guest Name",
-  role: "Guest Title",
+  name: "Imad Abdullah Hamdan",
+  role: "Minister of Culture of the State of Palestine",
+  src: "/videos/imad-abdullah-hamdan.mp4",
+  poster: "/videos/imad-abdullah-hamdan-poster.jpg",
 };
 
 const testimonials: Testimonial[] = [
@@ -122,6 +119,27 @@ function ChevronRight() {
   );
 }
 
+function CloseIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
+      <path
+        d="M6 6l12 12M18 6 6 18"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function PlayIcon({ size = 22 }: { size?: number }) {
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" aria-hidden="true">
+      <path d="M8 5.5v13l11-6.5-11-6.5Z" />
+    </svg>
+  );
+}
+
 function VideoPlaceholder({
   label,
   tone,
@@ -138,15 +156,189 @@ function VideoPlaceholder({
       aria-label={`${label} video placeholder`}
     >
       <span className="video-frame__play" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-          <path d="M8 5.5v13l11-6.5-11-6.5Z" />
-        </svg>
+        <PlayIcon />
       </span>
     </div>
   );
 }
 
 const VIDEO_REVIEW_SPEED = 28; // px per second, continuous marquee
+const DRAG_THRESHOLD = 8; // px before a pointer gesture counts as a drag
+
+function ReviewLightbox({
+  review,
+  onClose,
+}: {
+  review: VideoReview;
+  onClose: () => void;
+}) {
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.body.classList.add("has-room-lightbox");
+    closeRef.current?.focus();
+
+    // Keep a single soundtrack playing while the review is open.
+    document.querySelectorAll("video").forEach((video) => {
+      if (video !== videoRef.current) video.pause();
+    });
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.body.classList.remove("has-room-lightbox");
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [onClose]);
+
+  return createPortal(
+    <div className="review-lightbox" role="presentation">
+      <button
+        type="button"
+        className="review-lightbox__backdrop"
+        aria-label="Close review"
+        onClick={onClose}
+      />
+
+      <div
+        className="review-lightbox__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-label={`Review by ${review.name}`}
+      >
+        <div className="review-lightbox__toolbar">
+          <div>
+            <p className="review-lightbox__name">{review.name}</p>
+            <p className="review-lightbox__role">{review.role}</p>
+          </div>
+          <button
+            ref={closeRef}
+            type="button"
+            className="review-lightbox__close"
+            aria-label="Close review"
+            onClick={onClose}
+          >
+            <CloseIcon />
+          </button>
+        </div>
+
+        <video
+          ref={videoRef}
+          className="review-lightbox__player"
+          src={review.src}
+          poster={review.poster}
+          controls
+          autoPlay
+          playsInline
+          preload="auto"
+        />
+      </div>
+    </div>,
+    document.body,
+  );
+}
+
+function ShowcaseVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [blockedByBrowser, setBlockedByBrowser] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    let unmuteOnGesture: (() => void) | null = null;
+
+    const startWithSound = async () => {
+      video.muted = false;
+      video.volume = 1;
+
+      try {
+        await video.play();
+        setBlockedByBrowser(false);
+        return;
+      } catch {
+        // Browsers reject unmuted autoplay until the visitor interacts.
+      }
+
+      video.muted = true;
+      try {
+        await video.play();
+      } catch {
+        return;
+      }
+      setBlockedByBrowser(true);
+
+      unmuteOnGesture = () => {
+        video.muted = false;
+        video.volume = 1;
+        void video.play();
+        setBlockedByBrowser(false);
+      };
+
+      const events = ["pointerdown", "keydown", "touchstart", "wheel"] as const;
+      const handler = () => {
+        unmuteOnGesture?.();
+        events.forEach((name) => window.removeEventListener(name, handler));
+      };
+      events.forEach((name) =>
+        window.addEventListener(name, handler, { once: true, passive: true }),
+      );
+      unmuteOnGesture = handler;
+    };
+
+    void startWithSound();
+
+    return () => {
+      if (unmuteOnGesture) {
+        ["pointerdown", "keydown", "touchstart", "wheel"].forEach((name) =>
+          window.removeEventListener(name, unmuteOnGesture as () => void),
+        );
+      }
+    };
+  }, []);
+
+  const enableSound = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = false;
+    video.volume = 1;
+    void video.play();
+    setBlockedByBrowser(false);
+  };
+
+  return (
+    <div className="video-showcase__frame">
+      <video
+        ref={videoRef}
+        className="video-showcase__player"
+        src="/videos/conference-hadith.mp4"
+        poster="/videos/conference-hadith-poster.jpg"
+        controls
+        autoPlay
+        loop
+        playsInline
+        preload="auto"
+      />
+
+      {blockedByBrowser ? (
+        <button
+          type="button"
+          className="video-showcase__unmute"
+          onClick={enableSound}
+        >
+          Tap for sound
+        </button>
+      ) : null}
+    </div>
+  );
+}
 
 function VideoReviewsCarousel() {
   const count = videoReviews.length;
@@ -156,10 +348,12 @@ function VideoReviewsCarousel() {
   const offsetRef = useRef(0);
   const pausedRef = useRef(false);
   const reduceMotionRef = useRef(false);
+  const [activeReview, setActiveReview] = useState<VideoReview | null>(null);
   const dragState = useRef<{
     pointerId: number;
     startX: number;
     startOffset: number;
+    moved: boolean;
   } | null>(null);
   const loopWidthRef = useRef(0);
 
@@ -257,24 +451,41 @@ function VideoReviewsCarousel() {
       pointerId: event.pointerId,
       startX: event.clientX,
       startOffset: offsetRef.current,
+      moved: false,
     };
     setPaused(true);
-    viewportRef.current?.setPointerCapture(event.pointerId);
   };
 
   const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (dragState.current?.pointerId !== event.pointerId) return;
+    const drag = dragState.current;
+    if (drag?.pointerId !== event.pointerId) return;
+
+    const travel = event.clientX - drag.startX;
+    if (!drag.moved) {
+      // Below the threshold the gesture stays a tap so play buttons keep working.
+      if (Math.abs(travel) < DRAG_THRESHOLD) return;
+      drag.moved = true;
+      viewportRef.current?.setPointerCapture(event.pointerId);
+    }
+
     // Dragging right decreases offset (rewind); dragging left advances.
-    offsetRef.current = wrapOffset(
-      dragState.current.startOffset -
-        (event.clientX - dragState.current.startX),
-    );
+    offsetRef.current = wrapOffset(drag.startOffset - travel);
     applyTransform();
   };
 
   const endDrag = (event: React.PointerEvent<HTMLDivElement>) => {
     if (dragState.current?.pointerId !== event.pointerId) return;
     dragState.current = null;
+    if (!activeReview) setPaused(false);
+  };
+
+  const openReview = (review: VideoReview) => {
+    setPaused(true);
+    setActiveReview(review);
+  };
+
+  const closeReview = () => {
+    setActiveReview(null);
     setPaused(false);
   };
 
@@ -302,13 +513,38 @@ function VideoReviewsCarousel() {
               key={`${review.id}-${i}`}
               className="video-reviews__slide"
             >
-              <h3 className="video-reviews__slide-title">{review.title}</h3>
-              <VideoPlaceholder
-                label={`${review.title} by ${review.name}`}
-                tone={(i % 3) + 1}
-              />
-              <p className="video-reviews__slide-name">{review.name}</p>
-              <p className="video-reviews__slide-role">{review.role}</p>
+              {review.src && review.poster ? (
+                <button
+                  type="button"
+                  className="video-reviews__slide-media"
+                  aria-label={`Play review by ${review.name}`}
+                  onClick={() => openReview(review)}
+                >
+                  <Image
+                    className="video-reviews__poster"
+                    src={review.poster}
+                    alt=""
+                    fill
+                    sizes="(max-width: 760px) 60vw, 22vw"
+                    draggable={false}
+                  />
+                  <span className="video-reviews__play" aria-hidden="true">
+                    <PlayIcon size={20} />
+                  </span>
+                </button>
+              ) : (
+                <VideoPlaceholder
+                  label="Guest review"
+                  tone={(i % 3) + 1}
+                />
+              )}
+
+              {review.name ? (
+                <p className="video-reviews__slide-name">{review.name}</p>
+              ) : null}
+              {review.role ? (
+                <p className="video-reviews__slide-role">{review.role}</p>
+              ) : null}
             </article>
           ))}
         </div>
@@ -332,6 +568,10 @@ function VideoReviewsCarousel() {
           <ChevronRight />
         </button>
       </div>
+
+      {activeReview ? (
+        <ReviewLightbox review={activeReview} onClose={closeReview} />
+      ) : null}
     </div>
   );
 }
@@ -441,13 +681,14 @@ export function ReviewsTestimonies() {
         <VideoReviewsCarousel />
 
         <article className="video-reviews__landscape">
-          <h3 className="video-reviews__slide-title">
-            {landscapeReview.title}
-          </h3>
-          <VideoPlaceholder
-            label={`${landscapeReview.title} by ${landscapeReview.name}`}
-            tone={2}
-            orientation="landscape"
+          <video
+            className="video-reviews__landscape-player"
+            src={landscapeReview.src}
+            poster={landscapeReview.poster}
+            controls
+            playsInline
+            preload="metadata"
+            aria-label={`Review by ${landscapeReview.name}`}
           />
           <p className="video-reviews__slide-name">{landscapeReview.name}</p>
           <p className="video-reviews__slide-role">{landscapeReview.role}</p>
@@ -471,7 +712,7 @@ export function ReviewsTestimonies() {
             </p>
           </div>
           <div className="video-showcase__media">
-            <VideoPlaceholder label="Conference highlights" tone={1} />
+            <ShowcaseVideo />
           </div>
         </div>
       </section>
