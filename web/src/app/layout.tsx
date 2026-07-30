@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { VisitorTracker } from "@/components/VisitorTracker";
 import "./globals.css";
 
 const display = Cormorant_Garamond({
@@ -35,6 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${display.variable} ${sans.variable} h-full`}>
       <body className="min-h-full antialiased">
+        <VisitorTracker />
         <SiteHeader />
         {children}
         <SiteFooter />

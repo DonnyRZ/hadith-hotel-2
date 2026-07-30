@@ -1,20 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ComingSoonModal } from "@/components/ComingSoonModal";
-
-/* Static placeholders until live counters are wired to the database */
-const stats = [
-  { id: "downloads", value: 8, label: "Profile Downloads" },
-  { id: "visitors", value: 28, label: "Profile Visitors" },
-];
+import { ProfileDownloadLink } from "@/components/ProfileDownloadLink";
+import {
+  fetchDownloadMetrics,
+  fetchVisitorMetrics,
+} from "@/lib/siteMetrics";
 
 const comingSoonCopy = {
-  profile: {
-    eyebrow: "Hotel Profile",
-    body: "Our hotel profile document is being finalised and will be available for download shortly.",
-  },
   reserve: {
     eyebrow: "Reservations",
     body: "Online booking will be available shortly. Thank you for your interest in HADITH Hotel.",
@@ -25,6 +20,37 @@ export function OverviewFarewell() {
   const [comingSoon, setComingSoon] = useState<
     keyof typeof comingSoonCopy | null
   >(null);
+  const [visitorCount, setVisitorCount] = useState<number | null>(null);
+  const [downloadCount, setDownloadCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    let active = true;
+
+    Promise.all([fetchVisitorMetrics(), fetchDownloadMetrics()]).then(
+      ([visitorMetrics, downloadMetrics]) => {
+        if (!active) return;
+        setVisitorCount(visitorMetrics?.count ?? null);
+        setDownloadCount(downloadMetrics?.totalDownloads ?? null);
+      },
+    );
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const stats = [
+    {
+      id: "downloads",
+      value: downloadCount?.toLocaleString("en") ?? "—",
+      label: "Profile Downloads",
+    },
+    {
+      id: "visitors",
+      value: visitorCount?.toLocaleString("en") ?? "—",
+      label: "Profile Visitors",
+    },
+  ];
 
   return (
     <>
@@ -66,13 +92,14 @@ export function OverviewFarewell() {
           </dl>
 
           <div className="overview-farewell__actions">
-            <button
-              type="button"
+            <ProfileDownloadLink
               className="overview-farewell__download"
-              onClick={() => setComingSoon("profile")}
+              onTracked={(metrics) =>
+                setDownloadCount(metrics.totalDownloads)
+              }
             >
               Download Profile
-            </button>
+            </ProfileDownloadLink>
             <button
               type="button"
               className="overview-farewell__reserve"

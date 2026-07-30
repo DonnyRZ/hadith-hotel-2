@@ -1,22 +1,4 @@
 services:
-  db:
-    image: postgres:16-alpine
-    container_name: hadith-hotel-2-db
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: hadith2
-      POSTGRES_PASSWORD: hadith2
-      POSTGRES_DB: hadith_hotel_2
-    ports:
-      - "5435:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U hadith2 -d hadith_hotel_2"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
-
   web:
     build:
       context: ./web
@@ -24,12 +6,13 @@ services:
     container_name: hadith-hotel-2-web
     restart: unless-stopped
     ports:
-      - "3005:3000"
+      - "127.0.0.1:3006:3000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
-      DATABASE_URL: postgresql://hadith2:hadith2@db:5432/hadith_hotel_2?schema=public
-    depends_on:
-      db:
-        condition: service_healthy
-
-volumes:
-  pgdata:
+      DATABASE_URL: ${DATABASE_URL}
+      NODE_ENV: production
+      VISITOR_IP_HASH_SECRET: ${VISITOR_IP_HASH_SECRET}
+      VISITOR_GEOLOOKUP_URL: ${VISITOR_GEOLOOKUP_URL:-https://ipwho.is/{ip}}
+      VISITOR_MAJOR_CITIES: ${VISITOR_MAJOR_CITIES:-}
+      VISITOR_TRUST_CLOUDFLARE_HEADERS: ${VISITOR_TRUST_CLOUDFLARE_HEADERS:-false}
