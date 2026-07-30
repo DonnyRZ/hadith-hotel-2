@@ -6,43 +6,34 @@ import { useCallback, useState } from "react";
 type WellnessSlide = {
   id: string;
   title: string;
-  description: string;
   src?: string;
 };
-
-const placeholderDescription =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
 const wellnessSlides: WellnessSlide[] = [
   {
     id: "spa",
     title: "Spa / Massage Suite",
-    description: placeholderDescription,
     src: "/images/experience/massage.webp",
   },
   {
     id: "sauna",
     title: "Sauna",
-    description: placeholderDescription,
     src: "/images/experience/sauna.webp",
   },
   {
     id: "hammam",
     title: "Turkish Hammam",
-    description: placeholderDescription,
     src: "/images/experience/hamam.webp",
   },
   {
     id: "pool",
     title: "Indoor Pool",
-    description: placeholderDescription,
     src: "/images/experience/pool.webp",
   },
-  { id: "salon", title: "Beauty Salon", description: placeholderDescription },
+  { id: "salon", title: "Beauty Salon" },
   {
     id: "fitness",
     title: "Fitness Centre",
-    description: placeholderDescription,
     src: "/images/experience/gym.webp",
   },
 ];
@@ -257,14 +248,11 @@ function WellnessCarousel() {
 
         <div className="overview-features__active">
           <WellnessMedia slide={current} tone={(index % 3) + 1} />
-          <div className="overview-features__card">
+          <div className="overview-features__card overview-features__card--compact">
             <p className="overview-features__card-eyebrow">
               Wellness &amp; Relaxation
             </p>
             <h3 className="overview-features__card-title">{current.title}</h3>
-            <p className="overview-features__card-body">
-              {current.description}
-            </p>
           </div>
         </div>
 

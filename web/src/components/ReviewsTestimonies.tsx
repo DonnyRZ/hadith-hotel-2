@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 
@@ -17,6 +17,9 @@ type Testimonial = {
   quote: string;
   name: string;
   role: string;
+  photo: string;
+  /** Keeps the face in frame once the 3:4 portrait crop kicks in. */
+  photoPosition?: string;
 };
 
 const videoReviews: VideoReview[] = [
@@ -41,8 +44,13 @@ const videoReviews: VideoReview[] = [
     src: "/videos/syekh-mohamed-el-duwaini.mp4",
     poster: "/videos/syekh-mohamed-el-duwaini-poster.jpg",
   },
-  { id: "review-4" },
-  { id: "review-5" },
+  {
+    id: "dr-zulkifli-hasan",
+    name: "Dr. Zulkifli Hasan",
+    role: "Minister of Religious Affairs, Malaysia",
+    src: "/videos/dr-zulkifli-hasan.mp4",
+    poster: "/videos/dr-zulkifli-hasan-poster.jpg",
+  },
 ];
 
 const landscapeReview = {
@@ -55,39 +63,48 @@ const landscapeReview = {
 
 const testimonials: Testimonial[] = [
   {
-    id: "testimonial-1",
+    id: "syekh-mohamed-el-duwaini",
     quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...",
-    name: "Guest Name",
-    role: "Guest Title",
+      "Alhamdulillah, MashaAllah. This hotel is truly outstanding, with excellent service and a welcoming atmosphere. We pray that Allah blesses this hotel with continued success and helps it improve even further, InshaAllah.",
+    name: "Syekh Mohamed El Duwaini",
+    role: "Undersecretary of Al-Azhar Al-Sharif",
+    photo: "/images/testimonials/syekh-mohamed-el-duwaini.webp",
+    photoPosition: "50% 20%",
   },
   {
-    id: "testimonial-2",
+    id: "mohamed-shaheem-ali-saeed",
     quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...",
-    name: "Guest Name",
-    role: "Guest Title",
+      "MashaAllah, this is my first time visiting Samarkand, and staying at Hadith Hotel has been an amazing experience. Its location near the Imam Al-Bukhari Complex makes it especially meaningful for pilgrims, Islamic scholars, and visitors. The service is excellent, and I highly recommend this hotel as one of the best places to stay in Samarkand.",
+    name: "Mohamed Shaheem Ali Saeed",
+    role: "Minister of Islamic Affairs, Republic of Maldives",
+    photo: "/images/testimonials/mohamed-shaheem-ali-saeed.webp",
   },
   {
-    id: "testimonial-3",
+    id: "shady-al-suleiman",
     quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...",
-    name: "Guest Name",
-    role: "Guest Title",
+      "A very nice hotel in a wonderful environment, located right in front of the Imam Al-Bukhari Complex. We have truly enjoyed our stay here. I highly recommend this hotel to everyone visiting Samarkand.",
+    name: "Shady Al Suleiman",
+    role: "President of United Muslims of Australia",
+    photo: "/images/testimonials/shady-al-suleiman.webp",
+    photoPosition: "50% 15%",
   },
   {
-    id: "testimonial-4",
+    id: "emad-al-din-hamdan",
     quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...",
-    name: "Guest Name",
-    role: "Guest Title",
+      "I was genuinely impressed by this hotel. It is beautifully designed, well-equipped, and very well managed. With its modern facilities, new furnishings, and excellent location next to the Imam Al-Bukhari Tomb, I believe this hotel has great potential to become a major destination for visitors and tourists in the future.",
+    name: "Emad Al-Din Hamdan",
+    role: "Minister of Culture of the State of Palestine",
+    photo: "/images/testimonials/emad-al-din-hamdan.webp",
+    photoPosition: "62% 50%",
   },
   {
-    id: "testimonial-5",
+    id: "dr-zulkifli-hasan",
     quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...",
-    name: "Guest Name",
-    role: "Guest Title",
+      "I am truly impressed to find an Indonesian hotel here in Samarkand. Its strategic location and excellent facilities make it a wonderful place to stay and an important presence for Indonesians visiting Samarkand.",
+    name: "Dr. Zulkifli Hasan",
+    role: "Minister of Religious Affairs, Malaysia",
+    photo: "/images/testimonials/dr-zulkifli-hasan.webp",
+    photoPosition: "50% 28%",
   },
 ];
 
@@ -349,6 +366,8 @@ function VideoReviewsCarousel() {
   const pausedRef = useRef(false);
   const reduceMotionRef = useRef(false);
   const [activeReview, setActiveReview] = useState<VideoReview | null>(null);
+  // One copy only covers `loopWidth`; wide screens need more to stay filled.
+  const [repeats, setRepeats] = useState(2);
   const dragState = useRef<{
     pointerId: number;
     startX: number;
@@ -403,9 +422,16 @@ function VideoReviewsCarousel() {
     media.addEventListener("change", syncMotion);
 
     const updateLoop = () => {
-      loopWidthRef.current = measureLoopWidth();
+      const loopWidth = measureLoopWidth();
+      loopWidthRef.current = loopWidth;
       offsetRef.current = wrapOffset(offsetRef.current);
       applyTransform();
+
+      const viewport = viewportRef.current;
+      if (loopWidth > 0 && viewport) {
+        const needed = Math.ceil(viewport.clientWidth / loopWidth) + 1;
+        setRepeats((current) => Math.max(current, needed, 2));
+      }
     };
 
     updateLoop();
@@ -489,7 +515,10 @@ function VideoReviewsCarousel() {
     setPaused(false);
   };
 
-  const loopedReviews = [...videoReviews, ...videoReviews];
+  const loopedReviews = useMemo(
+    () => Array.from({ length: repeats }, () => videoReviews).flat(),
+    [repeats],
+  );
 
   return (
     <div
@@ -631,12 +660,15 @@ function TestimonialsCarousel() {
                 </blockquote>
               </div>
               <figcaption className="testimonial-card__person">
-                <div
-                  className={`media-placeholder testimonial-card__photo media-placeholder--tone-${(i % 3) + 1}`}
-                  role="img"
-                  aria-label={`${testimonial.name} portrait placeholder`}
-                >
-                  <span>Photo</span>
+                <div className="testimonial-card__photo">
+                  <Image
+                    className="testimonial-card__portrait"
+                    src={testimonial.photo}
+                    alt={testimonial.name}
+                    fill
+                    sizes="(max-width: 760px) 60vw, 260px"
+                    style={{ objectPosition: testimonial.photoPosition }}
+                  />
                 </div>
                 <p className="testimonial-card__name">{testimonial.name}</p>
                 <p className="testimonial-card__role">{testimonial.role}</p>
