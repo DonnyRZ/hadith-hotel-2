@@ -357,10 +357,15 @@ button {
 .hero-carousel__viewport {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  min-height: 460px;
-  /* Keep the hero from towering past the fold on very wide screens */
-  max-height: calc(100vh - var(--header-primary-h) - var(--header-utility-h));
+  height: min(
+    56.25vw,
+    calc(100svh - var(--header-primary-h) - var(--header-utility-h)),
+    700px
+  );
+  min-height: min(
+    420px,
+    calc(100svh - var(--header-primary-h) - var(--header-utility-h))
+  );
   overflow: hidden;
 }
 
@@ -385,14 +390,20 @@ button {
   background: #171614;
 }
 
-.hero-carousel__image-backdrop {
-  object-fit: cover;
-  filter: blur(28px) brightness(0.58) saturate(0.85);
-  transform: scale(1.08);
+.hero-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #171614;
 }
 
-.hero-carousel__image {
-  object-fit: contain;
+.hero-media__image {
+  object-fit: cover;
+  object-position: var(--hero-position, 50% 50%);
+}
+
+.hero-media__image--mobile {
+  display: none;
 }
 
 .hero-carousel__image-shell::after {
@@ -2155,10 +2166,14 @@ body.has-room-lightbox .reserve-float {
 .page-hero__viewport {
   position: relative;
   width: 100%;
-  height: clamp(
-    460px,
-    calc(100vh - var(--header-primary-h) - var(--header-utility-h)),
-    760px
+  height: min(
+    56.25vw,
+    calc(100svh - var(--header-primary-h) - var(--header-utility-h)),
+    700px
+  );
+  min-height: min(
+    420px,
+    calc(100svh - var(--header-primary-h) - var(--header-utility-h))
   );
   overflow: hidden;
   background: var(--placeholder);
@@ -2284,8 +2299,11 @@ body.has-room-lightbox .reserve-float {
 
 @media (max-width: 600px) {
   .page-hero__viewport {
-    min-height: 520px;
-    height: calc(100svh - var(--header-primary-h));
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    aspect-ratio: 4 / 3;
   }
 
   .page-hero__controls {
@@ -4059,10 +4077,26 @@ body.has-room-lightbox .reserve-float {
 
 @media (max-width: 720px) {
   .hero-carousel__viewport {
-    min-height: 520px;
-    height: calc(100svh - var(--header-primary-h));
-    max-height: 680px;
-    aspect-ratio: auto;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    aspect-ratio: 4 / 3;
+  }
+
+  .hero-media__image {
+    object-position: var(
+      --hero-position-mobile,
+      var(--hero-position, 50% 50%)
+    );
+  }
+
+  .hero-media--has-mobile .hero-media__image--desktop {
+    display: none;
+  }
+
+  .hero-media--has-mobile .hero-media__image--mobile {
+    display: block;
   }
 
   .overview-hero {
@@ -4382,13 +4416,19 @@ body.has-room-lightbox .reserve-float {
   }
 
   .page-hero__viewport {
-    min-height: 500px;
-    height: 68svh;
-    max-height: 620px;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    aspect-ratio: 4 / 3;
   }
 
   .page-hero__controls {
     bottom: 88px;
+  }
+
+  .page-hero__placeholder span {
+    transform: translateY(-52px);
   }
 
   .page-hero__navigation {

@@ -7,8 +7,8 @@ export const metadata: Metadata = {
 };
 
 const heroSlides = [
-  "Suites & Rooms hero image 1",
-  "Suites & Rooms hero image 2",
+  { id: "rooms-hero-1", label: "Suites & Rooms hero image 1" },
+  { id: "rooms-hero-2", label: "Suites & Rooms hero image 2" },
 ] as const;
 
 export default function SuitesRoomsPage() {

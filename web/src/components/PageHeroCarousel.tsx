@@ -2,11 +2,14 @@
 
 import Link from "next/link";
 import { useCallback, useState } from "react";
+import { HeroMedia, type HeroMediaSlide } from "@/components/HeroMedia";
 import { ScrollCue } from "@/components/ScrollCue";
+
+export type PageHeroSlide = HeroMediaSlide;
 
 type PageHeroCarouselProps = {
   title: string;
-  slides: readonly string[];
+  slides: readonly PageHeroSlide[];
 };
 
 export function PageHeroCarousel({
@@ -32,19 +35,18 @@ export function PageHeroCarousel({
       <h1 className="sr-only">{title}</h1>
 
       <div className="page-hero__viewport">
-        {slides.map((label, slideIndex) => (
+        {slides.map((slide, slideIndex) => (
           <div
-            key={label}
+            key={slide.id}
             className={`page-hero__slide${slideIndex === index ? " is-active" : ""}`}
             aria-hidden={slideIndex !== index}
           >
-            <div
-              className={`media-placeholder page-hero__placeholder media-placeholder--tone-${(slideIndex % 3) + 1}`}
-              role="img"
-              aria-label={label}
-            >
-              <span>{label}</span>
-            </div>
+            <HeroMedia
+              slide={slide}
+              priority={slideIndex === 0}
+              placeholderClassName="page-hero__placeholder"
+              placeholderTone={((slideIndex % 3) + 1) as 1 | 2 | 3}
+            />
           </div>
         ))}
 
@@ -86,7 +88,7 @@ export function PageHeroCarousel({
       </div>
 
       <p className="sr-only" aria-live="polite">
-        Image {index + 1} of {count}: {slides[index]}
+        Image {index + 1} of {count}: {slides[index]?.label}
       </p>
     </section>
   );

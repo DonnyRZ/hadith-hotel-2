@@ -7,8 +7,8 @@ export const metadata: Metadata = {
 };
 
 const heroSlides = [
-  "Experience hero image 1",
-  "Experience hero image 2",
+  { id: "experience-hero-1", label: "Experience hero image 1" },
+  { id: "experience-hero-2", label: "Experience hero image 2" },
 ] as const;
 
 export default function ExperiencePage() {

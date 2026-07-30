@@ -7,8 +7,8 @@ export const metadata: Metadata = {
 };
 
 const heroSlides = [
-  "Meetings & Weddings hero image 1",
-  "Meetings & Weddings hero image 2",
+  { id: "events-hero-1", label: "Meetings & Weddings hero image 1" },
+  { id: "events-hero-2", label: "Meetings & Weddings hero image 2" },
 ] as const;
 
 export default function MeetingsWeddingsPage() {

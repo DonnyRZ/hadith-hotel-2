@@ -7,8 +7,8 @@ export const metadata: Metadata = {
 };
 
 const heroSlides = [
-  "Cafe & Dining hero image 1",
-  "Cafe & Dining hero image 2",
+  { id: "dining-hero-1", label: "Cafe & Dining hero image 1" },
+  { id: "dining-hero-2", label: "Cafe & Dining hero image 2" },
 ] as const;
 
 export default function CafeDiningPage() {

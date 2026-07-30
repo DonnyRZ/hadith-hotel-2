@@ -1,15 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
+import { HeroMedia, type HeroMediaSlide } from "@/components/HeroMedia";
 import { SoftOpeningFloat } from "@/components/SoftOpeningFloat";
 import { ScrollCue } from "@/components/ScrollCue";
 
-export type HeroSlide = {
-  id: string;
-  label: string;
-  src: string;
-};
+export type HeroSlide = HeroMediaSlide & { src: string };
 
 type HeroCarouselProps = {
   slides: HeroSlide[];
@@ -87,22 +83,7 @@ export function HeroCarousel({ slides, intervalMs = 3000 }: HeroCarouselProps) {
             aria-hidden={i !== index}
           >
             <div className="hero-carousel__image-shell">
-              <Image
-                className="hero-carousel__image-backdrop"
-                src={slide.src}
-                alt=""
-                fill
-                sizes="100vw"
-                aria-hidden="true"
-              />
-              <Image
-                className="hero-carousel__image"
-                src={slide.src}
-                alt={slide.label}
-                fill
-                sizes="100vw"
-                priority={i === 0}
-              />
+              <HeroMedia slide={slide} priority={i === 0} />
             </div>
           </div>
         ))}
