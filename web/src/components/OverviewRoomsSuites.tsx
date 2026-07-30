@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import Image from "next/image";
 import Link from "next/link";
 import { ComingSoonModal } from "@/components/ComingSoonModal";
 
@@ -9,17 +10,48 @@ type RoomSlide = {
   id: string;
   name: string;
   units: number;
+  src: string;
+  comingSoon?: boolean;
 };
 
+const BALCONY_SRC = "/images/overview-rooms/balcony.webp";
+
 const rooms: RoomSlide[] = [
-  { id: "standard", name: "Standard Room", units: 62 },
-  { id: "balcony", name: "Balcony Room", units: 23 },
-  { id: "junior", name: "Junior Suite", units: 9 },
-  { id: "president", name: "President Suite", units: 2 },
-  { id: "suite", name: "Suite", units: 18 },
+  {
+    id: "standard",
+    name: "Standard Room",
+    units: 62,
+    src: "/images/overview-rooms/standard.webp",
+  },
+  {
+    id: "suite",
+    name: "Suite",
+    units: 18,
+    src: "/images/overview-rooms/suite.webp",
+  },
+  {
+    id: "balcony",
+    name: "Balcony Room",
+    units: 23,
+    src: BALCONY_SRC,
+  },
+  {
+    id: "junior",
+    name: "Junior Suite",
+    units: 9,
+    src: BALCONY_SRC,
+    comingSoon: true,
+  },
+  {
+    id: "president",
+    name: "President Suite",
+    units: 2,
+    src: BALCONY_SRC,
+    comingSoon: true,
+  },
 ];
 
-const PRESIDENT_INDEX = rooms.findIndex((r) => r.id === "president");
+const DEFAULT_INDEX = rooms.findIndex((r) => r.id === "suite");
 
 function ExpandIcon() {
   return (
@@ -48,48 +80,65 @@ function CloseIcon() {
   );
 }
 
-function RoomPlaceholder({
+function RoomMedia({
   room,
-  tone,
   featured = false,
   fullscreen = false,
+  priority = false,
 }: {
   room: RoomSlide;
-  tone: number;
   featured?: boolean;
   fullscreen?: boolean;
+  priority?: boolean;
 }) {
   return (
     <div
       className={[
-        "media-placeholder",
-        "media-placeholder--room",
-        `media-placeholder--tone-${tone}`,
-        featured ? "media-placeholder--room-featured" : "",
-        fullscreen ? "media-placeholder--room-fullscreen" : "",
+        "overview-rooms__media",
+        featured ? "overview-rooms__media--featured" : "",
+        fullscreen ? "overview-rooms__media--fullscreen" : "",
+        room.comingSoon ? "overview-rooms__media--coming-soon" : "",
       ]
         .filter(Boolean)
         .join(" ")}
       role="img"
-      aria-label={`${room.name} placeholder — ${room.units} units`}
+      aria-label={
+        room.comingSoon
+          ? `${room.name} — coming soon`
+          : `${room.name} — ${room.units} units`
+      }
     >
-      <span>
-        {room.name}
-        <br />
-        {room.units} units
-      </span>
+      <Image
+        className="overview-rooms__image"
+        src={room.src}
+        alt=""
+        fill
+        sizes={
+          fullscreen
+            ? "100vw"
+            : featured
+              ? "(max-width: 720px) 100vw, 58vw"
+              : "(max-width: 720px) 0px, 22vw"
+        }
+        priority={priority}
+        aria-hidden="true"
+      />
+
+      {room.comingSoon ? (
+        <div className="overview-rooms__soon" aria-hidden="true">
+          <span className="overview-rooms__soon-label">Coming Soon</span>
+        </div>
+      ) : null}
     </div>
   );
 }
 
 function RoomLightbox({
   room,
-  tone,
   open,
   onClose,
 }: {
   room: RoomSlide;
-  tone: number;
   open: boolean;
   onClose: () => void;
 }) {
@@ -147,7 +196,7 @@ function RoomLightbox({
           </button>
         </div>
         <div className="room-lightbox__media">
-          <RoomPlaceholder room={room} tone={tone} fullscreen />
+          <RoomMedia room={room} fullscreen />
         </div>
       </div>
     </div>,
@@ -157,7 +206,7 @@ function RoomLightbox({
 
 export function OverviewRoomsSuites() {
   const [index, setIndex] = useState(
-    PRESIDENT_INDEX >= 0 ? PRESIDENT_INDEX : 0,
+    DEFAULT_INDEX >= 0 ? DEFAULT_INDEX : 0,
   );
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -176,7 +225,6 @@ export function OverviewRoomsSuites() {
   const next = rooms[wrap(index + 1)]!;
   const counter = `${String(index + 1).padStart(2, "0")} / ${String(count).padStart(2, "0")}`;
   const progress = ((index + 1) / count) * 100;
-  const currentTone = (index % 3) + 1;
 
   return (
     <>
@@ -211,14 +259,14 @@ export function OverviewRoomsSuites() {
               onClick={goPrev}
               aria-label={`Previous: ${prev.name}`}
             >
-              <RoomPlaceholder room={prev} tone={(wrap(index - 1) % 3) + 1} />
+              <RoomMedia room={prev} />
             </button>
 
             <div
               className="overview-rooms__slide overview-rooms__slide--center"
               aria-current="true"
             >
-              <RoomPlaceholder room={current} tone={currentTone} featured />
+              <RoomMedia room={current} featured priority />
               <button
                 type="button"
                 className="overview-rooms__expand"
@@ -235,7 +283,7 @@ export function OverviewRoomsSuites() {
               onClick={goNext}
               aria-label={`Next: ${next.name}`}
             >
-              <RoomPlaceholder room={next} tone={(wrap(index + 1) % 3) + 1} />
+              <RoomMedia room={next} />
             </button>
           </div>
 
@@ -295,7 +343,6 @@ export function OverviewRoomsSuites() {
 
       <RoomLightbox
         room={current}
-        tone={currentTone}
         open={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
       />

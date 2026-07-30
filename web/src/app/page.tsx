@@ -27,13 +27,6 @@ const heroSlides = [
     mobilePosition: "50% 52%",
   },
   {
-    id: "buffet",
-    label: "Breakfast buffet at HADITH Hotel",
-    src: "/images/overview-hero/buffet.webp",
-    position: "58% 54%",
-    mobilePosition: "60% 54%",
-  },
-  {
     id: "junior-suite",
     label: "Junior Suite living and dining area",
     src: "/images/overview-hero/junior-suite.webp",
@@ -58,8 +51,8 @@ const heroSlides = [
     id: "massage",
     label: "Massage treatment room",
     src: "/images/overview-hero/massage.webp",
-    position: "50% 50%",
-    mobilePosition: "50% 50%",
+    position: "50% 100%",
+    mobilePosition: "50% 100%",
   },
   {
     id: "sauna",

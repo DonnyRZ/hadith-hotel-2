@@ -16,7 +16,7 @@ const wellnessSlides: WellnessSlide[] = [
   { id: "salon", title: "Beauty Salon", description: placeholderDescription },
   { id: "sauna", title: "Sauna", description: placeholderDescription },
   { id: "hammam", title: "Turkish Hammam", description: placeholderDescription },
-  { id: "pool", title: "Pool", description: placeholderDescription },
+  { id: "pool", title: "Indoor Pool", description: placeholderDescription },
   { id: "fitness", title: "Fitness Centre", description: placeholderDescription },
 ];
 

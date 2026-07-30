@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { ComingSoonModal } from "@/components/ComingSoonModal";
 
@@ -32,12 +33,14 @@ export function OverviewFarewell() {
         aria-labelledby="overview-farewell-heading"
       >
         <div className="overview-farewell__visual">
-          <div
-            className="overview-farewell__photo media-placeholder"
-            role="img"
-            aria-label="Hotel night photo placeholder"
-          >
-            <span>Hotel photo placeholder</span>
+          <div className="overview-farewell__photo">
+            <Image
+              className="overview-farewell__image"
+              src="/images/overview-features/starry-night.webp"
+              alt="HADITH Hotel beneath a starry night sky"
+              fill
+              sizes="100vw"
+            />
           </div>
 
           <div className="overview-farewell__copy">

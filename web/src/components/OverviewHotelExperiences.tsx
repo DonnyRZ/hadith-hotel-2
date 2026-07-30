@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useState } from "react";
 
@@ -8,6 +9,7 @@ type FeatureSlide = {
   title: string;
   href: string;
   description: string;
+  src?: string;
 };
 
 const placeholderDescription =
@@ -19,28 +21,32 @@ const slides: FeatureSlide[] = [
     title: "Suites & Rooms",
     href: "/suites-rooms",
     description: placeholderDescription,
+    src: "/images/overview-hero/junior-suite.webp",
   },
   {
     id: "cafe-dining",
     title: "Cafe & Dining",
     href: "/cafe-dining",
     description: placeholderDescription,
+    src: "/images/overview-features/cafe-dining.webp",
   },
   {
     id: "experience",
     title: "Experience",
     href: "/experience",
     description: placeholderDescription,
+    src: "/images/overview-hero/pool.webp",
   },
   {
     id: "meetings-weddings",
     title: "Meetings & Weddings",
     href: "/meetings-weddings",
     description: placeholderDescription,
+    src: "/images/overview-features/meetings-weddings.webp",
   },
 ];
 
-function FeaturePlaceholder({
+function FeatureMedia({
   slide,
   tone,
 }: {
@@ -48,12 +54,24 @@ function FeaturePlaceholder({
   tone: number;
 }) {
   return (
-    <div
-      className={`media-placeholder overview-features__placeholder media-placeholder--tone-${tone}`}
-      role="img"
-      aria-label={`${slide.title} image placeholder`}
-    >
-      <span>{slide.title}</span>
+    <div className="overview-features__media">
+      {slide.src ? (
+        <Image
+          className="overview-features__image"
+          src={slide.src}
+          alt={slide.title}
+          fill
+          sizes="(max-width: 720px) 100vw, 60vw"
+        />
+      ) : (
+        <div
+          className={`media-placeholder overview-features__placeholder media-placeholder--tone-${tone}`}
+          role="img"
+          aria-label={`${slide.title} image placeholder`}
+        >
+          <span>{slide.title}</span>
+        </div>
+      )}
     </div>
   );
 }
@@ -109,14 +127,14 @@ export function OverviewHotelExperiences() {
             onClick={goPrevious}
             aria-label={`Previous slide, ${previous.title}`}
           >
-            <FeaturePlaceholder
+            <FeatureMedia
               slide={previous}
               tone={(wrap(index - 1) % 3) + 1}
             />
           </button>
 
           <div className="overview-features__active">
-            <FeaturePlaceholder slide={current} tone={(index % 3) + 1} />
+            <FeatureMedia slide={current} tone={(index % 3) + 1} />
             <div className="overview-features__card">
               <p className="overview-features__card-eyebrow">
                 Hotel experience
@@ -140,7 +158,7 @@ export function OverviewHotelExperiences() {
             onClick={goNext}
             aria-label={`Next slide, ${next.title}`}
           >
-            <FeaturePlaceholder
+            <FeatureMedia
               slide={next}
               tone={(wrap(index + 1) % 3) + 1}
             />
