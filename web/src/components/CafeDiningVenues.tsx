@@ -18,8 +18,8 @@ const venues: Venue[] = [
   {
     id: "restaurant",
     heading: "Savour the Silk Road",
-    eyebrow: "Food & Beverage · The Restaurant",
-    name: "The Restaurant",
+    eyebrow: "Food & Beverage · Saji Nusantara",
+    name: "Saji Nusantara",
     description:
       "A 120-seat dining room framed by a slender white marble mihrab. The menu travels the Silk Road from Samarkand plov and Bukhara somsa to Indonesian-inspired creations prepared by our culinary team.",
     highlights: [
@@ -33,8 +33,8 @@ const venues: Venue[] = [
   {
     id: "cafe",
     heading: "A Taste of Indonesia",
-    eyebrow: "Food & Beverage · The Cafe",
-    name: "The Cafe",
+    eyebrow: "Food & Beverage · 7OZ",
+    name: "7OZ",
     description:
       "Discover curated Indonesian pastries and specialty coffees from across the archipelago, including classics such as Kopi Luwak. The cafe offers a warm social setting celebrating Indonesia’s rich coffee culture.",
     highlights: [
@@ -44,7 +44,7 @@ const venues: Venue[] = [
     ],
     variant: "paper",
     reversed: true,
-    gallery: ["The Cafe", "Indonesian Coffee & Pastries", "Cafe Social Lounge"],
+    gallery: ["7OZ", "Indonesian Coffee & Pastries", "Cafe Social Lounge"],
   },
 ];
 
