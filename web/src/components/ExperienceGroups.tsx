@@ -174,9 +174,9 @@ function WellnessMedia({
         <div
           className={`media-placeholder overview-features__placeholder media-placeholder--tone-${tone}`}
           role="img"
-          aria-label={`${slide.title} photo coming soon`}
+          aria-label={`${slide.title} — soonest`}
         >
-          <span>Photo Coming Soon</span>
+          <span>Photo — Soonest</span>
         </div>
       )}
     </div>
@@ -203,7 +203,7 @@ function ActiveFamilyMedia({
           featured ? "(max-width: 960px) 100vw, 58vw" : "(max-width: 960px) 0px, 22vw"
         }
       />
-      <span className="experience-active__badge">Coming Soon</span>
+      <span className="experience-active__badge">Soonest</span>
     </div>
   );
 }

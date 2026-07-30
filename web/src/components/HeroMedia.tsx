@@ -4,7 +4,7 @@ import type { CSSProperties } from "react";
 export type HeroMediaSlide = {
   id: string;
   label: string;
-  src?: string;
+  src: string;
   mobileSrc?: string;
   position?: string;
   mobilePosition?: string;
@@ -14,34 +14,18 @@ type HeroMediaProps = {
   slide: HeroMediaSlide;
   priority?: boolean;
   eager?: boolean;
-  placeholderClassName?: string;
-  placeholderTone?: 1 | 2 | 3;
 };
 
 export function HeroMedia({
   slide,
   priority = false,
   eager = true,
-  placeholderClassName = "",
-  placeholderTone = 1,
 }: HeroMediaProps) {
   const positionStyle = {
     "--hero-position": slide.position ?? "50% 50%",
     "--hero-position-mobile":
       slide.mobilePosition ?? slide.position ?? "50% 50%",
   } as CSSProperties;
-
-  if (!slide.src) {
-    return (
-      <div
-        className={`hero-media media-placeholder media-placeholder--tone-${placeholderTone} ${placeholderClassName}`.trim()}
-        role="img"
-        aria-label={slide.label}
-      >
-        <span>{slide.label}</span>
-      </div>
-    );
-  }
 
   return (
     <div

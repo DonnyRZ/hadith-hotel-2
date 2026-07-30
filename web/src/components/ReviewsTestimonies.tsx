@@ -6,10 +6,10 @@ import Image from "next/image";
 
 type VideoReview = {
   id: string;
-  name?: string;
-  role?: string;
-  src?: string;
-  poster?: string;
+  name: string;
+  role: string;
+  src: string;
+  poster: string;
 };
 
 type Testimonial = {
@@ -154,28 +154,6 @@ function PlayIcon({ size = 22 }: { size?: number }) {
     <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" aria-hidden="true">
       <path d="M8 5.5v13l11-6.5-11-6.5Z" />
     </svg>
-  );
-}
-
-function VideoPlaceholder({
-  label,
-  tone,
-  orientation = "portrait",
-}: {
-  label: string;
-  tone: number;
-  orientation?: "portrait" | "landscape";
-}) {
-  return (
-    <div
-      className={`media-placeholder video-frame video-frame--${orientation} media-placeholder--tone-${tone}`}
-      role="img"
-      aria-label={`${label} video placeholder`}
-    >
-      <span className="video-frame__play" aria-hidden="true">
-        <PlayIcon />
-      </span>
-    </div>
   );
 }
 
@@ -537,36 +515,29 @@ function VideoReviewsCarousel() {
         onPointerCancel={endDrag}
       >
         <div ref={trackRef} className="video-reviews__track">
-          {loopedReviews.map((review, i) => (
+          {loopedReviews.map((review, reviewIndex) => (
             <article
-              key={`${review.id}-${i}`}
+              key={`${review.id}-${reviewIndex}`}
               className="video-reviews__slide"
             >
-              {review.src && review.poster ? (
-                <button
-                  type="button"
-                  className="video-reviews__slide-media"
-                  aria-label={`Play review by ${review.name}`}
-                  onClick={() => openReview(review)}
-                >
-                  <Image
-                    className="video-reviews__poster"
-                    src={review.poster}
-                    alt=""
-                    fill
-                    sizes="(max-width: 760px) 60vw, 22vw"
-                    draggable={false}
-                  />
-                  <span className="video-reviews__play" aria-hidden="true">
-                    <PlayIcon size={20} />
-                  </span>
-                </button>
-              ) : (
-                <VideoPlaceholder
-                  label="Guest review"
-                  tone={(i % 3) + 1}
+              <button
+                type="button"
+                className="video-reviews__slide-media"
+                aria-label={`Play review by ${review.name}`}
+                onClick={() => openReview(review)}
+              >
+                <Image
+                  className="video-reviews__poster"
+                  src={review.poster}
+                  alt=""
+                  fill
+                  sizes="(max-width: 760px) 60vw, 22vw"
+                  draggable={false}
                 />
-              )}
+                <span className="video-reviews__play" aria-hidden="true">
+                  <PlayIcon size={20} />
+                </span>
+              </button>
 
               {review.name ? (
                 <p className="video-reviews__slide-name">{review.name}</p>

@@ -147,9 +147,9 @@ export function RoomDetailModal({ room, onClose }: RoomDetailModalProps) {
               <div
                 className="room-detail__photo room-detail__photo--soon"
                 role="img"
-                aria-label="More photos coming soon"
+                aria-label="More photos — soonest"
               >
-                <span>More Photos Coming Soon</span>
+                <span>More Photos — Soonest</span>
               </div>
             )}
 

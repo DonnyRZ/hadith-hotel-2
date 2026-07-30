@@ -3,9 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-type GallerySlide =
-  | { type: "photo"; src: string; label: string }
-  | { type: "soon"; label?: string };
+type GallerySlide = { src: string; label: string };
 
 type Venue = {
   id: string;
@@ -16,7 +14,7 @@ type Venue = {
   highlights: string[];
   variant: "blue" | "paper";
   reversed?: boolean;
-  gallery?: GallerySlide[];
+  gallery: GallerySlide[];
 };
 
 const venues: Venue[] = [
@@ -36,12 +34,10 @@ const venues: Venue[] = [
     variant: "blue",
     gallery: [
       {
-        type: "photo",
         src: "/images/cafe-dining/saji-nusantara.webp",
         label: "Saji Nusantara dining room",
       },
       {
-        type: "photo",
         src: "/images/cafe-dining/buffet.webp",
         label: "Saji Nusantara buffet counter",
       },
@@ -63,17 +59,14 @@ const venues: Venue[] = [
     reversed: true,
     gallery: [
       {
-        type: "photo",
         src: "/images/cafe-dining/cafe-1.webp",
         label: "7OZ cafe counter and lounge",
       },
       {
-        type: "photo",
         src: "/images/cafe-dining/cafe-2.webp",
         label: "7OZ coffee bar",
       },
       {
-        type: "photo",
         src: "/images/cafe-dining/cafe-3.webp",
         label: "7OZ lounge with grand piano",
       },
@@ -82,7 +75,7 @@ const venues: Venue[] = [
 ];
 
 function VenueMediaCarousel({ venue }: { venue: Venue }) {
-  const slides = venue.gallery ?? [{ type: "soon" as const, label: venue.name }];
+  const slides = venue.gallery;
   const [index, setIndex] = useState(0);
   const count = slides.length;
   const wrap = (value: number) => (value + count) % count;
@@ -96,31 +89,21 @@ function VenueMediaCarousel({ venue }: { venue: Venue }) {
       aria-roledescription="carousel"
       aria-label={`${venue.name} gallery`}
     >
-      {slide.type === "photo" ? (
-        <div
-          className="venue__placeholder venue-carousel__slide venue-carousel__slide--photo"
-          role="img"
-          aria-label={slide.label}
-        >
-          <Image
-            className="venue-carousel__image"
-            src={slide.src}
-            alt=""
-            fill
-            sizes="(max-width: 900px) 100vw, 58vw"
-            priority={venue.id === "restaurant"}
-            aria-hidden="true"
-          />
-        </div>
-      ) : (
-        <div
-          className={`media-placeholder venue__placeholder venue-carousel__slide venue-carousel__slide--soon media-placeholder--tone-${(index % 3) + 1}`}
-          role="img"
-          aria-label="More photos coming soon"
-        >
-          <span>{slide.label ?? "More Photos Coming Soon"}</span>
-        </div>
-      )}
+      <div
+        className="venue__placeholder venue-carousel__slide venue-carousel__slide--photo"
+        role="img"
+        aria-label={slide.label}
+      >
+        <Image
+          className="venue-carousel__image"
+          src={slide.src}
+          alt=""
+          fill
+          sizes="(max-width: 900px) 100vw, 58vw"
+          priority={venue.id === "restaurant"}
+          aria-hidden="true"
+        />
+      </div>
 
       <div className="venue-carousel__controls">
         <button

@@ -50,8 +50,6 @@ export function PageHeroCarousel({
             <HeroMedia
               slide={slide}
               priority={slideIndex === 0}
-              placeholderClassName="page-hero__placeholder"
-              placeholderTone={((slideIndex % 3) + 1) as 1 | 2 | 3}
             />
           </div>
         ))}

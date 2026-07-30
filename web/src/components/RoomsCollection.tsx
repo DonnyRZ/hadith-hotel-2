@@ -32,7 +32,7 @@ function RoomCard({
       <button
         type="button"
         className={`room-card__media${comingSoon ? " room-card__media--coming-soon" : ""}`}
-        aria-label={comingSoon ? `${room.name} — coming soon` : `View ${room.name} details`}
+        aria-label={comingSoon ? `${room.name} — soonest` : `View ${room.name} details`}
         onClick={onViewDetails}
       >
         <Image
@@ -44,7 +44,7 @@ function RoomCard({
           aria-hidden="true"
         />
         {comingSoon ? (
-          <span className="room-card__soon">Coming Soon</span>
+          <span className="room-card__soon">Soonest</span>
         ) : null}
       </button>
 
@@ -133,7 +133,7 @@ export function RoomsCollection() {
               <p className="rooms-collection__notice-eyebrow">
                 Accessible Rooms
               </p>
-              <p className="rooms-collection__notice-title">Coming Soon</p>
+              <p className="rooms-collection__notice-title">Soonest</p>
               <p className="rooms-collection__notice-body">
                 We are preparing detailed information about our accessible
                 rooms. Please check back soon.
@@ -153,7 +153,7 @@ export function RoomsCollection() {
         open={comingSoonRoom !== null}
         onClose={() => setComingSoonRoom(null)}
         eyebrow={comingSoonRoom?.name ?? "Room"}
-        body={`Details for the ${comingSoonRoom?.name ?? "room"} are being prepared and will be available shortly.`}
+        body={`The ${comingSoonRoom?.name ?? "room"} will be available soonest.`}
       />
     </>
   );

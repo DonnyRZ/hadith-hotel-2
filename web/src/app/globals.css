@@ -1825,6 +1825,7 @@ body.has-room-lightbox .reserve-float {
 .overview-features__card--compact {
   top: 50%;
   transform: translateY(-50%);
+  width: min(300px, 58%);
   min-height: 0;
   padding: clamp(22px, 2.4vw, 30px) clamp(24px, 2.8vw, 36px);
   display: flex;
@@ -2071,10 +2072,14 @@ body.has-room-lightbox .reserve-float {
 }
 
 .overview-farewell__download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
   min-height: 44px;
   padding: 0 22px;
-  border: 1px solid var(--ink);
-  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--accent) 75%, var(--ink));
+  background: color-mix(in srgb, var(--accent) 7%, var(--paper));
   color: var(--ink);
   font-family: var(--sans);
   font-size: 10.5px;
@@ -2082,11 +2087,13 @@ body.has-room-lightbox .reserve-float {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .overview-farewell__download:hover {
   background: var(--ink);
+  border-color: var(--ink);
   color: #fff;
 }
 

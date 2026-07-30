@@ -41,7 +41,22 @@ export function ProfileDownloadLink({
       className={className}
       onClick={handleClick}
     >
-      {children}
+      <span>{children}</span>
+      <svg
+        viewBox="0 0 24 24"
+        width="16"
+        height="16"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M12 4v11m0 0 4-4m-4 4-4-4M5 20h14"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
     </a>
   );
 }

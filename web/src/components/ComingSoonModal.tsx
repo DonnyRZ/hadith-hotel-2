@@ -54,7 +54,7 @@ export function ComingSoonModal({
       >
         <p className="coming-soon__eyebrow">{eyebrow}</p>
         <h2 id={titleId} className="coming-soon__title">
-          Coming Soon
+          Soonest
         </h2>
         <p className="coming-soon__body">{body}</p>
         <button
