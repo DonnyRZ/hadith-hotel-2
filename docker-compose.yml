@@ -10,7 +10,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: postgresql://hadith:${POSTGRES_PASSWORD}@host.docker.internal:5432/hadith_hotel?schema=public
       NODE_ENV: production
       VISITOR_IP_HASH_SECRET: ${VISITOR_IP_HASH_SECRET}
       VISITOR_GEOLOOKUP_URL: ${VISITOR_GEOLOOKUP_URL:-https://ipwho.is/{ip}}
