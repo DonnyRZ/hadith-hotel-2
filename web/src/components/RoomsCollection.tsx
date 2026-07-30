@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { ComingSoonModal } from "@/components/ComingSoonModal";
 import { RoomDetailModal } from "@/components/RoomDetailModal";
@@ -7,24 +8,44 @@ import { presidentSuite, roomTypes, type RoomType } from "@/lib/rooms";
 
 type Tab = "all" | "accessible";
 
+const BALCONY_SRC = "/images/overview-rooms/balcony.webp";
+
+const roomImages: Record<string, string> = {
+  president: BALCONY_SRC,
+  junior: BALCONY_SRC,
+  suite: "/images/overview-rooms/suite.webp",
+  balcony: BALCONY_SRC,
+  standard: "/images/overview-rooms/standard.webp",
+};
+
 function RoomCard({
   room,
-  tone,
+  comingSoon = false,
   onViewDetails,
 }: {
   room: RoomType;
-  tone: number;
+  comingSoon?: boolean;
   onViewDetails: () => void;
 }) {
   return (
     <article className="room-card">
       <button
         type="button"
-        className={`media-placeholder room-card__media media-placeholder--tone-${tone}`}
-        aria-label={`${room.name} image placeholder`}
+        className={`room-card__media${comingSoon ? " room-card__media--coming-soon" : ""}`}
+        aria-label={comingSoon ? `${room.name} — coming soon` : `View ${room.name} details`}
         onClick={onViewDetails}
       >
-        <span>{room.name}</span>
+        <Image
+          className="room-card__image"
+          src={roomImages[room.id] ?? BALCONY_SRC}
+          alt=""
+          fill
+          sizes="(max-width: 680px) 100vw, 50vw"
+          aria-hidden="true"
+        />
+        {comingSoon ? (
+          <span className="room-card__soon">Coming Soon</span>
+        ) : null}
       </button>
 
       <h3 className="room-card__name">{room.name}</h3>
@@ -45,7 +66,7 @@ function RoomCard({
 
 export function RoomsCollection() {
   const [tab, setTab] = useState<Tab>("all");
-  const [comingSoonOpen, setComingSoonOpen] = useState(false);
+  const [comingSoonRoom, setComingSoonRoom] = useState<RoomType | null>(null);
   const [detailRoom, setDetailRoom] = useState<RoomType | null>(null);
 
   return (
@@ -86,18 +107,22 @@ export function RoomsCollection() {
             <div className="rooms-collection__featured">
               <RoomCard
                 room={presidentSuite}
-                tone={1}
-                onViewDetails={() => setComingSoonOpen(true)}
+                comingSoon
+                onViewDetails={() => setComingSoonRoom(presidentSuite)}
               />
             </div>
 
             <div className="rooms-collection__grid">
-              {roomTypes.map((room, index) => (
+              {roomTypes.map((room) => (
                 <RoomCard
                   key={room.id}
                   room={room}
-                  tone={(index % 3) + 1}
-                  onViewDetails={() => setDetailRoom(room)}
+                  comingSoon={room.id === "junior"}
+                  onViewDetails={() =>
+                    room.id === "junior"
+                      ? setComingSoonRoom(room)
+                      : setDetailRoom(room)
+                  }
                 />
               ))}
             </div>
@@ -130,10 +155,10 @@ export function RoomsCollection() {
       />
 
       <ComingSoonModal
-        open={comingSoonOpen}
-        onClose={() => setComingSoonOpen(false)}
-        eyebrow="President Suite"
-        body="Details for the President Suite are being prepared and will be available shortly."
+        open={comingSoonRoom !== null}
+        onClose={() => setComingSoonRoom(null)}
+        eyebrow={comingSoonRoom?.name ?? "Room"}
+        body={`Details for the ${comingSoonRoom?.name ?? "room"} are being prepared and will be available shortly.`}
       />
     </>
   );

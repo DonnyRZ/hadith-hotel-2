@@ -1,23 +1,56 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useState } from "react";
 
 type WellnessSlide = {
   id: string;
   title: string;
   description: string;
+  src?: string;
 };
 
 const placeholderDescription =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
 const wellnessSlides: WellnessSlide[] = [
-  { id: "spa", title: "Spa / Massage Suite", description: placeholderDescription },
+  {
+    id: "spa",
+    title: "Spa / Massage Suite",
+    description: placeholderDescription,
+    src: "/images/experience/massage.webp",
+  },
+  {
+    id: "sauna",
+    title: "Sauna",
+    description: placeholderDescription,
+    src: "/images/experience/sauna.webp",
+  },
+  {
+    id: "hammam",
+    title: "Turkish Hammam",
+    description: placeholderDescription,
+    src: "/images/experience/hamam.webp",
+  },
+  {
+    id: "pool",
+    title: "Indoor Pool",
+    description: placeholderDescription,
+    src: "/images/experience/pool.webp",
+  },
   { id: "salon", title: "Beauty Salon", description: placeholderDescription },
-  { id: "sauna", title: "Sauna", description: placeholderDescription },
-  { id: "hammam", title: "Turkish Hammam", description: placeholderDescription },
-  { id: "pool", title: "Indoor Pool", description: placeholderDescription },
-  { id: "fitness", title: "Fitness Centre", description: placeholderDescription },
+  {
+    id: "fitness",
+    title: "Fitness Centre",
+    description: placeholderDescription,
+    src: "/images/experience/gym.webp",
+  },
+];
+
+const activeFamilyItems = [
+  { id: "tennis", name: "Tennis Court" },
+  { id: "padel", name: "Padel Court" },
+  { id: "kids-playground", name: "Kids’ Playground" },
 ];
 
 const exploreItems = [
@@ -26,7 +59,7 @@ const exploreItems = [
   { id: "ulugh-beg-observatory", name: "Ulugh Beg Observatory" },
 ];
 
-function WellnessPlaceholder({
+function WellnessMedia({
   slide,
   tone,
 }: {
@@ -34,12 +67,24 @@ function WellnessPlaceholder({
   tone: number;
 }) {
   return (
-    <div
-      className={`media-placeholder overview-features__placeholder media-placeholder--tone-${tone}`}
-      role="img"
-      aria-label={`${slide.title} image placeholder`}
-    >
-      <span>{slide.title}</span>
+    <div className="overview-features__media">
+      {slide.src ? (
+        <Image
+          className="overview-features__image"
+          src={slide.src}
+          alt={slide.title}
+          fill
+          sizes="(max-width: 720px) 100vw, 60vw"
+        />
+      ) : (
+        <div
+          className={`media-placeholder overview-features__placeholder media-placeholder--tone-${tone}`}
+          role="img"
+          aria-label={`${slide.title} photo coming soon`}
+        >
+          <span>Photo Coming Soon</span>
+        </div>
+      )}
     </div>
   );
 }
@@ -75,14 +120,11 @@ function WellnessCarousel() {
           onClick={goPrevious}
           aria-label={`Previous slide, ${previous.title}`}
         >
-          <WellnessPlaceholder
-            slide={previous}
-            tone={(wrap(index - 1) % 3) + 1}
-          />
+          <WellnessMedia slide={previous} tone={(wrap(index - 1) % 3) + 1} />
         </button>
 
         <div className="overview-features__active">
-          <WellnessPlaceholder slide={current} tone={(index % 3) + 1} />
+          <WellnessMedia slide={current} tone={(index % 3) + 1} />
           <div className="overview-features__card">
             <p className="overview-features__card-eyebrow">
               Wellness &amp; Relaxation
@@ -100,7 +142,7 @@ function WellnessCarousel() {
           onClick={goNext}
           aria-label={`Next slide, ${next.title}`}
         >
-          <WellnessPlaceholder slide={next} tone={(wrap(index + 1) % 3) + 1} />
+          <WellnessMedia slide={next} tone={(wrap(index + 1) % 3) + 1} />
         </button>
       </div>
 
@@ -187,6 +229,38 @@ export function ExperienceGroups() {
                   aria-label={`${item.name} image placeholder`}
                 >
                   <span>{item.name}</span>
+                </div>
+                <h3 className="experience-group__name">{item.name}</h3>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section
+        className="experience-group experience-group--band"
+        aria-labelledby="experience-active"
+      >
+        <div className="experience-group__inner">
+          <div className="experience-group__intro">
+            <h2 id="experience-active" className="experience-group__title">
+              Active &amp; Family
+            </h2>
+            <p className="experience-group__lede">
+              Courts and play spaces for guests who prefer to stay active during
+              their stay.
+            </p>
+          </div>
+
+          <ul className="experience-group__grid">
+            {activeFamilyItems.map((item, itemIndex) => (
+              <li key={item.id} className="experience-group__item">
+                <div
+                  className={`media-placeholder experience-group__media experience-group__media--soon media-placeholder--tone-${(itemIndex % 3) + 1}`}
+                  role="img"
+                  aria-label={`${item.name} — coming soon`}
+                >
+                  <span className="experience-group__soon">Coming Soon</span>
                 </div>
                 <h3 className="experience-group__name">{item.name}</h3>
               </li>

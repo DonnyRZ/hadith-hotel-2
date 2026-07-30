@@ -7,8 +7,20 @@ export const metadata: Metadata = {
 };
 
 const heroSlides = [
-  { id: "rooms-hero-1", label: "Suites & Rooms hero image 1" },
-  { id: "rooms-hero-2", label: "Suites & Rooms hero image 2" },
+  {
+    id: "rooms-hero-suite",
+    label: "HADITH Hotel Suite",
+    src: "/images/overview-rooms/suite.webp",
+    position: "50% 50%",
+    mobilePosition: "50% 50%",
+  },
+  {
+    id: "rooms-hero-junior",
+    label: "Junior Suite living and dining area",
+    src: "/images/overview-hero/junior-suite.webp",
+    position: "48% 52%",
+    mobilePosition: "28% 52%",
+  },
 ] as const;
 
 export default function SuitesRoomsPage() {
@@ -23,8 +35,9 @@ export default function SuitesRoomsPage() {
           Rooms & Suites
         </h2>
         <p className="rooms-page-intro__body">
-          Thoughtfully designed spaces for restful stays within the Imam Al
-          Bukhari Complex.
+          114 thoughtfully designed rooms and suites — matching the number of
+          Surahs in the Quran — for restful stays within the Imam Al Bukhari
+          Complex.
         </p>
       </section>
       <RoomsCollection />

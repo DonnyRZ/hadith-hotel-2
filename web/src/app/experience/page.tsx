@@ -7,8 +7,20 @@ export const metadata: Metadata = {
 };
 
 const heroSlides = [
-  { id: "experience-hero-1", label: "Experience hero image 1" },
-  { id: "experience-hero-2", label: "Experience hero image 2" },
+  {
+    id: "experience-hero-hamam",
+    label: "HADITH Hotel Turkish hammam",
+    src: "/images/experience/hamam.webp",
+    position: "50% 50%",
+    mobilePosition: "54% 50%",
+  },
+  {
+    id: "experience-hero-pool",
+    label: "HADITH Hotel indoor pool",
+    src: "/images/experience/pool.webp",
+    position: "50% 50%",
+    mobilePosition: "52% 50%",
+  },
 ] as const;
 
 export default function ExperiencePage() {

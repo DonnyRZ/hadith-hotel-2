@@ -2473,20 +2473,48 @@ body.has-room-lightbox .reserve-float {
 }
 
 .room-card__media {
+  position: relative;
+  display: block;
+  width: 100%;
   height: auto;
   aspect-ratio: 4 / 3;
-  font-size: 11px;
-  text-align: center;
+  overflow: hidden;
   appearance: none;
   padding: 0;
   border: 0;
-  color: inherit;
-  font: inherit;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  background: #171614;
   cursor: pointer;
+}
+
+.room-card__image {
+  object-fit: cover;
+  object-position: 50% 50%;
+  transition: transform 0.5s ease;
+}
+
+.room-card__media:hover .room-card__image {
+  transform: scale(1.02);
+}
+
+.room-card__soon {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(
+    to top,
+    rgba(12, 12, 12, 0.96) 0%,
+    rgba(12, 12, 12, 0.92) 45%,
+    rgba(12, 12, 12, 0.88) 100%
+  );
+  color: #fff;
+  font-family: var(--sans);
+  font-size: clamp(11px, 1.1vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  pointer-events: none;
 }
 
 .room-card__media:focus-visible {
@@ -2648,11 +2676,44 @@ body.has-room-lightbox .reserve-float {
 }
 
 .experience-group__media {
+  position: relative;
   height: auto;
   aspect-ratio: 4 / 3;
+  overflow: hidden;
   font-size: 10px;
   text-align: center;
   line-height: 1.45;
+}
+
+.experience-group__media--soon {
+  background: #171614;
+  color: #fff;
+}
+
+.experience-group__media--soon.media-placeholder {
+  background:
+    linear-gradient(
+      to top,
+      rgba(12, 12, 12, 0.96) 0%,
+      rgba(12, 12, 12, 0.9) 45%,
+      rgba(12, 12, 12, 0.84) 100%
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      #2a2824,
+      #2a2824 12px,
+      #221f1b 12px,
+      #221f1b 24px
+    );
+}
+
+.experience-group__soon {
+  color: #fff;
+  font-family: var(--sans);
+  font-size: clamp(11px, 1.1vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
 }
 
 .experience-group__name {
@@ -2729,14 +2790,30 @@ body.has-room-lightbox .reserve-float {
 }
 
 .venue__placeholder {
+  position: relative;
   height: auto;
   aspect-ratio: 4 / 3;
+  overflow: hidden;
   font-size: 11px;
   text-align: center;
 }
 
 .venue-carousel__slide {
   transition: background 0.35s ease;
+}
+
+.venue-carousel__slide--photo {
+  background: #171614;
+}
+
+.venue-carousel__image {
+  object-fit: cover;
+  object-position: 50% 45%;
+}
+
+.venue-carousel__slide--soon {
+  display: grid;
+  place-items: center;
 }
 
 .venue-carousel__controls {
@@ -3609,9 +3686,29 @@ body.has-room-lightbox .reserve-float {
 }
 
 .room-detail__photo {
+  position: relative;
   height: auto;
   aspect-ratio: 3 / 2;
-  font-size: 11px;
+  overflow: hidden;
+  background: #171614;
+}
+
+.room-detail__image {
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.room-detail__photo--soon {
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(135deg, #ebe6dc 0%, #e0d8c8 48%, #d4cbb8 100%);
+  color: #5c5346;
+  font-family: var(--sans);
+  font-size: clamp(12px, 1.4vw, 14px);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   text-align: center;
 }
 

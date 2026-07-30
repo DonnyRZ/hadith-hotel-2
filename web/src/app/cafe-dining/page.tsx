@@ -7,8 +7,20 @@ export const metadata: Metadata = {
 };
 
 const heroSlides = [
-  { id: "dining-hero-1", label: "Cafe & Dining hero image 1" },
-  { id: "dining-hero-2", label: "Cafe & Dining hero image 2" },
+  {
+    id: "dining-hero-cafe",
+    label: "7OZ cafe lounge with grand piano",
+    src: "/images/cafe-dining/cafe-3.webp",
+    position: "50% 50%",
+    mobilePosition: "38% 50%",
+  },
+  {
+    id: "dining-hero-buffet",
+    label: "Saji Nusantara buffet counter",
+    src: "/images/cafe-dining/buffet.webp",
+    position: "50% 50%",
+    mobilePosition: "55% 50%",
+  },
 ] as const;
 
 export default function CafeDiningPage() {

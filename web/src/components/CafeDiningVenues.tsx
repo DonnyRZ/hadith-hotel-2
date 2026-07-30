@@ -1,6 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
+
+type GallerySlide =
+  | { type: "photo"; src: string; label: string }
+  | { type: "soon"; label?: string };
 
 type Venue = {
   id: string;
@@ -11,7 +16,7 @@ type Venue = {
   highlights: string[];
   variant: "blue" | "paper";
   reversed?: boolean;
-  gallery?: string[];
+  gallery?: GallerySlide[];
 };
 
 const venues: Venue[] = [
@@ -29,6 +34,18 @@ const venues: Venue[] = [
       "Halal certified",
     ],
     variant: "blue",
+    gallery: [
+      {
+        type: "photo",
+        src: "/images/cafe-dining/saji-nusantara.webp",
+        label: "Saji Nusantara dining room",
+      },
+      {
+        type: "photo",
+        src: "/images/cafe-dining/buffet.webp",
+        label: "Saji Nusantara buffet counter",
+      },
+    ],
   },
   {
     id: "cafe",
@@ -44,16 +61,33 @@ const venues: Venue[] = [
     ],
     variant: "paper",
     reversed: true,
-    gallery: ["7OZ", "Indonesian Coffee & Pastries", "Cafe Social Lounge"],
+    gallery: [
+      {
+        type: "photo",
+        src: "/images/cafe-dining/cafe-1.webp",
+        label: "7OZ cafe counter and lounge",
+      },
+      {
+        type: "photo",
+        src: "/images/cafe-dining/cafe-2.webp",
+        label: "7OZ coffee bar",
+      },
+      {
+        type: "photo",
+        src: "/images/cafe-dining/cafe-3.webp",
+        label: "7OZ lounge with grand piano",
+      },
+    ],
   },
 ];
 
 function VenueMediaCarousel({ venue }: { venue: Venue }) {
-  const slides = venue.gallery ?? [venue.name];
+  const slides = venue.gallery ?? [{ type: "soon" as const, label: venue.name }];
   const [index, setIndex] = useState(0);
   const count = slides.length;
   const wrap = (value: number) => (value + count) % count;
   const progress = ((index + 1) / count) * 100;
+  const slide = slides[index]!;
 
   return (
     <div
@@ -62,13 +96,31 @@ function VenueMediaCarousel({ venue }: { venue: Venue }) {
       aria-roledescription="carousel"
       aria-label={`${venue.name} gallery`}
     >
-      <div
-        className={`media-placeholder venue__placeholder venue-carousel__slide media-placeholder--tone-${(index % 3) + 1}`}
-        role="img"
-        aria-label={`${slides[index]} image placeholder`}
-      >
-        <span>{slides[index]}</span>
-      </div>
+      {slide.type === "photo" ? (
+        <div
+          className="venue__placeholder venue-carousel__slide venue-carousel__slide--photo"
+          role="img"
+          aria-label={slide.label}
+        >
+          <Image
+            className="venue-carousel__image"
+            src={slide.src}
+            alt=""
+            fill
+            sizes="(max-width: 900px) 100vw, 58vw"
+            priority={venue.id === "restaurant"}
+            aria-hidden="true"
+          />
+        </div>
+      ) : (
+        <div
+          className={`media-placeholder venue__placeholder venue-carousel__slide venue-carousel__slide--soon media-placeholder--tone-${(index % 3) + 1}`}
+          role="img"
+          aria-label="More photos coming soon"
+        >
+          <span>{slide.label ?? "More Photos Coming Soon"}</span>
+        </div>
+      )}
 
       <div className="venue-carousel__controls">
         <button
@@ -104,7 +156,7 @@ function VenueMediaCarousel({ venue }: { venue: Venue }) {
 export function CafeDiningVenues() {
   return (
     <>
-      {venues.map((venue, index) => (
+      {venues.map((venue) => (
         <section
           key={venue.id}
           className={`venue venue--${venue.variant}`}
@@ -117,17 +169,7 @@ export function CafeDiningVenues() {
 
             <div className={`venue__layout${venue.reversed ? " is-reversed" : ""}`}>
               <div className="venue__media">
-                {venue.gallery ? (
-                  <VenueMediaCarousel venue={venue} />
-                ) : (
-                  <div
-                    className={`media-placeholder venue__placeholder media-placeholder--tone-${(index % 3) + 1}`}
-                    role="img"
-                    aria-label={`${venue.name} image placeholder`}
-                  >
-                    <span>{venue.name}</span>
-                  </div>
-                )}
+                <VenueMediaCarousel venue={venue} />
               </div>
 
               <div className="venue__card">

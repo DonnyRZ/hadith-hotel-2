@@ -1,10 +1,18 @@
 "use client";
 
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import Image from "next/image";
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import type { RoomType } from "@/lib/rooms";
 
-const PHOTO_COUNT = 4;
+const COMING_SOON_SLIDES = 1;
+
+const roomPhotos: Record<string, string[]> = {
+  suite: ["/images/overview-rooms/suite.webp"],
+  balcony: ["/images/overview-rooms/balcony.webp"],
+  standard: ["/images/overview-rooms/standard.webp"],
+  junior: ["/images/overview-hero/junior-suite.webp"],
+};
 
 function CloseIcon() {
   return (
@@ -30,10 +38,15 @@ export function RoomDetailModal({ room, onClose }: RoomDetailModalProps) {
   const [photo, setPhoto] = useState(0);
 
   const open = room !== null;
+  const photos = room ? (roomPhotos[room.id] ?? []) : [];
+  const slideCount = Math.max(photos.length + COMING_SOON_SLIDES, 1);
 
-  const move = useCallback((direction: number) => {
-    setPhoto((current) => (current + direction + PHOTO_COUNT) % PHOTO_COUNT);
-  }, []);
+  const move = useCallback(
+    (direction: number) => {
+      setPhoto((current) => (current + direction + slideCount) % slideCount);
+    },
+    [slideCount],
+  );
 
   useEffect(() => {
     if (!open) return;
@@ -56,6 +69,11 @@ export function RoomDetailModal({ room, onClose }: RoomDetailModalProps) {
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [open, onClose, move]);
+
+  const currentSrc = useMemo(
+    () => (photo < photos.length ? photos[photo] : null),
+    [photo, photos],
+  );
 
   if (!room || !room.specs) return null;
 
@@ -91,15 +109,31 @@ export function RoomDetailModal({ room, onClose }: RoomDetailModalProps) {
 
         <div className="room-detail__scroll">
           <div className="room-detail__gallery" aria-roledescription="carousel">
-            <div
-              className={`media-placeholder room-detail__photo media-placeholder--tone-${(photo % 3) + 1}`}
-              role="img"
-              aria-label={`${room.name} photo ${photo + 1} placeholder`}
-            >
-              <span>
-                {room.name} photo {photo + 1}
-              </span>
-            </div>
+            {currentSrc ? (
+              <div
+                className="room-detail__photo"
+                role="img"
+                aria-label={`${room.name} photo ${photo + 1}`}
+              >
+                <Image
+                  className="room-detail__image"
+                  src={currentSrc}
+                  alt=""
+                  fill
+                  sizes="(max-width: 880px) 100vw, 880px"
+                  priority
+                  aria-hidden="true"
+                />
+              </div>
+            ) : (
+              <div
+                className="room-detail__photo room-detail__photo--soon"
+                role="img"
+                aria-label="More photos coming soon"
+              >
+                <span>More Photos Coming Soon</span>
+              </div>
+            )}
 
             <div className="room-detail__gallery-controls">
               <div className="room-detail__gallery-nav">
@@ -113,7 +147,7 @@ export function RoomDetailModal({ room, onClose }: RoomDetailModalProps) {
 
                 <div className="room-detail__progress" aria-hidden="true">
                   <span
-                    style={{ width: `${((photo + 1) / PHOTO_COUNT) * 100}%` }}
+                    style={{ width: `${((photo + 1) / slideCount) * 100}%` }}
                   />
                 </div>
 
@@ -128,7 +162,7 @@ export function RoomDetailModal({ room, onClose }: RoomDetailModalProps) {
 
               <p className="room-detail__counter">
                 {String(photo + 1).padStart(2, "0")} /{" "}
-                {String(PHOTO_COUNT).padStart(2, "0")}
+                {String(slideCount).padStart(2, "0")}
               </p>
             </div>
           </div>
