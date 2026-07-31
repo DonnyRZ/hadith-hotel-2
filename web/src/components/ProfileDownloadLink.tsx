@@ -1,6 +1,6 @@
 "use client";
 
-import type { MouseEvent, ReactNode } from "react";
+import type { ReactNode } from "react";
 import {
   trackProfileDownload,
   type DownloadMetrics,
@@ -20,18 +20,10 @@ export function ProfileDownloadLink({
   children,
   onTracked,
 }: ProfileDownloadLinkProps) {
-  function handleClick(event: MouseEvent<HTMLAnchorElement>) {
-    event.preventDefault();
+  function handleClick() {
     void trackProfileDownload().then((metrics) => {
       if (metrics) onTracked?.(metrics);
     });
-
-    const anchor = document.createElement("a");
-    anchor.href = PDF_HREF;
-    anchor.download = PDF_DOWNLOAD_NAME;
-    document.body.appendChild(anchor);
-    anchor.click();
-    anchor.remove();
   }
 
   return (
