@@ -2,7 +2,12 @@ export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
 import { geolocateIp } from "@/lib/geolocation";
-import { getClientIp, hashIp, isSameOrigin } from "@/lib/visitorIdentity";
+import {
+  getClientIp,
+  hasVisitorSecret,
+  isSameOrigin,
+  resolveVisitorIdentity,
+} from "@/lib/visitorIdentity";
 
 type CityMetric = { city: string; region: string | null; count: number };
 type Overview = {
@@ -10,15 +15,21 @@ type Overview = {
   activeVisitors: number;
   cities: number;
   topCities: CityMetric[];
+  identityPending?: boolean;
 };
 
-const GEO_REFRESH_MS = 30 * 24 * 60 * 60 * 1000;
 const ACTIVE_WINDOW_MS = 7 * 24 * 60 * 60 * 1000;
 
-function response(overview: Overview | null, status = 200) {
+function response(
+  overview: Overview | null,
+  status = 200,
+  setCookie: string | null = null,
+) {
+  const headers = new Headers({ "Cache-Control": "no-store" });
+  if (setCookie) headers.set("Set-Cookie", setCookie);
   return Response.json(overview, {
     status,
-    headers: { "Cache-Control": "no-store" },
+    headers,
   });
 }
 
@@ -57,7 +68,7 @@ async function visitorOverview(): Promise<Overview> {
   };
 }
 
-async function registerVisitor(ip: string, visitorHash: string) {
+async function registerVisitor(ip: string | null, visitorHash: string) {
   const existing = await prisma.websiteVisitor.findUnique({
     where: { visitorHash },
     select: {
@@ -68,13 +79,8 @@ async function registerVisitor(ip: string, visitorHash: string) {
     },
   });
   const now = new Date();
-  const refreshWindow = existing?.countryCode
-    ? GEO_REFRESH_MS
-    : 24 * 60 * 60 * 1000;
-  const needsGeo =
-    !existing?.geoCheckedAt ||
-    existing.geoCheckedAt.getTime() < Date.now() - refreshWindow;
-  const location = needsGeo ? await geolocateIp(ip) : null;
+  const needsGeo = !existing && Boolean(ip);
+  const location = needsGeo && ip ? await geolocateIp(ip) : null;
   const locationUpdate = location
     ? {
         ...(location.city ? { city: location.city } : {}),
@@ -101,7 +107,7 @@ async function registerVisitor(ip: string, visitorHash: string) {
 }
 
 export async function GET() {
-  if (!process.env.VISITOR_IP_HASH_SECRET) return response(null, 503);
+  if (!hasVisitorSecret()) return response(null, 503);
   try {
     return response(await visitorOverview());
   } catch (error) {
@@ -112,11 +118,19 @@ export async function GET() {
 
 export async function POST(request: Request) {
   if (!isSameOrigin(request)) return response(null, 403);
-  if (!process.env.VISITOR_IP_HASH_SECRET) return response(null, 503);
+  if (!hasVisitorSecret()) return response(null, 503);
 
   try {
-    const ip = getClientIp(request);
-    if (ip) await registerVisitor(ip, await hashIp(ip));
+    const identity = await resolveVisitorIdentity(request);
+    if (identity.isBot) return response(await visitorOverview());
+    if (!identity.visitorHash) {
+      return response(
+        { ...(await visitorOverview()), identityPending: true },
+        200,
+        identity.setCookie,
+      );
+    }
+    await registerVisitor(getClientIp(request), identity.visitorHash);
     return response(await visitorOverview());
   } catch (error) {
     console.error("Visitor counter write failed", error);

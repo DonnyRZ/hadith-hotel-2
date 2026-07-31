@@ -46,10 +46,11 @@ model WebsiteVisitor {
 
 model ProfileDownload {
   id                String    @id @default(cuid())
-  visitorHash       String    @unique
+  visitorHash       String
+  documentVersion   String    @default("2026-07")
   firstDownloadedAt DateTime  @default(now())
   lastDownloadedAt  DateTime
-  /// Legacy-compatible field; one row is one unique IP, so this must stay 1.
+  /// One row represents one anonymous browser per document version.
   downloadCount     Int       @default(1)
   city              String?
   region            String?
@@ -59,4 +60,5 @@ model ProfileDownload {
   @@index([city])
   @@index([region])
   @@index([countryCode])
+  @@unique([visitorHash, documentVersion])
 }

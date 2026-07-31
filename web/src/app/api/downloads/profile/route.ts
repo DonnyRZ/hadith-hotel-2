@@ -5,19 +5,31 @@ import {
   geolocateIp,
   type GeographicLocation,
 } from "@/lib/geolocation";
-import { getClientIp, hashIp, isSameOrigin } from "@/lib/visitorIdentity";
+import {
+  getClientIp,
+  hasVisitorSecret,
+  isSameOrigin,
+  resolveVisitorIdentity,
+} from "@/lib/visitorIdentity";
 
 type DownloadMetrics = {
   totalDownloads: number;
   uniqueDownloaders: number;
+  identityPending?: boolean;
 };
 
 const UNKNOWN_GEO_RETRY_MS = 24 * 60 * 60 * 1000;
 
-function response(metrics: DownloadMetrics | null, status = 200) {
+function response(
+  metrics: DownloadMetrics | null,
+  status = 200,
+  setCookie: string | null = null,
+) {
+  const headers = new Headers({ "Cache-Control": "no-store" });
+  if (setCookie) headers.set("Set-Cookie", setCookie);
   return Response.json(metrics, {
     status,
-    headers: { "Cache-Control": "no-store" },
+    headers,
   });
 }
 
@@ -31,7 +43,7 @@ async function downloadOverview(): Promise<DownloadMetrics> {
 }
 
 export async function GET() {
-  if (!process.env.VISITOR_IP_HASH_SECRET) return response(null, 503);
+  if (!hasVisitorSecret()) return response(null, 503);
   try {
     return response(await downloadOverview());
   } catch (error) {
@@ -42,12 +54,22 @@ export async function GET() {
 
 export async function POST(request: Request) {
   if (!isSameOrigin(request)) return response(null, 403);
-  if (!process.env.VISITOR_IP_HASH_SECRET) return response(null, 503);
+  if (!hasVisitorSecret()) return response(null, 503);
 
   try {
+    const identity = await resolveVisitorIdentity(request);
+    if (identity.isBot) return response(await downloadOverview());
+    if (!identity.visitorHash) {
+      return response(
+        { ...(await downloadOverview()), identityPending: true },
+        200,
+        identity.setCookie,
+      );
+    }
     const ip = getClientIp(request);
-    if (ip) {
-      const visitorHash = await hashIp(ip);
+    {
+      const visitorHash = identity.visitorHash;
+      const documentVersion = process.env.PROFILE_DOCUMENT_VERSION || "2026-07";
       const now = new Date();
       const [existingVisitor, existingDownload] = await Promise.all([
         prisma.websiteVisitor.findUnique({
@@ -60,7 +82,7 @@ export async function POST(request: Request) {
           },
         }),
         prisma.profileDownload.findUnique({
-          where: { visitorHash },
+          where: { visitorHash_documentVersion: { visitorHash, documentVersion } },
           select: {
             city: true,
             region: true,
@@ -82,7 +104,7 @@ export async function POST(request: Request) {
         !hasCompleteLocation &&
         (!lastGeoCheck ||
           lastGeoCheck.getTime() < Date.now() - UNKNOWN_GEO_RETRY_MS);
-      const freshLocation = shouldLookupLocation ? await geolocateIp(ip) : null;
+      const freshLocation = shouldLookupLocation && ip ? await geolocateIp(ip) : null;
       const location: GeographicLocation = freshLocation ?? cachedLocation;
       const locationUpdate = {
         ...(location.city ? { city: location.city } : {}),
@@ -104,9 +126,10 @@ export async function POST(request: Request) {
 
       await prisma.$transaction([
         prisma.profileDownload.upsert({
-          where: { visitorHash },
+          where: { visitorHash_documentVersion: { visitorHash, documentVersion } },
           create: {
             visitorHash,
+            documentVersion,
             lastDownloadedAt: now,
             downloadCount: 1,
             ...location,

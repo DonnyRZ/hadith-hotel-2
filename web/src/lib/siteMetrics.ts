@@ -9,11 +9,13 @@ export type VisitorMetrics = {
   cities: number;
   count: number;
   topCities: CityMetric[];
+  identityPending?: boolean;
 };
 
 export type DownloadMetrics = {
   totalDownloads: number;
   uniqueDownloaders: number;
+  identityPending?: boolean;
 };
 
 export type GeographicMetric = {
@@ -69,8 +71,7 @@ function isGeographicBreakdown(
 }
 
 export function registerVisitor() {
-  registration ??= fetch("/api/visitors", { method: "POST", cache: "no-store" })
-    .then((result) => (result.ok ? result.json() : null))
+  registration ??= postWithIdentityRetry("/api/visitors")
     .then((result: unknown) => (isVisitorMetrics(result) ? result : null))
     .catch(() => null);
   return registration;
@@ -84,14 +85,24 @@ export function fetchVisitorMetrics() {
 }
 
 export function trackProfileDownload() {
-  return fetch("/api/downloads/profile", {
-    method: "POST",
-    cache: "no-store",
-    keepalive: true,
-  })
-    .then((result) => (result.ok ? result.json() : null))
+  return registerVisitor()
+    .then(() => postWithIdentityRetry("/api/downloads/profile"))
     .then((result: unknown) => (isDownloadMetrics(result) ? result : null))
     .catch(() => null);
+}
+
+async function postWithIdentityRetry(endpoint: string): Promise<unknown> {
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      cache: "no-store",
+      keepalive: true,
+    });
+    if (!response.ok) return null;
+    const payload = (await response.json()) as { identityPending?: boolean };
+    if (!payload.identityPending) return payload;
+  }
+  return null;
 }
 
 export function fetchDownloadMetrics() {

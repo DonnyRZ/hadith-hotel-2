@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic";
 
 import { countryName } from "@/lib/geolocation";
 import { prisma } from "@/lib/prisma";
+import { hasVisitorSecret } from "@/lib/visitorIdentity";
 
 const TAKE = 8;
 
@@ -13,7 +14,7 @@ function response(value: unknown, status = 200) {
 }
 
 export async function GET() {
-  if (!process.env.VISITOR_IP_HASH_SECRET) return response(null, 503);
+  if (!hasVisitorSecret()) return response(null, 503);
 
   try {
     const [totalRecorded, locatedRecords, cities, regions, countries] =

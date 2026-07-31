@@ -13,13 +13,10 @@ const APP_PORT = Number(process.env.METRICS_TEST_PORT || 3111);
 const APP_ORIGIN = `http://127.0.0.1:${APP_PORT}`;
 const PUBLIC_ORIGIN = "https://hadith-hotel.com";
 const WEB_ROOT = fileURLToPath(new URL("..", import.meta.url));
-const NEXT_BIN = fileURLToPath(
-  new URL("../node_modules/next/dist/bin/next", import.meta.url),
-);
-const PRISMA_BIN = fileURLToPath(
-  new URL("../node_modules/prisma/build/index.js", import.meta.url),
-);
+const NEXT_BIN = fileURLToPath(new URL("../node_modules/next/dist/bin/next", import.meta.url));
+const PRISMA_BIN = fileURLToPath(new URL("../node_modules/prisma/build/index.js", import.meta.url));
 const TSCONFIG_PATH = fileURLToPath(new URL("../tsconfig.json", import.meta.url));
+const BROWSER_UA = "Mozilla/5.0 Metrics Integration Browser";
 
 const geoRequests = new Map();
 const childOutput = [];
@@ -51,48 +48,23 @@ function runNode(scriptUrl, args, env = {}) {
 }
 
 function locationFor(ip) {
-  if (ip === "203.0.113.10") {
-    return { city: "New York City", region: "New York", country_code: "US" };
-  }
-  if (ip === "198.51.100.20") {
-    return { city: "Paris", region: "Île-de-France", country_code: "FR" };
-  }
-  if (ip === "2001:db8::1") {
-    return { city: "Tokyo", region: "Tokyo", country_code: "JP" };
-  }
-  if (/^192\.0\.2\.4[1-6]$/.test(ip)) {
-    return { city: "Toronto", region: "Ontario", country_code: "CA" };
-  }
-  if (ip === "198.51.100.88") {
-    return { city: "Sydney", region: "New South Wales", country_code: "AU" };
-  }
-  if (ip === "198.51.100.77") {
-    return { country_code: "GB" };
-  }
-  return null;
+  const locations = {
+    "203.0.113.10": { city: "New York", region: "New York", country_code: "US" },
+    "198.51.100.20": { city: "Paris", region: "Ile-de-France", country_code: "FR" },
+    "2001:db8::1": { city: "Tokyo", region: "Tokyo", country_code: "JP" },
+    "198.51.100.88": { city: "Sydney", region: "New South Wales", country_code: "AU" },
+    "192.0.2.41": { city: "Toronto", region: "Ontario", country_code: "CA" },
+  };
+  return locations[ip] ?? null;
 }
 
 async function startGeoServer() {
   geoServer = http.createServer((request, response) => {
     const ip = decodeURIComponent((request.url || "/").slice(1));
     geoRequests.set(ip, (geoRequests.get(ip) || 0) + 1);
-    if (ip === "203.0.113.98") {
-      response.writeHead(200, { "content-type": "application/json" });
-      response.end("not-json");
-      return;
-    }
-    if (ip === "203.0.113.97") {
-      setTimeout(() => {
-        response.writeHead(200, { "content-type": "application/json" });
-        response.end(JSON.stringify({ success: false }));
-      }, 3_000);
-      return;
-    }
     const location = locationFor(ip);
     response.writeHead(200, { "content-type": "application/json" });
-    response.end(
-      JSON.stringify(location ? { success: true, ...location } : { success: false }),
-    );
+    response.end(JSON.stringify(location ? { success: true, ...location } : { success: false }));
   });
   await new Promise((resolve) => geoServer.listen(0, "127.0.0.1", resolve));
   return geoServer.address().port;
@@ -104,68 +76,77 @@ async function waitForApp(expectedStatuses = [200]) {
     try {
       const response = await fetch(`${APP_ORIGIN}/api/visitors`);
       if (expectedStatuses.includes(response.status)) return;
-    } catch {
-      // The app is still compiling or opening the port.
-    }
+    } catch {}
     await delay(250);
   }
   throw new Error(`Next.js test server did not become ready:\n${childOutput.join("")}`);
 }
 
-function trackingHeaders(ip, origin = PUBLIC_ORIGIN) {
+function baseHeaders(ip, origin = PUBLIC_ORIGIN, userAgent = BROWSER_UA) {
   return {
     ...(ip ? { "x-real-ip": ip } : {}),
-    origin,
+    ...(origin ? { origin } : {}),
+    "user-agent": userAgent,
     "x-forwarded-host": "hadith-hotel.com",
     "x-forwarded-proto": "https",
   };
 }
 
-async function request(
-  path,
-  { ip, origin, method = "GET", extraHeaders = {} } = {},
-) {
+async function rawRequest(path, { method = "GET", ip, origin, userAgent, cookie } = {}) {
   return fetch(`${APP_ORIGIN}${path}`, {
     method,
-    headers:
-      method === "POST"
-        ? { ...trackingHeaders(ip, origin), ...extraHeaders }
-        : undefined,
+    headers: method === "POST"
+      ? { ...baseHeaders(ip, origin, userAgent), ...(cookie ? { cookie } : {}) }
+      : undefined,
   });
 }
 
-async function json(path, options) {
-  const response = await request(path, options);
+async function parse(response) {
   const payload = await response.text();
-  let body;
   try {
-    body = JSON.parse(payload);
+    return { response, body: JSON.parse(payload) };
   } catch {
-    throw new Error(
-      `${path} returned ${response.status} ${response.headers.get("content-type")}: ` +
-        `${payload.slice(0, 240)}\n${childOutput.slice(-30).join("")}`,
-    );
+    throw new Error(`${response.url} returned ${response.status}: ${payload.slice(0, 240)}`);
   }
-  return { response, body };
 }
 
-async function postMany(path, ip, count) {
-  return Promise.all(
-    Array.from({ length: count }, () => json(path, { ip, method: "POST" })),
-  );
+class TestBrowser {
+  constructor(ip, { acceptCookies = true, userAgent = BROWSER_UA } = {}) {
+    this.ip = ip;
+    this.acceptCookies = acceptCookies;
+    this.userAgent = userAgent;
+    this.cookie = null;
+    this.lastSetCookie = null;
+  }
+
+  async post(path, origin = PUBLIC_ORIGIN) {
+    const response = await rawRequest(path, {
+      method: "POST",
+      ip: this.ip,
+      origin,
+      userAgent: this.userAgent,
+      cookie: this.cookie,
+    });
+    this.lastSetCookie = response.headers.get("set-cookie");
+    if (this.acceptCookies && this.lastSetCookie) {
+      this.cookie = this.lastSetCookie.split(";", 1)[0];
+    }
+    return parse(response);
+  }
+
+  async confirm(path) {
+    let result = await this.post(path);
+    if (result.body?.identityPending) result = await this.post(path);
+    return result;
+  }
+}
+
+async function getJson(path) {
+  return parse(await rawRequest(path));
 }
 
 function metric(items, name) {
   return items.find((item) => item.name === name)?.count ?? 0;
-}
-
-async function cleanup() {
-  await stopApp();
-  if (geoServer) await new Promise((resolve) => geoServer.close(resolve));
-  if (prisma) await prisma.$disconnect();
-  if (originalTsconfig !== undefined) {
-    await writeFile(TSCONFIG_PATH, originalTsconfig);
-  }
 }
 
 async function stopApp() {
@@ -179,254 +160,176 @@ async function stopApp() {
   appProcess = undefined;
 }
 
+async function cleanup() {
+  await stopApp();
+  if (geoServer) await new Promise((resolve) => geoServer.close(resolve));
+  if (prisma) await prisma.$disconnect();
+  if (originalTsconfig !== undefined) await writeFile(TSCONFIG_PATH, originalTsconfig);
+}
+
+async function startApp(env) {
+  await rm(new URL("../.next/dev", import.meta.url), { force: true, recursive: true });
+  appProcess = spawn(process.execPath, [NEXT_BIN, "dev", "--hostname", "127.0.0.1", "--port", String(APP_PORT)], {
+    cwd: WEB_ROOT,
+    env,
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+  appProcess.stdout.on("data", recordOutput);
+  appProcess.stderr.on("data", recordOutput);
+}
+
 async function main() {
   originalTsconfig = await readFile(TSCONFIG_PATH);
   const geoPort = await startGeoServer();
   const env = {
+    ...process.env,
     DATABASE_URL,
-    VISITOR_IP_HASH_SECRET: "metrics-integration-secret",
+    VISITOR_ID_HASH_SECRET: "metrics-integration-secret",
+    VISITOR_IP_HASH_SECRET: "",
     VISITOR_GEOLOOKUP_URL: `http://127.0.0.1:${geoPort}/{ip}`,
+    PROFILE_DOCUMENT_VERSION: "test-v1",
     NODE_ENV: "test",
   };
 
   await runNode(PRISMA_BIN, ["db", "push", "--force-reset", "--skip-generate"], env);
-  await runNode(
-    PRISMA_BIN,
-    [
-      "db",
-      "execute",
-      "--file",
-      "prisma/manual/enforce-unique-profile-download-count.sql",
-      "--url",
-      DATABASE_URL,
-    ],
-    env,
-  );
-
+  await runNode(PRISMA_BIN, ["db", "execute", "--file", "prisma/manual/enforce-unique-profile-download-count.sql", "--url", DATABASE_URL], env);
   process.env.DATABASE_URL = DATABASE_URL;
   const { PrismaClient } = await import("@prisma/client");
   prisma = new PrismaClient();
 
-  await rm(new URL("../.next/dev", import.meta.url), {
-    force: true,
-    recursive: true,
-  });
-  appProcess = spawn(
-    process.execPath,
-    [NEXT_BIN, "dev", "--hostname", "127.0.0.1", "--port", String(APP_PORT)],
-    {
-      cwd: WEB_ROOT,
-      env,
-      stdio: ["ignore", "pipe", "pipe"],
-    },
-  );
-  appProcess.stdout.on("data", recordOutput);
-  appProcess.stderr.on("data", recordOutput);
+  await startApp(env);
   await waitForApp();
 
-  const initial = await json("/api/visitors");
+  const initial = await getJson("/api/visitors");
   assert.equal(initial.response.status, 200);
   assert.equal(initial.response.headers.get("cache-control"), "no-store");
   assert.equal(initial.body.count, 0);
 
-  const foreignOrigin = await json("/api/visitors", {
-    ip: "203.0.113.10",
-    method: "POST",
-    origin: "https://attacker.example",
-  });
-  assert.equal(foreignOrigin.response.status, 403);
-  assert.equal((await json("/api/visitors")).body.count, 0);
+  const attacker = new TestBrowser("203.0.113.10");
+  assert.equal((await attacker.post("/api/visitors", "https://attacker.example")).response.status, 403);
+  assert.equal((await getJson("/api/visitors")).body.count, 0);
 
-  assert.equal(
-    (await json("/api/visitors", { method: "POST" })).response.status,
-    200,
-  );
-  assert.equal(
-    (
-      await json("/api/visitors", {
-        method: "POST",
-        extraHeaders: { "x-forwarded-for": "203.0.113.10" },
-      })
-    ).response.status,
-    200,
-  );
-  assert.equal(
-    (
-      await json("/api/visitors", {
-        method: "POST",
-        extraHeaders: { "cf-connecting-ip": "203.0.113.10" },
-      })
-    ).response.status,
-    200,
-  );
-  assert.equal(
-    (await json("/api/visitors", { ip: "not-an-ip", method: "POST" })).response.status,
-    200,
-  );
-  assert.equal((await json("/api/visitors")).body.count, 0);
-
-  const visitorIp = "203.0.113.10";
-  assert.equal(
-    (await json("/api/visitors", { ip: `  ${visitorIp}  `, method: "POST" })).response.status,
-    200,
-  );
-  const firstVisitor = await prisma.websiteVisitor.findFirstOrThrow();
-  await delay(15);
-  const repeatedVisitors = await postMany("/api/visitors", visitorIp, 3);
-  assert.ok(repeatedVisitors.every(({ response }) => response.status === 200));
-  const repeatedVisitor = await prisma.websiteVisitor.findUniqueOrThrow({
-    where: { visitorHash: firstVisitor.visitorHash },
-  });
-  assert.equal(await prisma.websiteVisitor.count(), 1);
-  assert.ok(repeatedVisitor.lastSeenAt > firstVisitor.lastSeenAt);
-
-  const expandedIpv6 = "2001:0db8:0:0:0:0:0:1";
-  const compactIpv6 = "2001:db8::1";
-  const ipv6Responses = await Promise.all([
-    json("/api/visitors", { ip: expandedIpv6, method: "POST" }),
-    json("/api/visitors", { ip: compactIpv6, method: "POST" }),
-  ]);
-  assert.ok(ipv6Responses.every(({ response }) => response.status === 200));
-  assert.equal(await prisma.websiteVisitor.count(), 2);
-
-  const concurrentIp = "198.51.100.20";
-  const concurrentVisitors = await postMany("/api/visitors", concurrentIp, 25);
-  assert.ok(
-    concurrentVisitors.every(({ response }) => response.status === 200),
-    "Every concurrent visitor request must succeed",
-  );
-  assert.equal(await prisma.websiteVisitor.count(), 3);
-
-  const unknownIp = "203.0.113.99";
-  assert.equal(
-    (await json("/api/visitors", { ip: unknownIp, method: "POST" })).response.status,
-    200,
-  );
-  const distinctIps = Array.from({ length: 6 }, (_, index) => `192.0.2.${41 + index}`);
-  const distinctVisitors = await Promise.all(
-    distinctIps.map((ip) => json("/api/visitors", { ip, method: "POST" })),
-  );
-  assert.ok(distinctVisitors.every(({ response }) => response.status === 200));
-  assert.equal(await prisma.websiteVisitor.count(), 10);
-
-  for (const ip of ["203.0.113.98", "203.0.113.97", "198.51.100.77"]) {
-    const result = await json("/api/visitors", { ip, method: "POST" });
+  const cookieBlocked = new TestBrowser("203.0.113.10", { acceptCookies: false });
+  for (let index = 0; index < 3; index += 1) {
+    const result = await cookieBlocked.post("/api/visitors");
     assert.equal(result.response.status, 200);
+    assert.equal(result.body.identityPending, true);
   }
-  assert.equal(await prisma.websiteVisitor.count(), 13);
+  assert.equal((await getJson("/api/visitors")).body.count, 0, "Cookie-blocked requests are not guessed by IP");
 
-  const foreignDownload = await json("/api/downloads/profile", {
-    ip: visitorIp,
-    method: "POST",
-    origin: "https://attacker.example",
-  });
-  assert.equal(foreignDownload.response.status, 403);
-  assert.equal((await json("/api/downloads/profile")).body.totalDownloads, 0);
+  const bot = new TestBrowser("203.0.113.10", { userAgent: "Googlebot/2.1" });
+  const botResult = await bot.post("/api/visitors");
+  assert.equal(botResult.response.status, 200);
+  assert.equal(bot.lastSetCookie, null);
+  assert.equal((await getJson("/api/visitors")).body.count, 0);
 
-  const firstDownload = await json("/api/downloads/profile", {
-    ip: visitorIp,
-    method: "POST",
-  });
-  assert.equal(firstDownload.response.status, 200);
-  assert.equal(firstDownload.body.totalDownloads, 1);
-  const initialDownloadRow = await prisma.profileDownload.findFirstOrThrow();
+  const browserA = new TestBrowser("203.0.113.10");
+  const firstA = await browserA.post("/api/visitors");
+  assert.equal(firstA.body.identityPending, true);
+  assert.match(browserA.lastSetCookie, /HttpOnly/);
+  assert.match(browserA.lastSetCookie, /SameSite=Lax/);
+  assert.match(browserA.lastSetCookie, /Secure/);
+  assert.equal((await browserA.post("/api/visitors")).body.count, 1);
+  const aFirstRow = await prisma.websiteVisitor.findFirstOrThrow();
   await delay(15);
-  const repeatedDownloads = await postMany("/api/downloads/profile", visitorIp, 4);
-  assert.ok(repeatedDownloads.every(({ response }) => response.status === 200));
-  const repeatedDownloadRow = await prisma.profileDownload.findUniqueOrThrow({
-    where: { visitorHash: initialDownloadRow.visitorHash },
+  assert.equal((await browserA.post("/api/visitors")).body.count, 1);
+  const aRepeatedRow = await prisma.websiteVisitor.findUniqueOrThrow({ where: { visitorHash: aFirstRow.visitorHash } });
+  assert.ok(aRepeatedRow.lastSeenAt > aFirstRow.lastSeenAt);
+
+  const browserB = new TestBrowser("203.0.113.10");
+  assert.equal((await browserB.confirm("/api/visitors")).body.count, 2, "Two browsers behind one IP count separately");
+
+  browserA.ip = "198.51.100.20";
+  assert.equal((await browserA.post("/api/visitors")).body.count, 2, "One browser changing IP remains one visitor");
+  const persistedA = await prisma.websiteVisitor.findUniqueOrThrow({ where: { visitorHash: aFirstRow.visitorHash } });
+  assert.equal(persistedA.city, "New York", "First-event geography stays stable");
+
+  const browserC = new TestBrowser(null);
+  assert.equal((await browserC.confirm("/api/visitors")).body.count, 3, "A cookie identity does not require an IP");
+  const browserD = new TestBrowser("not-an-ip");
+  assert.equal((await browserD.confirm("/api/visitors")).body.count, 4, "Malformed IP cannot become identity or break tracking");
+
+  const parallel = await Promise.all(Array.from({ length: 25 }, () => browserA.post("/api/visitors")));
+  assert.ok(parallel.every(({ response }) => response.status === 200));
+  assert.equal(await prisma.websiteVisitor.count(), 4, "Parallel requests cannot duplicate one browser");
+
+  const browserE = new TestBrowser("2001:db8::1");
+  await browserE.confirm("/api/visitors");
+  const browserF = new TestBrowser("198.51.100.88");
+  await browserF.confirm("/api/visitors");
+  assert.equal(await prisma.websiteVisitor.count(), 6);
+
+  assert.equal((await browserA.post("/api/downloads/profile", "https://attacker.example")).response.status, 403);
+  assert.equal((await getJson("/api/downloads/profile")).body.totalDownloads, 0);
+
+  assert.equal((await browserA.confirm("/api/downloads/profile")).body.totalDownloads, 1);
+  const firstDownload = await prisma.profileDownload.findFirstOrThrow();
+  await delay(15);
+  assert.equal((await browserA.post("/api/downloads/profile")).body.totalDownloads, 1);
+  const repeatedDownload = await prisma.profileDownload.findUniqueOrThrow({
+    where: { visitorHash_documentVersion: { visitorHash: firstDownload.visitorHash, documentVersion: "test-v1" } },
   });
-  assert.equal(await prisma.profileDownload.count(), 1);
-  assert.equal(repeatedDownloadRow.downloadCount, 1);
-  assert.ok(repeatedDownloadRow.lastDownloadedAt > initialDownloadRow.lastDownloadedAt);
+  assert.equal(repeatedDownload.downloadCount, 1);
+  assert.ok(repeatedDownload.lastDownloadedAt > firstDownload.lastDownloadedAt);
 
-  const concurrentDownloads = await postMany(
-    "/api/downloads/profile",
-    concurrentIp,
-    25,
-  );
-  assert.ok(
-    concurrentDownloads.every(({ response }) => response.status === 200),
-    "Every concurrent download request must succeed",
-  );
-  assert.equal(await prisma.profileDownload.count(), 2);
+  assert.equal((await browserB.confirm("/api/downloads/profile")).body.totalDownloads, 2, "Same IP, different browser counts as a different downloader");
+  assert.equal((await browserF.confirm("/api/downloads/profile")).body.totalDownloads, 3);
 
-  await json("/api/downloads/profile", { ip: unknownIp, method: "POST" });
-  const downloadOnlyIp = "198.51.100.88";
-  await json("/api/downloads/profile", { ip: downloadOnlyIp, method: "POST" });
-  assert.equal(await prisma.profileDownload.count(), 4);
-  assert.equal(await prisma.websiteVisitor.count(), 14);
+  const browserG = new TestBrowser("192.0.2.41");
+  const directDownload = await browserG.confirm("/api/downloads/profile");
+  assert.equal(directDownload.body.totalDownloads, 4, "A direct download establishes visitor and download records");
+  assert.equal(await prisma.websiteVisitor.count(), 7);
 
-  const downloadOverview = await json("/api/downloads/profile");
-  assert.deepEqual(downloadOverview.body, {
-    totalDownloads: 4,
-    uniqueDownloaders: 4,
-  });
+  for (let index = 0; index < 2; index += 1) await cookieBlocked.post("/api/downloads/profile");
+  assert.equal(await prisma.profileDownload.count(), 4, "Cookie-blocked downloads are not deduplicated by IP or counted as unique");
 
-  const visitorGeo = (await json("/api/visitors/geography")).body;
-  assert.equal(visitorGeo.totalRecorded, 14);
-  assert.equal(visitorGeo.locatedRecords, 11);
-  assert.equal(visitorGeo.unclassified, 3);
-  assert.equal(metric(visitorGeo.topCities, "Toronto"), 6);
-  assert.equal(metric(visitorGeo.topCountries, "Canada"), 6);
-  assert.equal(metric(visitorGeo.topCities, "New York"), 1);
-  assert.equal(metric(visitorGeo.topCities, "Tokyo"), 1);
-  assert.equal(metric(visitorGeo.topCountries, "United Kingdom"), 1);
+  const concurrentDownloads = await Promise.all(Array.from({ length: 25 }, () => browserE.post("/api/downloads/profile")));
+  assert.ok(concurrentDownloads.every(({ response }) => response.status === 200));
+  assert.equal(await prisma.profileDownload.count(), 5);
 
-  const downloadGeo = (await json("/api/downloads/profile/geography")).body;
-  assert.equal(downloadGeo.totalRecorded, 4);
-  assert.equal(downloadGeo.locatedRecords, 3);
-  assert.equal(downloadGeo.unclassified, 1);
-  assert.equal(metric(downloadGeo.topCities, "New York"), 1);
-  assert.equal(metric(downloadGeo.topCities, "Paris"), 1);
-  assert.equal(metric(downloadGeo.topCities, "Sydney"), 1);
-  assert.equal(metric(downloadGeo.topCountries, "Australia"), 1);
+  const visitorGeo = (await getJson("/api/visitors/geography")).body;
+  assert.equal(visitorGeo.totalRecorded, 7);
+  assert.equal(visitorGeo.locatedRecords, 5);
+  assert.equal(visitorGeo.unclassified, 2);
+  assert.equal(metric(visitorGeo.topCities, "New York"), 2);
+  assert.equal(metric(visitorGeo.topCountries, "United States"), 2);
+
+  const downloadGeo = (await getJson("/api/downloads/profile/geography")).body;
+  assert.equal(downloadGeo.totalRecorded, 5);
+  assert.equal(downloadGeo.locatedRecords, 5);
+  assert.equal(metric(downloadGeo.topCities, "New York"), 2);
+  assert.equal(metric(downloadGeo.topCities, "Tokyo"), 1);
 
   const visitorRows = await prisma.websiteVisitor.findMany();
   const downloadRows = await prisma.profileDownload.findMany();
-  assert.equal(new Set(visitorRows.map((row) => row.visitorHash)).size, visitorRows.length);
-  assert.equal(new Set(downloadRows.map((row) => row.visitorHash)).size, downloadRows.length);
   assert.ok(visitorRows.every((row) => /^[a-f0-9]{64}$/.test(row.visitorHash)));
   assert.ok(downloadRows.every((row) => /^[a-f0-9]{64}$/.test(row.visitorHash)));
-  assert.ok(
-    [...visitorRows, ...downloadRows].every(
-      (row) => ![visitorIp, compactIpv6, expandedIpv6].includes(row.visitorHash),
-    ),
+  assert.ok([...visitorRows, ...downloadRows].every((row) => !row.visitorHash.includes("203.0.113.10")));
+  assert.equal(geoRequests.get("203.0.113.10"), 2, "Location is resolved once per distinct browser, not used as identity");
+
+  await prisma.profileDownload.create({
+    data: { visitorHash: firstDownload.visitorHash, documentVersion: "test-v2", lastDownloadedAt: new Date() },
+  });
+  assert.equal(await prisma.profileDownload.count(), 6, "A new document version may count the same browser again");
+  await assert.rejects(
+    prisma.profileDownload.create({
+      data: { visitorHash: firstDownload.visitorHash, documentVersion: "test-v1", lastDownloadedAt: new Date() },
+    }),
+    /unique constraint/i,
   );
   await assert.rejects(
     prisma.profileDownload.updateMany({ data: { downloadCount: 2 } }),
     /ProfileDownload_downloadCount_unique_ip_check|constraint/i,
   );
 
-  assert.equal(geoRequests.get(visitorIp), 1, "Known visitor location should be cached");
-  assert.equal(geoRequests.get(unknownIp), 1, "Unknown locations should use the retry window");
-
   await stopApp();
-  await rm(new URL("../.next/dev", import.meta.url), {
-    force: true,
-    recursive: true,
-  });
-  appProcess = spawn(
-    process.execPath,
-    [NEXT_BIN, "dev", "--hostname", "127.0.0.1", "--port", String(APP_PORT)],
-    {
-      cwd: WEB_ROOT,
-      env: { ...env, VISITOR_IP_HASH_SECRET: "" },
-      stdio: ["ignore", "pipe", "pipe"],
-    },
-  );
-  appProcess.stdout.on("data", recordOutput);
-  appProcess.stderr.on("data", recordOutput);
+  await startApp({ ...env, VISITOR_ID_HASH_SECRET: "", VISITOR_IP_HASH_SECRET: "" });
   await waitForApp([503]);
-  for (const endpoint of [
-    "/api/visitors",
-    "/api/visitors/geography",
-    "/api/downloads/profile",
-    "/api/downloads/profile/geography",
-  ]) {
-    assert.equal((await request(endpoint)).status, 503);
+  for (const endpoint of ["/api/visitors", "/api/visitors/geography", "/api/downloads/profile", "/api/downloads/profile/geography"]) {
+    assert.equal((await rawRequest(endpoint)).status, 503);
   }
-  console.log("Metrics integration suite passed (visitor, download, geo, concurrency, privacy)." );
+
+  console.log("Metrics integration suite passed (anonymous identity, shared IP, cookie rejection, bot filtering, downloads, geo, concurrency, and privacy).");
 }
 
 try {
