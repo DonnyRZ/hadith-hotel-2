@@ -190,6 +190,18 @@ async function main() {
   };
 
   await runNode(PRISMA_BIN, ["db", "push", "--force-reset", "--skip-generate"], env);
+  await runNode(
+    PRISMA_BIN,
+    [
+      "db",
+      "execute",
+      "--file",
+      "prisma/manual/enforce-unique-profile-download-count.sql",
+      "--url",
+      DATABASE_URL,
+    ],
+    env,
+  );
 
   process.env.DATABASE_URL = DATABASE_URL;
   const { PrismaClient } = await import("@prisma/client");
@@ -380,6 +392,10 @@ async function main() {
     [...visitorRows, ...downloadRows].every(
       (row) => ![visitorIp, compactIpv6, expandedIpv6].includes(row.visitorHash),
     ),
+  );
+  await assert.rejects(
+    prisma.profileDownload.updateMany({ data: { downloadCount: 2 } }),
+    /ProfileDownload_downloadCount_unique_ip_check|constraint/i,
   );
 
   assert.equal(geoRequests.get(visitorIp), 1, "Known visitor location should be cached");

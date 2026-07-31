@@ -49,6 +49,7 @@ model ProfileDownload {
   visitorHash       String    @unique
   firstDownloadedAt DateTime  @default(now())
   lastDownloadedAt  DateTime
+  /// Legacy-compatible field; one row is one unique IP, so this must stay 1.
   downloadCount     Int       @default(1)
   city              String?
   region            String?
