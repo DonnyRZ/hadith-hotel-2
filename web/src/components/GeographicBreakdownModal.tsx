@@ -184,7 +184,7 @@ function GeographicDialog({
             <MetricSection title="Top Countries" items={data.topCountries} />
             {data.unclassified > 0 ? (
               <p className="geography-modal__unclassified">
-                {data.unclassified} unique IP {data.unclassified === 1 ? "location is" : "locations are"} not yet classified.
+                {data.unclassified} anonymous {data.unclassified === 1 ? "record has" : "records have"} no classified location yet.
               </p>
             ) : null}
           </div>
