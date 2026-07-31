@@ -223,6 +223,16 @@ async function main() {
   assert.equal(bot.lastSetCookie, null);
   assert.equal((await getJson("/api/visitors")).body.count, 0);
 
+  const healthMonitor = new TestBrowser("203.0.113.10", {
+    userAgent: "EGI-Web-Monitoring/0.1 (Playwright)",
+  });
+  for (let index = 0; index < 3; index += 1) {
+    const monitorResult = await healthMonitor.post("/api/visitors");
+    assert.equal(monitorResult.response.status, 200);
+    assert.equal(healthMonitor.lastSetCookie, null);
+  }
+  assert.equal((await getJson("/api/visitors")).body.count, 0, "The production health monitor must never count as a visitor");
+
   const browserA = new TestBrowser("203.0.113.10");
   const firstA = await browserA.post("/api/visitors");
   assert.equal(firstA.body.identityPending, true);

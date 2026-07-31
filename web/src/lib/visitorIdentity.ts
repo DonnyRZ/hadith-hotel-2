@@ -5,7 +5,7 @@ import { isIP } from "node:net";
 const VISITOR_COOKIE = "hadith_visitor_id";
 const VISITOR_ID_PATTERN = /^[A-Za-z0-9_-]{43}$/;
 const BOT_PATTERN =
-  /(?:bot|crawler|spider|slurp|bingpreview|facebookexternalhit|whatsapp|telegrambot|discordbot|linkedinbot|pinterest|yandex|baiduspider|duckduckbot)/i;
+  /(?:bot|crawler|spider|slurp|bingpreview|facebookexternalhit|whatsapp|telegrambot|discordbot|linkedinbot|pinterest|yandex|baiduspider|duckduckbot|egi-web-monitoring)/i;
 
 export type VisitorIdentity = {
   visitorHash: string | null;
