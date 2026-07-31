@@ -102,7 +102,7 @@ export function SiteHeader() {
             <div className="site-header__brand-row">
               <Link href="/" className="site-logo" aria-label="HADITH Hotel home">
                 <Image
-                  src="/images/logo-hadith.png"
+                  src="/images/logo-hadith-2.png"
                   alt="Hadits Hotel — Complex of Imam Al Bukhari"
                   width={280}
                   height={112}
