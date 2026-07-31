@@ -8,7 +8,6 @@ type GallerySlide = { src: string; label: string };
 type Venue = {
   id: string;
   heading: string;
-  eyebrow: string;
   name: string;
   description: string;
   highlights: string[];
@@ -21,7 +20,6 @@ const venues: Venue[] = [
   {
     id: "restaurant",
     heading: "Savour the Silk Road",
-    eyebrow: "Food & Beverage · Saji Nusantara",
     name: "Saji Nusantara",
     description:
       "A 120-seat dining room framed by a slender white marble mihrab. The menu travels the Silk Road from Samarkand plov and Bukhara somsa to Indonesian-inspired creations prepared by our culinary team.",
@@ -46,7 +44,6 @@ const venues: Venue[] = [
   {
     id: "cafe",
     heading: "A Taste of Indonesia",
-    eyebrow: "Food & Beverage · 7OZ",
     name: "7OZ",
     description:
       "Discover curated Indonesian pastries and specialty coffees from across the archipelago, including classics such as Kopi Luwak. The cafe offers a warm social setting celebrating Indonesia’s rich coffee culture.",
@@ -156,7 +153,6 @@ export function CafeDiningVenues() {
               </div>
 
               <div className="venue__card">
-                <p className="venue__eyebrow">{venue.eyebrow}</p>
                 <h3 className="venue__name">{venue.name}</h3>
                 <p className="venue__body">{venue.description}</p>
 
