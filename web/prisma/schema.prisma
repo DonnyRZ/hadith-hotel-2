@@ -45,9 +45,17 @@ model WebsiteVisitor {
 }
 
 model ProfileDownload {
-  id                String   @id @default(cuid())
-  visitorHash       String   @unique
-  firstDownloadedAt DateTime @default(now())
+  id                String    @id @default(cuid())
+  visitorHash       String    @unique
+  firstDownloadedAt DateTime  @default(now())
   lastDownloadedAt  DateTime
-  downloadCount     Int      @default(1)
+  downloadCount     Int       @default(1)
+  city              String?
+  region            String?
+  countryCode       String?
+  geoCheckedAt      DateTime?
+
+  @@index([city])
+  @@index([region])
+  @@index([countryCode])
 }

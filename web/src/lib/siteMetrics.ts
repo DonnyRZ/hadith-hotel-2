@@ -16,6 +16,21 @@ export type DownloadMetrics = {
   uniqueDownloaders: number;
 };
 
+export type GeographicMetric = {
+  name: string;
+  context: string | null;
+  count: number;
+};
+
+export type GeographicBreakdown = {
+  totalRecorded: number;
+  locatedRecords: number;
+  unclassified: number;
+  topCities: GeographicMetric[];
+  topRegions: GeographicMetric[];
+  topCountries: GeographicMetric[];
+};
+
 let registration: Promise<VisitorMetrics | null> | null = null;
 
 function isVisitorMetrics(value: unknown): value is VisitorMetrics {
@@ -38,6 +53,21 @@ function isDownloadMetrics(value: unknown): value is DownloadMetrics {
   );
 }
 
+function isGeographicBreakdown(
+  value: unknown,
+): value is GeographicBreakdown {
+  if (!value || typeof value !== "object") return false;
+  const breakdown = value as Partial<GeographicBreakdown>;
+  return (
+    typeof breakdown.totalRecorded === "number" &&
+    typeof breakdown.locatedRecords === "number" &&
+    typeof breakdown.unclassified === "number" &&
+    Array.isArray(breakdown.topCities) &&
+    Array.isArray(breakdown.topRegions) &&
+    Array.isArray(breakdown.topCountries)
+  );
+}
+
 export function registerVisitor() {
   registration ??= fetch("/api/visitors", { method: "POST", cache: "no-store" })
     .then((result) => (result.ok ? result.json() : null))
@@ -57,6 +87,7 @@ export function trackProfileDownload() {
   return fetch("/api/downloads/profile", {
     method: "POST",
     cache: "no-store",
+    keepalive: true,
   })
     .then((result) => (result.ok ? result.json() : null))
     .then((result: unknown) => (isDownloadMetrics(result) ? result : null))
@@ -67,5 +98,21 @@ export function fetchDownloadMetrics() {
   return fetch("/api/downloads/profile", { cache: "no-store" })
     .then((result) => (result.ok ? result.json() : null))
     .then((result: unknown) => (isDownloadMetrics(result) ? result : null))
+    .catch(() => null);
+}
+
+export function fetchGeographicBreakdown(
+  metric: "downloads" | "visitors",
+) {
+  const endpoint =
+    metric === "downloads"
+      ? "/api/downloads/profile/geography"
+      : "/api/visitors/geography";
+
+  return fetch(endpoint, { cache: "no-store" })
+    .then((result) => (result.ok ? result.json() : null))
+    .then((result: unknown) =>
+      isGeographicBreakdown(result) ? result : null,
+    )
     .catch(() => null);
 }

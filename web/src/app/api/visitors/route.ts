@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
+import { geolocateIp } from "@/lib/geolocation";
 import { getClientIp, hashIp, isSameOrigin } from "@/lib/visitorIdentity";
 
 type CityMetric = { city: string; region: string | null; count: number };
@@ -13,75 +14,12 @@ type Overview = {
 
 const GEO_REFRESH_MS = 30 * 24 * 60 * 60 * 1000;
 const ACTIVE_WINDOW_MS = 7 * 24 * 60 * 60 * 1000;
-const defaultMajorCities = [
-  "Jakarta", "West Jakarta", "East Jakarta", "South Jakarta",
-  "North Jakarta", "Central Jakarta", "Bandung", "Surabaya", "Medan",
-  "Semarang", "Makassar", "Palembang", "Bekasi", "Depok", "Tangerang",
-  "South Tangerang", "Bogor", "Yogyakarta", "Malang", "Denpasar", "Batam",
-  "Pekanbaru", "Samarinda", "Balikpapan", "Banjarmasin", "Padang",
-  "Bandar Lampung", "Pontianak", "Manado", "Tashkent", "Samarkand",
-  "Bukhara", "Namangan",
-];
 
 function response(overview: Overview | null, status = 200) {
   return Response.json(overview, {
     status,
     headers: { "Cache-Control": "no-store" },
   });
-}
-
-function majorCities() {
-  const configured = process.env.VISITOR_MAJOR_CITIES?.split(",")
-    .map((city) => city.trim())
-    .filter(Boolean);
-  return new Set(
-    (configured?.length ? configured : defaultMajorCities).map((city) =>
-      city.toLocaleLowerCase(),
-    ),
-  );
-}
-
-function canonicalCity(city: string) {
-  return city.trim().replace(/\s+city$/i, "");
-}
-
-async function geolocate(ip: string) {
-  const template = process.env.VISITOR_GEOLOOKUP_URL || "https://ipwho.is/{ip}";
-  if (!template.includes("{ip}")) return null;
-
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 1500);
-  try {
-    const result = await fetch(template.replace("{ip}", encodeURIComponent(ip)), {
-      signal: controller.signal,
-    });
-    const location = (await result.json()) as {
-      city?: unknown;
-      country_code?: unknown;
-      region?: unknown;
-      success?: unknown;
-    };
-    if (!result.ok || location.success === false || typeof location.city !== "string") {
-      return null;
-    }
-    const city = canonicalCity(location.city);
-    if (!majorCities().has(city.toLocaleLowerCase())) return null;
-    return {
-      city,
-      countryCode:
-        typeof location.country_code === "string"
-          ? location.country_code.slice(0, 2).toUpperCase()
-          : null,
-      region:
-        typeof location.region === "string"
-          ? location.region.trim().slice(0, 80)
-          : null,
-    };
-  } catch {
-    return null;
-  } finally {
-    clearTimeout(timeout);
-  }
 }
 
 async function visitorOverview(): Promise<Overview> {
@@ -130,10 +68,13 @@ async function registerVisitor(ip: string, visitorHash: string) {
     },
   });
   const now = new Date();
+  const refreshWindow = existing?.countryCode
+    ? GEO_REFRESH_MS
+    : 24 * 60 * 60 * 1000;
   const needsGeo =
     !existing?.geoCheckedAt ||
-    existing.geoCheckedAt.getTime() < Date.now() - GEO_REFRESH_MS;
-  const location = needsGeo ? await geolocate(ip) : null;
+    existing.geoCheckedAt.getTime() < Date.now() - refreshWindow;
+  const location = needsGeo ? await geolocateIp(ip) : null;
 
   if (existing) {
     await prisma.websiteVisitor.update({

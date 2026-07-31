@@ -2040,8 +2040,53 @@ body.has-room-lightbox .reserve-float {
 }
 
 .overview-farewell__stat {
+  position: relative;
   display: flex;
   flex-direction: column;
+  min-width: 210px;
+  margin: 0;
+  padding: 12px 42px 12px 0;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.overview-farewell__stat::after {
+  position: absolute;
+  right: 2px;
+  bottom: 16px;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--accent) 65%, transparent);
+  border-radius: 50%;
+  color: var(--accent);
+  content: "↗";
+  font-family: var(--sans);
+  font-size: 12px;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.overview-farewell__stat:hover,
+.overview-farewell__stat:focus-visible {
+  border-color: var(--accent);
+  transform: translateX(4px);
+}
+
+.overview-farewell__stat:hover::after,
+.overview-farewell__stat:focus-visible::after {
+  background: var(--accent);
+  color: var(--paper);
+  transform: translate(2px, -2px);
+}
+
+.overview-farewell__stat:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
 }
 
 .overview-farewell__stat-value {
@@ -2126,6 +2171,226 @@ body.has-room-lightbox .reserve-float {
   outline-offset: 3px;
 }
 
+/* —— Geographic metric breakdown —— */
+
+.geography-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 160;
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 4vw, 56px);
+}
+
+.geography-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgb(20 19 17 / 72%);
+  cursor: default;
+  backdrop-filter: blur(5px);
+}
+
+.geography-modal__dialog {
+  position: relative;
+  width: min(1080px, 100%);
+  max-height: min(820px, calc(100vh - 40px));
+  overflow: auto;
+  padding: clamp(34px, 5vw, 64px);
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, var(--line));
+  background: var(--paper);
+  box-shadow: 0 28px 90px rgb(0 0 0 / 24%);
+  scrollbar-color: var(--accent) color-mix(in srgb, var(--ink) 8%, transparent);
+}
+
+.geography-modal__close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--ink) 20%, transparent);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.geography-modal__close:hover,
+.geography-modal__close:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: rotate(4deg);
+}
+
+.geography-modal__close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.geography-modal__header {
+  padding-right: 70px;
+}
+
+.geography-modal__eyebrow {
+  margin: 0;
+  color: var(--accent);
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.geography-modal__title {
+  margin: 13px 0 0;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.geography-modal__description {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.geography-modal__total {
+  margin: 22px 0 0;
+  color: var(--ink-soft);
+  font-family: var(--serif);
+  font-size: 1.05rem;
+}
+
+.geography-modal__total strong {
+  color: var(--ink);
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.geography-modal__content {
+  margin-top: clamp(38px, 5vw, 58px);
+  display: grid;
+  gap: clamp(34px, 5vw, 52px);
+}
+
+.geography-modal__section-title {
+  margin: 0 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.geography-modal__section-title svg {
+  color: var(--accent);
+}
+
+.geography-modal__rows {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 13px;
+  list-style: none;
+}
+
+.geography-modal__row {
+  display: grid;
+  grid-template-columns: 34px minmax(190px, 0.65fr) minmax(180px, 1.4fr) 42px;
+  gap: 16px;
+  align-items: center;
+}
+
+.geography-modal__rank,
+.geography-modal__count {
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.geography-modal__count {
+  color: var(--ink);
+  text-align: right;
+}
+
+.geography-modal__place {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.2;
+}
+
+.geography-modal__place small {
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.geography-modal__bar {
+  height: 5px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--ink) 16%, transparent);
+  background: color-mix(in srgb, var(--ink) 4%, transparent);
+}
+
+.geography-modal__bar span {
+  display: block;
+  min-width: 3px;
+  height: 100%;
+  background: var(--accent);
+}
+
+.geography-modal__loading,
+.geography-modal__empty,
+.geography-modal__unclassified {
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.geography-modal__loading {
+  margin: 48px 0 0;
+}
+
+.geography-modal__empty {
+  margin: 0;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.geography-modal__unclassified {
+  margin: 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
 @media (max-width: 720px) {
   .overview-farewell__footer {
     flex-direction: column;
@@ -2134,6 +2399,51 @@ body.has-room-lightbox .reserve-float {
 
   .overview-farewell__actions {
     width: 100%;
+  }
+
+  .overview-farewell__stats,
+  .overview-farewell__stat {
+    width: 100%;
+  }
+
+  .geography-modal {
+    padding: 10px;
+  }
+
+  .geography-modal__dialog {
+    max-height: calc(100vh - 20px);
+    padding: 32px 22px 38px;
+  }
+
+  .geography-modal__close {
+    top: 18px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .geography-modal__header {
+    padding-right: 44px;
+  }
+
+  .geography-modal__description {
+    max-width: 22em;
+    line-height: 1.5;
+  }
+
+  .geography-modal__row {
+    grid-template-columns: 26px minmax(110px, 1fr) 42px;
+    gap: 10px;
+  }
+
+  .geography-modal__bar {
+    grid-column: 2 / 4;
+    grid-row: 2;
+  }
+
+  .geography-modal__place {
+    flex-direction: column;
+    gap: 3px;
   }
 }
 
@@ -2354,6 +2664,28 @@ body.has-room-lightbox .reserve-float {
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+}
+
+.overview-farewell__stat-action {
+  max-height: 0;
+  margin-top: 0;
+  overflow: hidden;
+  color: var(--accent);
+  font-family: var(--sans);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  line-height: 1.4;
+  opacity: 0;
+  text-transform: uppercase;
+  transition: max-height 0.25s ease, margin-top 0.25s ease, opacity 0.25s ease;
+}
+
+.overview-farewell__stat:hover .overview-farewell__stat-action,
+.overview-farewell__stat:focus-visible .overview-farewell__stat-action {
+  max-height: 20px;
+  margin-top: 8px;
+  opacity: 1;
 }
 
 .page-hero__intro-heading {
@@ -4796,7 +5128,9 @@ body.has-room-lightbox .reserve-float {
   }
 
   .overview-farewell__stat {
-    text-align: center;
+    min-width: 0;
+    padding-right: 34px;
+    text-align: left;
   }
 
   .overview-farewell__actions {

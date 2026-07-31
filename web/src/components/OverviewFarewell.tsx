@@ -1,8 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ComingSoonModal } from "@/components/ComingSoonModal";
+import {
+  GeographicBreakdownModal,
+  type GeographicMetricKind,
+} from "@/components/GeographicBreakdownModal";
 import { ProfileDownloadLink } from "@/components/ProfileDownloadLink";
 import {
   fetchDownloadMetrics,
@@ -22,6 +26,8 @@ export function OverviewFarewell() {
   >(null);
   const [visitorCount, setVisitorCount] = useState<number | null>(null);
   const [downloadCount, setDownloadCount] = useState<number | null>(null);
+  const [geographicMetric, setGeographicMetric] =
+    useState<GeographicMetricKind | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -51,6 +57,7 @@ export function OverviewFarewell() {
       label: "Profile Visitors",
     },
   ];
+  const closeGeography = useCallback(() => setGeographicMetric(null), []);
 
   return (
     <>
@@ -82,14 +89,25 @@ export function OverviewFarewell() {
         </div>
 
         <div className="overview-farewell__footer">
-          <dl className="overview-farewell__stats">
+          <div className="overview-farewell__stats" aria-label="Hotel profile metrics">
             {stats.map((stat) => (
-              <div key={stat.id} className="overview-farewell__stat">
-                <dd className="overview-farewell__stat-value">{stat.value}</dd>
-                <dt className="overview-farewell__stat-label">{stat.label}</dt>
-              </div>
+              <button
+                key={stat.id}
+                type="button"
+                className="overview-farewell__stat"
+                aria-haspopup="dialog"
+                onClick={() =>
+                  setGeographicMetric(stat.id as GeographicMetricKind)
+                }
+              >
+                <span className="overview-farewell__stat-value">{stat.value}</span>
+                <span className="overview-farewell__stat-label">{stat.label}</span>
+                <span className="overview-farewell__stat-action">
+                  View locations <span aria-hidden="true">↗</span>
+                </span>
+              </button>
             ))}
-          </dl>
+          </div>
 
           <div className="overview-farewell__actions">
             <ProfileDownloadLink
@@ -117,6 +135,10 @@ export function OverviewFarewell() {
         onClose={() => setComingSoon(null)}
         eyebrow={comingSoon ? comingSoonCopy[comingSoon].eyebrow : undefined}
         body={comingSoon ? comingSoonCopy[comingSoon].body : undefined}
+      />
+      <GeographicBreakdownModal
+        metric={geographicMetric}
+        onClose={closeGeography}
       />
     </>
   );
