@@ -23,11 +23,11 @@ type GeographicDialogProps = {
 const copy = {
   downloads: {
     title: "Profile Downloads",
-    description: "Unique downloader locations by IP address",
+    description: "Approximate locations of anonymous profile downloaders",
   },
   visitors: {
     title: "Profile Visitors",
-    description: "Unique visitor locations by IP address",
+    description: "Approximate locations of anonymous website visitors",
   },
 } as const;
 
