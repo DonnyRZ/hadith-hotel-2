@@ -12,6 +12,8 @@ type DownloadMetrics = {
   uniqueDownloaders: number;
 };
 
+const UNKNOWN_GEO_RETRY_MS = 24 * 60 * 60 * 1000;
+
 function response(metrics: DownloadMetrics | null, status = 200) {
   return Response.json(metrics, {
     status,
@@ -50,20 +52,55 @@ export async function POST(request: Request) {
       const [existingVisitor, existingDownload] = await Promise.all([
         prisma.websiteVisitor.findUnique({
           where: { visitorHash },
-          select: { city: true, region: true, countryCode: true },
+          select: {
+            city: true,
+            region: true,
+            countryCode: true,
+            geoCheckedAt: true,
+          },
         }),
         prisma.profileDownload.findUnique({
           where: { visitorHash },
-          select: { city: true, region: true, countryCode: true },
+          select: {
+            city: true,
+            region: true,
+            countryCode: true,
+            geoCheckedAt: true,
+          },
         }),
       ]);
-      const freshLocation = await geolocateIp(ip);
-      const location: GeographicLocation = freshLocation ?? {
-        city: existingVisitor?.city ?? null,
-        region: existingVisitor?.region ?? null,
-        countryCode: existingVisitor?.countryCode ?? null,
+      const cachedLocation: GeographicLocation = {
+        city: existingDownload?.city ?? existingVisitor?.city ?? null,
+        region: existingDownload?.region ?? existingVisitor?.region ?? null,
+        countryCode:
+          existingDownload?.countryCode ?? existingVisitor?.countryCode ?? null,
       };
-      const shouldFillDownloadLocation = !existingDownload?.countryCode;
+      const lastGeoCheck =
+        existingDownload?.geoCheckedAt ?? existingVisitor?.geoCheckedAt ?? null;
+      const hasCompleteLocation = Boolean(cachedLocation.countryCode);
+      const shouldLookupLocation =
+        !hasCompleteLocation &&
+        (!lastGeoCheck ||
+          lastGeoCheck.getTime() < Date.now() - UNKNOWN_GEO_RETRY_MS);
+      const freshLocation = shouldLookupLocation ? await geolocateIp(ip) : null;
+      const location: GeographicLocation = freshLocation ?? cachedLocation;
+      const locationUpdate = {
+        ...(location.city ? { city: location.city } : {}),
+        ...(location.region ? { region: location.region } : {}),
+        ...(location.countryCode ? { countryCode: location.countryCode } : {}),
+      };
+      const freshLocationUpdate = freshLocation
+        ? {
+            ...(freshLocation.city ? { city: freshLocation.city } : {}),
+            ...(freshLocation.region ? { region: freshLocation.region } : {}),
+            ...(freshLocation.countryCode
+              ? { countryCode: freshLocation.countryCode }
+              : {}),
+          }
+        : {};
+      const shouldFillDownloadLocation =
+        !existingDownload?.countryCode &&
+        Boolean(location.city || location.region || location.countryCode);
 
       await prisma.$transaction([
         prisma.profileDownload.upsert({
@@ -78,8 +115,10 @@ export async function POST(request: Request) {
           update: {
             lastDownloadedAt: now,
             ...(shouldFillDownloadLocation
-              ? { ...location, geoCheckedAt: now }
-              : {}),
+              ? { ...locationUpdate, geoCheckedAt: now }
+              : shouldLookupLocation
+                ? { geoCheckedAt: now }
+                : {}),
           },
         }),
         prisma.websiteVisitor.upsert({
@@ -92,7 +131,9 @@ export async function POST(request: Request) {
           },
           update: {
             lastSeenAt: now,
-            ...(freshLocation ? { ...freshLocation, geoCheckedAt: now } : {}),
+            ...(shouldLookupLocation
+              ? { ...freshLocationUpdate, geoCheckedAt: now }
+              : {}),
           },
         }),
       ]);

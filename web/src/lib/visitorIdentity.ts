@@ -1,12 +1,36 @@
 /** Client IP hashing and same-origin helpers for visitor and download tracking. */
 
+import { isIP } from "node:net";
+
+function normalizeIp(value: string | null): string | null {
+  if (!value) return null;
+  const address = value.trim();
+  if (!address || address.length > 128) return null;
+
+  const version = isIP(address);
+  if (version === 4) return address;
+  if (version !== 6) return null;
+
+  try {
+    return new URL(`http://[${address}]`).hostname.slice(1, -1).toLowerCase();
+  } catch {
+    return null;
+  }
+}
+
 export function getClientIp(request: Request): string | null {
-  const address =
-    request.headers.get("x-real-ip") ??
-    (process.env.VISITOR_TRUST_CLOUDFLARE_HEADERS === "true"
+  const candidates = [
+    request.headers.get("x-real-ip"),
+    process.env.VISITOR_TRUST_CLOUDFLARE_HEADERS === "true"
       ? request.headers.get("cf-connecting-ip")
-      : null);
-  return address && address.length <= 128 ? address.trim() : null;
+      : null,
+  ];
+
+  for (const candidate of candidates) {
+    const address = normalizeIp(candidate);
+    if (address) return address;
+  }
+  return null;
 }
 
 export async function hashIp(ip: string): Promise<string> {

@@ -75,33 +75,27 @@ async function registerVisitor(ip: string, visitorHash: string) {
     !existing?.geoCheckedAt ||
     existing.geoCheckedAt.getTime() < Date.now() - refreshWindow;
   const location = needsGeo ? await geolocateIp(ip) : null;
+  const locationUpdate = location
+    ? {
+        ...(location.city ? { city: location.city } : {}),
+        ...(location.region ? { region: location.region } : {}),
+        ...(location.countryCode ? { countryCode: location.countryCode } : {}),
+      }
+    : {};
 
-  if (existing) {
-    await prisma.websiteVisitor.update({
-      where: { visitorHash },
-      data: {
-        lastSeenAt: now,
-        ...(needsGeo
-          ? {
-              city: location?.city ?? existing.city ?? null,
-              region: location?.region ?? existing.region ?? null,
-              countryCode: location?.countryCode ?? existing.countryCode ?? null,
-              geoCheckedAt: now,
-            }
-          : {}),
-      },
-    });
-    return;
-  }
-
-  await prisma.websiteVisitor.create({
-    data: {
+  await prisma.websiteVisitor.upsert({
+    where: { visitorHash },
+    create: {
       visitorHash,
       lastSeenAt: now,
       city: location?.city ?? null,
       region: location?.region ?? null,
       countryCode: location?.countryCode ?? null,
       geoCheckedAt: now,
+    },
+    update: {
+      lastSeenAt: now,
+      ...(needsGeo ? { ...locationUpdate, geoCheckedAt: now } : {}),
     },
   });
 }
