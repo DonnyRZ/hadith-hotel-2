@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type WellnessSlide = {
   id: string;
@@ -59,6 +59,7 @@ type DestinationSlide = {
   src: string;
   alt: string;
   position?: string;
+  video?: string;
 };
 
 type DestinationJourney = {
@@ -91,7 +92,8 @@ const destinationJourneys: DestinationJourney[] = [
       {
         id: "imam-bukhari-1",
         src: "/images/experience/destinations/imam-bukhari-1.png",
-        alt: "Imam Al-Bukhari Mausoleum and its blue dome",
+        video: "/videos/imam-al-bukhari-complex.mp4",
+        alt: "Imam Al-Bukhari Mausoleum complex near HADITH Hotel",
       },
       {
         id: "imam-bukhari-2",
@@ -411,6 +413,7 @@ function DestinationCarousel({
   title: string;
 }) {
   const [index, setIndex] = useState(0);
+  const videoRefs = useRef<Record<string, HTMLVideoElement | null>>({});
   const count = slides.length;
   const progress = ((index + 1) / count) * 100;
 
@@ -418,6 +421,15 @@ function DestinationCarousel({
     setIndex((currentIndex) => (currentIndex - 1 + count) % count);
   const goNext = () =>
     setIndex((currentIndex) => (currentIndex + 1) % count);
+
+  useEffect(() => {
+    slides.forEach((slide, slideIndex) => {
+      const video = videoRefs.current[slide.id];
+      if (!video) return;
+      if (slideIndex === index) return;
+      video.pause();
+    });
+  }, [index, slides]);
 
   return (
     <div
@@ -427,22 +439,40 @@ function DestinationCarousel({
       aria-label={`${title} gallery`}
     >
       <div className="destination-carousel__viewport">
-        {slides.map((slide, slideIndex) => (
-          <div
-            key={slide.id}
-            className={`destination-carousel__slide${slideIndex === index ? " is-active" : ""}`}
-            aria-hidden={slideIndex !== index}
-          >
-            <Image
-              className="destination-carousel__image"
-              src={slide.src}
-              alt={slideIndex === index ? slide.alt : ""}
-              fill
-              sizes="(max-width: 920px) 100vw, 58vw"
-              style={{ objectPosition: slide.position ?? "50% 50%" }}
-            />
-          </div>
-        ))}
+        {slides.map((slide, slideIndex) => {
+          const isActive = slideIndex === index;
+
+          return (
+            <div
+              key={slide.id}
+              className={`destination-carousel__slide${isActive ? " is-active" : ""}`}
+              aria-hidden={!isActive}
+            >
+              {slide.video ? (
+                <video
+                  ref={(node) => {
+                    videoRefs.current[slide.id] = node;
+                  }}
+                  className="destination-carousel__video"
+                  src={slide.video}
+                  controls={isActive}
+                  playsInline
+                  preload="auto"
+                  aria-label={slide.alt}
+                />
+              ) : (
+                <Image
+                  className="destination-carousel__image"
+                  src={slide.src}
+                  alt={isActive ? slide.alt : ""}
+                  fill
+                  sizes="(max-width: 920px) 100vw, 58vw"
+                  style={{ objectPosition: slide.position ?? "50% 50%" }}
+                />
+              )}
+            </div>
+          );
+        })}
       </div>
 
       <div className="destination-carousel__controls">
@@ -450,7 +480,7 @@ function DestinationCarousel({
           type="button"
           className="destination-carousel__nav"
           onClick={goPrevious}
-          aria-label={`Previous image in ${title} gallery`}
+          aria-label={`Previous media in ${title} gallery`}
         >
           <span aria-hidden="true">‹</span> Previous
         </button>
@@ -470,7 +500,7 @@ function DestinationCarousel({
           type="button"
           className="destination-carousel__nav"
           onClick={goNext}
-          aria-label={`Next image in ${title} gallery`}
+          aria-label={`Next media in ${title} gallery`}
         >
           Next <span aria-hidden="true">›</span>
         </button>

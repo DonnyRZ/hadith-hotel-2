@@ -11,10 +11,9 @@ export function OverviewDestinations() {
           <video
             className="overview-destinations__video"
             src="/videos/imam-al-bukhari-complex.mp4"
-            poster="/images/experience/destinations/imam-bukhari-1.png"
             controls
             playsInline
-            preload="metadata"
+            preload="auto"
             aria-label="Imam Al-Bukhari Mausoleum complex near HADITH Hotel"
           />
         </div>

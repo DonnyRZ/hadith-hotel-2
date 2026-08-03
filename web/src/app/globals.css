@@ -5839,10 +5839,19 @@ body.has-room-lightbox .reserve-float {
 .destination-carousel__slide.is-active {
   z-index: 1;
   opacity: 1;
+  pointer-events: auto;
 }
 
 .destination-carousel__image {
   object-fit: cover;
+}
+
+.destination-carousel__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #111;
 }
 
 .destination-carousel__controls {
