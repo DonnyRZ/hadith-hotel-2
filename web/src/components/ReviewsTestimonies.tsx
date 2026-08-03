@@ -241,96 +241,16 @@ function ReviewLightbox({
 }
 
 function ShowcaseVideo() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [blockedByBrowser, setBlockedByBrowser] = useState(false);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    let unmuteOnGesture: (() => void) | null = null;
-
-    const startWithSound = async () => {
-      video.muted = false;
-      video.volume = 1;
-
-      try {
-        await video.play();
-        setBlockedByBrowser(false);
-        return;
-      } catch {
-        // Browsers reject unmuted autoplay until the visitor interacts.
-      }
-
-      video.muted = true;
-      try {
-        await video.play();
-      } catch {
-        return;
-      }
-      setBlockedByBrowser(true);
-
-      unmuteOnGesture = () => {
-        video.muted = false;
-        video.volume = 1;
-        void video.play();
-        setBlockedByBrowser(false);
-      };
-
-      const events = ["pointerdown", "keydown", "touchstart", "wheel"] as const;
-      const handler = () => {
-        unmuteOnGesture?.();
-        events.forEach((name) => window.removeEventListener(name, handler));
-      };
-      events.forEach((name) =>
-        window.addEventListener(name, handler, { once: true, passive: true }),
-      );
-      unmuteOnGesture = handler;
-    };
-
-    void startWithSound();
-
-    return () => {
-      if (unmuteOnGesture) {
-        ["pointerdown", "keydown", "touchstart", "wheel"].forEach((name) =>
-          window.removeEventListener(name, unmuteOnGesture as () => void),
-        );
-      }
-    };
-  }, []);
-
-  const enableSound = () => {
-    const video = videoRef.current;
-    if (!video) return;
-    video.muted = false;
-    video.volume = 1;
-    void video.play();
-    setBlockedByBrowser(false);
-  };
-
   return (
     <div className="video-showcase__frame">
       <video
-        ref={videoRef}
         className="video-showcase__player"
         src="/videos/conference-hadith.mp4"
         poster="/videos/conference-hadith-poster.jpg"
         controls
-        autoPlay
-        loop
         playsInline
-        preload="auto"
+        preload="metadata"
       />
-
-      {blockedByBrowser ? (
-        <button
-          type="button"
-          className="video-showcase__unmute"
-          onClick={enableSound}
-        >
-          Tap for sound
-        </button>
-      ) : null}
     </div>
   );
 }
