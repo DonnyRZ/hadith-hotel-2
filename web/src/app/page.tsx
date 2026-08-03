@@ -61,6 +61,34 @@ const heroSlides = [
     position: "50% 52%",
     mobilePosition: "50% 52%",
   },
+  {
+    id: "hamam",
+    label: "Turkish hammam",
+    src: "/images/experience/hamam.webp",
+    position: "50% 52%",
+    mobilePosition: "50% 52%",
+  },
+  {
+    id: "suite-living",
+    label: "Suite living area",
+    src: "/images/rooms/suite/suite-2.png",
+    position: "50% 52%",
+    mobilePosition: "50% 52%",
+  },
+  {
+    id: "hall",
+    label: "Meetings and weddings hall",
+    src: "/images/meetings-weddings/hall.webp",
+    position: "50% 52%",
+    mobilePosition: "50% 52%",
+  },
+  {
+    id: "salon",
+    label: "Beauty salon",
+    src: "/images/overview-hero/salon.jpeg",
+    position: "50% 52%",
+    mobilePosition: "50% 52%",
+  },
 ];
 
 export default function OverviewPage() {

@@ -30,7 +30,11 @@ const wellnessSlides: WellnessSlide[] = [
     title: "Indoor Pool",
     src: "/images/experience/pool.webp",
   },
-  { id: "salon", title: "Beauty Salon" },
+  {
+    id: "salon",
+    title: "Beauty Salon",
+    src: "/images/experience/salon.jpeg",
+  },
   {
     id: "fitness",
     title: "Fitness Centre",

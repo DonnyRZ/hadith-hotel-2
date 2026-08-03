@@ -14,6 +14,7 @@ import { ComingSoonModal } from "@/components/ComingSoonModal";
 type AmenityRow = {
   label: string;
   value?: string;
+  detail?: string;
 };
 
 type AmenityGroup = {
@@ -24,7 +25,7 @@ type AmenityGroup = {
 };
 
 /* Mirrors the hotel fact sheet, with room names kept consistent site-wide */
-const groups: AmenityGroup[] = [
+const leftGroups: AmenityGroup[] = [
   {
     id: "accommodation",
     title: "Accommodation",
@@ -43,13 +44,14 @@ const groups: AmenityGroup[] = [
     title: "Dining",
     icon: UtensilsCrossed,
     rows: [
-      { label: "Restaurant", value: "120 seats" },
-      { label: "Bar & Lounge", value: "20 seats" },
-      { label: "Indoor Cafe", value: "20 seats" },
-      { label: "Cuisine", value: "Uzbek · Indonesian · Continental" },
-      { label: "Certification", value: "Halal" },
+      { label: "Saji Nusantara Restaurant", detail: "Uzbek Cuisine" },
+      { label: "Bar & Lounge" },
+      { label: "7OZ Espresso Cafe" },
     ],
   },
+];
+
+const rightGroups: AmenityGroup[] = [
   {
     id: "wellness",
     title: "Wellness & Sport",
@@ -61,6 +63,9 @@ const groups: AmenityGroup[] = [
       { label: "Turkish Hammam" },
       { label: "Fitness Centre" },
       { label: "Beauty Salon" },
+      { label: "Tennis Court" },
+      { label: "Kids’ Playground" },
+      { label: "Padel Court" },
     ],
   },
   {
@@ -68,11 +73,41 @@ const groups: AmenityGroup[] = [
     title: "Events & Culture",
     icon: CalendarDays,
     rows: [
-      { label: "Event Space", value: "350 m²" },
       { label: "Occupancy", value: "250 persons" },
     ],
   },
 ];
+
+function AmenityGroupBlock({ title, icon: Icon, rows }: AmenityGroup) {
+  return (
+    <div className="overview-amenities__group">
+      <p className="overview-amenities__group-title">
+        <Icon
+          className="overview-amenities__group-icon"
+          strokeWidth={1.25}
+          aria-hidden
+        />
+        {title}
+      </p>
+
+      <ul className="overview-amenities__rows">
+        {rows.map((row) => (
+          <li key={row.label} className="overview-amenities__row">
+            <span className="overview-amenities__row-main">
+              <span className="overview-amenities__row-label">{row.label}</span>
+              {row.detail ? (
+                <span className="overview-amenities__row-detail">{row.detail}</span>
+              ) : null}
+            </span>
+            {row.value ? (
+              <span className="overview-amenities__row-value">{row.value}</span>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export function OverviewReserveAmenities() {
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
@@ -106,33 +141,16 @@ export function OverviewReserveAmenities() {
             <p className="overview-amenities__label">Amenities &amp; Hotel Information</p>
 
             <div className="overview-amenities__groups">
-              {groups.map(({ id, title, icon: Icon, rows }) => (
-                <div key={id} className="overview-amenities__group">
-                  <p className="overview-amenities__group-title">
-                    <Icon
-                      className="overview-amenities__group-icon"
-                      strokeWidth={1.25}
-                      aria-hidden
-                    />
-                    {title}
-                  </p>
-
-                  <ul className="overview-amenities__rows">
-                    {rows.map((row) => (
-                      <li key={row.label} className="overview-amenities__row">
-                        <span className="overview-amenities__row-label">
-                          {row.label}
-                        </span>
-                        {row.value ? (
-                          <span className="overview-amenities__row-value">
-                            {row.value}
-                          </span>
-                        ) : null}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+              <div className="overview-amenities__col">
+                {leftGroups.map((group) => (
+                  <AmenityGroupBlock key={group.id} {...group} />
+                ))}
+              </div>
+              <div className="overview-amenities__col">
+                {rightGroups.map((group) => (
+                  <AmenityGroupBlock key={group.id} {...group} />
+                ))}
+              </div>
             </div>
 
             <p className="overview-amenities__note">

@@ -9,6 +9,8 @@
   --line: #e8e8e8;
   --accent: #b08d57;
   --reserve: #333333;
+  --reserve-float: #b08d57;
+  --reserve-float-hover: #9a753f;
   --placeholder: #d8d3cb;
   --placeholder-text: #7a746c;
   --header-primary-h: 92px;
@@ -219,13 +221,13 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  min-height: 42px;
-  padding: 0 20px;
+  min-height: 48px;
+  padding: 0 26px;
   border: 0;
-  background: var(--reserve);
+  background: var(--reserve-float);
   color: #fff;
   font-family: var(--sans);
-  font-size: 10.5px;
+  font-size: 11.5px;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -233,11 +235,11 @@ button {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translateY(10px);
+  transform: translateY(14px);
   transition:
-    opacity 0.25s ease,
-    transform 0.25s ease,
-    visibility 0.25s ease,
+    opacity 0.35s ease,
+    transform 0.35s ease,
+    visibility 0.35s ease,
     background 0.2s ease;
 }
 
@@ -249,11 +251,11 @@ button {
 }
 
 .reserve-float:hover {
-  background: #1f1f1f;
+  background: var(--reserve-float-hover);
 }
 
 .reserve-float:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
 
@@ -947,7 +949,15 @@ button {
 .overview-amenities__groups {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(28px, 4vh, 40px) clamp(32px, 4vw, 56px);
+  gap: clamp(32px, 4vw, 56px);
+  align-items: start;
+}
+
+.overview-amenities__col {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 4vh, 40px);
+  min-width: 0;
 }
 
 .overview-amenities__group {
@@ -992,11 +1002,26 @@ button {
   gap: 18px;
 }
 
+.overview-amenities__row-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
 .overview-amenities__row-label {
   color: var(--ink-soft);
   font-family: var(--serif);
   font-size: clamp(0.92rem, 1vw, 1rem);
   line-height: 1.4;
+}
+
+.overview-amenities__row-detail {
+  color: var(--muted);
+  font-family: var(--serif);
+  font-size: clamp(0.82rem, 0.9vw, 0.9rem);
+  font-style: italic;
+  line-height: 1.35;
 }
 
 .overview-amenities__row-value {
@@ -3525,8 +3550,9 @@ body.has-room-lightbox .reserve-float {
 .event-facts__grid {
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(28px, 4vw, 48px);
+  justify-content: center;
 }
 
 .event-facts__item {
@@ -5674,9 +5700,19 @@ body.has-room-lightbox .reserve-float {
   background: var(--placeholder);
 }
 
-.overview-destinations__image {
+.overview-destinations__image,
+.overview-destinations__video {
   object-fit: cover;
   object-position: 50% 48%;
+}
+
+.overview-destinations__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: var(--placeholder);
 }
 
 .overview-destinations__copy,

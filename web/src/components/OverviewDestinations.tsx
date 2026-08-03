@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export function OverviewDestinations() {
@@ -9,12 +8,14 @@ export function OverviewDestinations() {
     >
       <div className="overview-destinations__inner">
         <div className="overview-destinations__media">
-          <Image
-            className="overview-destinations__image"
-            src="/images/experience/destinations/imam-bukhari-1.png"
-            alt="Imam Al-Bukhari Mausoleum complex near HADITH Hotel"
-            fill
-            sizes="(max-width: 820px) 100vw, 58vw"
+          <video
+            className="overview-destinations__video"
+            src="/videos/imam-al-bukhari-complex.mp4"
+            poster="/images/experience/destinations/imam-bukhari-1.png"
+            controls
+            playsInline
+            preload="metadata"
+            aria-label="Imam Al-Bukhari Mausoleum complex near HADITH Hotel"
           />
         </div>
 

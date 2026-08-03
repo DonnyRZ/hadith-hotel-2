@@ -39,7 +39,6 @@ const eventUses: EventUse[] = [
 ];
 
 const venueFacts = [
-  { id: "area", value: "350 m²", label: "Ballroom Area" },
   { id: "capacity", value: "250 Guests", label: "Maximum Capacity" },
   { id: "setups", value: "Flexible", label: "Event Setups" },
   { id: "facilities", value: "Modern", label: "Facilities" },
