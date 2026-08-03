@@ -599,6 +599,7 @@ export function ExperienceGroups() {
 
       <section
         className="experience-active"
+        id="active"
         aria-labelledby="experience-active-heading"
       >
         <div className="experience-active__intro">

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
@@ -15,6 +16,7 @@ type AmenityRow = {
   label: string;
   value?: string;
   detail?: string;
+  href?: string;
 };
 
 type AmenityGroup = {
@@ -31,12 +33,12 @@ const leftGroups: AmenityGroup[] = [
     title: "Accommodation",
     icon: BedDouble,
     rows: [
-      { label: "Rooms & Suites", value: "114" },
-      { label: "Standard Room", value: "62" },
-      { label: "Balcony Room", value: "23" },
-      { label: "Suite", value: "18" },
-      { label: "Junior Suite", value: "9" },
-      { label: "President Suite", value: "2" },
+      { label: "Rooms & Suites", value: "114", href: "/suites-rooms" },
+      { label: "Standard Room", value: "62", href: "/suites-rooms" },
+      { label: "Balcony Room", value: "23", href: "/suites-rooms" },
+      { label: "Suite", value: "18", href: "/suites-rooms" },
+      { label: "Junior Suite", value: "9", href: "/suites-rooms" },
+      { label: "President Suite", value: "2", href: "/suites-rooms" },
     ],
   },
   {
@@ -44,9 +46,13 @@ const leftGroups: AmenityGroup[] = [
     title: "Dining",
     icon: UtensilsCrossed,
     rows: [
-      { label: "Saji Nusantara Restaurant", detail: "Uzbek Cuisine" },
-      { label: "Bar & Lounge" },
-      { label: "7OZ Espresso Cafe" },
+      {
+        label: "Saji Nusantara Restaurant",
+        detail: "Uzbek Cuisine",
+        href: "/cafe-dining",
+      },
+      { label: "Bar & Lounge", href: "/cafe-dining" },
+      { label: "7OZ Espresso Cafe", href: "/cafe-dining" },
     ],
   },
 ];
@@ -57,15 +63,15 @@ const rightGroups: AmenityGroup[] = [
     title: "Wellness & Sport",
     icon: Flower2,
     rows: [
-      { label: "Indoor Pool" },
-      { label: "Spa Center" },
-      { label: "Sauna" },
-      { label: "Turkish Hammam" },
-      { label: "Fitness Centre" },
-      { label: "Beauty Salon" },
-      { label: "Tennis Court" },
-      { label: "Kids’ Playground" },
-      { label: "Padel Court" },
+      { label: "Indoor Pool", href: "/experience" },
+      { label: "Spa Center", href: "/experience" },
+      { label: "Sauna", href: "/experience" },
+      { label: "Turkish Hammam", href: "/experience" },
+      { label: "Fitness Centre", href: "/experience" },
+      { label: "Beauty Salon", href: "/experience" },
+      { label: "Tennis Court", href: "/experience#active" },
+      { label: "Kids’ Playground", href: "/experience#active" },
+      { label: "Padel Court", href: "/experience#active" },
     ],
   },
   {
@@ -73,7 +79,11 @@ const rightGroups: AmenityGroup[] = [
     title: "Events & Culture",
     icon: CalendarDays,
     rows: [
-      { label: "Occupancy", value: "250 persons" },
+      {
+        label: "Occupancy",
+        value: "250 persons",
+        href: "/meetings-weddings",
+      },
     ],
   },
 ];
@@ -94,10 +104,25 @@ function AmenityGroupBlock({ title, icon: Icon, rows }: AmenityGroup) {
         {rows.map((row) => (
           <li key={row.label} className="overview-amenities__row">
             <span className="overview-amenities__row-main">
-              <span className="overview-amenities__row-label">{row.label}</span>
-              {row.detail ? (
-                <span className="overview-amenities__row-detail">{row.detail}</span>
-              ) : null}
+              {row.href ? (
+                <Link href={row.href} className="overview-amenities__row-link">
+                  <span className="overview-amenities__row-label">{row.label}</span>
+                  {row.detail ? (
+                    <span className="overview-amenities__row-detail">
+                      {row.detail}
+                    </span>
+                  ) : null}
+                </Link>
+              ) : (
+                <>
+                  <span className="overview-amenities__row-label">{row.label}</span>
+                  {row.detail ? (
+                    <span className="overview-amenities__row-detail">
+                      {row.detail}
+                    </span>
+                  ) : null}
+                </>
+              )}
             </span>
             {row.value ? (
               <span className="overview-amenities__row-value">{row.value}</span>
