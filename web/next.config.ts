@@ -3,14 +3,10 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: "standalone",
   images: {
-    // Prefer URL versioning (asset()) for busting; keep optimizer cache short as backup.
+    loader: "custom",
+    loaderFile: "./src/lib/imageLoader.ts",
+    // Prefer URL versioning for busting; keep optimizer cache short as backup.
     minimumCacheTTL: 60,
-    localPatterns: [
-      { pathname: "/images/**", search: "" },
-      { pathname: "/images/**", search: "?v=*" },
-      { pathname: "/videos/**", search: "" },
-      { pathname: "/videos/**", search: "?v=*" },
-    ],
   },
   async headers() {
     return [
