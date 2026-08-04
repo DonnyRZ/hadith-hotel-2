@@ -67,7 +67,7 @@ type DestinationJourney = {
   eyebrow: string;
   title: string;
   description: string;
-  destinations: Array<{ name: string; distance: string }>;
+  destinations: Array<{ name: string; detail: string }>;
   highlights: string[];
   slides: DestinationSlide[];
 };
@@ -80,8 +80,11 @@ const destinationJourneys: DestinationJourney[] = [
     description:
       "Visit the resting place of Imam Muhammad Al-Bukhari, then continue into a centre dedicated to scholarship, manuscripts, research, and international exchange.",
     destinations: [
-      { name: "Imam Al-Bukhari Mausoleum", distance: "0.9 km" },
-      { name: "Imam Bukhari International Centre", distance: "0.9 km" },
+      { name: "Imam Al-Bukhari Mausoleum", detail: "0.9 km from the hotel" },
+      {
+        name: "Imam Bukhari International Centre",
+        detail: "0.9 km from the hotel",
+      },
     ],
     highlights: [
       "Spiritual pilgrimage",
@@ -118,42 +121,44 @@ const destinationJourneys: DestinationJourney[] = [
     ],
   },
   {
-    id: "timurid-samarkand",
-    eyebrow: "A half-day journey · approximately 16.5–16.6 km",
-    title: "Timurid Samarkand",
+    id: "registan-square",
+    eyebrow: "A half-day journey · approximately 17.2 km",
+    title: "Registan Square",
     description:
-      "Walk through Shah-i-Zinda's avenue of mausoleums and discover the monumental scale of Bibi-Khanym Mosque—two landmarks shaped by Samarkand's Timurid heritage.",
+      "Step into the heart of Samarkand at Registan Square, where three monumental madrasas create one of Central Asia's most iconic architectural ensembles. Discover grand portals, intricate blue tilework, and centuries of Silk Road history.",
     destinations: [
-      { name: "Shah-i-Zinda", distance: "16.5 km" },
-      { name: "Bibi-Khanym Mosque", distance: "16.6 km" },
+      { name: "Registan Square", detail: "17.2 km from the hotel" },
+      {
+        name: "Ulugh Beg, Sher-Dor & Tilla-Kori Madrasas",
+        detail: "Within the complex",
+      },
     ],
-    highlights: ["Timurid architecture", "Blue tilework", "Historic Samarkand"],
+    highlights: [
+      "Islamic architecture",
+      "Blue tilework",
+      "Silk Road heritage",
+    ],
     slides: [
       {
-        id: "samarkand-1",
-        src: "/images/experience/destinations/samarkand-1.jpg",
-        alt: "Monumental Islamic architecture in historic Samarkand",
+        id: "registan-video",
+        src: "/images/experience/destinations/registan-poster.jpg",
+        video: "/videos/registan-square.mp4",
+        alt: "Video tour of Registan Square in Samarkand",
       },
       {
-        id: "samarkand-2",
-        src: "/images/experience/destinations/samarkand-2.jpg",
-        alt: "Illuminated historic monument in Samarkand",
+        id: "registan-1",
+        src: "/images/experience/destinations/registan-1.png",
+        alt: "Registan Square at sunset with Tilla-Kori and Sher-Dor Madrasas",
       },
       {
-        id: "samarkand-3",
-        src: "/images/experience/destinations/samarkand-3.jpg",
-        alt: "Detailed blue tilework along the Shah-i-Zinda ensemble",
-        position: "50% 58%",
+        id: "registan-2",
+        src: "/images/experience/destinations/registan-2.png",
+        alt: "Registan Square courtyard framed by three Timurid madrasas",
       },
       {
-        id: "samarkand-4",
-        src: "/images/experience/destinations/samarkand-4.jpg",
-        alt: "Historic domes and monumental architecture in Samarkand",
-      },
-      {
-        id: "samarkand-5",
-        src: "/images/experience/destinations/samarkand-5.jpg",
-        alt: "Panoramic view of a historic landmark in Samarkand",
+        id: "registan-3",
+        src: "/images/experience/destinations/registan-3.png",
+        alt: "Grand portal and blue tilework at Registan Square",
       },
     ],
   },
@@ -449,17 +454,29 @@ function DestinationCarousel({
               aria-hidden={!isActive}
             >
               {slide.video ? (
-                <video
-                  ref={(node) => {
-                    videoRefs.current[slide.id] = node;
-                  }}
-                  className="destination-carousel__video"
-                  src={slide.video}
-                  controls={isActive}
-                  playsInline
-                  preload="auto"
-                  aria-label={slide.alt}
-                />
+                isActive ? (
+                  <video
+                    ref={(node) => {
+                      videoRefs.current[slide.id] = node;
+                    }}
+                    className="destination-carousel__video"
+                    src={slide.video}
+                    poster={slide.src}
+                    controls
+                    playsInline
+                    preload="metadata"
+                    aria-label={slide.alt}
+                  />
+                ) : (
+                  <Image
+                    className="destination-carousel__image"
+                    src={slide.src}
+                    alt=""
+                    fill
+                    sizes="(max-width: 920px) 100vw, 58vw"
+                    style={{ objectPosition: slide.position ?? "50% 50%" }}
+                  />
+                )
               ) : (
                 <Image
                   className="destination-carousel__image"
@@ -529,9 +546,9 @@ function DestinationsSection() {
           Explore Samarkand
         </h2>
         <p className="experience-group__lede">
-          From the spiritual heart of the Imam Al-Bukhari complex to the
-          monumental architecture of historic Samarkand, discover two journeys
-          shaped around the hotel&apos;s setting.
+          From the spiritual heart of the Imam Al-Bukhari complex to Registan
+          Square in historic Samarkand, discover two journeys shaped around the
+          hotel&apos;s setting.
         </p>
       </div>
 
@@ -554,7 +571,7 @@ function DestinationsSection() {
                 {journey.destinations.map((destination) => (
                   <div key={destination.name} className="destination-journey__place">
                     <dt>{destination.name}</dt>
-                    <dd>{destination.distance} from the hotel</dd>
+                    <dd>{destination.detail}</dd>
                   </div>
                 ))}
               </dl>

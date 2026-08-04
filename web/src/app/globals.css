@@ -5705,9 +5705,13 @@ body.has-room-lightbox .reserve-float {
   width: min(1080px, 100%);
   margin-inline: auto;
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.85fr);
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.9fr);
   gap: clamp(40px, 5vw, 76px);
-  align-items: center;
+  align-items: start;
+}
+
+.overview-destinations__media-col {
+  min-width: 0;
 }
 
 .overview-destinations__media {
@@ -5731,35 +5735,100 @@ body.has-room-lightbox .reserve-float {
   width: 100%;
   height: 100%;
   display: block;
-  background: var(--placeholder);
+  background: #111;
+}
+
+.overview-destinations__controls {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: auto minmax(90px, 1fr) auto auto;
+  gap: clamp(14px, 2vw, 24px);
+  align-items: center;
+}
+
+.overview-destinations__nav {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.overview-destinations__nav:hover {
+  color: var(--accent);
+}
+
+.overview-destinations__progress {
+  height: 1px;
+  overflow: hidden;
+  background: #cbc8c1;
+}
+
+.overview-destinations__progress span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.35s ease;
+}
+
+.overview-destinations__counter {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.14em;
 }
 
 .overview-destinations__copy,
 .overview-destinations__row.is-reversed .overview-destinations__copy {
-  max-width: 420px;
+  max-width: 440px;
   order: initial;
+  padding-top: 4px;
 }
 
 .overview-destinations__eyebrow {
   color: var(--accent);
 }
 
+.overview-destinations__journey {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
 .overview-destinations__heading {
-  margin-top: 18px;
+  margin-top: 14px;
   font-weight: 500;
   letter-spacing: 0;
 }
 
 .overview-destinations__body {
-  margin-top: 24px;
+  margin-top: 20px;
   max-width: none;
   font-size: clamp(1rem, 1.08vw, 1.1rem);
   line-height: 1.72;
 }
 
+.overview-destinations__copy .destination-journey__places {
+  margin-top: 26px;
+}
+
+.overview-destinations__copy .destination-journey__highlights {
+  margin-top: 20px;
+}
+
 .overview-destinations__explore {
   width: fit-content;
-  margin-top: 30px;
+  margin-top: 28px;
   display: inline-flex;
   gap: 12px;
   align-items: center;
@@ -6047,6 +6116,16 @@ body.has-room-lightbox .reserve-float {
   .destination-carousel__controls {
     grid-template-columns: auto 1fr auto;
     gap: 12px;
+  }
+
+  .overview-destinations__controls {
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+  }
+
+  .overview-destinations__counter {
+    grid-column: 1 / -1;
+    text-align: right;
   }
 
   .destination-carousel__counter {
