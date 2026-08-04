@@ -5,6 +5,12 @@ const nextConfig: NextConfig = {
   images: {
     // Prefer URL versioning (asset()) for busting; keep optimizer cache short as backup.
     minimumCacheTTL: 60,
+    localPatterns: [
+      { pathname: "/images/**", search: "" },
+      { pathname: "/images/**", search: "?v=*" },
+      { pathname: "/videos/**", search: "" },
+      { pathname: "/videos/**", search: "?v=*" },
+    ],
   },
   async headers() {
     return [
