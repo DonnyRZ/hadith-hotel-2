@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { VisitorTracker } from "@/components/VisitorTracker";
+import { asset } from "@/lib/asset";
 import "./globals.css";
 
 const display = Cormorant_Garamond({
@@ -33,9 +34,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const decorArches = `url("${asset("/images/decor/architectural-arches.svg")}")`;
+
   return (
     <html lang="en" className={`${display.variable} ${sans.variable} h-full`}>
-      <body className="min-h-full antialiased">
+      <body
+        className="min-h-full antialiased"
+        style={{ ["--decor-arches" as never]: decorArches }}
+      >
         <VisitorTracker />
         <SiteHeader />
         {children}

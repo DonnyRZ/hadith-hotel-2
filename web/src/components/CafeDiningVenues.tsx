@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import SiteImage from "@/components/SiteImage";
 import { useState } from "react";
 
 type GallerySlide = { src: string; label: string };
@@ -87,7 +87,7 @@ function VenueMediaCarousel({ venue }: { venue: Venue }) {
         role="img"
         aria-label={slide.label}
       >
-        <Image
+        <SiteImage
           className="venue-carousel__image"
           src={slide.src}
           alt=""

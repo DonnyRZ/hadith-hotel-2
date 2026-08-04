@@ -881,7 +881,7 @@ button {
   z-index: 0;
   width: min(88%, 520px);
   aspect-ratio: 1;
-  background: url("/images/decor/architectural-arches.svg") left bottom / contain no-repeat;
+  background: var(--decor-arches) left bottom / contain no-repeat;
   opacity: 0.16;
   pointer-events: none;
 }

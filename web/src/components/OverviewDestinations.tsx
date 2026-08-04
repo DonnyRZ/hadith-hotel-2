@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { asset } from "@/lib/asset";
 
 type OverviewDestinationSlide = {
   id: string;
@@ -92,8 +93,8 @@ export function OverviewDestinations() {
               key={slide.id}
               ref={videoRef}
               className="overview-destinations__video"
-              src={slide.video}
-              poster={slide.poster}
+              src={asset(slide.video)}
+              poster={asset(slide.poster)}
               controls
               playsInline
               preload="metadata"

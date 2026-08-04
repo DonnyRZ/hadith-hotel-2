@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import SiteImage from "@/components/SiteImage";
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import type { RoomType } from "@/lib/rooms";
@@ -133,7 +133,7 @@ export function RoomDetailModal({ room, onClose }: RoomDetailModalProps) {
                 role="img"
                 aria-label={`${room.name} photo ${photo + 1}`}
               >
-                <Image
+                <SiteImage
                   className="room-detail__image"
                   src={currentSrc}
                   alt=""

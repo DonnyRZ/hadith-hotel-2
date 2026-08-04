@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import SiteImage from "@/components/SiteImage";
 import { useState } from "react";
 import { ComingSoonModal } from "@/components/ComingSoonModal";
 import { RoomDetailModal } from "@/components/RoomDetailModal";
@@ -35,7 +35,7 @@ function RoomCard({
         aria-label={comingSoon ? `${room.name} — soonest` : `View ${room.name} details`}
         onClick={onViewDetails}
       >
-        <Image
+        <SiteImage
           className="room-card__image"
           src={roomImages[room.id] ?? BALCONY_SRC}
           alt=""

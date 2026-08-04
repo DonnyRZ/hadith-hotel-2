@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import SiteImage from "@/components/SiteImage";
 import { useCallback, useEffect, useState } from "react";
 import { ComingSoonModal } from "@/components/ComingSoonModal";
 import {
@@ -67,7 +67,7 @@ export function OverviewFarewell() {
       >
         <div className="overview-farewell__visual">
           <div className="overview-farewell__photo">
-            <Image
+            <SiteImage
               className="overview-farewell__image"
               src="/images/overview-features/starry-night.webp"
               alt="HADITH Hotel beneath a starry night sky"

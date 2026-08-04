@@ -1,6 +1,7 @@
 "use client";
 
-import Image from "next/image";
+import SiteImage from "@/components/SiteImage";
+import { asset } from "@/lib/asset";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type WellnessSlide = {
@@ -174,7 +175,7 @@ function WellnessMedia({
   return (
     <div className="overview-features__media">
       {slide.src ? (
-        <Image
+        <SiteImage
           className="overview-features__image"
           src={slide.src}
           alt={slide.title}
@@ -205,7 +206,7 @@ function ActiveFamilyMedia({
     <div
       className={`overview-rooms__media${featured ? " overview-rooms__media--featured" : ""}`}
     >
-      <Image
+      <SiteImage
         className="overview-rooms__image"
         src={item.src}
         alt={item.name}
@@ -460,15 +461,15 @@ function DestinationCarousel({
                       videoRefs.current[slide.id] = node;
                     }}
                     className="destination-carousel__video"
-                    src={slide.video}
-                    poster={slide.src}
+                    src={asset(slide.video)}
+                    poster={asset(slide.src)}
                     controls
                     playsInline
                     preload="metadata"
                     aria-label={slide.alt}
                   />
                 ) : (
-                  <Image
+                  <SiteImage
                     className="destination-carousel__image"
                     src={slide.src}
                     alt=""
@@ -478,7 +479,7 @@ function DestinationCarousel({
                   />
                 )
               ) : (
-                <Image
+                <SiteImage
                   className="destination-carousel__image"
                   src={slide.src}
                   alt={isActive ? slide.alt : ""}

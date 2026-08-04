@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import SiteImage from "@/components/SiteImage";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -101,7 +101,7 @@ export function SiteHeader() {
           <div className="site-header__primary-inner">
             <div className="site-header__brand-row">
               <Link href="/" className="site-logo" aria-label="HADITH Hotel home">
-                <Image
+                <SiteImage
                   src="/images/logo-hadith-2.png"
                   alt="Hadits Hotel — Complex of Imam Al Bukhari"
                   width={280}

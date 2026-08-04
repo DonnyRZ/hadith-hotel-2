@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import SiteImage from "@/components/SiteImage";
 import Link from "next/link";
 import { useCallback, useState } from "react";
 
@@ -45,7 +45,7 @@ function FeatureMedia({
 }) {
   return (
     <div className="overview-features__media">
-      <Image
+      <SiteImage
         className="overview-features__image"
         src={slide.src}
         alt={slide.title}

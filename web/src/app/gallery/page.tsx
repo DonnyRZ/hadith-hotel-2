@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import SiteImage from "@/components/SiteImage";
 import { useEffect, useState } from "react";
 
 type GalleryImage = {
@@ -127,7 +127,7 @@ function GalleryLightbox({
           ×
         </button>
         <div className="gallery-lightbox__media">
-          <Image src={image.src} alt={image.alt} fill sizes="100vw" priority />
+          <SiteImage src={image.src} alt={image.alt} fill sizes="100vw" priority />
         </div>
         <p className="gallery-lightbox__caption">{image.alt}</p>
       </div>
@@ -158,7 +158,7 @@ export default function GalleryPage() {
             onClick={() => setSelectedImage(image)}
             aria-label={`View ${image.alt}`}
           >
-            <Image
+            <SiteImage
               className="gallery-grid__image"
               src={image.src}
               alt={image.alt}

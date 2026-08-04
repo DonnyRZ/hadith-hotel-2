@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import Image from "next/image";
+import SiteImage from "@/components/SiteImage";
 import Link from "next/link";
 
 type GallerySlide = {
@@ -95,7 +95,7 @@ function GalleryMedia({
         .filter(Boolean)
         .join(" ")}
     >
-      <Image
+      <SiteImage
         className="overview-rooms__image"
         src={slide.src}
         alt={slide.alt}

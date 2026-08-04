@@ -1,4 +1,4 @@
-import Image from "next/image";
+import SiteImage from "@/components/SiteImage";
 import type { CSSProperties } from "react";
 
 export type HeroMediaSlide = {
@@ -34,7 +34,7 @@ export function HeroMedia({
       aria-label={slide.label}
       style={positionStyle}
     >
-      <Image
+      <SiteImage
         className="hero-media__image hero-media__image--desktop"
         src={slide.src}
         alt=""
@@ -46,7 +46,7 @@ export function HeroMedia({
       />
 
       {slide.mobileSrc ? (
-        <Image
+        <SiteImage
           className="hero-media__image hero-media__image--mobile"
           src={slide.mobileSrc}
           alt=""

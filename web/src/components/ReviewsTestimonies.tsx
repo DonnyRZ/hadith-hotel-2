@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import Image from "next/image";
+import SiteImage from "@/components/SiteImage";
+import { asset } from "@/lib/asset";
 
 type VideoReview = {
   id: string;
@@ -239,8 +240,8 @@ function ReviewLightbox({
         <video
           ref={videoRef}
           className="review-lightbox__player"
-          src={review.src}
-          poster={review.poster}
+          src={asset(review.src)}
+          poster={asset(review.poster)}
           controls
           autoPlay
           playsInline
@@ -257,8 +258,8 @@ function ShowcaseVideo() {
     <div className="video-showcase__frame">
       <video
         className="video-showcase__player"
-        src="/videos/conference-hadith.mp4"
-        poster="/videos/conference-hadith-poster.jpg"
+        src={asset("/videos/conference-hadith.mp4")}
+        poster={asset("/videos/conference-hadith-poster.jpg")}
         controls
         playsInline
         preload="metadata"
@@ -458,7 +459,7 @@ function VideoReviewsCarousel() {
                 aria-label={`Play review by ${review.name}`}
                 onClick={() => openReview(review)}
               >
-                <Image
+                <SiteImage
                   className="video-reviews__poster"
                   src={review.poster}
                   alt=""
@@ -611,7 +612,7 @@ function TestimonialsCarousel() {
                 <figcaption className="testimonial-card__person">
                   <div className="testimonial-card__photo">
                     {item.photo ? (
-                      <Image
+                      <SiteImage
                         className="testimonial-card__portrait"
                         src={item.photo}
                         alt={item.name}
@@ -674,8 +675,8 @@ export function ReviewsTestimonies() {
         <article className="video-reviews__landscape">
           <video
             className="video-reviews__landscape-player"
-            src={landscapeReview.src}
-            poster={landscapeReview.poster}
+            src={asset(landscapeReview.src)}
+            poster={asset(landscapeReview.poster)}
             controls
             playsInline
             preload="metadata"
