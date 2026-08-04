@@ -22,7 +22,7 @@ const slides: FeatureSlide[] = [
     id: "cafe-dining",
     title: "Cafe & Dining",
     href: "/cafe-dining",
-    src: "/images/overview-features/cafe-dining.webp",
+    src: "/images/cafe-dining/cafe-1.webp",
   },
   {
     id: "experience",

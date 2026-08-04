@@ -81,9 +81,9 @@ const galleryImages: GalleryImage[] = [
     alt: "Children's playground at HADITH Hotel",
   },
   {
-    id: "cafe-lounge",
-    src: "/images/cafe-dining/cafe-3.webp",
-    alt: "Cafe lounge with grand piano at HADITH Hotel",
+    id: "cafe-bar",
+    src: "/images/cafe-dining/cafe-2.webp",
+    alt: "7OZ coffee bar at HADITH Hotel",
   },
 ];
 

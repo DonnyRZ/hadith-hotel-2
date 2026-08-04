@@ -63,10 +63,6 @@ const venues: Venue[] = [
         src: "/images/cafe-dining/cafe-2.webp",
         label: "7OZ coffee bar",
       },
-      {
-        src: "/images/cafe-dining/cafe-3.webp",
-        label: "7OZ lounge with grand piano",
-      },
     ],
   },
 ];
