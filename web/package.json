@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/write-asset-rev.mjs && next build",
+    "build": "next build",
+    "prebuild": "node scripts/write-asset-rev.mjs",
     "start": "next start",
     "lint": "eslint",
     "test:metrics": "node tests/metrics.integration.mjs",

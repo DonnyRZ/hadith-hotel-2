@@ -1,6 +1,8 @@
+import { ASSET_REV } from "@/generated/asset-rev";
+
 /**
- * Cache-bust public static URLs. NEXT_PUBLIC_ASSET_REV is a content hash of
- * `public/` written at build time — browsers refetch only after assets change.
+ * Cache-bust public static URLs. ASSET_REV is a content hash of `public/`
+ * written at build time — browsers refetch after assets change.
  */
 export function asset(path: string): string {
   if (
@@ -13,9 +15,8 @@ export function asset(path: string): string {
     return path;
   }
 
-  const rev = process.env.NEXT_PUBLIC_ASSET_REV;
-  if (!rev) return path;
+  if (!ASSET_REV) return path;
 
   const sep = path.includes("?") ? "&" : "?";
-  return `${path}${sep}v=${rev}`;
+  return `${path}${sep}v=${ASSET_REV}`;
 }
