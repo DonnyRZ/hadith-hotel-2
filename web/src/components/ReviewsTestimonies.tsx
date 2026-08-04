@@ -14,10 +14,10 @@ type VideoReview = {
 
 type Testimonial = {
   id: string;
-  quote: string;
+  quote?: string;
   name: string;
   role: string;
-  photo: string;
+  photo?: string;
   /** Keeps the face in frame once the 3:4 portrait crop kicks in. */
   photoPosition?: string;
 };
@@ -50,6 +50,13 @@ const videoReviews: VideoReview[] = [
     role: "Minister of Religious Affairs, Malaysia",
     src: "/videos/dr-zulkifli-hasan.mp4",
     poster: "/videos/dr-zulkifli-hasan-poster.jpg",
+  },
+  {
+    id: "talgat-safich-tadzetdinov",
+    name: "Talgat Safich Tadzetdinov (Tajuddin)",
+    role: "Grand Mufti and Head of the Central Spiritual Administration of Muslims of Russia",
+    src: "/videos/talgat-safich-tadzetdinov.mp4",
+    poster: "/videos/talgat-safich-tadzetdinov-poster.jpg",
   },
 ];
 
@@ -105,6 +112,11 @@ const testimonials: Testimonial[] = [
     role: "Minister of Religious Affairs, Malaysia",
     photo: "/images/testimonials/dr-zulkifli-hasan.webp",
     photoPosition: "50% 28%",
+  },
+  {
+    id: "talgat-safich-tadzetdinov",
+    name: "Talgat Safich Tadzetdinov (Tajuddin)",
+    role: "Grand Mufti and Head of the Central Spiritual Administration of Muslims of Russia",
   },
 ];
 
@@ -498,31 +510,71 @@ function VideoReviewsCarousel() {
 
 function TestimonialsCarousel() {
   const count = testimonials.length;
-  const [index, setIndex] = useState(0);
   const [perView, setPerView] = useState(2);
+  const [index, setIndex] = useState(count);
+  const [animate, setAnimate] = useState(true);
 
   useEffect(() => {
     const query = window.matchMedia("(max-width: 760px)");
-    const update = () => setPerView(query.matches ? 1 : 2);
+    const update = () => {
+      const nextPerView = query.matches ? 1 : 2;
+      setPerView(nextPerView);
+      setAnimate(false);
+      setIndex(count);
+    };
 
     update();
     query.addEventListener("change", update);
     return () => query.removeEventListener("change", update);
-  }, []);
+  }, [count]);
 
-  const maxIndex = Math.max(0, count - perView);
-  const visibleIndex = Math.min(index, maxIndex);
+  useEffect(() => {
+    if (animate) return;
+    const id = window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => setAnimate(true));
+    });
+    return () => window.cancelAnimationFrame(id);
+  }, [animate, index]);
 
-  const goPrevious = () =>
-    setIndex((current) => {
-      const safeIndex = Math.min(current, maxIndex);
-      return safeIndex <= 0 ? maxIndex : safeIndex - 1;
-    });
-  const goNext = () =>
-    setIndex((current) => {
-      const safeIndex = Math.min(current, maxIndex);
-      return safeIndex >= maxIndex ? 0 : safeIndex + 1;
-    });
+  // Triple buffer so (5,1) is a real adjacent pair and Next keeps moving forward.
+  const loopSlides = useMemo(
+    () =>
+      Array.from({ length: 3 }, (_, copy) =>
+        testimonials.map((item) => ({
+          item,
+          key: `${copy}-${item.id}`,
+        })),
+      ).flat(),
+    [],
+  );
+
+  const goPrevious = () => {
+    setAnimate(true);
+    setIndex((current) => current - 1);
+  };
+
+  const goNext = () => {
+    setAnimate(true);
+    setIndex((current) => current + 1);
+  };
+
+  const handleTransitionEnd = (
+    event: React.TransitionEvent<HTMLDivElement>,
+  ) => {
+    if (event.target !== event.currentTarget) return;
+    if (event.propertyName !== "transform") return;
+
+    if (index >= 2 * count) {
+      setAnimate(false);
+      setIndex(index - count);
+      return;
+    }
+
+    if (index < count) {
+      setAnimate(false);
+      setIndex(index + count);
+    }
+  };
 
   return (
     <div
@@ -533,39 +585,55 @@ function TestimonialsCarousel() {
     >
       <div className="testimonials__viewport">
         <div
-          className="testimonials__track"
-          style={{ "--i": visibleIndex } as React.CSSProperties}
+          className={`testimonials__track${animate ? "" : " is-instant"}`}
+          style={{ "--i": index } as React.CSSProperties}
+          onTransitionEnd={handleTransitionEnd}
         >
-          {testimonials.map((testimonial, i) => (
-            <figure
-              key={testimonial.id}
-              className="testimonial-card"
-              aria-hidden={i < visibleIndex || i >= visibleIndex + perView}
-            >
-              <div className="testimonial-card__content">
-                <span className="testimonial-card__mark" aria-hidden="true">
-                  “
-                </span>
-                <blockquote className="testimonial-card__quote">
-                  {testimonial.quote}
-                </blockquote>
-              </div>
-              <figcaption className="testimonial-card__person">
-                <div className="testimonial-card__photo">
-                  <Image
-                    className="testimonial-card__portrait"
-                    src={testimonial.photo}
-                    alt={testimonial.name}
-                    fill
-                    sizes="(max-width: 760px) 60vw, 260px"
-                    style={{ objectPosition: testimonial.photoPosition }}
-                  />
+          {loopSlides.map(({ item, key }, i) => {
+            const isVisible = i >= index && i < index + perView;
+
+            return (
+              <figure
+                key={key}
+                className="testimonial-card"
+                aria-hidden={!isVisible}
+              >
+                <div className="testimonial-card__content">
+                  <span className="testimonial-card__mark" aria-hidden="true">
+                    “
+                  </span>
+                  <blockquote
+                    className={`testimonial-card__quote${item.quote ? "" : " is-placeholder"}`}
+                  >
+                    {item.quote ?? "Guest quote coming soon."}
+                  </blockquote>
                 </div>
-                <p className="testimonial-card__name">{testimonial.name}</p>
-                <p className="testimonial-card__role">{testimonial.role}</p>
-              </figcaption>
-            </figure>
-          ))}
+                <figcaption className="testimonial-card__person">
+                  <div className="testimonial-card__photo">
+                    {item.photo ? (
+                      <Image
+                        className="testimonial-card__portrait"
+                        src={item.photo}
+                        alt={item.name}
+                        fill
+                        sizes="(max-width: 760px) 42vw, 180px"
+                        style={{ objectPosition: item.photoPosition }}
+                      />
+                    ) : (
+                      <div
+                        className="media-placeholder testimonial-card__photo-placeholder"
+                        aria-hidden="true"
+                      >
+                        Photo
+                      </div>
+                    )}
+                  </div>
+                  <p className="testimonial-card__name">{item.name}</p>
+                  <p className="testimonial-card__role">{item.role}</p>
+                </figcaption>
+              </figure>
+            );
+          })}
         </div>
       </div>
 
