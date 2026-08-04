@@ -446,8 +446,27 @@ function DestinationCarousel({
     slides.forEach((slide, slideIndex) => {
       const video = videoRefs.current[slide.id];
       if (!video) return;
-      if (slideIndex === index) return;
-      video.pause();
+      if (slideIndex !== index) {
+        video.pause();
+        return;
+      }
+
+      const paintFirstFrame = () => {
+        const onSeeked = () => {
+          video.pause();
+          video.removeEventListener("seeked", onSeeked);
+        };
+        video.pause();
+        video.addEventListener("seeked", onSeeked);
+        try {
+          video.currentTime = video.currentTime >= 0.05 ? 0 : 0.05;
+        } catch {
+          video.removeEventListener("seeked", onSeeked);
+        }
+      };
+
+      if (video.readyState >= 2) paintFirstFrame();
+      else video.addEventListener("loadeddata", paintFirstFrame, { once: true });
     });
   }, [index, slides]);
 
@@ -476,7 +495,6 @@ function DestinationCarousel({
                     }}
                     className="destination-carousel__video"
                     src={asset(slide.video)}
-                    poster={asset(slide.src)}
                     controls
                     playsInline
                     preload="metadata"

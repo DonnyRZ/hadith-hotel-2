@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { asset } from "@/lib/asset";
+import { useVideoFirstFrame } from "@/lib/useVideoFirstFrame";
 
 type OverviewDestinationSlide = {
   id: string;
@@ -10,7 +11,6 @@ type OverviewDestinationSlide = {
   title: string;
   description: string;
   video: string;
-  poster: string;
   videoLabel: string;
   facts: Array<{ label: string; detail: string; mapsUrl: string }>;
   tags: string[];
@@ -24,7 +24,6 @@ const slides: OverviewDestinationSlide[] = [
     description:
       "Visit the resting place of Imam Muhammad Al-Bukhari, then continue into a centre dedicated to scholarship, manuscripts, research, and international exchange.",
     video: "/videos/imam-al-bukhari-complex.mp4",
-    poster: "/images/experience/destinations/imam-bukhari-1.png",
     videoLabel: "Imam Al-Bukhari Mausoleum complex near HADITH Hotel",
     facts: [
       {
@@ -53,7 +52,6 @@ const slides: OverviewDestinationSlide[] = [
     description:
       "Step into the heart of Samarkand at Registan Square, where three monumental madrasas create one of Central Asia's most iconic architectural ensembles. Discover grand portals, intricate blue tilework, and centuries of Silk Road history.",
     video: "/videos/registan-square.mp4",
-    poster: "/images/experience/destinations/registan-poster.jpg",
     videoLabel: "Video tour of Registan Square in Samarkand",
     facts: [
       {
@@ -88,12 +86,7 @@ export function OverviewDestinations() {
     setIndex((current) => (current - 1 + count) % count);
   const goNext = () => setIndex((current) => (current + 1) % count);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    video.pause();
-    video.currentTime = 0;
-  }, [index]);
+  useVideoFirstFrame(videoRef, slide.id);
 
   return (
     <section
@@ -108,7 +101,6 @@ export function OverviewDestinations() {
               ref={videoRef}
               className="overview-destinations__video"
               src={asset(slide.video)}
-              poster={asset(slide.poster)}
               controls
               playsInline
               preload="metadata"
