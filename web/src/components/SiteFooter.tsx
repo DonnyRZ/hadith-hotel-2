@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Instagram } from "lucide-react";
 import { navItems } from "@/lib/navigation";
 
 const addressLines = [
@@ -8,6 +7,31 @@ const addressLines = [
 ];
 
 const INSTAGRAM_URL = "https://www.instagram.com/hadithhotel/";
+
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      width="14"
+      height="14"
+      fill="none"
+      aria-hidden="true"
+    >
+      <rect
+        x="3.5"
+        y="3.5"
+        width="17"
+        height="17"
+        rx="5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="17.2" cy="6.8" r="1" fill="currentColor" />
+    </svg>
+  );
+}
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -37,11 +61,7 @@ export function SiteFooter() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Instagram
-                className="site-footer__instagram-icon"
-                strokeWidth={1.5}
-                aria-hidden
-              />
+              <InstagramIcon className="site-footer__instagram-icon" />
               Instagram
             </a>
           </div>
