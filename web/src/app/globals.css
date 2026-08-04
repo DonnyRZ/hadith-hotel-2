@@ -4522,9 +4522,16 @@ body.has-room-lightbox .reserve-float {
   line-height: 1.65;
 }
 
+.site-footer__contacts {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
 .site-footer__email {
   display: inline-block;
-  margin-top: 18px;
   color: #fff;
   font-family: var(--sans);
   font-size: 11px;
@@ -4538,6 +4545,31 @@ body.has-room-lightbox .reserve-float {
 .site-footer__email:hover {
   color: var(--accent);
   border-bottom-color: var(--accent);
+}
+
+.site-footer__instagram {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  padding-bottom: 2px;
+}
+
+.site-footer__instagram:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.site-footer__instagram-icon {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
 }
 
 .site-footer__nav {

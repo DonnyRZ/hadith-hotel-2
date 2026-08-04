@@ -1,10 +1,13 @@
 import Link from "next/link";
+import { Instagram } from "lucide-react";
 import { navItems } from "@/lib/navigation";
 
 const addressLines = [
   "RW5X+9P, Xo\u2018ja Ismoil,",
   "Samarqand viloyati, Uzbekistan",
 ];
+
+const INSTAGRAM_URL = "https://www.instagram.com/hadithhotel/";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -24,9 +27,24 @@ export function SiteFooter() {
             ))}
           </address>
 
-          <a className="site-footer__email" href="mailto:info@hadith-hotel.com">
-            info@hadith-hotel.com
-          </a>
+          <div className="site-footer__contacts">
+            <a className="site-footer__email" href="mailto:info@hadith-hotel.com">
+              info@hadith-hotel.com
+            </a>
+            <a
+              className="site-footer__instagram"
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Instagram
+                className="site-footer__instagram-icon"
+                strokeWidth={1.5}
+                aria-hidden
+              />
+              Instagram
+            </a>
+          </div>
         </div>
 
         <nav className="site-footer__nav" aria-label="Footer">
