@@ -116,8 +116,12 @@ const testimonials: Testimonial[] = [
   },
   {
     id: "talgat-safich-tadzetdinov",
+    quote:
+      "This hotel is the pride of all Muslims in the world, and above all, the people of Uzbekistan.",
     name: "Talgat Safich Tadzetdinov (Tajuddin)",
     role: "Grand Mufti and Head of the Central Spiritual Administration of Muslims of Russia",
+    photo: "/images/testimonials/talgat-safich-tadzetdinov.webp",
+    photoPosition: "50% 18%",
   },
 ];
 
