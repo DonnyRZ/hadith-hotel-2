@@ -3,10 +3,14 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: "standalone",
   images: {
-    loader: "custom",
-    loaderFile: "./src/lib/imageLoader.ts",
-    // Prefer URL versioning for busting; keep optimizer cache short as backup.
+    // Cache-bust via ?v= on public URLs (SiteImage uses unoptimized for local paths).
     minimumCacheTTL: 60,
+    localPatterns: [
+      { pathname: "/images/**", search: "" },
+      { pathname: "/images/**", search: "?v=*" },
+      { pathname: "/videos/**", search: "" },
+      { pathname: "/videos/**", search: "?v=*" },
+    ],
   },
   async headers() {
     return [
