@@ -6033,8 +6033,9 @@ body.has-room-lightbox .reserve-float {
 .destination-journey__place {
   padding: 16px 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 20px;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 16px 18px;
+  align-items: center;
   border-bottom: 1px solid #d4d1ca;
 }
 
@@ -6046,7 +6047,7 @@ body.has-room-lightbox .reserve-float {
 }
 
 .destination-journey__place dd {
-  margin: 2px 0 0;
+  margin: 0;
   color: var(--muted);
   font-family: var(--sans);
   font-size: 9px;
@@ -6055,6 +6056,69 @@ body.has-room-lightbox .reserve-float {
   line-height: 1.45;
   text-align: right;
   text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.destination-journey__maps {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px 8px 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, #d4d1ca);
+  border-radius: 999px;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--accent) 12%, #fff) 0%,
+      color-mix(in srgb, var(--accent) 4%, #fff) 100%
+    );
+  color: var(--accent);
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 18%, transparent);
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.destination-journey__maps-icon {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 16%, #fff);
+  color: var(--accent);
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.destination-journey__maps:hover,
+.destination-journey__maps:focus-visible {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--accent) 28%, transparent);
+  outline: none;
+}
+
+.destination-journey__maps:hover .destination-journey__maps-icon,
+.destination-journey__maps:focus-visible .destination-journey__maps-icon {
+  background: color-mix(in srgb, #fff 22%, transparent);
+  color: #fff;
+}
+
+.destination-journey__maps:active {
+  transform: translateY(0);
 }
 
 .destination-journey__highlights {
@@ -6154,11 +6218,25 @@ body.has-room-lightbox .reserve-float {
   }
 
   .destination-journey__place {
-    grid-template-columns: 1fr;
-    gap: 5px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "name maps"
+      "detail maps";
+    gap: 6px 12px;
+  }
+
+  .destination-journey__place dt {
+    grid-area: name;
   }
 
   .destination-journey__place dd {
+    grid-area: detail;
     text-align: left;
+    white-space: normal;
+  }
+
+  .destination-journey__maps {
+    grid-area: maps;
+    align-self: center;
   }
 }

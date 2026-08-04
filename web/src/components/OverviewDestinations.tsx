@@ -12,7 +12,7 @@ type OverviewDestinationSlide = {
   video: string;
   poster: string;
   videoLabel: string;
-  facts: Array<{ label: string; detail: string }>;
+  facts: Array<{ label: string; detail: string; mapsUrl: string }>;
   tags: string[];
 };
 
@@ -27,10 +27,17 @@ const slides: OverviewDestinationSlide[] = [
     poster: "/images/experience/destinations/imam-bukhari-1.png",
     videoLabel: "Imam Al-Bukhari Mausoleum complex near HADITH Hotel",
     facts: [
-      { label: "Imam Al-Bukhari Mausoleum", detail: "0.9 km from the hotel" },
+      {
+        label: "Imam Al-Bukhari Mausoleum",
+        detail: "0.9 km from the hotel",
+        mapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=39.814999,66.944485",
+      },
       {
         label: "Imam Bukhari International Centre",
         detail: "0.9 km from the hotel",
+        mapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Imam+Bukhari+International+Scientific+Research+Center+Samarkand",
       },
     ],
     tags: [
@@ -49,10 +56,17 @@ const slides: OverviewDestinationSlide[] = [
     poster: "/images/experience/destinations/registan-poster.jpg",
     videoLabel: "Video tour of Registan Square in Samarkand",
     facts: [
-      { label: "Registan Square", detail: "17.2 km from the hotel" },
+      {
+        label: "Registan Square",
+        detail: "17.2 km from the hotel",
+        mapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=39.6545,66.9758",
+      },
       {
         label: "Ulugh Beg, Sher-Dor & Tilla-Kori Madrasas",
         detail: "Within the complex",
+        mapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Ulugh+Beg+Madrasa+Registan+Samarkand",
       },
     ],
     tags: [
@@ -155,6 +169,31 @@ export function OverviewDestinations() {
               <div key={fact.label} className="destination-journey__place">
                 <dt>{fact.label}</dt>
                 <dd>{fact.detail}</dd>
+                <a
+                  className="destination-journey__maps"
+                  href={fact.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${fact.label} in Google Maps`}
+                >
+                  <span className="destination-journey__maps-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none">
+                      <path
+                        d="M12 21s6.5-5.2 6.5-10.2A6.5 6.5 0 0 0 12 4.3a6.5 6.5 0 0 0-6.5 6.5C5.5 15.8 12 21 12 21Z"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                      />
+                      <circle
+                        cx="12"
+                        cy="10.8"
+                        r="2.2"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                      />
+                    </svg>
+                  </span>
+                  <span>Maps</span>
+                </a>
               </div>
             ))}
           </dl>

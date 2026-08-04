@@ -68,7 +68,7 @@ type DestinationJourney = {
   eyebrow: string;
   title: string;
   description: string;
-  destinations: Array<{ name: string; detail: string }>;
+  destinations: Array<{ name: string; detail: string; mapsUrl: string }>;
   highlights: string[];
   slides: DestinationSlide[];
 };
@@ -81,10 +81,17 @@ const destinationJourneys: DestinationJourney[] = [
     description:
       "Visit the resting place of Imam Muhammad Al-Bukhari, then continue into a centre dedicated to scholarship, manuscripts, research, and international exchange.",
     destinations: [
-      { name: "Imam Al-Bukhari Mausoleum", detail: "0.9 km from the hotel" },
+      {
+        name: "Imam Al-Bukhari Mausoleum",
+        detail: "0.9 km from the hotel",
+        mapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=39.814999,66.944485",
+      },
       {
         name: "Imam Bukhari International Centre",
         detail: "0.9 km from the hotel",
+        mapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Imam+Bukhari+International+Scientific+Research+Center+Samarkand",
       },
     ],
     highlights: [
@@ -128,10 +135,17 @@ const destinationJourneys: DestinationJourney[] = [
     description:
       "Step into the heart of Samarkand at Registan Square, where three monumental madrasas create one of Central Asia's most iconic architectural ensembles. Discover grand portals, intricate blue tilework, and centuries of Silk Road history.",
     destinations: [
-      { name: "Registan Square", detail: "17.2 km from the hotel" },
+      {
+        name: "Registan Square",
+        detail: "17.2 km from the hotel",
+        mapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=39.6545,66.9758",
+      },
       {
         name: "Ulugh Beg, Sher-Dor & Tilla-Kori Madrasas",
         detail: "Within the complex",
+        mapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Ulugh+Beg+Madrasa+Registan+Samarkand",
       },
     ],
     highlights: [
@@ -573,6 +587,34 @@ function DestinationsSection() {
                   <div key={destination.name} className="destination-journey__place">
                     <dt>{destination.name}</dt>
                     <dd>{destination.detail}</dd>
+                    <a
+                      className="destination-journey__maps"
+                      href={destination.mapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Open ${destination.name} in Google Maps`}
+                    >
+                      <span
+                        className="destination-journey__maps-icon"
+                        aria-hidden="true"
+                      >
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none">
+                          <path
+                            d="M12 21s6.5-5.2 6.5-10.2A6.5 6.5 0 0 0 12 4.3a6.5 6.5 0 0 0-6.5 6.5C5.5 15.8 12 21 12 21Z"
+                            stroke="currentColor"
+                            strokeWidth="1.6"
+                          />
+                          <circle
+                            cx="12"
+                            cy="10.8"
+                            r="2.2"
+                            stroke="currentColor"
+                            strokeWidth="1.6"
+                          />
+                        </svg>
+                      </span>
+                      <span>Maps</span>
+                    </a>
                   </div>
                 ))}
               </dl>
