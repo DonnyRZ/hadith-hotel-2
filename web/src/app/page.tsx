@@ -27,13 +27,6 @@ const heroSlides = [
     mobilePosition: "50% 52%",
   },
   {
-    id: "cafe",
-    label: "7OZ cafe counter and lounge",
-    src: "/images/cafe-dining/cafe-1.webp",
-    position: "50% 48%",
-    mobilePosition: "42% 50%",
-  },
-  {
     id: "junior-suite",
     label: "Junior Suite living and dining area",
     src: "/images/overview-hero/junior-suite.webp",
