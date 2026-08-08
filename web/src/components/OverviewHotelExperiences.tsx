@@ -1,12 +1,13 @@
 "use client";
 
 import SiteImage from "@/components/SiteImage";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useCallback, useState } from "react";
+import { useTranslations } from "next-intl";
 
 type FeatureSlide = {
   id: string;
-  title: string;
+  key: string;
   href: string;
   src: string;
 };
@@ -14,25 +15,25 @@ type FeatureSlide = {
 const slides: FeatureSlide[] = [
   {
     id: "suites-rooms",
-    title: "Suites & Rooms",
+    key: "suitesRooms",
     href: "/suites-rooms",
     src: "/images/overview-hero/junior-suite.webp",
   },
   {
     id: "cafe-dining",
-    title: "Cafe & Dining",
+    key: "cafeDining",
     href: "/cafe-dining",
     src: "/images/cafe-dining/cafe-1.webp",
   },
   {
     id: "experience",
-    title: "Experience",
+    key: "experience",
     href: "/experience",
     src: "/images/overview-hero/pool.webp",
   },
   {
     id: "meetings-weddings",
-    title: "Meetings & Weddings",
+    key: "meetingsWeddings",
     href: "/meetings-weddings",
     src: "/images/overview-features/meetings-weddings.webp",
   },
@@ -40,15 +41,17 @@ const slides: FeatureSlide[] = [
 
 function FeatureMedia({
   slide,
+  title,
 }: {
   slide: FeatureSlide;
+  title: string;
 }) {
   return (
     <div className="overview-features__media">
       <SiteImage
         className="overview-features__image"
         src={slide.src}
-        alt={slide.title}
+        alt={title}
         fill
         sizes="(max-width: 720px) 100vw, 60vw"
       />
@@ -57,6 +60,7 @@ function FeatureMedia({
 }
 
 export function OverviewHotelExperiences() {
+  const t = useTranslations("overview.experiences");
   const [index, setIndex] = useState(0);
   const count = slides.length;
 
@@ -73,6 +77,8 @@ export function OverviewHotelExperiences() {
   const next = slides[wrap(index + 1)]!;
   const progress = ((index + 1) / count) * 100;
 
+  const titleFor = (slide: FeatureSlide) => t(`slides.${slide.key}`);
+
   return (
     <section
       className="overview-features"
@@ -80,48 +86,44 @@ export function OverviewHotelExperiences() {
     >
       <div className="overview-features__intro">
         <div>
-          <p className="overview-features__lede">
-            Discover every side of HADITH Hotel
-          </p>
+          <p className="overview-features__lede">{t("lede")}</p>
           <h2 id="overview-features-heading" className="overview-features__heading">
-            A Complete Hotel Experience
+            {t("heading")}
           </h2>
         </div>
-        <p className="overview-features__intro-copy">
-          Explore the spaces and experiences that shape a stay at HADITH Hotel,
-          from refined accommodation and dining to wellbeing and memorable
-          celebrations.
-        </p>
+        <p className="overview-features__intro-copy">{t("introCopy")}</p>
       </div>
 
       <div
         className="overview-features__carousel"
         role="region"
         aria-roledescription="carousel"
-        aria-label="Hotel experiences"
+        aria-label={t("carouselAria")}
       >
         <div className="overview-features__stage">
           <button
             type="button"
             className="overview-features__side overview-features__side--previous"
             onClick={goPrevious}
-            aria-label={`Previous slide, ${previous.title}`}
+            aria-label={t("prevSlideAria", { title: titleFor(previous) })}
           >
-            <FeatureMedia slide={previous} />
+            <FeatureMedia slide={previous} title={titleFor(previous)} />
           </button>
 
           <div className="overview-features__active">
-            <FeatureMedia slide={current} />
+            <FeatureMedia slide={current} title={titleFor(current)} />
             <div className="overview-features__card overview-features__card--compact">
               <p className="overview-features__card-eyebrow">
-                Hotel experience
+                {t("cardEyebrow")}
               </p>
-              <h3 className="overview-features__card-title">{current.title}</h3>
+              <h3 className="overview-features__card-title">
+                {titleFor(current)}
+              </h3>
               <Link
                 href={current.href}
                 className="overview-features__explore"
               >
-                Explore
+                {t("explore")}
               </Link>
             </div>
           </div>
@@ -130,9 +132,9 @@ export function OverviewHotelExperiences() {
             type="button"
             className="overview-features__side overview-features__side--next"
             onClick={goNext}
-            aria-label={`Next slide, ${next.title}`}
+            aria-label={t("nextSlideAria", { title: titleFor(next) })}
           >
-            <FeatureMedia slide={next} />
+            <FeatureMedia slide={next} title={titleFor(next)} />
           </button>
         </div>
 
@@ -142,7 +144,7 @@ export function OverviewHotelExperiences() {
             className="overview-features__nav overview-features__nav--previous"
             onClick={goPrevious}
           >
-            <span aria-hidden="true">‹</span> Previous
+            <span aria-hidden="true">‹</span> {t("previous")}
           </button>
 
           <div
@@ -151,7 +153,7 @@ export function OverviewHotelExperiences() {
             aria-valuemin={1}
             aria-valuemax={count}
             aria-valuenow={index + 1}
-            aria-label="Carousel progress"
+            aria-label={t("progressAria")}
           >
             <span style={{ width: `${progress}%` }} />
           </div>
@@ -161,7 +163,7 @@ export function OverviewHotelExperiences() {
             className="overview-features__nav overview-features__nav--next"
             onClick={goNext}
           >
-            Next <span aria-hidden="true">›</span>
+            {t("next")} <span aria-hidden="true">›</span>
           </button>
 
           <p className="overview-features__counter">

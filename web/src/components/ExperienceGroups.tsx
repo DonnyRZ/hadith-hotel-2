@@ -3,196 +3,130 @@
 import SiteImage from "@/components/SiteImage";
 import { asset } from "@/lib/asset";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
-type WellnessSlide = {
+type WellnessSlideConfig = {
   id: string;
-  title: string;
+  key: string;
   src?: string;
 };
 
-const wellnessSlides: WellnessSlide[] = [
-  {
-    id: "spa",
-    title: "Spa / Massage Suite",
-    src: "/images/experience/massage.webp",
-  },
-  {
-    id: "sauna",
-    title: "Sauna",
-    src: "/images/experience/sauna.webp",
-  },
-  {
-    id: "hammam",
-    title: "Turkish Hammam",
-    src: "/images/experience/hamam.webp",
-  },
-  {
-    id: "pool",
-    title: "Indoor Pool",
-    src: "/images/experience/pool.webp",
-  },
-  {
-    id: "salon",
-    title: "Beauty Salon",
-    src: "/images/experience/salon.jpeg",
-  },
-  {
-    id: "fitness",
-    title: "Fitness Centre",
-    src: "/images/experience/gym.webp",
-  },
+const wellnessSlideConfigs: WellnessSlideConfig[] = [
+  { id: "spa", key: "spa", src: "/images/experience/massage.webp" },
+  { id: "sauna", key: "sauna", src: "/images/experience/sauna.webp" },
+  { id: "hammam", key: "hammam", src: "/images/experience/hamam.webp" },
+  { id: "pool", key: "pool", src: "/images/experience/pool.webp" },
+  { id: "salon", key: "salon", src: "/images/experience/salon.jpeg" },
+  { id: "fitness", key: "fitness", src: "/images/experience/gym.webp" },
 ];
 
-const activeFamilyItems = [
-  { id: "tennis", name: "Tennis Court", src: "/images/experience/tennis.webp" },
-  { id: "padel", name: "Padel Court", src: "/images/experience/padel.webp" },
+const activeFamilyItemConfigs = [
+  { id: "tennis", key: "tennis", src: "/images/experience/tennis.webp" },
+  { id: "padel", key: "padel", src: "/images/experience/padel.webp" },
   {
     id: "kids-playground",
-    name: "Kids’ Playground",
+    key: "kidsPlayground",
     src: "/images/experience/playground.webp",
   },
 ];
 
-type ActiveFamilyItem = (typeof activeFamilyItems)[number];
+type ActiveFamilyItem = {
+  id: string;
+  key: string;
+  src: string;
+  name: string;
+};
 
-type DestinationSlide = {
+type DestinationSlideConfig = {
   id: string;
   src: string;
-  alt: string;
   position?: string;
   video?: string;
 };
 
-type DestinationJourney = {
+type DestinationConfig = { key: string; mapsUrl: string };
+
+type DestinationJourneyConfig = {
   id: string;
-  eyebrow: string;
-  title: string;
-  description: string;
-  destinations: Array<{ name: string; detail: string; mapsUrl: string }>;
-  highlights: string[];
-  slides: DestinationSlide[];
+  key: string;
+  destinations: DestinationConfig[];
+  slides: DestinationSlideConfig[];
 };
 
-const destinationJourneys: DestinationJourney[] = [
+const destinationJourneyConfigs: DestinationJourneyConfig[] = [
   {
     id: "imam-al-bukhari-legacy",
-    eyebrow: "A short visit · approximately 0.9 km",
-    title: "The Legacy of Imam Al-Bukhari",
-    description:
-      "Visit the resting place of Imam Muhammad Al-Bukhari, then continue into a centre dedicated to scholarship, manuscripts, research, and international exchange.",
+    key: "imamAlBukhariLegacy",
     destinations: [
       {
-        name: "Imam Al-Bukhari Mausoleum",
-        detail: "0.9 km from the hotel",
-        mapsUrl:
-          "https://www.google.com/maps/search/?api=1&query=39.814999,66.944485",
+        key: "mausoleum",
+        mapsUrl: "https://www.google.com/maps/search/?api=1&query=39.814999,66.944485",
       },
       {
-        name: "Imam Bukhari International Centre",
-        detail: "0.9 km from the hotel",
+        key: "center",
         mapsUrl:
           "https://www.google.com/maps/search/?api=1&query=Imam+Bukhari+International+Scientific+Research+Center+Samarkand",
       },
-    ],
-    highlights: [
-      "Spiritual pilgrimage",
-      "Islamic scholarship",
-      "Monumental architecture",
     ],
     slides: [
       {
         id: "imam-bukhari-1",
         src: "/images/experience/destinations/imam-bukhari-1.png",
         video: "/videos/imam-al-bukhari-complex.mp4",
-        alt: "Imam Al-Bukhari Mausoleum complex near HADITH Hotel",
       },
-      {
-        id: "imam-bukhari-2",
-        src: "/images/experience/destinations/imam-bukhari-2.png",
-        alt: "Interior hall at the Imam Al-Bukhari complex",
-      },
-      {
-        id: "imam-bukhari-3",
-        src: "/images/experience/destinations/imam-bukhari-3.png",
-        alt: "Exhibition at the Imam Bukhari International Centre",
-      },
-      {
-        id: "imam-bukhari-4",
-        src: "/images/experience/destinations/imam-bukhari-4.png",
-        alt: "Islamic manuscripts displayed at the Imam Bukhari International Centre",
-      },
-      {
-        id: "imam-bukhari-5",
-        src: "/images/experience/destinations/imam-bukhari-5.png",
-        alt: "Mosque and gardens within the Imam Al-Bukhari complex",
-      },
+      { id: "imam-bukhari-2", src: "/images/experience/destinations/imam-bukhari-2.png" },
+      { id: "imam-bukhari-3", src: "/images/experience/destinations/imam-bukhari-3.png" },
+      { id: "imam-bukhari-4", src: "/images/experience/destinations/imam-bukhari-4.png" },
+      { id: "imam-bukhari-5", src: "/images/experience/destinations/imam-bukhari-5.png" },
     ],
   },
   {
     id: "registan-square",
-    eyebrow: "A half-day journey · approximately 17.2 km",
-    title: "Registan Square",
-    description:
-      "Step into the heart of Samarkand at Registan Square, where three monumental madrasas create one of Central Asia's most iconic architectural ensembles. Discover grand portals, intricate blue tilework, and centuries of Silk Road history.",
+    key: "registanSquare",
     destinations: [
       {
-        name: "Registan Square",
-        detail: "17.2 km from the hotel",
-        mapsUrl:
-          "https://www.google.com/maps/search/?api=1&query=39.6545,66.9758",
+        key: "square",
+        mapsUrl: "https://www.google.com/maps/search/?api=1&query=39.6545,66.9758",
       },
       {
-        name: "Ulugh Beg, Sher-Dor & Tilla-Kori Madrasas",
-        detail: "Within the complex",
+        key: "madrasas",
         mapsUrl:
           "https://www.google.com/maps/search/?api=1&query=Ulugh+Beg+Madrasa+Registan+Samarkand",
       },
-    ],
-    highlights: [
-      "Islamic architecture",
-      "Blue tilework",
-      "Silk Road heritage",
     ],
     slides: [
       {
         id: "registan-video",
         src: "/images/experience/destinations/registan-poster.jpg",
         video: "/videos/registan-square.mp4",
-        alt: "Video tour of Registan Square in Samarkand",
       },
-      {
-        id: "registan-1",
-        src: "/images/experience/destinations/registan-1.png",
-        alt: "Registan Square at sunset with Tilla-Kori and Sher-Dor Madrasas",
-      },
-      {
-        id: "registan-2",
-        src: "/images/experience/destinations/registan-2.png",
-        alt: "Registan Square courtyard framed by three Timurid madrasas",
-      },
-      {
-        id: "registan-3",
-        src: "/images/experience/destinations/registan-3.png",
-        alt: "Grand portal and blue tilework at Registan Square",
-      },
+      { id: "registan-1", src: "/images/experience/destinations/registan-1.png" },
+      { id: "registan-2", src: "/images/experience/destinations/registan-2.png" },
+      { id: "registan-3", src: "/images/experience/destinations/registan-3.png" },
     ],
   },
 ];
 
+type ResolvedDestinationSlide = DestinationSlideConfig & { alt: string };
+
 function WellnessMedia({
-  slide,
+  title,
+  src,
   tone,
+  t,
 }: {
-  slide: WellnessSlide;
+  title: string;
+  src?: string;
   tone: number;
+  t: ReturnType<typeof useTranslations>;
 }) {
   return (
     <div className="overview-features__media">
-      {slide.src ? (
+      {src ? (
         <SiteImage
           className="overview-features__image"
-          src={slide.src}
-          alt={slide.title}
+          src={src}
+          alt={title}
           fill
           sizes="(max-width: 720px) 100vw, 60vw"
         />
@@ -200,9 +134,9 @@ function WellnessMedia({
         <div
           className={`media-placeholder overview-features__placeholder media-placeholder--tone-${tone}`}
           role="img"
-          aria-label={`${slide.title} — soonest`}
+          aria-label={t("wellness.photoSoonAria", { title })}
         >
-          <span>Photo — Soonest</span>
+          <span>{t("wellness.photoSoon")}</span>
         </div>
       )}
     </div>
@@ -212,9 +146,11 @@ function WellnessMedia({
 function ActiveFamilyMedia({
   item,
   featured = false,
+  t,
 }: {
   item: ActiveFamilyItem;
   featured?: boolean;
+  t: ReturnType<typeof useTranslations>;
 }) {
   return (
     <div
@@ -229,14 +165,20 @@ function ActiveFamilyMedia({
           featured ? "(max-width: 960px) 100vw, 58vw" : "(max-width: 960px) 0px, 22vw"
         }
       />
-      <span className="experience-active__badge">Soonest</span>
+      <span className="experience-active__badge">{t("active.badge")}</span>
     </div>
   );
 }
 
-function ActiveFamilyCarousel() {
+function ActiveFamilyCarousel({
+  items,
+  t,
+}: {
+  items: ActiveFamilyItem[];
+  t: ReturnType<typeof useTranslations>;
+}) {
   const [index, setIndex] = useState(0);
-  const count = activeFamilyItems.length;
+  const count = items.length;
 
   const wrap = useCallback(
     (value: number) => ((value % count) + count) % count,
@@ -246,9 +188,9 @@ function ActiveFamilyCarousel() {
   const goPrevious = () => setIndex((current) => wrap(current - 1));
   const goNext = () => setIndex((current) => wrap(current + 1));
 
-  const previous = activeFamilyItems[wrap(index - 1)]!;
-  const current = activeFamilyItems[index]!;
-  const next = activeFamilyItems[wrap(index + 1)]!;
+  const previous = items[wrap(index - 1)]!;
+  const current = items[index]!;
+  const next = items[wrap(index + 1)]!;
   const progress = ((index + 1) / count) * 100;
 
   return (
@@ -256,32 +198,32 @@ function ActiveFamilyCarousel() {
       className="overview-rooms__carousel"
       role="region"
       aria-roledescription="carousel"
-      aria-label="Active and family facilities"
+      aria-label={t("active.ariaLabel")}
     >
       <div className="overview-rooms__stage">
         <button
           type="button"
           className="overview-rooms__slide overview-rooms__slide--side"
           onClick={goPrevious}
-          aria-label={`Previous: ${previous.name}`}
+          aria-label={t("active.prevItemAria", { name: previous.name })}
         >
-          <ActiveFamilyMedia item={previous} />
+          <ActiveFamilyMedia item={previous} t={t} />
         </button>
 
         <div
           className="overview-rooms__slide overview-rooms__slide--center"
           aria-current="true"
         >
-          <ActiveFamilyMedia item={current} featured />
+          <ActiveFamilyMedia item={current} featured t={t} />
         </div>
 
         <button
           type="button"
           className="overview-rooms__slide overview-rooms__slide--side"
           onClick={goNext}
-          aria-label={`Next: ${next.name}`}
+          aria-label={t("active.nextItemAria", { name: next.name })}
         >
-          <ActiveFamilyMedia item={next} />
+          <ActiveFamilyMedia item={next} t={t} />
         </button>
       </div>
 
@@ -298,9 +240,9 @@ function ActiveFamilyCarousel() {
           type="button"
           className="overview-rooms__nav overview-rooms__nav--prev"
           onClick={goPrevious}
-          aria-label="Previous facility"
+          aria-label={t("active.prevFacilityAria")}
         >
-          <span aria-hidden="true">‹</span> Previous
+          <span aria-hidden="true">‹</span> {t("active.previous")}
         </button>
 
         <div
@@ -309,7 +251,7 @@ function ActiveFamilyCarousel() {
           aria-valuemin={1}
           aria-valuemax={count}
           aria-valuenow={index + 1}
-          aria-label="Carousel progress"
+          aria-label={t("active.progressAria")}
         >
           <span
             className="overview-rooms__progress-fill"
@@ -321,9 +263,9 @@ function ActiveFamilyCarousel() {
           type="button"
           className="overview-rooms__nav overview-rooms__nav--next"
           onClick={goNext}
-          aria-label="Next facility"
+          aria-label={t("active.nextFacilityAria")}
         >
-          Next <span aria-hidden="true">›</span>
+          {t("active.next")} <span aria-hidden="true">›</span>
         </button>
 
         <p className="overview-rooms__counter">
@@ -335,9 +277,15 @@ function ActiveFamilyCarousel() {
   );
 }
 
-function WellnessCarousel() {
+function WellnessCarousel({
+  slides,
+  t,
+}: {
+  slides: Array<{ id: string; title: string; src?: string }>;
+  t: ReturnType<typeof useTranslations>;
+}) {
   const [index, setIndex] = useState(0);
-  const count = wellnessSlides.length;
+  const count = slides.length;
 
   const wrap = useCallback(
     (value: number) => ((value % count) + count) % count,
@@ -347,9 +295,9 @@ function WellnessCarousel() {
   const goPrevious = () => setIndex((current) => wrap(current - 1));
   const goNext = () => setIndex((current) => wrap(current + 1));
 
-  const previous = wellnessSlides[wrap(index - 1)]!;
-  const current = wellnessSlides[index]!;
-  const next = wellnessSlides[wrap(index + 1)]!;
+  const previous = slides[wrap(index - 1)]!;
+  const current = slides[index]!;
+  const next = slides[wrap(index + 1)]!;
   const progress = ((index + 1) / count) * 100;
 
   return (
@@ -357,24 +305,27 @@ function WellnessCarousel() {
       className="overview-features__carousel"
       role="region"
       aria-roledescription="carousel"
-      aria-label="Wellness and relaxation facilities"
+      aria-label={t("wellness.ariaLabel")}
     >
       <div className="overview-features__stage">
         <button
           type="button"
           className="overview-features__side overview-features__side--previous"
           onClick={goPrevious}
-          aria-label={`Previous slide, ${previous.title}`}
+          aria-label={t("wellness.prevSlideAria", { title: previous.title })}
         >
-          <WellnessMedia slide={previous} tone={(wrap(index - 1) % 3) + 1} />
+          <WellnessMedia
+            title={previous.title}
+            src={previous.src}
+            tone={(wrap(index - 1) % 3) + 1}
+            t={t}
+          />
         </button>
 
         <div className="overview-features__active">
-          <WellnessMedia slide={current} tone={(index % 3) + 1} />
+          <WellnessMedia title={current.title} src={current.src} tone={(index % 3) + 1} t={t} />
           <div className="overview-features__card overview-features__card--compact">
-            <p className="overview-features__card-eyebrow">
-              Wellness &amp; Relaxation
-            </p>
+            <p className="overview-features__card-eyebrow">{t("wellness.cardEyebrow")}</p>
             <h3 className="overview-features__card-title">{current.title}</h3>
           </div>
         </div>
@@ -383,9 +334,14 @@ function WellnessCarousel() {
           type="button"
           className="overview-features__side overview-features__side--next"
           onClick={goNext}
-          aria-label={`Next slide, ${next.title}`}
+          aria-label={t("wellness.nextSlideAria", { title: next.title })}
         >
-          <WellnessMedia slide={next} tone={(wrap(index + 1) % 3) + 1} />
+          <WellnessMedia
+            title={next.title}
+            src={next.src}
+            tone={(wrap(index + 1) % 3) + 1}
+            t={t}
+          />
         </button>
       </div>
 
@@ -395,7 +351,7 @@ function WellnessCarousel() {
           className="overview-features__nav overview-features__nav--previous"
           onClick={goPrevious}
         >
-          <span aria-hidden="true">‹</span> Previous
+          <span aria-hidden="true">‹</span> {t("wellness.previous")}
         </button>
 
         <div
@@ -404,7 +360,7 @@ function WellnessCarousel() {
           aria-valuemin={1}
           aria-valuemax={count}
           aria-valuenow={index + 1}
-          aria-label="Carousel progress"
+          aria-label={t("wellness.progressAria")}
         >
           <span style={{ width: `${progress}%` }} />
         </div>
@@ -414,7 +370,7 @@ function WellnessCarousel() {
           className="overview-features__nav overview-features__nav--next"
           onClick={goNext}
         >
-          Next <span aria-hidden="true">›</span>
+          {t("wellness.next")} <span aria-hidden="true">›</span>
         </button>
 
         <p className="overview-features__counter">
@@ -428,9 +384,11 @@ function WellnessCarousel() {
 function DestinationCarousel({
   slides,
   title,
+  t,
 }: {
-  slides: DestinationSlide[];
+  slides: ResolvedDestinationSlide[];
   title: string;
+  t: ReturnType<typeof useTranslations>;
 }) {
   const [index, setIndex] = useState(0);
   const videoRefs = useRef<Record<string, HTMLVideoElement | null>>({});
@@ -475,7 +433,7 @@ function DestinationCarousel({
       className="destination-carousel"
       role="region"
       aria-roledescription="carousel"
-      aria-label={`${title} gallery`}
+      aria-label={t("destinations.galleryAria", { title })}
     >
       <div className="destination-carousel__viewport">
         {slides.map((slide, slideIndex) => {
@@ -530,9 +488,9 @@ function DestinationCarousel({
           type="button"
           className="destination-carousel__nav"
           onClick={goPrevious}
-          aria-label={`Previous media in ${title} gallery`}
+          aria-label={t("destinations.prevMediaAria", { title })}
         >
-          <span aria-hidden="true">‹</span> Previous
+          <span aria-hidden="true">‹</span> {t("destinations.previous")}
         </button>
 
         <div
@@ -541,7 +499,7 @@ function DestinationCarousel({
           aria-valuemin={1}
           aria-valuemax={count}
           aria-valuenow={index + 1}
-          aria-label={`${title} gallery progress`}
+          aria-label={t("destinations.galleryProgressAria", { title })}
         >
           <span style={{ width: `${progress}%` }} />
         </div>
@@ -550,9 +508,9 @@ function DestinationCarousel({
           type="button"
           className="destination-carousel__nav"
           onClick={goNext}
-          aria-label={`Next media in ${title} gallery`}
+          aria-label={t("destinations.nextMediaAria", { title })}
         >
-          Next <span aria-hidden="true">›</span>
+          {t("destinations.next")} <span aria-hidden="true">›</span>
         </button>
 
         <p className="destination-carousel__counter" aria-live="polite">
@@ -563,7 +521,7 @@ function DestinationCarousel({
   );
 }
 
-function DestinationsSection() {
+function DestinationsSection({ t }: { t: ReturnType<typeof useTranslations> }) {
   return (
     <section
       id="destinations"
@@ -571,86 +529,117 @@ function DestinationsSection() {
       aria-labelledby="experience-destinations-heading"
     >
       <div className="experience-destinations__intro">
-        <p className="experience-destinations__eyebrow">Beyond the Hotel</p>
+        <p className="experience-destinations__eyebrow">{t("destinations.eyebrow")}</p>
         <h2
           id="experience-destinations-heading"
           className="experience-group__title"
         >
-          Explore Samarkand
+          {t("destinations.heading")}
         </h2>
-        <p className="experience-group__lede">
-          From the spiritual heart of the Imam Al-Bukhari complex to Registan
-          Square in historic Samarkand, discover two journeys shaped around the
-          hotel&apos;s setting.
-        </p>
+        <p className="experience-group__lede">{t("destinations.lede")}</p>
       </div>
 
       <div className="experience-destinations__journeys">
-        {destinationJourneys.map((journey, journeyIndex) => (
-          <article
-            key={journey.id}
-            className={`destination-journey${journeyIndex % 2 === 1 ? " is-reversed" : ""}`}
-          >
-            <DestinationCarousel slides={journey.slides} title={journey.title} />
+        {destinationJourneyConfigs.map((journey, journeyIndex) => {
+          const base = `destinations.journeys.${journey.key}`;
+          const title = t(`${base}.title`);
+          const highlights = t.raw(`${base}.highlights`) as string[];
+          const slideAlts = t.raw(`${base}.slideAlts`) as string[];
+          const resolvedSlides: ResolvedDestinationSlide[] = journey.slides.map(
+            (slide, slideIndex) => ({
+              ...slide,
+              alt: slideAlts[slideIndex] ?? "",
+            }),
+          );
 
-            <div className="destination-journey__copy">
-              <p className="destination-journey__eyebrow">{journey.eyebrow}</p>
-              <h3 className="destination-journey__title">{journey.title}</h3>
-              <p className="destination-journey__description">
-                {journey.description}
-              </p>
+          return (
+            <article
+              key={journey.id}
+              className={`destination-journey${journeyIndex % 2 === 1 ? " is-reversed" : ""}`}
+            >
+              <DestinationCarousel slides={resolvedSlides} title={title} t={t} />
 
-              <dl className="destination-journey__places">
-                {journey.destinations.map((destination) => (
-                  <div key={destination.name} className="destination-journey__place">
-                    <dt>{destination.name}</dt>
-                    <dd>{destination.detail}</dd>
-                    <a
-                      className="destination-journey__maps"
-                      href={destination.mapsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Open ${destination.name} in Google Maps`}
-                    >
-                      <span
-                        className="destination-journey__maps-icon"
-                        aria-hidden="true"
-                      >
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none">
-                          <path
-                            d="M12 21s6.5-5.2 6.5-10.2A6.5 6.5 0 0 0 12 4.3a6.5 6.5 0 0 0-6.5 6.5C5.5 15.8 12 21 12 21Z"
-                            stroke="currentColor"
-                            strokeWidth="1.6"
-                          />
-                          <circle
-                            cx="12"
-                            cy="10.8"
-                            r="2.2"
-                            stroke="currentColor"
-                            strokeWidth="1.6"
-                          />
-                        </svg>
-                      </span>
-                      <span>Maps</span>
-                    </a>
-                  </div>
-                ))}
-              </dl>
+              <div className="destination-journey__copy">
+                <p className="destination-journey__eyebrow">{t(`${base}.eyebrow`)}</p>
+                <h3 className="destination-journey__title">{title}</h3>
+                <p className="destination-journey__description">
+                  {t(`${base}.description`)}
+                </p>
 
-              <ul className="destination-journey__highlights" aria-label="Highlights">
-                {journey.highlights.map((highlight) => (
-                  <li key={highlight}>{highlight}</li>
-                ))}
-              </ul>
-            </div>
-          </article>
-        ))}
+                <dl className="destination-journey__places">
+                  {journey.destinations.map((destination) => {
+                    const destBase = `${base}.destinations.${destination.key}`;
+                    const name = t(`${destBase}.name`);
+                    return (
+                      <div key={destination.key} className="destination-journey__place">
+                        <dt>{name}</dt>
+                        <dd>{t(`${destBase}.detail`)}</dd>
+                        <a
+                          className="destination-journey__maps"
+                          href={destination.mapsUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={t("destinations.mapsAria", { name })}
+                        >
+                          <span
+                            className="destination-journey__maps-icon"
+                            aria-hidden="true"
+                          >
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none">
+                              <path
+                                d="M12 21s6.5-5.2 6.5-10.2A6.5 6.5 0 0 0 12 4.3a6.5 6.5 0 0 0-6.5 6.5C5.5 15.8 12 21 12 21Z"
+                                stroke="currentColor"
+                                strokeWidth="1.6"
+                              />
+                              <circle
+                                cx="12"
+                                cy="10.8"
+                                r="2.2"
+                                stroke="currentColor"
+                                strokeWidth="1.6"
+                              />
+                            </svg>
+                          </span>
+                          <span>{t("destinations.maps")}</span>
+                        </a>
+                      </div>
+                    );
+                  })}
+                </dl>
+
+                <ul
+                  className="destination-journey__highlights"
+                  aria-label={t("destinations.highlightsAriaLabel")}
+                >
+                  {highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </section>
   );
 }
 
 export function ExperienceGroups() {
+  const t = useTranslations("experience");
+
+  const wellnessSlides = wellnessSlideConfigs.map((slide) => ({
+    id: slide.id,
+    title: t(`wellness.slides.${slide.key}`),
+    src: slide.src,
+  }));
+
+  const activeFamilyItems: ActiveFamilyItem[] = activeFamilyItemConfigs.map((item) => ({
+    id: item.id,
+    key: item.key,
+    src: item.src,
+    name: t(`active.items.${item.key}`),
+  }));
+
   return (
     <>
       <section
@@ -662,18 +651,15 @@ export function ExperienceGroups() {
             id="experience-wellness-heading"
             className="experience-group__title"
           >
-            Wellness &amp; Relaxation
+            {t("wellness.heading")}
           </h2>
-          <p className="experience-group__lede">
-            Restore body and mind with spa rituals, thermal experiences, and a
-            calm indoor pool.
-          </p>
+          <p className="experience-group__lede">{t("wellness.lede")}</p>
         </div>
 
-        <WellnessCarousel />
+        <WellnessCarousel slides={wellnessSlides} t={t} />
       </section>
 
-      <DestinationsSection />
+      <DestinationsSection t={t} />
 
       <section
         className="experience-active"
@@ -682,15 +668,12 @@ export function ExperienceGroups() {
       >
         <div className="experience-active__intro">
           <h2 id="experience-active-heading" className="experience-group__title">
-            Active &amp; Family
+            {t("active.heading")}
           </h2>
-          <p className="experience-group__lede">
-            Courts and play spaces for guests who prefer to stay active during
-            their stay.
-          </p>
+          <p className="experience-group__lede">{t("active.lede")}</p>
         </div>
 
-        <ActiveFamilyCarousel />
+        <ActiveFamilyCarousel items={activeFamilyItems} t={t} />
       </section>
     </>
   );

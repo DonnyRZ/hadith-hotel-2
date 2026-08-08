@@ -1,10 +1,11 @@
 "use client";
 
 import SiteImage from "@/components/SiteImage";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { ComingSoonModal } from "@/components/ComingSoonModal";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { navItems } from "@/lib/navigation";
 
 function PinIcon() {
@@ -24,6 +25,8 @@ function PinIcon() {
 }
 
 export function SiteHeader() {
+  const t = useTranslations("common.header");
+  const tNav = useTranslations("common.nav");
   const pathname = usePathname();
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
   const [showFloatReserve, setShowFloatReserve] = useState(false);
@@ -100,10 +103,10 @@ export function SiteHeader() {
         <div className="site-header__primary">
           <div className="site-header__primary-inner">
             <div className="site-header__brand-row">
-              <Link href="/" className="site-logo" aria-label="HADITH Hotel home">
+              <Link href="/" className="site-logo" aria-label={t("homeAriaLabel")}>
                 <SiteImage
                   src="/images/logo-hadith-2.png"
-                  alt="Hadits Hotel — Complex of Imam Al Bukhari"
+                  alt={t("logoAlt")}
                   width={280}
                   height={112}
                   className="site-logo__image"
@@ -119,7 +122,7 @@ export function SiteHeader() {
                   href={item.href}
                   className={isActive(item.href) ? "is-active" : undefined}
                 >
-                  {item.label}
+                  {tNav(item.key)}
                 </Link>
               ))}
             </nav>
@@ -131,14 +134,14 @@ export function SiteHeader() {
                 data-reserve-anchor
                 onClick={openComingSoon}
               >
-                Reserve
+                {t("reserve")}
               </button>
               <button
                 type="button"
                 className={`site-header__menu-toggle${mobileMenuOpen ? " is-open" : ""}`}
                 aria-expanded={mobileMenuOpen}
                 aria-controls="mobile-navigation"
-                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                aria-label={mobileMenuOpen ? t("closeMenu") : t("openMenu")}
                 onClick={() => setMobileMenuOpen((open) => !open)}
               >
                 <span />
@@ -154,11 +157,14 @@ export function SiteHeader() {
           <button
             type="button"
             className="mobile-menu__backdrop"
-            aria-label="Close menu"
+            aria-label={t("closeMenu")}
             onClick={() => setMobileMenuOpen(false)}
           />
           <div className="mobile-menu__panel">
-            <p className="mobile-menu__eyebrow">Explore HADITH Hotel</p>
+            <p className="mobile-menu__eyebrow">{t("mobileEyebrow")}</p>
+            <div className="mobile-menu__language">
+              <LanguageSwitcher />
+            </div>
             <nav className="mobile-menu__nav" aria-label="Mobile primary">
               {navItems.map((item) => (
                 <Link
@@ -167,7 +173,7 @@ export function SiteHeader() {
                   className={isActive(item.href) ? "is-active" : undefined}
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  {item.label}
+                  {tNav(item.key)}
                 </Link>
               ))}
             </nav>
@@ -178,7 +184,7 @@ export function SiteHeader() {
               rel="noreferrer"
             >
               <PinIcon />
-              View Map
+              {t("viewMap")}
             </a>
           </div>
         </div>
@@ -194,15 +200,16 @@ export function SiteHeader() {
               rel="noreferrer"
             >
               <PinIcon />
-              <span>View Map</span>
+              <span>{t("viewMap")}</span>
             </a>
+            <LanguageSwitcher />
             <button
               type="button"
               className="site-header__reserve"
               data-reserve-anchor
               onClick={openComingSoon}
             >
-              <span>Reserve</span>
+              <span>{t("reserve")}</span>
             </button>
           </div>
         </div>
@@ -215,7 +222,7 @@ export function SiteHeader() {
         aria-hidden={!showFloatReserve}
         tabIndex={showFloatReserve ? 0 : -1}
       >
-        <span>Reserve</span>
+        <span>{t("reserve")}</span>
       </button>
 
       <ComingSoonModal

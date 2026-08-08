@@ -1,50 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ComingSoonModal } from "@/components/ComingSoonModal";
 
-type EventUse = {
-  id: string;
-  eyebrow: string;
-  title: string;
-  description: string;
-  highlights: string[];
-};
-
-const eventUses: EventUse[] = [
-  {
-    id: "meetings",
-    eyebrow: "Business Events",
-    title: "Meetings & Conferences",
-    description:
-      "Configure the hall for focused meetings, conferences, and corporate gatherings, with adaptable arrangements supported by modern facilities.",
-    highlights: [
-      "Flexible event setups",
-      "Modern facilities",
-      "Dedicated events team",
-    ],
-  },
-  {
-    id: "weddings",
-    eyebrow: "Social Events",
-    title: "Weddings & Celebrations",
-    description:
-      "Transform the same hall into an elegant setting for weddings and social celebrations, welcoming up to 250 guests.",
-    highlights: [
-      "Elegant ballroom",
-      "Up to 250 guests",
-      "Weddings and social events",
-    ],
-  },
-];
-
-const venueFacts = [
-  { id: "capacity", value: "250 Guests", label: "Maximum Capacity" },
-  { id: "setups", value: "Flexible", label: "Event Setups" },
-  { id: "facilities", value: "Modern", label: "Facilities" },
-];
+const eventUseKeys = ["meetings", "weddings"] as const;
+const venueFactKeys = ["capacity", "setups", "facilities"] as const;
 
 export function MeetingsWeddings() {
+  const t = useTranslations("meetingsWeddings");
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
 
   return (
@@ -52,30 +16,31 @@ export function MeetingsWeddings() {
       <section className="event-uses" aria-labelledby="event-uses-heading">
         <div className="event-uses__inner">
           <header className="event-uses__intro">
-            <p className="event-uses__eyebrow">Meetings &amp; Weddings</p>
+            <p className="event-uses__eyebrow">{t("eventUses.eyebrow")}</p>
             <h2 id="event-uses-heading" className="event-uses__heading">
-              One Hall, Many Possibilities
+              {t("eventUses.heading")}
             </h2>
-            <p className="event-uses__lead">
-              One adaptable venue, thoughtfully arranged around the character
-              and scale of each occasion.
-            </p>
+            <p className="event-uses__lead">{t("eventUses.lead")}</p>
           </header>
 
           <div className="event-uses__grid">
-            {eventUses.map((eventUse) => (
-              <article key={eventUse.id} className="event-use">
-                <p className="event-use__eyebrow">{eventUse.eyebrow}</p>
-                <h3 className="event-use__title">{eventUse.title}</h3>
-                <p className="event-use__body">{eventUse.description}</p>
+            {eventUseKeys.map((key) => {
+              const base = `eventUses.${key}`;
+              const highlights = t.raw(`${base}.highlights`) as string[];
+              return (
+                <article key={key} className="event-use">
+                  <p className="event-use__eyebrow">{t(`${base}.eyebrow`)}</p>
+                  <h3 className="event-use__title">{t(`${base}.title`)}</h3>
+                  <p className="event-use__body">{t(`${base}.description`)}</p>
 
-                <ul className="event-use__highlights">
-                  {eventUse.highlights.map((highlight) => (
-                    <li key={highlight}>{highlight}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
+                  <ul className="event-use__highlights">
+                    {highlights.map((highlight) => (
+                      <li key={highlight}>{highlight}</li>
+                    ))}
+                  </ul>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -83,14 +48,14 @@ export function MeetingsWeddings() {
       <section className="event-facts" aria-labelledby="event-facts-heading">
         <div className="event-facts__inner">
           <h2 id="event-facts-heading" className="event-facts__heading">
-            Venue Details
+            {t("facts.heading")}
           </h2>
 
           <dl className="event-facts__grid">
-            {venueFacts.map((fact) => (
-              <div key={fact.id} className="event-facts__item">
-                <dd className="event-facts__value">{fact.value}</dd>
-                <dt className="event-facts__label">{fact.label}</dt>
+            {venueFactKeys.map((key) => (
+              <div key={key} className="event-facts__item">
+                <dd className="event-facts__value">{t(`facts.${key}.value`)}</dd>
+                <dt className="event-facts__label">{t(`facts.${key}.label`)}</dt>
               </div>
             ))}
           </dl>
@@ -99,26 +64,23 @@ export function MeetingsWeddings() {
 
       <section className="event-enquiry" aria-labelledby="event-enquiry-heading">
         <h2 id="event-enquiry-heading" className="event-enquiry__title">
-          Plan Your Event
+          {t("enquiry.title")}
         </h2>
-        <p className="event-enquiry__body">
-          Tell us about your upcoming meeting, wedding, or celebration. Our
-          team will help you plan an event tailored to your requirements.
-        </p>
+        <p className="event-enquiry__body">{t("enquiry.body")}</p>
         <button
           type="button"
           className="event-enquiry__button"
           onClick={() => setComingSoonOpen(true)}
         >
-          Request a Proposal
+          {t("enquiry.button")}
         </button>
       </section>
 
       <ComingSoonModal
         open={comingSoonOpen}
         onClose={() => setComingSoonOpen(false)}
-        eyebrow="Event Enquiry"
-        body="Event enquiries will open shortly. Thank you for considering HADITH Hotel for your occasion."
+        eyebrow={t("enquiry.comingSoonEyebrow")}
+        body={t("enquiry.comingSoonBody")}
       />
     </>
   );

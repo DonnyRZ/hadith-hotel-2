@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useSyncExternalStore } from "react";
+import { useTranslations } from "next-intl";
 
 const STORAGE_KEY = "hadith-soft-opening-dismissed";
 
@@ -19,6 +20,7 @@ type SoftOpeningFloatProps = {
 };
 
 export function SoftOpeningFloat({ className = "" }: SoftOpeningFloatProps) {
+  const t = useTranslations("common.softOpening");
   const dismissedBefore = useSyncExternalStore(
     subscribeToDismissal,
     wasDismissed,
@@ -43,19 +45,19 @@ export function SoftOpeningFloat({ className = "" }: SoftOpeningFloatProps) {
     <div
       className={`soft-float${leaving ? " is-leaving" : ""} ${className}`.trim()}
       role="status"
-      aria-label="Soft Opening September 5th 2026"
+      aria-label={t("title")}
     >
       <div className="soft-float__mover">
         <div className="soft-float__card">
           <span className="soft-float__pulse" aria-hidden="true" />
           <div className="soft-float__copy">
-            <p className="soft-float__eyebrow">Announcement</p>
-            <p className="soft-float__title">Soft Opening September 5th 2026</p>
+            <p className="soft-float__eyebrow">{t("announcement")}</p>
+            <p className="soft-float__title">{t("title")}</p>
           </div>
           <button
             type="button"
             className="soft-float__close"
-            aria-label="Dismiss soft opening announcement"
+            aria-label={t("dismiss")}
             onClick={dismiss}
           >
             <svg viewBox="0 0 24 24" width="12" height="12" fill="none" aria-hidden="true">

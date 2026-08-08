@@ -1,10 +1,6 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { navItems } from "@/lib/navigation";
-
-const addressLines = [
-  "RW5X+9P, Xo\u2018ja Ismoil,",
-  "Samarqand viloyati, Uzbekistan",
-];
 
 const INSTAGRAM_URL = "https://www.instagram.com/hadithhotel/";
 
@@ -34,21 +30,22 @@ function InstagramIcon({ className }: { className?: string }) {
 }
 
 export function SiteFooter() {
+  const t = useTranslations("common.footer");
+  const tNav = useTranslations("common.nav");
   const year = new Date().getFullYear();
 
   return (
     <footer className="site-footer" aria-labelledby="site-footer-heading">
       <div className="site-footer__inner">
         <div className="site-footer__brand">
-          <p className="site-footer__eyebrow">HADITH Hotel</p>
+          <p className="site-footer__eyebrow">{t("eyebrow")}</p>
           <h2 id="site-footer-heading" className="site-footer__title">
-            Complex of Imam Al Bukhari
+            {t("title")}
           </h2>
 
           <address className="site-footer__address">
-            {addressLines.map((line) => (
-              <span key={line}>{line}</span>
-            ))}
+            <span>{t("addressLine1")}</span>
+            <span>{t("addressLine2")}</span>
           </address>
 
           <div className="site-footer__contacts">
@@ -62,7 +59,7 @@ export function SiteFooter() {
               rel="noopener noreferrer"
             >
               <InstagramIcon className="site-footer__instagram-icon" />
-              Instagram
+              {t("instagram")}
             </a>
           </div>
         </div>
@@ -70,16 +67,14 @@ export function SiteFooter() {
         <nav className="site-footer__nav" aria-label="Footer">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href}>
-              {item.label}
+              {tNav(item.key)}
             </Link>
           ))}
         </nav>
       </div>
 
       <div className="site-footer__bottom">
-        <p className="site-footer__copy">
-          © {year} HADITH Hotel. All rights reserved.
-        </p>
+        <p className="site-footer__copy">{t("copyright", { year })}</p>
       </div>
     </footer>
   );

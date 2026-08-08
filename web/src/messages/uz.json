@@ -1,0 +1,607 @@
+{
+  "common": {
+    "metadata": {
+      "title": "HADITH Hotel",
+      "titleTemplate": "%s | HADITH Hotel",
+      "description": "HADITH Hotel — Samarqanddagi Imom Al-Buxoriy majmuasi ichidagi besh yulduzli boragoh."
+    },
+    "nav": {
+      "overview": "Umumiy ma'lumot",
+      "suitesRooms": "Xonalar va lyukslar",
+      "cafeDining": "Kafe va restoranlar",
+      "experience": "Tajriba",
+      "meetingsWeddings": "Uchrashuvlar va to'ylar",
+      "reviews": "Hikoyalar va lavhalar",
+      "gallery": "Galereya"
+    },
+    "header": {
+      "homeAriaLabel": "HADITH Hotel bosh sahifasi",
+      "logoAlt": "Hadits Hotel — Imom Al-Buxoriy majmuasi",
+      "viewMap": "Xaritada ko'rish",
+      "reserve": "Band qilish",
+      "openMenu": "Menyuni ochish",
+      "closeMenu": "Menyuni yopish",
+      "mobileEyebrow": "HADITH Hotelni kashf eting"
+    },
+    "languageSwitcher": {
+      "ariaLabel": "Tilni tanlang"
+    },
+    "comingSoon": {
+      "eyebrow": "Bandlash",
+      "title": "Tez kunda",
+      "body": "Onlayn bandlash tez orada mavjud bo'ladi. HADITH Hotelga bildirgan qizig'ingiz uchun rahmat.",
+      "close": "Yopish"
+    },
+    "footer": {
+      "eyebrow": "HADITH Hotel",
+      "title": "Imom Al-Buxoriy majmuasi",
+      "addressLine1": "RW5X+9P, Xoʻja Ismoil,",
+      "addressLine2": "Samarqand viloyati, Oʻzbekiston",
+      "instagram": "Instagram",
+      "copyright": "© {year} HADITH Hotel. Barcha huquqlar himoyalangan."
+    },
+    "pageHero": {
+      "galleryAriaLabel": "{title} rasmlar galereyasi",
+      "previous": "Oldingi",
+      "next": "Keyingi",
+      "prevAria": "Oldingi rasmni ko'rsatish",
+      "nextAria": "Keyingi rasmni ko'rsatish",
+      "gallery": "Galereya",
+      "imageStatus": "{total} tadan {current}-rasm: {label}"
+    },
+    "scrollCue": "Ko'rish uchun aylantiring",
+    "heroCarousel": {
+      "prevSlide": "Oldingi slayd",
+      "nextSlide": "Keyingi slayd"
+    },
+    "softOpening": {
+      "announcement": "E'lon",
+      "title": "2026-yil 5-sentyabrda ochilish marosimi",
+      "dismiss": "Ochilish marosimi e'lonini yopish"
+    }
+  },
+  "overview": {
+    "metaTitle": "Umumiy ma'lumot",
+    "hero": {
+      "hotelExterior": "Quyosh botishida HADITH Hotel tashqi ko'rinishi",
+      "resto": "Saji Nusantara restoranining ovqatlanish zali",
+      "juniorSuite": "Junior Suite yashash va ovqatlanish zonasi",
+      "suite": "HADITH Hotel Suite",
+      "pool": "HADITH Hotel suzish havzasi",
+      "massage": "Massaj xonasi",
+      "sauna": "Mehmonxona saunasi",
+      "hamam": "Turk hammomi",
+      "suiteLiving": "Suite yashash zonasi",
+      "hall": "Uchrashuvlar va to'ylar zali",
+      "salon": "Go'zallik saloni"
+    },
+    "welcome": {
+      "lede": "HADITH Hotelga xush kelibsiz",
+      "title": "Samarqand qalbidagi orom maskanini kashf eting",
+      "body": "Ipak yo'li merosini nafis zamonaviy taraqqiyot bilan uyg'unlashtiruvchi madaniy va ma'naviy yodgorlik — nufuzli Imom Al-Buxoriy majmuasi ichida tashkil topgan HADITH Hotel buyuk hadis olimini hurmat qiluvchi zamonaviy orom maskani bo'lib, unda o'zbek ulug'vorligi Indoneziya mehmondo'stligining iliqligi bilan uyg'unlashadi."
+    },
+    "stats": {
+      "roomsSuites": "Xonalar va lyukslar",
+      "classRating": "Mehmonxona toifasi"
+    },
+    "amenities": {
+      "lede": "Turingizni boshlang",
+      "title": "HADITH Hotelda band qiling",
+      "reserve": "Band qilish",
+      "label": "Qulayliklar va mehmonxona ma'lumotlari",
+      "noPets": "Uy hayvonlari bilan kirish mumkin emas",
+      "groups": {
+        "accommodation": {
+          "title": "Turar joy",
+          "roomsSuites": "Xonalar va lyukslar",
+          "standardRoom": "Standard Room",
+          "balconyRoom": "Balcony Room",
+          "suite": "Suite",
+          "juniorSuite": "Junior Suite",
+          "presidentSuite": "President Suite"
+        },
+        "dining": {
+          "title": "Taomlanish",
+          "sajiNusantara": "Saji Nusantara restorani",
+          "sajiNusantaraDetail": "O'zbek taomlari",
+          "barLounge": "Bar & Lounge",
+          "espressoCafe": "7oz Espresso Cafe"
+        },
+        "wellness": {
+          "title": "Sog'lomlashtirish va sport",
+          "indoorPool": "Yopiq suzish havzasi",
+          "spaCenter": "Spa markazi",
+          "sauna": "Sauna",
+          "turkishHammam": "Turk hammomi",
+          "fitnessCentre": "Fitnes markazi",
+          "beautySalon": "Go'zallik saloni",
+          "tennisCourt": "Tennis korti",
+          "kidsPlayground": "Bolalar o'yin maydonchasi",
+          "padelCourt": "Padel korti"
+        },
+        "events": {
+          "title": "Tadbirlar va madaniyat",
+          "occupancy": "Sig'im",
+          "occupancyValue": "250 kishi"
+        }
+      }
+    },
+    "rooms": {
+      "lede": "Hashamat va orom maskaniga qoching",
+      "title": "Xonalar va lyukslar",
+      "blurb": "Nafis Standard xonalardan President Suite'gacha — Imom Al-Buxoriy majmuasidagi kun davomida dam olish uchun mo'ljallangan 114 xona va lyuks.",
+      "typesAriaLabel": "Xona turlari",
+      "unitsCount": "{units} xona",
+      "learnMore": "Batafsil ma'lumot",
+      "types": {
+        "standardRoom": "Standard Room",
+        "balconyRoom": "Balcony Room",
+        "suite": "Suite",
+        "juniorSuite": "Junior Suite",
+        "presidentSuite": "President Suite"
+      },
+      "gallery": {
+        "guestRoom1": "Yorug'lantirilgan gumbazli karavot boshi bilan mehmon xonasi",
+        "guestRoom2": "HADITH Hoteldagi keng mehmon xonasi ichki ko'rinishi",
+        "guestRoom3": "HADITH Hoteldagi mehmon xonasi hammomi",
+        "guestRoom4": "HADITH Hoteldagi zamonaviy mehmon xonasi ichki ko'rinishi",
+        "guestRoom5": "HADITH Hoteldagi nafis mehmon xonasi ichki ko'rinishi",
+        "ariaLabel": "Xonalar va lyukslar galereyasi",
+        "previous": "Oldingi",
+        "next": "Keyingi",
+        "prevImageAria": "Galereyaning oldingi rasmini ko'rsatish",
+        "nextImageAria": "Galereyaning keyingi rasmini ko'rsatish",
+        "expandAria": "Rasmni to'liq ekranda ko'rish",
+        "prevImageLabel": "Oldingi rasm",
+        "nextImageLabel": "Keyingi rasm",
+        "progressAria": "Karusel jarayoni",
+        "lightboxTitle": "Xonalar va lyukslar galereyasi",
+        "closeFullscreen": "To'liq ekran rasmini yopish",
+        "close": "Yopish"
+      }
+    },
+    "destinations": {
+      "eyebrow": "Mehmonxonadan tashqarida",
+      "previous": "Oldingi",
+      "next": "Keyingi",
+      "prevAria": "Oldingi manzil",
+      "nextAria": "Keyingi manzil",
+      "progressAria": "Manzillar karuseli jarayoni",
+      "maps": "Xarita",
+      "highlightsAria": "Asosiy jihatlar",
+      "explore": "Manzillarni kashf eting",
+      "openInMaps": "{label}ni Google Xaritada ochish",
+      "slides": {
+        "imamAlBukhari": {
+          "journeyEyebrow": "Qisqa tashrif · taxminan 0,9 km",
+          "title": "Imom Al-Buxoriy merosi",
+          "description": "Imom Muhammad Al-Buxoriyning dafn etilgan joyiga tashrif buyuring, so'ngra ilm-fan, qo'lyozmalar, tadqiqotlar va xalqaro almashinuvga bag'ishlangan markazga o'ting.",
+          "videoLabel": "HADITH Hotel yaqinidagi Imom Al-Buxoriy maqbarasi majmuasi",
+          "facts": {
+            "mausoleum": { "label": "Imom Al-Buxoriy maqbarasi", "detail": "Mehmonxonadan 0,9 km" },
+            "centre": { "label": "Imom Buxoriy xalqaro markazi", "detail": "Mehmonxonadan 0,9 km" }
+          },
+          "tags": {
+            "pilgrimage": "Ma'naviy ziyorat",
+            "scholarship": "Islom ilmi",
+            "architecture": "Monumental me'morchilik"
+          }
+        },
+        "registanSquare": {
+          "journeyEyebrow": "Yarim kunlik sayohat · taxminan 17,2 km",
+          "title": "Registon maydoni",
+          "description": "Uch buyuk madrasa Markaziy Osiyoning eng mashhur me'moriy ansambllaridan birini tashkil etadigan Registon maydonida Samarqand qalbiga qadam qo'ying. Ulug'vor darvozalar, nafis ko'k naqshlar va asrlar davomidagi Ipak yo'li tarixini kashf eting.",
+          "videoLabel": "Samarqanddagi Registon maydoni bo'ylab video sayohat",
+          "facts": {
+            "square": { "label": "Registon maydoni", "detail": "Mehmonxonadan 17,2 km" },
+            "madrasas": { "label": "Ulug'bek, Sherdor va Tillakori madrasalari", "detail": "Majmua ichida" }
+          },
+          "tags": {
+            "architecture": "Islom me'morchiligi",
+            "tilework": "Ko'k naqshlar",
+            "heritage": "Ipak yo'li merosi"
+          }
+        }
+      }
+    },
+    "experiences": {
+      "lede": "HADITH Hotelning har bir qirrasini kashf eting",
+      "heading": "To'liq mehmonxona tajribasi",
+      "introCopy": "HADITH Hoteldagi turishni shakllantiradigan makon va tajribalarni — nafis turar joy va taomlanishdan sog'lomlik va unutilmas bayramlargacha — kashf eting.",
+      "cardEyebrow": "Mehmonxona tajribasi",
+      "explore": "Kashf eting",
+      "previous": "Oldingi",
+      "next": "Keyingi",
+      "carouselAria": "Mehmonxona tajribalari",
+      "progressAria": "Karusel jarayoni",
+      "prevSlideAria": "Oldingi slayd, {title}",
+      "nextSlideAria": "Keyingi slayd, {title}",
+      "slides": {
+        "suitesRooms": "Xonalar va lyukslar",
+        "cafeDining": "Kafe va restoranlar",
+        "experience": "Tajriba",
+        "meetingsWeddings": "Uchrashuvlar va to'ylar"
+      }
+    },
+    "farewell": {
+      "eyebrow": "Sizni kutib olishimizgacha",
+      "title": "Ba'zi mehmonxonalar sizga tunash uchun joy beradi. HADITH Hotel esa Imom Al-Buxoriy majmuasida eslab qolishga arzigulik osoyishtalik bag'ishlaydi.",
+      "statsAriaLabel": "Mehmonxona profili ko'rsatkichlari",
+      "downloadsLabel": "Profil yuklab olishlari",
+      "visitorsLabel": "Profil tashrif buyuruvchilari",
+      "viewLocations": "Manzillarni ko'rish",
+      "downloadProfile": "Profilni yuklab olish",
+      "reserve": "Band qilish",
+      "comingSoon": {
+        "eyebrow": "Bandlash",
+        "body": "Onlayn bandlash tez orada mavjud bo'ladi. HADITH Hotelga bildirgan qizig'ingiz uchun rahmat."
+      }
+    },
+    "location": {
+      "eyebrow": "Bizning manzilimiz",
+      "titleLine1": "Bizga",
+      "titleLine2": "qanday yetib borish",
+      "mapTitle": "Google Xaritada HADITH Hotel manzili",
+      "mapOverlayAria": "Google Xaritada HADITH Hotel manzilini ochish",
+      "viewOnMaps": "Google Xaritada ko'rish"
+    }
+  },
+  "suitesRooms": {
+    "metaTitle": "Xonalar va lyukslar",
+    "hero": {
+      "suite": "HADITH Hotel Suite",
+      "junior": "Junior Suite yashash va ovqatlanish zonasi"
+    },
+    "intro": {
+      "title": "Xonalar va lyukslar",
+      "body": "Qur'ondagi suralar soniga teng — 114 ta o'ylab tuzilgan xona va lyuks, Imom Al-Buxoriy majmuasida orom olish uchun."
+    },
+    "tabs": {
+      "all": "Barcha xonalar",
+      "accessible": "Nogironlar uchun xonalar"
+    },
+    "accessibleNotice": {
+      "eyebrow": "Nogironlar uchun xonalar",
+      "title": "Tez kunda",
+      "body": "Biz nogironlar uchun xonalar haqida batafsil ma'lumot tayyorlamoqdamiz. Iltimos, yaqinda qayta tekshiring."
+    },
+    "card": {
+      "comingSoonBadge": "Tez kunda",
+      "viewDetails": "Batafsil ko'rish",
+      "comingSoonAria": "{name} — tez kunda",
+      "viewDetailsAria": "{name} tafsilotlarini ko'rish",
+      "unitsOnly": "{units} xona",
+      "unitsAndSize": "{units} xona · {size}"
+    },
+    "comingSoonBody": "{name} tez orada mavjud bo'ladi.",
+    "rooms": {
+      "president": "President Suite",
+      "junior": "Junior Suite",
+      "suite": "Suite",
+      "balcony": "Balcony Room",
+      "standard": "Standard Room"
+    },
+    "specs": {
+      "groupTitles": {
+        "roomOverview": "Xona haqida",
+        "bedsAndBedding": "Karavotlar va choyshablar",
+        "roomFeatures": "Xona jihozlari",
+        "bathroom": "Hammom jihozlari",
+        "foodBeverages": "Oziq-ovqat va ichimliklar",
+        "additionalFeatures": "Qo'shimcha jihozlar"
+      },
+      "overview": {
+        "maxOccupancy": "Maksimal sig'im: 2 kishi",
+        "nonSmoking": "Bu xonada chekish taqiqlanadi",
+        "wirelessInternet": "Simsiz internet"
+      },
+      "bedding": [
+        "Bir karavotga birlashtiriladigan ikkita 100 sm bir kishilik karavot",
+        "Maksimal sig'im: 2 kishi"
+      ],
+      "bathroom": [
+        "Dush",
+        "Bide",
+        "Yoritilgan bezanish oynasi",
+        "Soch quritgich",
+        "Xalat",
+        "Shippak"
+      ],
+      "foodBeverages": ["Elektr choynak", "Muzlatgich"],
+      "baseRoomFeatures": [
+        "Konditsioner",
+        "Seyf",
+        "Kiyim shkafi",
+        "Ilgichlar",
+        "Stol va stul",
+        "Televizor",
+        "Telefon"
+      ],
+      "suiteRoomFeatures": [
+        "Konditsioner",
+        "Seyf",
+        "Kiyim shkafi",
+        "Ilgichlar",
+        "Stol va stul",
+        "Tortmali TV skafi",
+        "Televizor",
+        "Telefon"
+      ],
+      "additional": {
+        "junior": ["Ovqatlanish stoli va stullari", "Divan va kofe stolchasi"],
+        "suite": ["Ovqatlanish stoli va stullari", "Kreslo va kofe stolchasi"],
+        "balcony": ["Shaxsiy balkon"]
+      }
+    },
+    "detail": {
+      "closeDetails": "Xona tafsilotlarini yopish",
+      "close": "Yopish",
+      "photoAria": "{name} rasmi {n}",
+      "morePhotosSoon": "Ko'proq rasmlar — tez kunda",
+      "morePhotosSoonAria": "Ko'proq rasmlar — tez kunda",
+      "prev": "Oldingi",
+      "next": "Keyingi",
+      "prevAria": "Oldingi rasm",
+      "nextAria": "Keyingi rasm",
+      "summaryBody": "{units} xona, konditsioner, chekish taqiqlangan, simsiz internet"
+    }
+  },
+  "cafeDining": {
+    "metaTitle": "Kafe va restoranlar",
+    "hero": {
+      "cafe": "7oz kafe peshtaxtasi va lounge",
+      "buffet": "Saji Nusantara bufet peshtaxtasi"
+    },
+    "openWebsite": "Veb-saytni ochish",
+    "venues": {
+      "restaurant": {
+        "heading": "Ipak yo'li ta'mini his eting",
+        "name": "Saji Nusantara",
+        "subname": "O'zbek taomlari",
+        "description": "Nafis oq marmar mihrob bilan bezatilgan 120 o'rinli ovqatlanish zali. Taomlar ro'yxati Samarqand palovi va Buxoro somsasidan tortib, oshpazlar guruhimiz tomonidan tayyorlangan Indoneziya uslubidagi taomlargacha Ipak yo'li bo'ylab sayohat qiladi.",
+        "highlights": [
+          "Nonushta, tushlik va kechki ovqat",
+          "Alohida ovqatlanish zali",
+          "Halol sertifikatlangan"
+        ],
+        "gallery": {
+          "diningRoom": "Saji Nusantara ovqatlanish zali",
+          "buffetCounter": "Saji Nusantara bufet peshtaxtasi"
+        }
+      },
+      "cafe": {
+        "heading": "Indoneziya ta'mi",
+        "name": "7oz Espresso",
+        "description": "Butun arxipelagdan tanlab olingan Indoneziya shirinliklari va maxsus qahvalarni, jumladan Kopi Luwak kabi klassikalarni kashf eting. Kafe Indoneziyaning boy qahva madaniyatini nishonlaydigan iliq ijtimoiy muhitni taklif etadi.",
+        "highlights": [
+          "Indoneziya maxsus qahvasi",
+          "Tanlangan Indoneziya shirinliklari",
+          "Bo'shashgan ijtimoiy muhit"
+        ],
+        "gallery": {
+          "counterLounge": "7oz kafe peshtaxtasi va lounge",
+          "coffeeBar": "7oz qahva bari"
+        }
+      }
+    },
+    "carousel": {
+      "ariaLabel": "{name} galereyasi",
+      "previous": "Oldingi",
+      "next": "Keyingi",
+      "prevPhotoAria": "{name}ning oldingi rasmi",
+      "nextPhotoAria": "{name}ning keyingi rasmi"
+    }
+  },
+  "experience": {
+    "metaTitle": "Tajriba",
+    "hero": {
+      "hamam": "HADITH Hotel turk hammomi",
+      "pool": "HADITH Hotel yopiq basseyni"
+    },
+    "wellness": {
+      "heading": "Sog'lomlashtirish va Dam Olish",
+      "lede": "Spa rituallari, termal tajribalar va tinch yopiq basseyn bilan tanangiz va ongingizni tiklang.",
+      "ariaLabel": "Sog'lomlashtirish va dam olish inshootlari",
+      "cardEyebrow": "Sog'lomlashtirish va Dam Olish",
+      "prevSlideAria": "Oldingi slayd, {title}",
+      "nextSlideAria": "Keyingi slayd, {title}",
+      "previous": "Oldingi",
+      "next": "Keyingi",
+      "progressAria": "Karusel jarayoni",
+      "photoSoonAria": "{title} — tez orada",
+      "photoSoon": "Rasm — Tez Orada",
+      "slides": {
+        "spa": "Spa / Massaj Xonasi",
+        "sauna": "Sauna",
+        "hammam": "Turk Hammomi",
+        "pool": "Yopiq Basseyn",
+        "salon": "Go'zallik Saloni",
+        "fitness": "Fitnes Markazi"
+      }
+    },
+    "destinations": {
+      "eyebrow": "Mehmonxonadan Tashqarida",
+      "heading": "Samarqandni Kashf Eting",
+      "lede": "Imom Al-Buxoriy majmuasining ruhiy markazidan tortib, tarixiy Samarqanddagi Registon maydonigacha, mehmonxona joylashuvi asosida shakllangan ikki sayohatni kashf eting.",
+      "highlightsAriaLabel": "Xususiyatlar",
+      "mapsAria": "{name}ni Google Xaritada ochish",
+      "maps": "Xarita",
+      "galleryAria": "{title} galereyasi",
+      "prevMediaAria": "{title} galereyasidagi oldingi material",
+      "nextMediaAria": "{title} galereyasidagi keyingi material",
+      "galleryProgressAria": "{title} galereyasi jarayoni",
+      "previous": "Oldingi",
+      "next": "Keyingi",
+      "journeys": {
+        "imamAlBukhariLegacy": {
+          "eyebrow": "Qisqa tashrif · taxminan 0,9 km",
+          "title": "Imom Al-Buxoriy Merosi",
+          "description": "Imom Muhammad Al-Buxoriyning dafn etilgan joyiga tashrif buyuring, so'ngra ilm-fan, qo'lyozmalar, tadqiqotlar va xalqaro almashinuvga bag'ishlangan markazga o'ting.",
+          "highlights": ["Ruhiy ziyorat", "Islom ilmi", "Monumental me'morchilik"],
+          "destinations": {
+            "mausoleum": { "name": "Imom Al-Buxoriy Maqbarasi", "detail": "Mehmonxonadan 0,9 km" },
+            "center": { "name": "Imom Buxoriy Xalqaro Markazi", "detail": "Mehmonxonadan 0,9 km" }
+          },
+          "slideAlts": [
+            "HADITH Hotel yaqinidagi Imom Al-Buxoriy Maqbarasi majmuasi",
+            "Imom Al-Buxoriy majmuasidagi ichki zal",
+            "Imom Buxoriy Xalqaro Markazidagi ko'rgazma",
+            "Imom Buxoriy Xalqaro Markazida namoyish etilgan islomiy qo'lyozmalar",
+            "Imom Al-Buxoriy majmuasi hududidagi masjid va bog'lar"
+          ]
+        },
+        "registanSquare": {
+          "eyebrow": "Yarim kunlik sayohat · taxminan 17,2 km",
+          "title": "Registon Maydoni",
+          "description": "Samarqandning yuragi — Registon maydoniga qadam qo'ying, u yerda uch buyuk madrasa Markaziy Osiyodagi eng mashhur me'moriy majmualardan birini tashkil etadi. Ulug' peshtoqlar, nozik ko'k naqshlar va asrlar davomida davom etgan Ipak yo'li tarixini kashf eting.",
+          "highlights": ["Islom me'morchiligi", "Ko'k naqshlar", "Ipak yo'li merosi"],
+          "destinations": {
+            "square": { "name": "Registon Maydoni", "detail": "Mehmonxonadan 17,2 km" },
+            "madrasas": { "name": "Ulug'bek, Sherdor va Tillakori Madrasalari", "detail": "Majmua ichida" }
+          },
+          "slideAlts": [
+            "Samarqanddagi Registon maydoni video sayohati",
+            "Tillakori va Sherdor madrasalari bilan quyosh botishida Registon maydoni",
+            "Uch Temuriylar davri madrasasi bilan o'ralgan Registon maydoni hovlisi",
+            "Registon maydonidagi ulug' peshtoq va ko'k naqshlar"
+          ]
+        }
+      }
+    },
+    "active": {
+      "heading": "Faol Dam Olish va Oila",
+      "lede": "Dam olish paytida faol bo'lishni afzal ko'radigan mehmonlar uchun kortlar va o'yin maydonchalari.",
+      "ariaLabel": "Faol dam olish va oila inshootlari",
+      "badge": "Tez Orada",
+      "prevItemAria": "Oldingi: {name}",
+      "nextItemAria": "Keyingi: {name}",
+      "prevFacilityAria": "Oldingi inshoot",
+      "nextFacilityAria": "Keyingi inshoot",
+      "previous": "Oldingi",
+      "next": "Keyingi",
+      "progressAria": "Karusel jarayoni",
+      "items": {
+        "tennis": "Tennis Korti",
+        "padel": "Padel Korti",
+        "kidsPlayground": "Bolalar O'yin Maydonchasi"
+      }
+    }
+  },
+  "meetingsWeddings": {
+    "metaTitle": "Uchrashuvlar va To'ylar",
+    "hero": {
+      "hall": "HADITH Hotel'dagi uchrashuvlar va to'ylar zali"
+    },
+    "intro": {
+      "eyebrow": "Uchrashuvlar va To'ylar",
+      "heading": "Har bir tadbir uchun makon",
+      "body": "Diqqat markazidagi uchrashuvlar, rasmiy yig'ilishlar va to'y marosimlar uchun nafis muhit."
+    },
+    "eventUses": {
+      "eyebrow": "Uchrashuvlar va To'ylar",
+      "heading": "Bitta Zal, Ko'plab Imkoniyatlar",
+      "lead": "Har bir tadbirning xususiyati va ko'lamiga mos ravishda diqqat bilan tashkil etilgan moslashuvchan makon.",
+      "meetings": {
+        "eyebrow": "Biznes Tadbirlari",
+        "title": "Uchrashuvlar va Konferensiyalar",
+        "description": "Zamonaviy jihozlar bilan qo'llab-quvvatlanadigan moslashuvchan tartiblar bilan zalni diqqat markazidagi uchrashuvlar, konferensiyalar va korporativ yig'ilishlar uchun sozlang.",
+        "highlights": ["Moslashuvchan tadbir tartibi", "Zamonaviy jihozlar", "Alohida tadbirlar jamoasi"]
+      },
+      "weddings": {
+        "eyebrow": "Ijtimoiy Tadbirlar",
+        "title": "To'ylar va Bayramlar",
+        "description": "Bir xil zalni 250 tagacha mehmonni qabul qiladigan to'ylar va ijtimoiy bayramlar uchun nafis makonga aylantiring.",
+        "highlights": ["Nafis banket zali", "250 tagacha mehmon", "To'ylar va ijtimoiy tadbirlar"]
+      }
+    },
+    "facts": {
+      "heading": "Makon Tafsilotlari",
+      "capacity": { "value": "250 Mehmon", "label": "Maksimal Sig'im" },
+      "setups": { "value": "Moslashuvchan", "label": "Tadbir Tartibi" },
+      "facilities": { "value": "Zamonaviy", "label": "Jihozlar" }
+    },
+    "enquiry": {
+      "title": "Tadbiringizni Rejalashtiring",
+      "body": "Bizga kelayotgan uchrashuv, to'y yoki bayram haqida ma'lumot bering. Jamoamiz talablaringizga mos tadbirni rejalashtirishga yordam beradi.",
+      "button": "Taklif So'rash",
+      "comingSoonEyebrow": "Tadbir So'rovi",
+      "comingSoonBody": "Tadbir so'rovlari tez orada ochiladi. HADITH Hotel'ni tadbiringiz uchun ko'rib chiqayotganingiz uchun rahmat."
+    }
+  },
+  "reviews": {
+    "metaTitle": "Hikoyalar va Voqealar",
+    "intro": {
+      "eyebrow": "HADITH Hikoyalari",
+      "heading": "Sharhlar"
+    },
+    "people": {
+      "mohamedShaheemAliSaeed": { "name": "Mohamed Shaheem Ali Saeed", "role": "Maldiv Respublikasi Islom Ishlari vaziri" },
+      "shadyAlSuleiman": { "name": "Shady Al Suleiman", "role": "Avstraliya Musulmonlari Birlashgan Uyushmasi Prezidenti" },
+      "syekhMohamedElDuwaini": { "name": "Syekh Mohamed El Duwaini", "role": "Al-Azhar Al-Sharif Bosh Kotib O'rinbosari" },
+      "drZulkifliHasan": { "name": "Dr. Zulkifli Hasan", "role": "Malayziya Diniy Ishlar Vaziri" },
+      "talgatSafichTadzetdinov": { "name": "Talgat Safich Tadzetdinov (Tajuddin)", "role": "Rossiya Musulmonlari Markaziy Ruhiy Boshqarmasi Bosh Muftiysi va Rahbari" },
+      "emadAlDinHamdan": { "name": "Emad Al-Din Hamdan", "role": "Falastin Davlati Madaniyat Vaziri" },
+      "reviewLandscape": { "name": "Imad Abdullah Hamdan", "role": "Falastin Davlati Madaniyat Vaziri" }
+    },
+    "testimonialQuotes": {
+      "syekhMohamedElDuwaini": "Ajoyib xizmat ko'rsatuvchi zo'r mehmonxona. Alloh uning davomli muvaffaqiyatini barakali qilsin.",
+      "mohamedShaheemAliSaeed": "Ajoyib xizmat va Imom Al-Buxoriy Majmuasiga strategik yaqinlikdagi hayratlanarli mehmonxona.",
+      "shadyAlSuleiman": "Ajoyib joyda joylashgan juda yaxshi mehmonxona. Samarqandga tashrif buyuruvchilarga tavsiya etaman.",
+      "emadAlDinHamdan": "Chiroyli, zamonaviy, yaxshi boshqariladigan va Imom Al-Buxoriy Majmuasiga yaqin joylashgan.",
+      "drZulkifliHasan": "Samarqanddagi juda strategik joylashgan, ta'sirli Indoneziya mehmonxonasi.",
+      "talgatSafichTadzetdinov": "Bu mehmonxona butun dunyo musulmonlari, ayniqsa O'zbekiston xalqining faxridir."
+    },
+    "videoReviews": {
+      "ariaLabel": "Mehmonlarning video sharhlari",
+      "playAria": "{name}ning sharhini ijro etish",
+      "prevAria": "Oldingi hikoya",
+      "nextAria": "Keyingi hikoya",
+      "closeReviewAria": "Sharhni yopish",
+      "reviewByAria": "{name}dan sharh"
+    },
+    "videoShowcase": {
+      "eyebrow": "Tanlangan Tadbir",
+      "title": "Birinchi Xalqaro Konferensiya",
+      "citeTitle": "Al-Jami’ al-Musnad al-Sahih: The Book of an Ummah",
+      "bodyRest": ", HADITH Hotel, Imom al-Buxoriy Yodgorlik Majmuasi, Samarqand, O'zbekistonda 2026-yil 9–10-iyul kunlari o'tkazilgan."
+    },
+    "testimonials": {
+      "eyebrow": "Ularning So'zlari",
+      "heading": "Mehmonlar Fikri",
+      "ariaLabel": "Mehmonlar sharhlari",
+      "prevAria": "Oldingi sharh",
+      "nextAria": "Keyingi sharh",
+      "quotePlaceholder": "Mehmon fikri tez orada qo'shiladi.",
+      "photoPlaceholder": "Rasm"
+    }
+  },
+  "gallery": {
+    "metaTitle": "Galereya",
+    "eyebrow": "HADITH Hotel Ichida",
+    "title": "Galereya",
+    "body": "Mehmonxona, uning maydonlari va uni o'rab turgan meros bo'ylab vizual sayohat.",
+    "gridAriaLabel": "HADITH Hotel foto galereyasi",
+    "viewAria": "{alt}ni ko'rish",
+    "lightbox": {
+      "ariaLabel": "Galereya rasmi",
+      "closeAria": "Rasmni yopish"
+    },
+    "images": {
+      "hotelExterior": "Quyosh botishida HADITH Hotel tashqi ko'rinishi",
+      "juniorSuite": "HADITH Hotel'dagi Junior Suite ichki qismi",
+      "restaurant": "HADITH Hotel'dagi restoran ovqatlanish zali",
+      "buffet": "HADITH Hotel'dagi bufet tajribasi",
+      "cafe": "HADITH Hotel'dagi kafe",
+      "eventsHall": "HADITH Hotel'dagi tadbirlar zali",
+      "indoorPool": "HADITH Hotel'dagi yopiq basseyn",
+      "turkishHammam": "HADITH Hotel'dagi turk hammomi",
+      "massageSuite": "HADITH Hotel'dagi massaj xonasi",
+      "sauna": "HADITH Hotel'dagi sauna",
+      "fitnessCentre": "HADITH Hotel'dagi fitnes markazi",
+      "tennisCourt": "HADITH Hotel'dagi tennis korti",
+      "padelCourt": "HADITH Hotel'dagi padel korti",
+      "playground": "HADITH Hotel'dagi bolalar o'yin maydonchasi",
+      "cafeBar": "HADITH Hotel'dagi 7oz qahva bari"
+    }
+  }
+}

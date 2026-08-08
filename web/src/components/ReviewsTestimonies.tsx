@@ -2,124 +2,116 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { useTranslations } from "next-intl";
 import SiteImage from "@/components/SiteImage";
 import { asset } from "@/lib/asset";
 
-type VideoReview = {
+type VideoReviewConfig = {
   id: string;
-  name: string;
-  role: string;
+  personKey: string;
   src: string;
   poster: string;
 };
 
+type TestimonialConfig = {
+  id: string;
+  personKey: string;
+  quoteKey?: string;
+  photo?: string;
+  /** Keeps the face in frame once the 3:4 portrait crop kicks in. */
+  photoPosition?: string;
+};
+
+type Person = { name: string; role: string };
+type VideoReview = { id: string; name: string; role: string; src: string; poster: string };
 type Testimonial = {
   id: string;
   quote?: string;
   name: string;
   role: string;
   photo?: string;
-  /** Keeps the face in frame once the 3:4 portrait crop kicks in. */
   photoPosition?: string;
 };
 
-const videoReviews: VideoReview[] = [
+const videoReviewConfigs: VideoReviewConfig[] = [
   {
     id: "mohamed-shaheem-ali-saeed",
-    name: "Mohamed Shaheem Ali Saeed",
-    role: "Minister of Islamic Affairs, Republic of Maldives",
+    personKey: "mohamedShaheemAliSaeed",
     src: "/videos/mohamed-shaheem-ali-saeed.mp4",
     poster: "/videos/mohamed-shaheem-ali-saeed-poster.jpg",
   },
   {
     id: "shady-al-suleiman",
-    name: "Shady Al Suleiman",
-    role: "President of United Muslims of Australia",
+    personKey: "shadyAlSuleiman",
     src: "/videos/shady-al-suleiman.mp4",
     poster: "/videos/shady-al-suleiman-poster.jpg",
   },
   {
     id: "syekh-mohamed-el-duwaini",
-    name: "Syekh Mohamed El Duwaini",
-    role: "Undersecretary of Al-Azhar Al-Sharif",
+    personKey: "syekhMohamedElDuwaini",
     src: "/videos/syekh-mohamed-el-duwaini.mp4",
     poster: "/videos/syekh-mohamed-el-duwaini-poster.jpg",
   },
   {
     id: "dr-zulkifli-hasan",
-    name: "Dr. Zulkifli Hasan",
-    role: "Minister of Religious Affairs, Malaysia",
+    personKey: "drZulkifliHasan",
     src: "/videos/dr-zulkifli-hasan.mp4",
     poster: "/videos/dr-zulkifli-hasan-poster.jpg",
   },
   {
     id: "talgat-safich-tadzetdinov",
-    name: "Talgat Safich Tadzetdinov (Tajuddin)",
-    role: "Grand Mufti and Head of the Central Spiritual Administration of Muslims of Russia",
+    personKey: "talgatSafichTadzetdinov",
     src: "/videos/talgat-safich-tadzetdinov.mp4",
     poster: "/videos/talgat-safich-tadzetdinov-poster.jpg",
   },
 ];
 
-const landscapeReview = {
+const landscapeReviewConfig: VideoReviewConfig = {
   id: "review-landscape",
-  name: "Imad Abdullah Hamdan",
-  role: "Minister of Culture of the State of Palestine",
+  personKey: "reviewLandscape",
   src: "/videos/imad-abdullah-hamdan.mp4",
   poster: "/videos/imad-abdullah-hamdan-poster.jpg",
 };
 
-const testimonials: Testimonial[] = [
+const testimonialConfigs: TestimonialConfig[] = [
   {
     id: "syekh-mohamed-el-duwaini",
-    quote:
-      "Outstanding hotel with excellent service. May Allah bless its continued success.",
-    name: "Syekh Mohamed El Duwaini",
-    role: "Undersecretary of Al-Azhar Al-Sharif",
+    personKey: "syekhMohamedElDuwaini",
+    quoteKey: "syekhMohamedElDuwaini",
     photo: "/images/testimonials/syekh-mohamed-el-duwaini.webp",
     photoPosition: "50% 20%",
   },
   {
     id: "mohamed-shaheem-ali-saeed",
-    quote:
-      "An amazing hotel with excellent service and a strategic location near the Imam Al-Bukhari Complex.",
-    name: "Mohamed Shaheem Ali Saeed",
-    role: "Minister of Islamic Affairs, Republic of Maldives",
+    personKey: "mohamedShaheemAliSaeed",
+    quoteKey: "mohamedShaheemAliSaeed",
     photo: "/images/testimonials/mohamed-shaheem-ali-saeed.webp",
   },
   {
     id: "shady-al-suleiman",
-    quote:
-      "A very nice hotel in a wonderful location. Highly recommended for visitors to Samarkand.",
-    name: "Shady Al Suleiman",
-    role: "President of United Muslims of Australia",
+    personKey: "shadyAlSuleiman",
+    quoteKey: "shadyAlSuleiman",
     photo: "/images/testimonials/shady-al-suleiman.webp",
     photoPosition: "50% 15%",
   },
   {
     id: "emad-al-din-hamdan",
-    quote:
-      "Beautiful, modern, well-managed, and perfectly located near the Imam Al-Bukhari Complex.",
-    name: "Emad Al-Din Hamdan",
-    role: "Minister of Culture of the State of Palestine",
+    personKey: "emadAlDinHamdan",
+    quoteKey: "emadAlDinHamdan",
     photo: "/images/testimonials/emad-al-din-hamdan.webp",
     photoPosition: "62% 50%",
   },
   {
     id: "dr-zulkifli-hasan",
-    quote:
-      "An impressive Indonesian hotel in Samarkand with a very strategic location.",
-    name: "Dr. Zulkifli Hasan",
-    role: "Minister of Religious Affairs, Malaysia",
+    personKey: "drZulkifliHasan",
+    quoteKey: "drZulkifliHasan",
     photo: "/images/testimonials/dr-zulkifli-hasan.webp",
     photoPosition: "50% 28%",
   },
   {
     id: "talgat-safich-tadzetdinov",
-    quote:
-      "This hotel is the pride of all Muslims in the world, and above all, the people of Uzbekistan.",
-    name: "Talgat Safich Tadzetdinov (Tajuddin)",
-    role: "Grand Mufti and Head of the Central Spiritual Administration of Muslims of Russia",
+    personKey: "talgatSafichTadzetdinov",
+    quoteKey: "talgatSafichTadzetdinov",
     photo: "/images/testimonials/talgat-safich-tadzetdinov.webp",
     photoPosition: "50% 18%",
   },
@@ -180,9 +172,11 @@ const DRAG_THRESHOLD = 8; // px before a pointer gesture counts as a drag
 function ReviewLightbox({
   review,
   onClose,
+  t,
 }: {
   review: VideoReview;
   onClose: () => void;
+  t: ReturnType<typeof useTranslations>;
 }) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -215,7 +209,7 @@ function ReviewLightbox({
       <button
         type="button"
         className="review-lightbox__backdrop"
-        aria-label="Close review"
+        aria-label={t("videoReviews.closeReviewAria")}
         onClick={onClose}
       />
 
@@ -223,7 +217,7 @@ function ReviewLightbox({
         className="review-lightbox__dialog"
         role="dialog"
         aria-modal="true"
-        aria-label={`Review by ${review.name}`}
+        aria-label={t("videoReviews.reviewByAria", { name: review.name })}
       >
         <div className="review-lightbox__toolbar">
           <div>
@@ -234,7 +228,7 @@ function ReviewLightbox({
             ref={closeRef}
             type="button"
             className="review-lightbox__close"
-            aria-label="Close review"
+            aria-label={t("videoReviews.closeReviewAria")}
             onClick={onClose}
           >
             <CloseIcon />
@@ -272,7 +266,13 @@ function ShowcaseVideo() {
   );
 }
 
-function VideoReviewsCarousel() {
+function VideoReviewsCarousel({
+  videoReviews,
+  t,
+}: {
+  videoReviews: VideoReview[];
+  t: ReturnType<typeof useTranslations>;
+}) {
   const count = videoReviews.length;
   const trackRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -432,7 +432,7 @@ function VideoReviewsCarousel() {
 
   const loopedReviews = useMemo(
     () => Array.from({ length: repeats }, () => videoReviews).flat(),
-    [repeats],
+    [repeats, videoReviews],
   );
 
   return (
@@ -441,7 +441,7 @@ function VideoReviewsCarousel() {
       className="video-reviews__carousel"
       role="region"
       aria-roledescription="carousel"
-      aria-label="Guest video reviews"
+      aria-label={t("videoReviews.ariaLabel")}
     >
       <div
         ref={viewportRef}
@@ -460,7 +460,7 @@ function VideoReviewsCarousel() {
               <button
                 type="button"
                 className="video-reviews__slide-media"
-                aria-label={`Play review by ${review.name}`}
+                aria-label={t("videoReviews.playAria", { name: review.name })}
                 onClick={() => openReview(review)}
               >
                 <SiteImage
@@ -491,7 +491,7 @@ function VideoReviewsCarousel() {
         <button
           type="button"
           className="carousel-arrow"
-          aria-label="Previous story"
+          aria-label={t("videoReviews.prevAria")}
           onClick={() => nudge(-1)}
         >
           <ChevronLeft />
@@ -499,7 +499,7 @@ function VideoReviewsCarousel() {
         <button
           type="button"
           className="carousel-arrow"
-          aria-label="Next story"
+          aria-label={t("videoReviews.nextAria")}
           onClick={() => nudge(1)}
         >
           <ChevronRight />
@@ -507,13 +507,19 @@ function VideoReviewsCarousel() {
       </div>
 
       {activeReview ? (
-        <ReviewLightbox review={activeReview} onClose={closeReview} />
+        <ReviewLightbox review={activeReview} onClose={closeReview} t={t} />
       ) : null}
     </div>
   );
 }
 
-function TestimonialsCarousel() {
+function TestimonialsCarousel({
+  testimonials,
+  t,
+}: {
+  testimonials: Testimonial[];
+  t: ReturnType<typeof useTranslations>;
+}) {
   const count = testimonials.length;
   const [perView, setPerView] = useState(2);
   const [index, setIndex] = useState(count);
@@ -550,7 +556,7 @@ function TestimonialsCarousel() {
           key: `${copy}-${item.id}`,
         })),
       ).flat(),
-    [],
+    [testimonials],
   );
 
   const goPrevious = () => {
@@ -586,7 +592,7 @@ function TestimonialsCarousel() {
       className="testimonials__carousel"
       role="region"
       aria-roledescription="carousel"
-      aria-label="Guest testimonials"
+      aria-label={t("testimonials.ariaLabel")}
     >
       <div className="testimonials__viewport">
         <div
@@ -610,7 +616,7 @@ function TestimonialsCarousel() {
                   <blockquote
                     className={`testimonial-card__quote${item.quote ? "" : " is-placeholder"}`}
                   >
-                    {item.quote ?? "Guest quote coming soon."}
+                    {item.quote ?? t("testimonials.quotePlaceholder")}
                   </blockquote>
                 </div>
                 <figcaption className="testimonial-card__person">
@@ -629,7 +635,7 @@ function TestimonialsCarousel() {
                         className="media-placeholder testimonial-card__photo-placeholder"
                         aria-hidden="true"
                       >
-                        Photo
+                        {t("testimonials.photoPlaceholder")}
                       </div>
                     )}
                   </div>
@@ -646,7 +652,7 @@ function TestimonialsCarousel() {
         <button
           type="button"
           className="carousel-arrow"
-          aria-label="Previous testimonial"
+          aria-label={t("testimonials.prevAria")}
           onClick={goPrevious}
         >
           <ChevronLeft />
@@ -654,7 +660,7 @@ function TestimonialsCarousel() {
         <button
           type="button"
           className="carousel-arrow"
-          aria-label="Next testimonial"
+          aria-label={t("testimonials.nextAria")}
           onClick={goNext}
         >
           <ChevronRight />
@@ -665,16 +671,45 @@ function TestimonialsCarousel() {
 }
 
 export function ReviewsTestimonies() {
+  const t = useTranslations("reviews");
+
+  const getPerson = (key: string): Person => ({
+    name: t(`people.${key}.name`),
+    role: t(`people.${key}.role`),
+  });
+
+  const videoReviews: VideoReview[] = videoReviewConfigs.map((config) => ({
+    id: config.id,
+    src: config.src,
+    poster: config.poster,
+    ...getPerson(config.personKey),
+  }));
+
+  const landscapeReview: VideoReview = {
+    id: landscapeReviewConfig.id,
+    src: landscapeReviewConfig.src,
+    poster: landscapeReviewConfig.poster,
+    ...getPerson(landscapeReviewConfig.personKey),
+  };
+
+  const testimonials: Testimonial[] = testimonialConfigs.map((config) => ({
+    id: config.id,
+    photo: config.photo,
+    photoPosition: config.photoPosition,
+    quote: config.quoteKey ? t(`testimonialQuotes.${config.quoteKey}`) : undefined,
+    ...getPerson(config.personKey),
+  }));
+
   return (
     <>
       <section className="video-reviews" aria-labelledby="video-reviews-heading">
         <div className="video-reviews__intro">
-          <p className="video-reviews__eyebrow">HADITH Stories</p>
+          <p className="video-reviews__eyebrow">{t("intro.eyebrow")}</p>
           <h1 id="video-reviews-heading" className="video-reviews__heading">
-            Reviews
+            {t("intro.heading")}
           </h1>
         </div>
-        <VideoReviewsCarousel />
+        <VideoReviewsCarousel videoReviews={videoReviews} t={t} />
 
         <article className="video-reviews__landscape">
           <video
@@ -684,7 +719,7 @@ export function ReviewsTestimonies() {
             controls
             playsInline
             preload="metadata"
-            aria-label={`Review by ${landscapeReview.name}`}
+            aria-label={t("videoReviews.reviewByAria", { name: landscapeReview.name })}
           />
           <p className="video-reviews__slide-name">{landscapeReview.name}</p>
           <p className="video-reviews__slide-role">{landscapeReview.role}</p>
@@ -697,14 +732,13 @@ export function ReviewsTestimonies() {
       >
         <div className="video-showcase__inner">
           <div className="video-showcase__card">
-            <p className="video-showcase__eyebrow">Featured Event</p>
+            <p className="video-showcase__eyebrow">{t("videoShowcase.eyebrow")}</p>
             <h2 id="video-showcase-heading" className="video-showcase__title">
-              The First International Conference
+              {t("videoShowcase.title")}
             </h2>
             <p className="video-showcase__body">
-              <cite>Al-Jami&rsquo; al-Musnad al-Sahih: The Book of an Ummah</cite>,
-              held at HADITH Hotel, Imam al-Bukhari Memorial Complex,
-              Samarkand, Uzbekistan, on 9–10 July 2026.
+              <cite>{t("videoShowcase.citeTitle")}</cite>
+              {t("videoShowcase.bodyRest")}
             </p>
           </div>
           <div className="video-showcase__media">
@@ -716,12 +750,12 @@ export function ReviewsTestimonies() {
       <section className="testimonials" aria-labelledby="testimonials-heading">
         <div className="testimonials__inner">
           <div className="testimonials__intro">
-            <p className="testimonials__eyebrow">In Their Words</p>
+            <p className="testimonials__eyebrow">{t("testimonials.eyebrow")}</p>
             <h2 id="testimonials-heading" className="testimonials__heading">
-              Guest Perspectives
+              {t("testimonials.heading")}
             </h2>
           </div>
-          <TestimonialsCarousel />
+          <TestimonialsCarousel testimonials={testimonials} t={t} />
         </div>
       </section>
     </>

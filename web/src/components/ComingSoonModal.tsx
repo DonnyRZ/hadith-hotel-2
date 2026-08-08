@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef } from "react";
+import { useTranslations } from "next-intl";
 
 type ComingSoonModalProps = {
   open: boolean;
@@ -12,9 +13,10 @@ type ComingSoonModalProps = {
 export function ComingSoonModal({
   open,
   onClose,
-  eyebrow = "Reservations",
-  body = "Online booking will be available shortly. Thank you for your interest in HADITH Hotel.",
+  eyebrow,
+  body,
 }: ComingSoonModalProps) {
+  const t = useTranslations("common.comingSoon");
   const titleId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
 
@@ -43,7 +45,7 @@ export function ComingSoonModal({
       <button
         type="button"
         className="coming-soon__backdrop"
-        aria-label="Close dialog"
+        aria-label={t("close")}
         onClick={onClose}
       />
       <div
@@ -52,18 +54,18 @@ export function ComingSoonModal({
         aria-modal="true"
         aria-labelledby={titleId}
       >
-        <p className="coming-soon__eyebrow">{eyebrow}</p>
+        <p className="coming-soon__eyebrow">{eyebrow ?? t("eyebrow")}</p>
         <h2 id={titleId} className="coming-soon__title">
-          Soonest
+          {t("title")}
         </h2>
-        <p className="coming-soon__body">{body}</p>
+        <p className="coming-soon__body">{body ?? t("body")}</p>
         <button
           ref={closeRef}
           type="button"
           className="coming-soon__close"
           onClick={onClose}
         >
-          Close
+          {t("close")}
         </button>
       </div>
     </div>

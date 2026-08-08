@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { HeroMedia, type HeroMediaSlide } from "@/components/HeroMedia";
 import { SoftOpeningFloat } from "@/components/SoftOpeningFloat";
 import { ScrollCue } from "@/components/ScrollCue";
@@ -42,6 +43,7 @@ function ChevronRight() {
 }
 
 export function HeroCarousel({ slides, intervalMs = 3000 }: HeroCarouselProps) {
+  const t = useTranslations("common.heroCarousel");
   const [index, setIndex] = useState(0);
   const count = slides.length;
 
@@ -94,7 +96,7 @@ export function HeroCarousel({ slides, intervalMs = 3000 }: HeroCarouselProps) {
           <button
             type="button"
             className="hero-carousel__arrow hero-carousel__arrow--prev"
-            aria-label="Previous slide"
+            aria-label={t("prevSlide")}
             onClick={goPrev}
           >
             <ChevronLeft />
@@ -102,7 +104,7 @@ export function HeroCarousel({ slides, intervalMs = 3000 }: HeroCarouselProps) {
           <button
             type="button"
             className="hero-carousel__arrow hero-carousel__arrow--next"
-            aria-label="Next slide"
+            aria-label={t("nextSlide")}
             onClick={goNext}
           >
             <ChevronRight />

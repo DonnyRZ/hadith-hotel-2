@@ -2,91 +2,85 @@
 
 import SiteImage from "@/components/SiteImage";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
-type GallerySlide = { src: string; label: string };
+type GallerySlide = { src: string; labelKey: string };
 
 type Venue = {
   id: string;
-  heading: string;
-  name: string;
-  subname?: string;
-  description: string;
-  highlights: string[];
+  key: string;
+  website?: string;
   variant: "blue" | "paper";
   reversed?: boolean;
   gallery: GallerySlide[];
 };
 
+function ExternalLinkIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" aria-hidden="true">
+      <path
+        d="M14 5h5v5M19 5l-8 8M18 13.5V18a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 18V9a1.5 1.5 0 0 1 1.5-1.5H12"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 const venues: Venue[] = [
   {
     id: "restaurant",
-    heading: "Savour the Silk Road",
-    name: "Saji Nusantara",
-    subname: "Uzbek Cuisine",
-    description:
-      "A 120-seat dining room framed by a slender white marble mihrab. The menu travels the Silk Road from Samarkand plov and Bukhara somsa to Indonesian-inspired creations prepared by our culinary team.",
-    highlights: [
-      "Breakfast, lunch and dinner",
-      "Private dining room",
-      "Halal certified",
-    ],
+    key: "restaurant",
+    website: "https://saji-nusantara.com/",
     variant: "blue",
     gallery: [
-      {
-        src: "/images/cafe-dining/saji-nusantara.webp",
-        label: "Saji Nusantara dining room",
-      },
-      {
-        src: "/images/cafe-dining/buffet.webp",
-        label: "Saji Nusantara buffet counter",
-      },
+      { src: "/images/cafe-dining/saji-nusantara.webp", labelKey: "diningRoom" },
+      { src: "/images/cafe-dining/buffet.webp", labelKey: "buffetCounter" },
     ],
   },
   {
     id: "cafe",
-    heading: "A Taste of Indonesia",
-    name: "7oz Espresso",
-    description:
-      "Discover curated Indonesian pastries and specialty coffees from across the archipelago, including classics such as Kopi Luwak. The cafe offers a warm social setting celebrating Indonesia’s rich coffee culture.",
-    highlights: [
-      "Indonesian specialty coffee",
-      "Curated Indonesian pastries",
-      "Relaxed social setting",
-    ],
+    key: "cafe",
+    website: "https://7oz-espresso.com/",
     variant: "paper",
     reversed: true,
     gallery: [
-      {
-        src: "/images/cafe-dining/cafe-1.webp",
-        label: "7oz cafe counter and lounge",
-      },
-      {
-        src: "/images/cafe-dining/cafe-2.webp",
-        label: "7oz coffee bar",
-      },
+      { src: "/images/cafe-dining/cafe-1.webp", labelKey: "counterLounge" },
+      { src: "/images/cafe-dining/cafe-2.webp", labelKey: "coffeeBar" },
     ],
   },
 ];
 
-function VenueMediaCarousel({ venue }: { venue: Venue }) {
+function VenueMediaCarousel({
+  venue,
+  name,
+  t,
+}: {
+  venue: Venue;
+  name: string;
+  t: ReturnType<typeof useTranslations>;
+}) {
   const slides = venue.gallery;
   const [index, setIndex] = useState(0);
   const count = slides.length;
   const wrap = (value: number) => (value + count) % count;
   const progress = ((index + 1) / count) * 100;
   const slide = slides[index]!;
+  const slideLabel = t(`venues.${venue.key}.gallery.${slide.labelKey}`);
 
   return (
     <div
       className="venue-carousel"
       role="region"
       aria-roledescription="carousel"
-      aria-label={`${venue.name} gallery`}
+      aria-label={t("carousel.ariaLabel", { name })}
     >
       <div
         className="venue__placeholder venue-carousel__slide venue-carousel__slide--photo"
         role="img"
-        aria-label={slide.label}
+        aria-label={slideLabel}
       >
         <SiteImage
           className="venue-carousel__image"
@@ -104,9 +98,9 @@ function VenueMediaCarousel({ venue }: { venue: Venue }) {
           type="button"
           className="venue-carousel__nav"
           onClick={() => setIndex((current) => wrap(current - 1))}
-          aria-label={`Previous ${venue.name} photo`}
+          aria-label={t("carousel.prevPhotoAria", { name })}
         >
-          <span aria-hidden="true">‹</span> Previous
+          <span aria-hidden="true">‹</span> {t("carousel.previous")}
         </button>
 
         <div className="venue-carousel__progress" aria-hidden="true">
@@ -117,9 +111,9 @@ function VenueMediaCarousel({ venue }: { venue: Venue }) {
           type="button"
           className="venue-carousel__nav"
           onClick={() => setIndex((current) => wrap(current + 1))}
-          aria-label={`Next ${venue.name} photo`}
+          aria-label={t("carousel.nextPhotoAria", { name })}
         >
-          Next <span aria-hidden="true">›</span>
+          {t("carousel.next")} <span aria-hidden="true">›</span>
         </button>
 
         <p className="venue-carousel__counter">
@@ -131,41 +125,62 @@ function VenueMediaCarousel({ venue }: { venue: Venue }) {
 }
 
 export function CafeDiningVenues() {
+  const t = useTranslations("cafeDining");
+
   return (
     <>
-      {venues.map((venue) => (
-        <section
-          key={venue.id}
-          className={`venue venue--${venue.variant}`}
-          aria-labelledby={`venue-heading-${venue.id}`}
-        >
-          <div className="venue__inner">
-            <h2 id={`venue-heading-${venue.id}`} className="venue__heading">
-              {venue.heading}
-            </h2>
+      {venues.map((venue) => {
+        const base = `venues.${venue.key}`;
+        const name = t(`${base}.name`);
+        const subname = t.has(`${base}.subname`) ? t(`${base}.subname`) : null;
+        const highlights = t.raw(`${base}.highlights`) as string[];
 
-            <div className={`venue__layout${venue.reversed ? " is-reversed" : ""}`}>
-              <div className="venue__media">
-                <VenueMediaCarousel venue={venue} />
-              </div>
+        return (
+          <section
+            key={venue.id}
+            className={`venue venue--${venue.variant}`}
+            aria-labelledby={`venue-heading-${venue.id}`}
+          >
+            <div className="venue__inner">
+              <h2 id={`venue-heading-${venue.id}`} className="venue__heading">
+                {t(`${base}.heading`)}
+              </h2>
 
-              <div className="venue__card">
-                <h3 className="venue__name">{venue.name}</h3>
-                {venue.subname ? (
-                  <p className="venue__subname">{venue.subname}</p>
-                ) : null}
-                <p className="venue__body">{venue.description}</p>
+              <div className={`venue__layout${venue.reversed ? " is-reversed" : ""}`}>
+                <div className="venue__media">
+                  <VenueMediaCarousel venue={venue} name={name} t={t} />
+                </div>
 
-                <ul className="venue__highlights">
-                  {venue.highlights.map((highlight) => (
-                    <li key={highlight}>{highlight}</li>
-                  ))}
-                </ul>
+                <div className="venue__card">
+                  <h3 className="venue__name">{name}</h3>
+                  {subname ? (
+                    <p className="venue__subname">{subname}</p>
+                  ) : null}
+                  <p className="venue__body">{t(`${base}.description`)}</p>
+
+                  <ul className="venue__highlights">
+                    {highlights.map((highlight) => (
+                      <li key={highlight}>{highlight}</li>
+                    ))}
+                  </ul>
+
+                  {venue.website ? (
+                    <a
+                      className="venue__website"
+                      href={venue.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <ExternalLinkIcon />
+                      <span>{t("openWebsite")}</span>
+                    </a>
+                  ) : null}
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-      ))}
+          </section>
+        );
+      })}
     </>
   );
 }

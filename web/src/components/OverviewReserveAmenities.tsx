@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import type { LucideIcon } from "lucide-react";
 import {
   Ban,
@@ -13,15 +14,16 @@ import {
 import { ComingSoonModal } from "@/components/ComingSoonModal";
 
 type AmenityRow = {
-  label: string;
+  key: string;
   value?: string;
-  detail?: string;
+  valueKey?: string;
+  detailKey?: string;
   href?: string;
 };
 
 type AmenityGroup = {
   id: string;
-  title: string;
+  titleKey: string;
   icon: LucideIcon;
   rows: AmenityRow[];
 };
@@ -30,29 +32,29 @@ type AmenityGroup = {
 const leftGroups: AmenityGroup[] = [
   {
     id: "accommodation",
-    title: "Accommodation",
+    titleKey: "groups.accommodation.title",
     icon: BedDouble,
     rows: [
-      { label: "Rooms & Suites", value: "114", href: "/suites-rooms" },
-      { label: "Standard Room", value: "62", href: "/suites-rooms" },
-      { label: "Balcony Room", value: "23", href: "/suites-rooms" },
-      { label: "Suite", value: "18", href: "/suites-rooms" },
-      { label: "Junior Suite", value: "9", href: "/suites-rooms" },
-      { label: "President Suite", value: "2", href: "/suites-rooms" },
+      { key: "groups.accommodation.roomsSuites", value: "114", href: "/suites-rooms" },
+      { key: "groups.accommodation.standardRoom", value: "62", href: "/suites-rooms" },
+      { key: "groups.accommodation.balconyRoom", value: "23", href: "/suites-rooms" },
+      { key: "groups.accommodation.suite", value: "18", href: "/suites-rooms" },
+      { key: "groups.accommodation.juniorSuite", value: "9", href: "/suites-rooms" },
+      { key: "groups.accommodation.presidentSuite", value: "2", href: "/suites-rooms" },
     ],
   },
   {
     id: "dining",
-    title: "Dining",
+    titleKey: "groups.dining.title",
     icon: UtensilsCrossed,
     rows: [
       {
-        label: "Saji Nusantara Restaurant",
-        detail: "Uzbek Cuisine",
+        key: "groups.dining.sajiNusantara",
+        detailKey: "groups.dining.sajiNusantaraDetail",
         href: "/cafe-dining",
       },
-      { label: "Bar & Lounge", href: "/cafe-dining" },
-      { label: "7oz Espresso Cafe", href: "/cafe-dining" },
+      { key: "groups.dining.barLounge", href: "/cafe-dining" },
+      { key: "groups.dining.espressoCafe", href: "/cafe-dining" },
     ],
   },
 ];
@@ -60,35 +62,40 @@ const leftGroups: AmenityGroup[] = [
 const rightGroups: AmenityGroup[] = [
   {
     id: "wellness",
-    title: "Wellness & Sport",
+    titleKey: "groups.wellness.title",
     icon: Flower2,
     rows: [
-      { label: "Indoor Pool", href: "/experience" },
-      { label: "Spa Center", href: "/experience" },
-      { label: "Sauna", href: "/experience" },
-      { label: "Turkish Hammam", href: "/experience" },
-      { label: "Fitness Centre", href: "/experience" },
-      { label: "Beauty Salon", href: "/experience" },
-      { label: "Tennis Court", href: "/experience#active" },
-      { label: "Kids’ Playground", href: "/experience#active" },
-      { label: "Padel Court", href: "/experience#active" },
+      { key: "groups.wellness.indoorPool", href: "/experience" },
+      { key: "groups.wellness.spaCenter", href: "/experience" },
+      { key: "groups.wellness.sauna", href: "/experience" },
+      { key: "groups.wellness.turkishHammam", href: "/experience" },
+      { key: "groups.wellness.fitnessCentre", href: "/experience" },
+      { key: "groups.wellness.beautySalon", href: "/experience" },
+      { key: "groups.wellness.tennisCourt", href: "/experience#active" },
+      { key: "groups.wellness.kidsPlayground", href: "/experience#active" },
+      { key: "groups.wellness.padelCourt", href: "/experience#active" },
     ],
   },
   {
     id: "events",
-    title: "Events & Culture",
+    titleKey: "groups.events.title",
     icon: CalendarDays,
     rows: [
       {
-        label: "Occupancy",
-        value: "250 persons",
+        key: "groups.events.occupancy",
+        valueKey: "groups.events.occupancyValue",
         href: "/meetings-weddings",
       },
     ],
   },
 ];
 
-function AmenityGroupBlock({ title, icon: Icon, rows }: AmenityGroup) {
+function AmenityGroupBlock({
+  titleKey,
+  icon: Icon,
+  rows,
+  t,
+}: AmenityGroup & { t: ReturnType<typeof useTranslations> }) {
   return (
     <div className="overview-amenities__group">
       <p className="overview-amenities__group-title">
@@ -97,44 +104,51 @@ function AmenityGroupBlock({ title, icon: Icon, rows }: AmenityGroup) {
           strokeWidth={1.25}
           aria-hidden
         />
-        {title}
+        {t(titleKey)}
       </p>
 
       <ul className="overview-amenities__rows">
-        {rows.map((row) => (
-          <li key={row.label} className="overview-amenities__row">
-            <span className="overview-amenities__row-main">
-              {row.href ? (
-                <Link href={row.href} className="overview-amenities__row-link">
-                  <span className="overview-amenities__row-label">{row.label}</span>
-                  {row.detail ? (
-                    <span className="overview-amenities__row-detail">
-                      {row.detail}
-                    </span>
-                  ) : null}
-                </Link>
-              ) : (
-                <>
-                  <span className="overview-amenities__row-label">{row.label}</span>
-                  {row.detail ? (
-                    <span className="overview-amenities__row-detail">
-                      {row.detail}
-                    </span>
-                  ) : null}
-                </>
-              )}
-            </span>
-            {row.value ? (
-              <span className="overview-amenities__row-value">{row.value}</span>
-            ) : null}
-          </li>
-        ))}
+        {rows.map((row) => {
+          const value = row.value ?? (row.valueKey ? t(row.valueKey) : undefined);
+          const label = t(row.key);
+          const detail = row.detailKey ? t(row.detailKey) : undefined;
+
+          return (
+            <li key={row.key} className="overview-amenities__row">
+              <span className="overview-amenities__row-main">
+                {row.href ? (
+                  <Link href={row.href} className="overview-amenities__row-link">
+                    <span className="overview-amenities__row-label">{label}</span>
+                    {detail ? (
+                      <span className="overview-amenities__row-detail">
+                        {detail}
+                      </span>
+                    ) : null}
+                  </Link>
+                ) : (
+                  <>
+                    <span className="overview-amenities__row-label">{label}</span>
+                    {detail ? (
+                      <span className="overview-amenities__row-detail">
+                        {detail}
+                      </span>
+                    ) : null}
+                  </>
+                )}
+              </span>
+              {value ? (
+                <span className="overview-amenities__row-value">{value}</span>
+              ) : null}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
 }
 
 export function OverviewReserveAmenities() {
+  const t = useTranslations("overview.amenities");
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
 
   return (
@@ -145,12 +159,12 @@ export function OverviewReserveAmenities() {
       >
         <div className="overview-amenities__inner">
           <div className="overview-amenities__reserve">
-            <p className="overview-amenities__lede">Begin your stay</p>
+            <p className="overview-amenities__lede">{t("lede")}</p>
             <h2
               id="overview-amenities-heading"
               className="overview-amenities__title"
             >
-              Reserve at HADITH Hotel
+              {t("title")}
             </h2>
             <button
               type="button"
@@ -158,22 +172,22 @@ export function OverviewReserveAmenities() {
               data-reserve-anchor
               onClick={() => setComingSoonOpen(true)}
             >
-              <span>Reserve</span>
+              <span>{t("reserve")}</span>
             </button>
           </div>
 
           <div className="overview-amenities__list-wrap">
-            <p className="overview-amenities__label">Amenities &amp; Hotel Information</p>
+            <p className="overview-amenities__label">{t("label")}</p>
 
             <div className="overview-amenities__groups">
               <div className="overview-amenities__col">
                 {leftGroups.map((group) => (
-                  <AmenityGroupBlock key={group.id} {...group} />
+                  <AmenityGroupBlock key={group.id} {...group} t={t} />
                 ))}
               </div>
               <div className="overview-amenities__col">
                 {rightGroups.map((group) => (
-                  <AmenityGroupBlock key={group.id} {...group} />
+                  <AmenityGroupBlock key={group.id} {...group} t={t} />
                 ))}
               </div>
             </div>
@@ -184,7 +198,7 @@ export function OverviewReserveAmenities() {
                 strokeWidth={1.25}
                 aria-hidden
               />
-              No Pets
+              {t("noPets")}
             </p>
           </div>
         </div>

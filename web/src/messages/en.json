@@ -1,0 +1,607 @@
+{
+  "common": {
+    "metadata": {
+      "title": "HADITH Hotel",
+      "titleTemplate": "%s | HADITH Hotel",
+      "description": "HADITH Hotel — a five-star sanctuary within the Complex of Imam Al Bukhari in Samarkand."
+    },
+    "nav": {
+      "overview": "Overview",
+      "suitesRooms": "Suites & Rooms",
+      "cafeDining": "Cafe & Dining",
+      "experience": "Experience",
+      "meetingsWeddings": "Meetings & Weddings",
+      "reviews": "Stories & Highlights",
+      "gallery": "Gallery"
+    },
+    "header": {
+      "homeAriaLabel": "HADITH Hotel home",
+      "logoAlt": "Hadits Hotel — Complex of Imam Al Bukhari",
+      "viewMap": "View Map",
+      "reserve": "Reserve",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu",
+      "mobileEyebrow": "Explore HADITH Hotel"
+    },
+    "languageSwitcher": {
+      "ariaLabel": "Select language"
+    },
+    "comingSoon": {
+      "eyebrow": "Reservations",
+      "title": "Soonest",
+      "body": "Online booking will be available shortly. Thank you for your interest in HADITH Hotel.",
+      "close": "Close"
+    },
+    "footer": {
+      "eyebrow": "HADITH Hotel",
+      "title": "Complex of Imam Al Bukhari",
+      "addressLine1": "RW5X+9P, Xo‘ja Ismoil,",
+      "addressLine2": "Samarqand viloyati, Uzbekistan",
+      "instagram": "Instagram",
+      "copyright": "© {year} HADITH Hotel. All rights reserved."
+    },
+    "pageHero": {
+      "galleryAriaLabel": "{title} image gallery",
+      "previous": "Previous",
+      "next": "Next",
+      "prevAria": "Show previous image",
+      "nextAria": "Show next image",
+      "gallery": "Gallery",
+      "imageStatus": "Image {current} of {total}: {label}"
+    },
+    "scrollCue": "Scroll to explore",
+    "heroCarousel": {
+      "prevSlide": "Previous slide",
+      "nextSlide": "Next slide"
+    },
+    "softOpening": {
+      "announcement": "Announcement",
+      "title": "Soft Opening September 5th 2026",
+      "dismiss": "Dismiss soft opening announcement"
+    }
+  },
+  "overview": {
+    "metaTitle": "Overview",
+    "hero": {
+      "hotelExterior": "HADITH Hotel exterior at sunset",
+      "resto": "Saji Nusantara restaurant dining room",
+      "juniorSuite": "Junior Suite living and dining area",
+      "suite": "HADITH Hotel Suite",
+      "pool": "HADITH Hotel swimming pool",
+      "massage": "Massage treatment room",
+      "sauna": "Hotel sauna",
+      "hamam": "Turkish hammam",
+      "suiteLiving": "Suite living area",
+      "hall": "Meetings and weddings hall",
+      "salon": "Beauty salon"
+    },
+    "welcome": {
+      "lede": "Welcome to HADITH Hotel",
+      "title": "Discover a sanctuary at the heart of Samarkand",
+      "body": "Born within the prestigious Imam Al Bukhari Complex — a cultural and spiritual landmark blending Silk Road heritage with refined modern development — HADITH Hotel is a contemporary sanctuary honouring the great hadith scholar, where Uzbek grandeur meets the warmth of Indonesian hospitality."
+    },
+    "stats": {
+      "roomsSuites": "Rooms & Suites",
+      "classRating": "Class Rating"
+    },
+    "amenities": {
+      "lede": "Begin your stay",
+      "title": "Reserve at HADITH Hotel",
+      "reserve": "Reserve",
+      "label": "Amenities & Hotel Information",
+      "noPets": "No Pets",
+      "groups": {
+        "accommodation": {
+          "title": "Accommodation",
+          "roomsSuites": "Rooms & Suites",
+          "standardRoom": "Standard Room",
+          "balconyRoom": "Balcony Room",
+          "suite": "Suite",
+          "juniorSuite": "Junior Suite",
+          "presidentSuite": "President Suite"
+        },
+        "dining": {
+          "title": "Dining",
+          "sajiNusantara": "Saji Nusantara Restaurant",
+          "sajiNusantaraDetail": "Uzbek Cuisine",
+          "barLounge": "Bar & Lounge",
+          "espressoCafe": "7oz Espresso Cafe"
+        },
+        "wellness": {
+          "title": "Wellness & Sport",
+          "indoorPool": "Indoor Pool",
+          "spaCenter": "Spa Center",
+          "sauna": "Sauna",
+          "turkishHammam": "Turkish Hammam",
+          "fitnessCentre": "Fitness Centre",
+          "beautySalon": "Beauty Salon",
+          "tennisCourt": "Tennis Court",
+          "kidsPlayground": "Kids’ Playground",
+          "padelCourt": "Padel Court"
+        },
+        "events": {
+          "title": "Events & Culture",
+          "occupancy": "Occupancy",
+          "occupancyValue": "250 persons"
+        }
+      }
+    },
+    "rooms": {
+      "lede": "Escape to a sanctuary of luxury",
+      "title": "Rooms and Suites",
+      "blurb": "From refined Standard rooms to the President Suite — 114 rooms and suites designed for rest after a day within the Imam Al Bukhari Complex.",
+      "typesAriaLabel": "Room types",
+      "unitsCount": "{units} units",
+      "learnMore": "Learn More",
+      "types": {
+        "standardRoom": "Standard Room",
+        "balconyRoom": "Balcony Room",
+        "suite": "Suite",
+        "juniorSuite": "Junior Suite",
+        "presidentSuite": "President Suite"
+      },
+      "gallery": {
+        "guestRoom1": "Guest room with an illuminated arched headboard",
+        "guestRoom2": "Spacious guest room interior at HADITH Hotel",
+        "guestRoom3": "Guest room bathroom at HADITH Hotel",
+        "guestRoom4": "Contemporary guest room interior at HADITH Hotel",
+        "guestRoom5": "Refined guest room interior at HADITH Hotel",
+        "ariaLabel": "Rooms and suites gallery",
+        "previous": "Previous",
+        "next": "Next",
+        "prevImageAria": "Show previous gallery image",
+        "nextImageAria": "Show next gallery image",
+        "expandAria": "View fullscreen image",
+        "prevImageLabel": "Previous image",
+        "nextImageLabel": "Next image",
+        "progressAria": "Carousel progress",
+        "lightboxTitle": "Rooms & Suites Gallery",
+        "closeFullscreen": "Close fullscreen image",
+        "close": "Close"
+      }
+    },
+    "destinations": {
+      "eyebrow": "Beyond the Hotel",
+      "previous": "Previous",
+      "next": "Next",
+      "prevAria": "Previous destination",
+      "nextAria": "Next destination",
+      "progressAria": "Destination carousel progress",
+      "maps": "Maps",
+      "highlightsAria": "Highlights",
+      "explore": "Explore Destinations",
+      "openInMaps": "Open {label} in Google Maps",
+      "slides": {
+        "imamAlBukhari": {
+          "journeyEyebrow": "A short visit · approximately 0.9 km",
+          "title": "The Legacy of Imam Al-Bukhari",
+          "description": "Visit the resting place of Imam Muhammad Al-Bukhari, then continue into a centre dedicated to scholarship, manuscripts, research, and international exchange.",
+          "videoLabel": "Imam Al-Bukhari Mausoleum complex near HADITH Hotel",
+          "facts": {
+            "mausoleum": { "label": "Imam Al-Bukhari Mausoleum", "detail": "0.9 km from the hotel" },
+            "centre": { "label": "Imam Bukhari International Centre", "detail": "0.9 km from the hotel" }
+          },
+          "tags": {
+            "pilgrimage": "Spiritual pilgrimage",
+            "scholarship": "Islamic scholarship",
+            "architecture": "Monumental architecture"
+          }
+        },
+        "registanSquare": {
+          "journeyEyebrow": "A half-day journey · approximately 17.2 km",
+          "title": "Registan Square",
+          "description": "Step into the heart of Samarkand at Registan Square, where three monumental madrasas create one of Central Asia's most iconic architectural ensembles. Discover grand portals, intricate blue tilework, and centuries of Silk Road history.",
+          "videoLabel": "Video tour of Registan Square in Samarkand",
+          "facts": {
+            "square": { "label": "Registan Square", "detail": "17.2 km from the hotel" },
+            "madrasas": { "label": "Ulugh Beg, Sher-Dor & Tilla-Kori Madrasas", "detail": "Within the complex" }
+          },
+          "tags": {
+            "architecture": "Islamic architecture",
+            "tilework": "Blue tilework",
+            "heritage": "Silk Road heritage"
+          }
+        }
+      }
+    },
+    "experiences": {
+      "lede": "Discover every side of HADITH Hotel",
+      "heading": "A Complete Hotel Experience",
+      "introCopy": "Explore the spaces and experiences that shape a stay at HADITH Hotel, from refined accommodation and dining to wellbeing and memorable celebrations.",
+      "cardEyebrow": "Hotel experience",
+      "explore": "Explore",
+      "previous": "Previous",
+      "next": "Next",
+      "carouselAria": "Hotel experiences",
+      "progressAria": "Carousel progress",
+      "prevSlideAria": "Previous slide, {title}",
+      "nextSlideAria": "Next slide, {title}",
+      "slides": {
+        "suitesRooms": "Suites & Rooms",
+        "cafeDining": "Cafe & Dining",
+        "experience": "Experience",
+        "meetingsWeddings": "Meetings & Weddings"
+      }
+    },
+    "farewell": {
+      "eyebrow": "Until we welcome you",
+      "title": "Some hotels give you somewhere to stay. HADITH Hotel gives you peace worth remembering at the Complex of Imam Al Bukhari.",
+      "statsAriaLabel": "Hotel profile metrics",
+      "downloadsLabel": "Profile Downloads",
+      "visitorsLabel": "Profile Visitors",
+      "viewLocations": "View locations",
+      "downloadProfile": "Download Profile",
+      "reserve": "Reserve",
+      "comingSoon": {
+        "eyebrow": "Reservations",
+        "body": "Online booking will be available shortly. Thank you for your interest in HADITH Hotel."
+      }
+    },
+    "location": {
+      "eyebrow": "Our Location",
+      "titleLine1": "Getting",
+      "titleLine2": "Here",
+      "mapTitle": "HADITH Hotel location on Google Maps",
+      "mapOverlayAria": "Open HADITH Hotel location in Google Maps",
+      "viewOnMaps": "View on Google Maps"
+    }
+  },
+  "suitesRooms": {
+    "metaTitle": "Suites & Rooms",
+    "hero": {
+      "suite": "HADITH Hotel Suite",
+      "junior": "Junior Suite living and dining area"
+    },
+    "intro": {
+      "title": "Rooms & Suites",
+      "body": "114 thoughtfully designed rooms and suites — matching the number of Surahs in the Quran — for restful stays within the Imam Al Bukhari Complex."
+    },
+    "tabs": {
+      "all": "All Rooms",
+      "accessible": "Accessible Rooms"
+    },
+    "accessibleNotice": {
+      "eyebrow": "Accessible Rooms",
+      "title": "Soonest",
+      "body": "We are preparing detailed information about our accessible rooms. Please check back soon."
+    },
+    "card": {
+      "comingSoonBadge": "Soonest",
+      "viewDetails": "View Details",
+      "comingSoonAria": "{name} — soonest",
+      "viewDetailsAria": "View {name} details",
+      "unitsOnly": "{units} units",
+      "unitsAndSize": "{units} units · {size}"
+    },
+    "comingSoonBody": "The {name} will be available soonest.",
+    "rooms": {
+      "president": "President Suite",
+      "junior": "Junior Suite",
+      "suite": "Suite",
+      "balcony": "Balcony Room",
+      "standard": "Standard Room"
+    },
+    "specs": {
+      "groupTitles": {
+        "roomOverview": "Room Overview",
+        "bedsAndBedding": "Beds and Bedding",
+        "roomFeatures": "Room Features",
+        "bathroom": "Bath and Bathroom Features",
+        "foodBeverages": "Food & Beverages",
+        "additionalFeatures": "Additional Features"
+      },
+      "overview": {
+        "maxOccupancy": "Maximum occupancy: 2",
+        "nonSmoking": "This room is non-smoking",
+        "wirelessInternet": "Wireless internet"
+      },
+      "bedding": [
+        "Two 100 cm single beds, convertible into one bed",
+        "Maximum occupancy: 2"
+      ],
+      "bathroom": [
+        "Shower",
+        "Bidet",
+        "Lighted makeup mirror",
+        "Hair dryer",
+        "Robe",
+        "Slippers"
+      ],
+      "foodBeverages": ["Electric kettle", "Refrigerator"],
+      "baseRoomFeatures": [
+        "Air-conditioned",
+        "Safe deposit box",
+        "Wardrobe",
+        "Hangers",
+        "Desk and chair",
+        "Television",
+        "Telephone"
+      ],
+      "suiteRoomFeatures": [
+        "Air-conditioned",
+        "Safe deposit box",
+        "Wardrobe",
+        "Hangers",
+        "Desk and chair",
+        "TV cabinet with drawers",
+        "Television",
+        "Telephone"
+      ],
+      "additional": {
+        "junior": ["Dining table and chairs", "Sofa and coffee table"],
+        "suite": ["Dining table and chairs", "Lounge chair and coffee table"],
+        "balcony": ["Private balcony"]
+      }
+    },
+    "detail": {
+      "closeDetails": "Close room details",
+      "close": "Close",
+      "photoAria": "{name} photo {n}",
+      "morePhotosSoon": "More Photos — Soonest",
+      "morePhotosSoonAria": "More photos — soonest",
+      "prev": "Prev",
+      "next": "Next",
+      "prevAria": "Previous photo",
+      "nextAria": "Next photo",
+      "summaryBody": "{units} units, air-conditioned, non-smoking, wireless internet"
+    }
+  },
+  "cafeDining": {
+    "metaTitle": "Cafe & Dining",
+    "hero": {
+      "cafe": "7oz cafe counter and lounge",
+      "buffet": "Saji Nusantara buffet counter"
+    },
+    "openWebsite": "Open Website",
+    "venues": {
+      "restaurant": {
+        "heading": "Savour the Silk Road",
+        "name": "Saji Nusantara",
+        "subname": "Uzbek Cuisine",
+        "description": "A 120-seat dining room framed by a slender white marble mihrab. The menu travels the Silk Road from Samarkand plov and Bukhara somsa to Indonesian-inspired creations prepared by our culinary team.",
+        "highlights": [
+          "Breakfast, lunch and dinner",
+          "Private dining room",
+          "Halal certified"
+        ],
+        "gallery": {
+          "diningRoom": "Saji Nusantara dining room",
+          "buffetCounter": "Saji Nusantara buffet counter"
+        }
+      },
+      "cafe": {
+        "heading": "A Taste of Indonesia",
+        "name": "7oz Espresso",
+        "description": "Discover curated Indonesian pastries and specialty coffees from across the archipelago, including classics such as Kopi Luwak. The cafe offers a warm social setting celebrating Indonesia’s rich coffee culture.",
+        "highlights": [
+          "Indonesian specialty coffee",
+          "Curated Indonesian pastries",
+          "Relaxed social setting"
+        ],
+        "gallery": {
+          "counterLounge": "7oz cafe counter and lounge",
+          "coffeeBar": "7oz coffee bar"
+        }
+      }
+    },
+    "carousel": {
+      "ariaLabel": "{name} gallery",
+      "previous": "Previous",
+      "next": "Next",
+      "prevPhotoAria": "Previous {name} photo",
+      "nextPhotoAria": "Next {name} photo"
+    }
+  },
+  "experience": {
+    "metaTitle": "Experience",
+    "hero": {
+      "hamam": "HADITH Hotel Turkish hammam",
+      "pool": "HADITH Hotel indoor pool"
+    },
+    "wellness": {
+      "heading": "Wellness & Relaxation",
+      "lede": "Restore body and mind with spa rituals, thermal experiences, and a calm indoor pool.",
+      "ariaLabel": "Wellness and relaxation facilities",
+      "cardEyebrow": "Wellness & Relaxation",
+      "prevSlideAria": "Previous slide, {title}",
+      "nextSlideAria": "Next slide, {title}",
+      "previous": "Previous",
+      "next": "Next",
+      "progressAria": "Carousel progress",
+      "photoSoonAria": "{title} — soonest",
+      "photoSoon": "Photo — Soonest",
+      "slides": {
+        "spa": "Spa / Massage Suite",
+        "sauna": "Sauna",
+        "hammam": "Turkish Hammam",
+        "pool": "Indoor Pool",
+        "salon": "Beauty Salon",
+        "fitness": "Fitness Centre"
+      }
+    },
+    "destinations": {
+      "eyebrow": "Beyond the Hotel",
+      "heading": "Explore Samarkand",
+      "lede": "From the spiritual heart of the Imam Al-Bukhari complex to Registan Square in historic Samarkand, discover two journeys shaped around the hotel's setting.",
+      "highlightsAriaLabel": "Highlights",
+      "mapsAria": "Open {name} in Google Maps",
+      "maps": "Maps",
+      "galleryAria": "{title} gallery",
+      "prevMediaAria": "Previous media in {title} gallery",
+      "nextMediaAria": "Next media in {title} gallery",
+      "galleryProgressAria": "{title} gallery progress",
+      "previous": "Previous",
+      "next": "Next",
+      "journeys": {
+        "imamAlBukhariLegacy": {
+          "eyebrow": "A short visit · approximately 0.9 km",
+          "title": "The Legacy of Imam Al-Bukhari",
+          "description": "Visit the resting place of Imam Muhammad Al-Bukhari, then continue into a centre dedicated to scholarship, manuscripts, research, and international exchange.",
+          "highlights": ["Spiritual pilgrimage", "Islamic scholarship", "Monumental architecture"],
+          "destinations": {
+            "mausoleum": { "name": "Imam Al-Bukhari Mausoleum", "detail": "0.9 km from the hotel" },
+            "center": { "name": "Imam Bukhari International Centre", "detail": "0.9 km from the hotel" }
+          },
+          "slideAlts": [
+            "Imam Al-Bukhari Mausoleum complex near HADITH Hotel",
+            "Interior hall at the Imam Al-Bukhari complex",
+            "Exhibition at the Imam Bukhari International Centre",
+            "Islamic manuscripts displayed at the Imam Bukhari International Centre",
+            "Mosque and gardens within the Imam Al-Bukhari complex"
+          ]
+        },
+        "registanSquare": {
+          "eyebrow": "A half-day journey · approximately 17.2 km",
+          "title": "Registan Square",
+          "description": "Step into the heart of Samarkand at Registan Square, where three monumental madrasas create one of Central Asia's most iconic architectural ensembles. Discover grand portals, intricate blue tilework, and centuries of Silk Road history.",
+          "highlights": ["Islamic architecture", "Blue tilework", "Silk Road heritage"],
+          "destinations": {
+            "square": { "name": "Registan Square", "detail": "17.2 km from the hotel" },
+            "madrasas": { "name": "Ulugh Beg, Sher-Dor & Tilla-Kori Madrasas", "detail": "Within the complex" }
+          },
+          "slideAlts": [
+            "Video tour of Registan Square in Samarkand",
+            "Registan Square at sunset with Tilla-Kori and Sher-Dor Madrasas",
+            "Registan Square courtyard framed by three Timurid madrasas",
+            "Grand portal and blue tilework at Registan Square"
+          ]
+        }
+      }
+    },
+    "active": {
+      "heading": "Active & Family",
+      "lede": "Courts and play spaces for guests who prefer to stay active during their stay.",
+      "ariaLabel": "Active and family facilities",
+      "badge": "Soonest",
+      "prevItemAria": "Previous: {name}",
+      "nextItemAria": "Next: {name}",
+      "prevFacilityAria": "Previous facility",
+      "nextFacilityAria": "Next facility",
+      "previous": "Previous",
+      "next": "Next",
+      "progressAria": "Carousel progress",
+      "items": {
+        "tennis": "Tennis Court",
+        "padel": "Padel Court",
+        "kidsPlayground": "Kids’ Playground"
+      }
+    }
+  },
+  "meetingsWeddings": {
+    "metaTitle": "Meetings & Weddings",
+    "hero": {
+      "hall": "Meetings and weddings hall at HADITH Hotel"
+    },
+    "intro": {
+      "eyebrow": "Meetings & Weddings",
+      "heading": "A space for every occasion",
+      "body": "A refined setting for focused meetings, formal gatherings, and wedding celebrations."
+    },
+    "eventUses": {
+      "eyebrow": "Meetings & Weddings",
+      "heading": "One Hall, Many Possibilities",
+      "lead": "One adaptable venue, thoughtfully arranged around the character and scale of each occasion.",
+      "meetings": {
+        "eyebrow": "Business Events",
+        "title": "Meetings & Conferences",
+        "description": "Configure the hall for focused meetings, conferences, and corporate gatherings, with adaptable arrangements supported by modern facilities.",
+        "highlights": ["Flexible event setups", "Modern facilities", "Dedicated events team"]
+      },
+      "weddings": {
+        "eyebrow": "Social Events",
+        "title": "Weddings & Celebrations",
+        "description": "Transform the same hall into an elegant setting for weddings and social celebrations, welcoming up to 250 guests.",
+        "highlights": ["Elegant ballroom", "Up to 250 guests", "Weddings and social events"]
+      }
+    },
+    "facts": {
+      "heading": "Venue Details",
+      "capacity": { "value": "250 Guests", "label": "Maximum Capacity" },
+      "setups": { "value": "Flexible", "label": "Event Setups" },
+      "facilities": { "value": "Modern", "label": "Facilities" }
+    },
+    "enquiry": {
+      "title": "Plan Your Event",
+      "body": "Tell us about your upcoming meeting, wedding, or celebration. Our team will help you plan an event tailored to your requirements.",
+      "button": "Request a Proposal",
+      "comingSoonEyebrow": "Event Enquiry",
+      "comingSoonBody": "Event enquiries will open shortly. Thank you for considering HADITH Hotel for your occasion."
+    }
+  },
+  "reviews": {
+    "metaTitle": "Stories & Highlights",
+    "intro": {
+      "eyebrow": "HADITH Stories",
+      "heading": "Reviews"
+    },
+    "people": {
+      "mohamedShaheemAliSaeed": { "name": "Mohamed Shaheem Ali Saeed", "role": "Minister of Islamic Affairs, Republic of Maldives" },
+      "shadyAlSuleiman": { "name": "Shady Al Suleiman", "role": "President of United Muslims of Australia" },
+      "syekhMohamedElDuwaini": { "name": "Syekh Mohamed El Duwaini", "role": "Undersecretary of Al-Azhar Al-Sharif" },
+      "drZulkifliHasan": { "name": "Dr. Zulkifli Hasan", "role": "Minister of Religious Affairs, Malaysia" },
+      "talgatSafichTadzetdinov": { "name": "Talgat Safich Tadzetdinov (Tajuddin)", "role": "Grand Mufti and Head of the Central Spiritual Administration of Muslims of Russia" },
+      "emadAlDinHamdan": { "name": "Emad Al-Din Hamdan", "role": "Minister of Culture of the State of Palestine" },
+      "reviewLandscape": { "name": "Imad Abdullah Hamdan", "role": "Minister of Culture of the State of Palestine" }
+    },
+    "testimonialQuotes": {
+      "syekhMohamedElDuwaini": "Outstanding hotel with excellent service. May Allah bless its continued success.",
+      "mohamedShaheemAliSaeed": "An amazing hotel with excellent service and a strategic location near the Imam Al-Bukhari Complex.",
+      "shadyAlSuleiman": "A very nice hotel in a wonderful location. Highly recommended for visitors to Samarkand.",
+      "emadAlDinHamdan": "Beautiful, modern, well-managed, and perfectly located near the Imam Al-Bukhari Complex.",
+      "drZulkifliHasan": "An impressive Indonesian hotel in Samarkand with a very strategic location.",
+      "talgatSafichTadzetdinov": "This hotel is the pride of all Muslims in the world, and above all, the people of Uzbekistan."
+    },
+    "videoReviews": {
+      "ariaLabel": "Guest video reviews",
+      "playAria": "Play review by {name}",
+      "prevAria": "Previous story",
+      "nextAria": "Next story",
+      "closeReviewAria": "Close review",
+      "reviewByAria": "Review by {name}"
+    },
+    "videoShowcase": {
+      "eyebrow": "Featured Event",
+      "title": "The First International Conference",
+      "citeTitle": "Al-Jami’ al-Musnad al-Sahih: The Book of an Ummah",
+      "bodyRest": ", held at HADITH Hotel, Imam al-Bukhari Memorial Complex, Samarkand, Uzbekistan, on 9–10 July 2026."
+    },
+    "testimonials": {
+      "eyebrow": "In Their Words",
+      "heading": "Guest Perspectives",
+      "ariaLabel": "Guest testimonials",
+      "prevAria": "Previous testimonial",
+      "nextAria": "Next testimonial",
+      "quotePlaceholder": "Guest quote coming soon.",
+      "photoPlaceholder": "Photo"
+    }
+  },
+  "gallery": {
+    "metaTitle": "Gallery",
+    "eyebrow": "Inside HADITH Hotel",
+    "title": "Gallery",
+    "body": "A visual journey through the hotel, its spaces, and the heritage that surrounds it.",
+    "gridAriaLabel": "HADITH Hotel photo gallery",
+    "viewAria": "View {alt}",
+    "lightbox": {
+      "ariaLabel": "Gallery image",
+      "closeAria": "Close image"
+    },
+    "images": {
+      "hotelExterior": "HADITH Hotel exterior at sunset",
+      "juniorSuite": "Junior Suite interior at HADITH Hotel",
+      "restaurant": "Restaurant dining room at HADITH Hotel",
+      "buffet": "Buffet dining experience at HADITH Hotel",
+      "cafe": "The Cafe at HADITH Hotel",
+      "eventsHall": "Events hall at HADITH Hotel",
+      "indoorPool": "Indoor pool at HADITH Hotel",
+      "turkishHammam": "Turkish hammam at HADITH Hotel",
+      "massageSuite": "Massage treatment room at HADITH Hotel",
+      "sauna": "Sauna at HADITH Hotel",
+      "fitnessCentre": "Fitness centre at HADITH Hotel",
+      "tennisCourt": "Tennis court at HADITH Hotel",
+      "padelCourt": "Padel court at HADITH Hotel",
+      "playground": "Children's playground at HADITH Hotel",
+      "cafeBar": "7oz coffee bar at HADITH Hotel"
+    }
+  }
+}

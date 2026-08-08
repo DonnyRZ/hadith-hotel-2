@@ -2,8 +2,10 @@
 
 import SiteImage from "@/components/SiteImage";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ComingSoonModal } from "@/components/ComingSoonModal";
 import { RoomDetailModal } from "@/components/RoomDetailModal";
+import { getRoomName, getRoomSpecs } from "@/lib/roomSpecs";
 import { presidentSuite, roomTypes, type RoomType } from "@/lib/rooms";
 
 type Tab = "all" | "accessible";
@@ -20,10 +22,14 @@ const roomImages: Record<string, string> = {
 
 function RoomCard({
   room,
+  name,
+  t,
   comingSoon = false,
   onViewDetails,
 }: {
   room: RoomType;
+  name: string;
+  t: ReturnType<typeof useTranslations>;
   comingSoon?: boolean;
   onViewDetails: () => void;
 }) {
@@ -32,7 +38,11 @@ function RoomCard({
       <button
         type="button"
         className={`room-card__media${comingSoon ? " room-card__media--coming-soon" : ""}`}
-        aria-label={comingSoon ? `${room.name} — soonest` : `View ${room.name} details`}
+        aria-label={
+          comingSoon
+            ? t("card.comingSoonAria", { name })
+            : t("card.viewDetailsAria", { name })
+        }
         onClick={onViewDetails}
       >
         <SiteImage
@@ -44,13 +54,13 @@ function RoomCard({
           aria-hidden="true"
         />
         {comingSoon ? (
-          <span className="room-card__soon">Soonest</span>
+          <span className="room-card__soon">{t("card.comingSoonBadge")}</span>
         ) : null}
       </button>
 
-      <h3 className="room-card__name">{room.name}</h3>
+      <h3 className="room-card__name">{name}</h3>
       <p className="room-card__detail">
-        {room.units} units{room.size ? ` · ${room.size}` : ""}
+        {room.size ? t("card.unitsAndSize", { units: room.units, size: room.size }) : t("card.unitsOnly", { units: room.units })}
       </p>
 
       <button
@@ -58,13 +68,14 @@ function RoomCard({
         className="room-card__details"
         onClick={onViewDetails}
       >
-        View Details
+        {t("card.viewDetails")}
       </button>
     </article>
   );
 }
 
 export function RoomsCollection() {
+  const t = useTranslations("suitesRooms");
   const [tab, setTab] = useState<Tab>("all");
   const [comingSoonRoom, setComingSoonRoom] = useState<RoomType | null>(null);
   const [detailRoom, setDetailRoom] = useState<RoomType | null>(null);
@@ -82,7 +93,7 @@ export function RoomsCollection() {
             className={`rooms-collection__tab${tab === "all" ? " is-active" : ""}`}
             onClick={() => setTab("all")}
           >
-            All Rooms
+            {t("tabs.all")}
           </button>
           <button
             type="button"
@@ -93,7 +104,7 @@ export function RoomsCollection() {
             className={`rooms-collection__tab${tab === "accessible" ? " is-active" : ""}`}
             onClick={() => setTab("accessible")}
           >
-            Accessible Rooms
+            {t("tabs.accessible")}
           </button>
         </div>
 
@@ -107,6 +118,8 @@ export function RoomsCollection() {
             <div className="rooms-collection__featured">
               <RoomCard
                 room={presidentSuite}
+                name={getRoomName(t, presidentSuite.id)}
+                t={t}
                 comingSoon
                 onViewDetails={() => setComingSoonRoom(presidentSuite)}
               />
@@ -117,6 +130,8 @@ export function RoomsCollection() {
                 <RoomCard
                   key={room.id}
                   room={room}
+                  name={getRoomName(t, room.id)}
+                  t={t}
                   onViewDetails={() => setDetailRoom(room)}
                 />
               ))}
@@ -131,12 +146,13 @@ export function RoomsCollection() {
           >
             <div className="rooms-collection__notice">
               <p className="rooms-collection__notice-eyebrow">
-                Accessible Rooms
+                {t("accessibleNotice.eyebrow")}
               </p>
-              <p className="rooms-collection__notice-title">Soonest</p>
+              <p className="rooms-collection__notice-title">
+                {t("accessibleNotice.title")}
+              </p>
               <p className="rooms-collection__notice-body">
-                We are preparing detailed information about our accessible
-                rooms. Please check back soon.
+                {t("accessibleNotice.body")}
               </p>
             </div>
           </div>
@@ -146,14 +162,20 @@ export function RoomsCollection() {
       <RoomDetailModal
         key={detailRoom?.id ?? "closed"}
         room={detailRoom}
+        name={detailRoom ? getRoomName(t, detailRoom.id) : ""}
+        specs={detailRoom ? getRoomSpecs(t, detailRoom) : null}
         onClose={() => setDetailRoom(null)}
       />
 
       <ComingSoonModal
         open={comingSoonRoom !== null}
         onClose={() => setComingSoonRoom(null)}
-        eyebrow={comingSoonRoom?.name ?? "Room"}
-        body={`The ${comingSoonRoom?.name ?? "room"} will be available soonest.`}
+        eyebrow={comingSoonRoom ? getRoomName(t, comingSoonRoom.id) : undefined}
+        body={
+          comingSoonRoom
+            ? t("comingSoonBody", { name: getRoomName(t, comingSoonRoom.id) })
+            : undefined
+        }
       />
     </>
   );

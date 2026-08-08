@@ -3,7 +3,9 @@
 import SiteImage from "@/components/SiteImage";
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { useTranslations } from "next-intl";
 import type { RoomType } from "@/lib/rooms";
+import type { SpecGroup } from "@/lib/roomSpecs";
 
 const roomPhotos: Record<string, string[]> = {
   suite: [
@@ -46,10 +48,13 @@ function CloseIcon() {
 
 type RoomDetailModalProps = {
   room: RoomType | null;
+  name: string;
+  specs: SpecGroup[] | null;
   onClose: () => void;
 };
 
-export function RoomDetailModal({ room, onClose }: RoomDetailModalProps) {
+export function RoomDetailModal({ room, name, specs, onClose }: RoomDetailModalProps) {
+  const t = useTranslations("suitesRooms.detail");
   const titleId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
   const [photo, setPhoto] = useState(0);
@@ -93,14 +98,14 @@ export function RoomDetailModal({ room, onClose }: RoomDetailModalProps) {
     [photo, photos],
   );
 
-  if (!room || !room.specs) return null;
+  if (!room || !specs) return null;
 
   return createPortal(
     <div className="room-detail" role="presentation">
       <button
         type="button"
         className="room-detail__backdrop"
-        aria-label="Close room details"
+        aria-label={t("closeDetails")}
         onClick={onClose}
       />
 
@@ -112,13 +117,13 @@ export function RoomDetailModal({ room, onClose }: RoomDetailModalProps) {
       >
         <header className="room-detail__header">
           <h2 id={titleId} className="room-detail__title">
-            {room.name}
+            {name}
           </h2>
           <button
             ref={closeRef}
             type="button"
             className="room-detail__close"
-            aria-label="Close"
+            aria-label={t("close")}
             onClick={onClose}
           >
             <CloseIcon />
@@ -131,7 +136,7 @@ export function RoomDetailModal({ room, onClose }: RoomDetailModalProps) {
               <div
                 className="room-detail__photo"
                 role="img"
-                aria-label={`${room.name} photo ${photo + 1}`}
+                aria-label={t("photoAria", { name, n: photo + 1 })}
               >
                 <SiteImage
                   className="room-detail__image"
@@ -147,9 +152,9 @@ export function RoomDetailModal({ room, onClose }: RoomDetailModalProps) {
               <div
                 className="room-detail__photo room-detail__photo--soon"
                 role="img"
-                aria-label="More photos — soonest"
+                aria-label={t("morePhotosSoonAria")}
               >
-                <span>More Photos — Soonest</span>
+                <span>{t("morePhotosSoon")}</span>
               </div>
             )}
 
@@ -158,9 +163,9 @@ export function RoomDetailModal({ room, onClose }: RoomDetailModalProps) {
                 <button
                   type="button"
                   onClick={() => move(-1)}
-                  aria-label="Previous photo"
+                  aria-label={t("prevAria")}
                 >
-                  <span aria-hidden="true">‹</span> Prev
+                  <span aria-hidden="true">‹</span> {t("prev")}
                 </button>
 
                 <div className="room-detail__progress" aria-hidden="true">
@@ -172,9 +177,9 @@ export function RoomDetailModal({ room, onClose }: RoomDetailModalProps) {
                 <button
                   type="button"
                   onClick={() => move(1)}
-                  aria-label="Next photo"
+                  aria-label={t("nextAria")}
                 >
-                  Next <span aria-hidden="true">›</span>
+                  {t("next")} <span aria-hidden="true">›</span>
                 </button>
               </div>
 
@@ -188,17 +193,16 @@ export function RoomDetailModal({ room, onClose }: RoomDetailModalProps) {
           <div className="room-detail__body">
             <div className="room-detail__summary">
               <h3 className="room-detail__summary-title">
-                {room.name}
+                {name}
                 {room.size ? `, ${room.size}` : ""}
               </h3>
               <p className="room-detail__summary-body">
-                {room.units} units, air-conditioned, non-smoking, wireless
-                internet
+                {t("summaryBody", { units: room.units })}
               </p>
             </div>
 
             <dl className="room-detail__specs">
-              {room.specs.map((group) => (
+              {specs.map((group) => (
                 <div key={group.title} className="room-detail__spec">
                   <dt className="room-detail__spec-title">{group.title}</dt>
                   {group.items.map((item) => (

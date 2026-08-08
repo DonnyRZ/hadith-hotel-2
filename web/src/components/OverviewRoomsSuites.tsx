@@ -2,48 +2,49 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { useTranslations } from "next-intl";
 import SiteImage from "@/components/SiteImage";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 type GallerySlide = {
   id: string;
   src: string;
-  alt: string;
+  altKey: string;
 };
 
 const roomTypes = [
-  { name: "Standard Room", units: 62 },
-  { name: "Balcony Room", units: 23 },
-  { name: "Suite", units: 18 },
-  { name: "Junior Suite", units: 9 },
-  { name: "President Suite", units: 2 },
+  { key: "standardRoom", units: 62 },
+  { key: "balconyRoom", units: 23 },
+  { key: "suite", units: 18 },
+  { key: "juniorSuite", units: 9 },
+  { key: "presidentSuite", units: 2 },
 ];
 
 const gallerySlides: GallerySlide[] = [
   {
     id: "guest-room-1",
     src: "/images/overview-rooms/junior-1.png",
-    alt: "Guest room with an illuminated arched headboard",
+    altKey: "guestRoom1",
   },
   {
     id: "guest-room-2",
     src: "/images/overview-rooms/junior-3.png",
-    alt: "Spacious guest room interior at HADITH Hotel",
+    altKey: "guestRoom2",
   },
   {
     id: "guest-room-3",
     src: "/images/overview-rooms/suite-3.png",
-    alt: "Guest room bathroom at HADITH Hotel",
+    altKey: "guestRoom3",
   },
   {
     id: "guest-room-4",
     src: "/images/overview-rooms/suite-4.png",
-    alt: "Contemporary guest room interior at HADITH Hotel",
+    altKey: "guestRoom4",
   },
   {
     id: "guest-room-5",
     src: "/images/overview-rooms/suite-main.jpeg",
-    alt: "Refined guest room interior at HADITH Hotel",
+    altKey: "guestRoom5",
   },
 ];
 
@@ -76,11 +77,13 @@ function CloseIcon() {
 
 function GalleryMedia({
   slide,
+  alt,
   featured = false,
   fullscreen = false,
   priority = false,
 }: {
   slide: GallerySlide;
+  alt: string;
   featured?: boolean;
   fullscreen?: boolean;
   priority?: boolean;
@@ -98,7 +101,7 @@ function GalleryMedia({
       <SiteImage
         className="overview-rooms__image"
         src={slide.src}
-        alt={slide.alt}
+        alt={alt}
         fill
         sizes={
           fullscreen
@@ -115,12 +118,16 @@ function GalleryMedia({
 
 function RoomLightbox({
   slide,
+  alt,
   open,
   onClose,
+  t,
 }: {
   slide: GallerySlide;
+  alt: string;
   open: boolean;
   onClose: () => void;
+  t: ReturnType<typeof useTranslations>;
 }) {
   const titleId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -152,7 +159,7 @@ function RoomLightbox({
       <button
         type="button"
         className="room-lightbox__backdrop"
-        aria-label="Close fullscreen image"
+        aria-label={t("gallery.closeFullscreen")}
         onClick={onClose}
       />
       <div
@@ -163,20 +170,20 @@ function RoomLightbox({
       >
         <div className="room-lightbox__toolbar">
           <p id={titleId} className="room-lightbox__title">
-            Rooms &amp; Suites Gallery
+            {t("gallery.lightboxTitle")}
           </p>
           <button
             ref={closeRef}
             type="button"
             className="room-lightbox__close"
-            aria-label="Close"
+            aria-label={t("gallery.close")}
             onClick={onClose}
           >
             <CloseIcon />
           </button>
         </div>
         <div className="room-lightbox__media">
-          <GalleryMedia slide={slide} fullscreen />
+          <GalleryMedia slide={slide} alt={alt} fullscreen />
         </div>
       </div>
     </div>,
@@ -185,6 +192,7 @@ function RoomLightbox({
 }
 
 export function OverviewRoomsSuites() {
+  const t = useTranslations("overview.rooms");
   const [index, setIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const count = gallerySlides.length;
@@ -210,59 +218,62 @@ export function OverviewRoomsSuites() {
         aria-labelledby="overview-rooms-heading"
       >
         <div className="overview-rooms__intro">
-          <p className="overview-rooms__lede">Escape to a sanctuary of luxury</p>
+          <p className="overview-rooms__lede">{t("lede")}</p>
           <h2 id="overview-rooms-heading" className="overview-rooms__title">
-            Rooms and Suites
+            {t("title")}
           </h2>
-          <p className="overview-rooms__blurb">
-            From refined Standard rooms to the President Suite — 114 rooms and
-            suites designed for rest after a day within the Imam Al Bukhari
-            Complex.
-          </p>
+          <p className="overview-rooms__blurb">{t("blurb")}</p>
 
-          <ul className="overview-rooms__types" aria-label="Room types">
+          <ul className="overview-rooms__types" aria-label={t("typesAriaLabel")}>
             {roomTypes.map((roomType, roomIndex) => (
-              <li key={roomType.name} className="overview-rooms__type">
+              <li key={roomType.key} className="overview-rooms__type">
                 <span className="overview-rooms__type-number" aria-hidden="true">
                   {String(roomIndex + 1).padStart(2, "0")}
                 </span>
-                <span className="overview-rooms__type-name">{roomType.name}</span>
+                <span className="overview-rooms__type-name">
+                  {t(`types.${roomType.key}`)}
+                </span>
                 <span className="overview-rooms__type-units">
-                  {roomType.units} units
+                  {t("unitsCount", { units: roomType.units })}
                 </span>
               </li>
             ))}
           </ul>
 
           <Link href="/suites-rooms" className="overview-rooms__learn-more">
-            Learn More
+            {t("learnMore")}
           </Link>
         </div>
 
         <div
           className="overview-rooms__carousel"
           aria-roledescription="carousel"
-          aria-label="Rooms and suites gallery"
+          aria-label={t("gallery.ariaLabel")}
         >
           <div className="overview-rooms__stage">
             <button
               type="button"
               className="overview-rooms__slide overview-rooms__slide--side"
               onClick={goPrev}
-              aria-label="Show previous gallery image"
+              aria-label={t("gallery.prevImageAria")}
             >
-              <GalleryMedia slide={prev} />
+              <GalleryMedia slide={prev} alt={t(`gallery.${prev.altKey}`)} />
             </button>
 
             <div
               className="overview-rooms__slide overview-rooms__slide--center"
               aria-current="true"
             >
-              <GalleryMedia slide={current} featured priority />
+              <GalleryMedia
+                slide={current}
+                alt={t(`gallery.${current.altKey}`)}
+                featured
+                priority
+              />
               <button
                 type="button"
                 className="overview-rooms__expand"
-                aria-label="View fullscreen image"
+                aria-label={t("gallery.expandAria")}
                 onClick={() => setLightboxOpen(true)}
               >
                 <ExpandIcon />
@@ -273,9 +284,9 @@ export function OverviewRoomsSuites() {
               type="button"
               className="overview-rooms__slide overview-rooms__slide--side"
               onClick={goNext}
-              aria-label="Show next gallery image"
+              aria-label={t("gallery.nextImageAria")}
             >
-              <GalleryMedia slide={next} />
+              <GalleryMedia slide={next} alt={t(`gallery.${next.altKey}`)} />
             </button>
           </div>
 
@@ -284,9 +295,9 @@ export function OverviewRoomsSuites() {
               type="button"
               className="overview-rooms__nav overview-rooms__nav--prev"
               onClick={goPrev}
-              aria-label="Previous image"
+              aria-label={t("gallery.prevImageLabel")}
             >
-              <span aria-hidden="true">‹</span> Previous
+              <span aria-hidden="true">‹</span> {t("gallery.previous")}
             </button>
 
             <div
@@ -295,7 +306,7 @@ export function OverviewRoomsSuites() {
               aria-valuenow={index + 1}
               aria-valuemin={1}
               aria-valuemax={count}
-              aria-label="Carousel progress"
+              aria-label={t("gallery.progressAria")}
             >
               <span
                 className="overview-rooms__progress-fill"
@@ -307,9 +318,9 @@ export function OverviewRoomsSuites() {
               type="button"
               className="overview-rooms__nav overview-rooms__nav--next"
               onClick={goNext}
-              aria-label="Next image"
+              aria-label={t("gallery.nextImageLabel")}
             >
-              Next <span aria-hidden="true">›</span>
+              {t("gallery.next")} <span aria-hidden="true">›</span>
             </button>
 
             <p className="overview-rooms__counter">{counter}</p>
@@ -319,8 +330,10 @@ export function OverviewRoomsSuites() {
 
       <RoomLightbox
         slide={current}
+        alt={t(`gallery.${current.altKey}`)}
         open={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
+        t={t}
       />
     </>
   );

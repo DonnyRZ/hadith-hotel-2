@@ -1,8 +1,12 @@
+import { useTranslations } from "next-intl";
+
 const mapUrl =
   "https://www.google.com/maps?q=39.808167,66.949639&z=14&output=embed";
 const directionsUrl = "https://maps.app.goo.gl/71EH9gqP3kGgsMAB6";
 
 export function OverviewLocation() {
+  const t = useTranslations("overview.location");
+
   return (
     <section
       className="overview-location"
@@ -10,11 +14,11 @@ export function OverviewLocation() {
     >
       <div className="overview-location__inner">
         <div className="overview-location__content">
-          <p className="overview-location__eyebrow">Our Location</p>
+          <p className="overview-location__eyebrow">{t("eyebrow")}</p>
           <h2 id="overview-location-heading" className="overview-location__title">
-            Getting
+            {t("titleLine1")}
             <br />
-            Here
+            {t("titleLine2")}
           </h2>
 
           <address className="overview-location__address">
@@ -27,7 +31,7 @@ export function OverviewLocation() {
         <div className="overview-location__map">
           <iframe
             src={mapUrl}
-            title="HADITH Hotel location on Google Maps"
+            title={t("mapTitle")}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             allowFullScreen
@@ -37,10 +41,10 @@ export function OverviewLocation() {
             href={directionsUrl}
             target="_blank"
             rel="noreferrer"
-            aria-label="Open HADITH Hotel location in Google Maps"
+            aria-label={t("mapOverlayAria")}
           >
             <span className="overview-location__map-link">
-              View on Google Maps
+              {t("viewOnMaps")}
               <span aria-hidden="true">↗</span>
             </span>
           </a>

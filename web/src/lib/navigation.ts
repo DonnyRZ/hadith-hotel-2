@@ -1,9 +1,9 @@
 export const navItems = [
-  { href: "/", label: "Overview" },
-  { href: "/suites-rooms", label: "Suites & Rooms" },
-  { href: "/cafe-dining", label: "Cafe & Dining" },
-  { href: "/experience", label: "Experience" },
-  { href: "/meetings-weddings", label: "Meetings & Weddings" },
-  { href: "/reviews", label: "Stories & Highlights" },
-  { href: "/gallery", label: "Gallery" },
+  { href: "/", key: "overview" },
+  { href: "/suites-rooms", key: "suitesRooms" },
+  { href: "/cafe-dining", key: "cafeDining" },
+  { href: "/experience", key: "experience" },
+  { href: "/meetings-weddings", key: "meetingsWeddings" },
+  { href: "/reviews", key: "reviews" },
+  { href: "/gallery", key: "gallery" },
 ] as const;

@@ -1,11 +1,15 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 type ScrollCueProps = {
   /** Anchor target for overview-style pages. If omitted, scrolls the page down. */
   href?: string;
 };
 
 export function ScrollCue({ href }: ScrollCueProps) {
+  const t = useTranslations("common");
+
   const scrollDown = () => {
     window.scrollBy({
       top: Math.min(window.innerHeight * 0.75, 640),
@@ -15,7 +19,7 @@ export function ScrollCue({ href }: ScrollCueProps) {
 
   const content = (
     <>
-      <span className="scroll-cue__label">Scroll to explore</span>
+      <span className="scroll-cue__label">{t("scrollCue")}</span>
       <span className="scroll-cue__arrows" aria-hidden="true">
         <svg width="28" height="16" viewBox="0 0 14 8" fill="none">
           <path
@@ -43,7 +47,7 @@ export function ScrollCue({ href }: ScrollCueProps) {
 
   if (href) {
     return (
-      <a href={href} className="scroll-cue" aria-label="Scroll to explore">
+      <a href={href} className="scroll-cue" aria-label={t("scrollCue")}>
         {content}
       </a>
     );
@@ -53,7 +57,7 @@ export function ScrollCue({ href }: ScrollCueProps) {
     <button
       type="button"
       className="scroll-cue"
-      aria-label="Scroll to explore"
+      aria-label={t("scrollCue")}
       onClick={scrollDown}
     >
       {content}

@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useCallback, useState } from "react";
+import { useTranslations } from "next-intl";
 import { HeroMedia, type HeroMediaSlide } from "@/components/HeroMedia";
 import { ScrollCue } from "@/components/ScrollCue";
 
@@ -22,6 +23,7 @@ export function PageHeroCarousel({
   slides,
   intro,
 }: PageHeroCarouselProps) {
+  const t = useTranslations("common.pageHero");
   const [index, setIndex] = useState(0);
   const count = slides.length;
 
@@ -35,7 +37,7 @@ export function PageHeroCarousel({
   return (
     <section
       className="page-hero"
-      aria-label={`${title} image gallery`}
+      aria-label={t("galleryAriaLabel", { title })}
       aria-roledescription="carousel"
     >
       <h1 className="sr-only">{title}</h1>
@@ -59,10 +61,10 @@ export function PageHeroCarousel({
             <button
               type="button"
               onClick={() => move(-1)}
-              aria-label="Show previous image"
+              aria-label={t("prevAria")}
             >
               <span aria-hidden="true">‹</span>
-              Previous
+              {t("previous")}
             </button>
 
             <div className="page-hero__progress" aria-hidden="true">
@@ -72,9 +74,9 @@ export function PageHeroCarousel({
             <button
               type="button"
               onClick={() => move(1)}
-              aria-label="Show next image"
+              aria-label={t("nextAria")}
             >
-              Next
+              {t("next")}
               <span aria-hidden="true">›</span>
             </button>
           </div>
@@ -84,7 +86,7 @@ export function PageHeroCarousel({
               {String(index + 1).padStart(2, "0")} /{" "}
               {String(count).padStart(2, "0")}
             </span>
-            <Link href="/gallery">Gallery</Link>
+            <Link href="/gallery">{t("gallery")}</Link>
           </div>
         </div> : null}
 
@@ -100,7 +102,11 @@ export function PageHeroCarousel({
       </div>
 
       <p className="sr-only" aria-live="polite">
-        Image {index + 1} of {count}: {slides[index]?.label}
+        {t("imageStatus", {
+          current: index + 1,
+          total: count,
+          label: slides[index]?.label ?? "",
+        })}
       </p>
     </section>
   );

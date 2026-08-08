@@ -1,0 +1,607 @@
+{
+  "common": {
+    "metadata": {
+      "title": "HADITH Hotel",
+      "titleTemplate": "%s | HADITH Hotel",
+      "description": "HADITH Hotel — sanctuary bintang lima di dalam Kompleks Imam Al Bukhari di Samarkand."
+    },
+    "nav": {
+      "overview": "Ikhtisar",
+      "suitesRooms": "Suite & Kamar",
+      "cafeDining": "Kafe & Restoran",
+      "experience": "Pengalaman",
+      "meetingsWeddings": "Pertemuan & Pernikahan",
+      "reviews": "Cerita & Sorotan",
+      "gallery": "Galeri"
+    },
+    "header": {
+      "homeAriaLabel": "Beranda HADITH Hotel",
+      "logoAlt": "Hadits Hotel — Kompleks Imam Al Bukhari",
+      "viewMap": "Lihat Peta",
+      "reserve": "Reservasi",
+      "openMenu": "Buka menu",
+      "closeMenu": "Tutup menu",
+      "mobileEyebrow": "Jelajahi HADITH Hotel"
+    },
+    "languageSwitcher": {
+      "ariaLabel": "Pilih bahasa"
+    },
+    "comingSoon": {
+      "eyebrow": "Reservasi",
+      "title": "Segera Hadir",
+      "body": "Pemesanan online akan segera tersedia. Terima kasih atas minat Anda pada HADITH Hotel.",
+      "close": "Tutup"
+    },
+    "footer": {
+      "eyebrow": "HADITH Hotel",
+      "title": "Kompleks Imam Al Bukhari",
+      "addressLine1": "RW5X+9P, Xo‘ja Ismoil,",
+      "addressLine2": "Samarqand viloyati, Uzbekistan",
+      "instagram": "Instagram",
+      "copyright": "© {year} HADITH Hotel. Seluruh hak cipta dilindungi."
+    },
+    "pageHero": {
+      "galleryAriaLabel": "Galeri gambar {title}",
+      "previous": "Sebelumnya",
+      "next": "Berikutnya",
+      "prevAria": "Tampilkan foto sebelumnya",
+      "nextAria": "Tampilkan foto berikutnya",
+      "gallery": "Galeri",
+      "imageStatus": "Foto {current} dari {total}: {label}"
+    },
+    "scrollCue": "Gulir untuk menjelajahi",
+    "heroCarousel": {
+      "prevSlide": "Slide sebelumnya",
+      "nextSlide": "Slide berikutnya"
+    },
+    "softOpening": {
+      "announcement": "Pengumuman",
+      "title": "Soft Opening 5 September 2026",
+      "dismiss": "Tutup pengumuman soft opening"
+    }
+  },
+  "overview": {
+    "metaTitle": "Ikhtisar",
+    "hero": {
+      "hotelExterior": "Eksterior HADITH Hotel saat matahari terbenam",
+      "resto": "Ruang makan restoran Saji Nusantara",
+      "juniorSuite": "Area duduk dan makan Junior Suite",
+      "suite": "Suite HADITH Hotel",
+      "pool": "Kolam renang HADITH Hotel",
+      "massage": "Ruang perawatan pijat",
+      "sauna": "Sauna hotel",
+      "hamam": "Hamam Turki",
+      "suiteLiving": "Area duduk suite",
+      "hall": "Aula pertemuan dan pernikahan",
+      "salon": "Salon kecantikan"
+    },
+    "welcome": {
+      "lede": "Selamat Datang di HADITH Hotel",
+      "title": "Temukan sanctuary di jantung kota Samarkand",
+      "body": "Lahir di dalam Kompleks Imam Al Bukhari yang megah — sebuah landmark budaya dan spiritual yang memadukan warisan Jalur Sutra dengan pembangunan modern yang elegan — HADITH Hotel adalah sanctuary kontemporer yang menghormati sang ulama besar hadits, tempat kemegahan Uzbekistan bertemu dengan kehangatan keramahan Indonesia."
+    },
+    "stats": {
+      "roomsSuites": "Kamar & Suite",
+      "classRating": "Kelas Hotel"
+    },
+    "amenities": {
+      "lede": "Mulai masa menginap Anda",
+      "title": "Reservasi di HADITH Hotel",
+      "reserve": "Reservasi",
+      "label": "Fasilitas & Informasi Hotel",
+      "noPets": "Tidak Menerima Hewan Peliharaan",
+      "groups": {
+        "accommodation": {
+          "title": "Akomodasi",
+          "roomsSuites": "Kamar & Suite",
+          "standardRoom": "Standard Room",
+          "balconyRoom": "Balcony Room",
+          "suite": "Suite",
+          "juniorSuite": "Junior Suite",
+          "presidentSuite": "President Suite"
+        },
+        "dining": {
+          "title": "Kuliner",
+          "sajiNusantara": "Saji Nusantara Restaurant",
+          "sajiNusantaraDetail": "Kuliner Uzbekistan",
+          "barLounge": "Bar & Lounge",
+          "espressoCafe": "7oz Espresso Cafe"
+        },
+        "wellness": {
+          "title": "Wellness & Olahraga",
+          "indoorPool": "Kolam Renang Indoor",
+          "spaCenter": "Spa Center",
+          "sauna": "Sauna",
+          "turkishHammam": "Hamam Turki",
+          "fitnessCentre": "Fitness Centre",
+          "beautySalon": "Salon Kecantikan",
+          "tennisCourt": "Lapangan Tenis",
+          "kidsPlayground": "Taman Bermain Anak",
+          "padelCourt": "Lapangan Padel"
+        },
+        "events": {
+          "title": "Acara & Budaya",
+          "occupancy": "Kapasitas",
+          "occupancyValue": "250 orang"
+        }
+      }
+    },
+    "rooms": {
+      "lede": "Melarikan diri ke sanctuary kemewahan",
+      "title": "Kamar dan Suite",
+      "blurb": "Dari Standard Room yang elegan hingga President Suite — 114 kamar dan suite dirancang untuk beristirahat setelah menjelajahi Kompleks Imam Al Bukhari.",
+      "typesAriaLabel": "Tipe kamar",
+      "unitsCount": "{units} unit",
+      "learnMore": "Pelajari Lebih Lanjut",
+      "types": {
+        "standardRoom": "Standard Room",
+        "balconyRoom": "Balcony Room",
+        "suite": "Suite",
+        "juniorSuite": "Junior Suite",
+        "presidentSuite": "President Suite"
+      },
+      "gallery": {
+        "guestRoom1": "Kamar tamu dengan headboard melengkung yang menyala",
+        "guestRoom2": "Interior kamar tamu yang luas di HADITH Hotel",
+        "guestRoom3": "Kamar mandi kamar tamu di HADITH Hotel",
+        "guestRoom4": "Interior kamar tamu kontemporer di HADITH Hotel",
+        "guestRoom5": "Interior kamar tamu yang elegan di HADITH Hotel",
+        "ariaLabel": "Galeri kamar dan suite",
+        "previous": "Sebelumnya",
+        "next": "Berikutnya",
+        "prevImageAria": "Tampilkan foto galeri sebelumnya",
+        "nextImageAria": "Tampilkan foto galeri berikutnya",
+        "expandAria": "Lihat foto layar penuh",
+        "prevImageLabel": "Foto sebelumnya",
+        "nextImageLabel": "Foto berikutnya",
+        "progressAria": "Progres carousel",
+        "lightboxTitle": "Galeri Kamar & Suite",
+        "closeFullscreen": "Tutup foto layar penuh",
+        "close": "Tutup"
+      }
+    },
+    "destinations": {
+      "eyebrow": "Di Luar Hotel",
+      "previous": "Sebelumnya",
+      "next": "Berikutnya",
+      "prevAria": "Destinasi sebelumnya",
+      "nextAria": "Destinasi berikutnya",
+      "progressAria": "Progres carousel destinasi",
+      "maps": "Peta",
+      "highlightsAria": "Sorotan",
+      "explore": "Jelajahi Destinasi",
+      "openInMaps": "Buka {label} di Google Maps",
+      "slides": {
+        "imamAlBukhari": {
+          "journeyEyebrow": "Kunjungan singkat · sekitar 0,9 km",
+          "title": "Warisan Imam Al-Bukhari",
+          "description": "Kunjungi tempat peristirahatan Imam Muhammad Al-Bukhari, lalu lanjutkan ke pusat yang didedikasikan untuk keilmuan, manuskrip, penelitian, dan pertukaran internasional.",
+          "videoLabel": "Kompleks Makam Imam Al-Bukhari dekat HADITH Hotel",
+          "facts": {
+            "mausoleum": { "label": "Makam Imam Al-Bukhari", "detail": "0,9 km dari hotel" },
+            "centre": { "label": "Pusat Internasional Imam Bukhari", "detail": "0,9 km dari hotel" }
+          },
+          "tags": {
+            "pilgrimage": "Ziarah spiritual",
+            "scholarship": "Keilmuan Islam",
+            "architecture": "Arsitektur monumental"
+          }
+        },
+        "registanSquare": {
+          "journeyEyebrow": "Perjalanan setengah hari · sekitar 17,2 km",
+          "title": "Registan Square",
+          "description": "Melangkah ke jantung Samarkand di Registan Square, tempat tiga madrasah megah membentuk salah satu ansambel arsitektur paling ikonik di Asia Tengah. Temukan gerbang megah, ukiran ubin biru yang rumit, dan sejarah Jalur Sutra selama berabad-abad.",
+          "videoLabel": "Video tur Registan Square di Samarkand",
+          "facts": {
+            "square": { "label": "Registan Square", "detail": "17,2 km dari hotel" },
+            "madrasas": { "label": "Madrasah Ulugh Beg, Sher-Dor & Tilla-Kori", "detail": "Di dalam kompleks" }
+          },
+          "tags": {
+            "architecture": "Arsitektur Islam",
+            "tilework": "Ukiran ubin biru",
+            "heritage": "Warisan Jalur Sutra"
+          }
+        }
+      }
+    },
+    "experiences": {
+      "lede": "Temukan setiap sisi HADITH Hotel",
+      "heading": "Pengalaman Hotel yang Lengkap",
+      "introCopy": "Jelajahi ruang dan pengalaman yang membentuk masa menginap di HADITH Hotel, dari akomodasi dan kuliner yang elegan hingga kesehatan dan perayaan yang tak terlupakan.",
+      "cardEyebrow": "Pengalaman hotel",
+      "explore": "Jelajahi",
+      "previous": "Sebelumnya",
+      "next": "Berikutnya",
+      "carouselAria": "Pengalaman hotel",
+      "progressAria": "Progres carousel",
+      "prevSlideAria": "Slide sebelumnya, {title}",
+      "nextSlideAria": "Slide berikutnya, {title}",
+      "slides": {
+        "suitesRooms": "Suite & Kamar",
+        "cafeDining": "Kafe & Restoran",
+        "experience": "Pengalaman",
+        "meetingsWeddings": "Pertemuan & Pernikahan"
+      }
+    },
+    "farewell": {
+      "eyebrow": "Hingga kami menyambut Anda",
+      "title": "Beberapa hotel memberi Anda tempat untuk menginap. HADITH Hotel memberi Anda kedamaian yang layak dikenang di Kompleks Imam Al Bukhari.",
+      "statsAriaLabel": "Metrik profil hotel",
+      "downloadsLabel": "Unduhan Profil",
+      "visitorsLabel": "Pengunjung Profil",
+      "viewLocations": "Lihat lokasi",
+      "downloadProfile": "Unduh Profil",
+      "reserve": "Reservasi",
+      "comingSoon": {
+        "eyebrow": "Reservasi",
+        "body": "Pemesanan online akan segera tersedia. Terima kasih atas minat Anda pada HADITH Hotel."
+      }
+    },
+    "location": {
+      "eyebrow": "Lokasi Kami",
+      "titleLine1": "Cara",
+      "titleLine2": "Menuju",
+      "mapTitle": "Lokasi HADITH Hotel di Google Maps",
+      "mapOverlayAria": "Buka lokasi HADITH Hotel di Google Maps",
+      "viewOnMaps": "Lihat di Google Maps"
+    }
+  },
+  "suitesRooms": {
+    "metaTitle": "Suite & Kamar",
+    "hero": {
+      "suite": "Suite HADITH Hotel",
+      "junior": "Area duduk dan makan Junior Suite"
+    },
+    "intro": {
+      "title": "Kamar & Suite",
+      "body": "114 kamar dan suite yang dirancang dengan cermat — sesuai jumlah Surah dalam Al-Qur'an — untuk masa menginap yang menenangkan di dalam Kompleks Imam Al Bukhari."
+    },
+    "tabs": {
+      "all": "Semua Kamar",
+      "accessible": "Kamar Aksesibel"
+    },
+    "accessibleNotice": {
+      "eyebrow": "Kamar Aksesibel",
+      "title": "Segera Hadir",
+      "body": "Kami sedang menyiapkan informasi rinci tentang kamar aksesibel kami. Silakan periksa kembali segera."
+    },
+    "card": {
+      "comingSoonBadge": "Segera Hadir",
+      "viewDetails": "Lihat Detail",
+      "comingSoonAria": "{name} — segera hadir",
+      "viewDetailsAria": "Lihat detail {name}",
+      "unitsOnly": "{units} unit",
+      "unitsAndSize": "{units} unit · {size}"
+    },
+    "comingSoonBody": "{name} akan segera tersedia.",
+    "rooms": {
+      "president": "President Suite",
+      "junior": "Junior Suite",
+      "suite": "Suite",
+      "balcony": "Balcony Room",
+      "standard": "Standard Room"
+    },
+    "specs": {
+      "groupTitles": {
+        "roomOverview": "Ikhtisar Kamar",
+        "bedsAndBedding": "Tempat Tidur dan Perlengkapannya",
+        "roomFeatures": "Fasilitas Kamar",
+        "bathroom": "Fasilitas Kamar Mandi",
+        "foodBeverages": "Makanan & Minuman",
+        "additionalFeatures": "Fasilitas Tambahan"
+      },
+      "overview": {
+        "maxOccupancy": "Kapasitas maksimum: 2 orang",
+        "nonSmoking": "Kamar ini bebas rokok",
+        "wirelessInternet": "Internet nirkabel"
+      },
+      "bedding": [
+        "Dua tempat tidur single 100 cm, dapat digabung menjadi satu tempat tidur",
+        "Kapasitas maksimum: 2 orang"
+      ],
+      "bathroom": [
+        "Shower",
+        "Bidet",
+        "Cermin rias dengan lampu",
+        "Pengering rambut",
+        "Jubah mandi",
+        "Sandal"
+      ],
+      "foodBeverages": ["Ketel listrik", "Kulkas"],
+      "baseRoomFeatures": [
+        "Berpendingin udara",
+        "Kotak penyimpanan aman",
+        "Lemari pakaian",
+        "Gantungan baju",
+        "Meja dan kursi kerja",
+        "Televisi",
+        "Telepon"
+      ],
+      "suiteRoomFeatures": [
+        "Berpendingin udara",
+        "Kotak penyimpanan aman",
+        "Lemari pakaian",
+        "Gantungan baju",
+        "Meja dan kursi kerja",
+        "Lemari TV dengan laci",
+        "Televisi",
+        "Telepon"
+      ],
+      "additional": {
+        "junior": ["Meja dan kursi makan", "Sofa dan meja kopi"],
+        "suite": ["Meja dan kursi makan", "Kursi santai dan meja kopi"],
+        "balcony": ["Balkon pribadi"]
+      }
+    },
+    "detail": {
+      "closeDetails": "Tutup detail kamar",
+      "close": "Tutup",
+      "photoAria": "Foto {name} {n}",
+      "morePhotosSoon": "Foto Lainnya — Segera Hadir",
+      "morePhotosSoonAria": "Foto lainnya — segera hadir",
+      "prev": "Sebelumnya",
+      "next": "Berikutnya",
+      "prevAria": "Foto sebelumnya",
+      "nextAria": "Foto berikutnya",
+      "summaryBody": "{units} unit, berpendingin udara, bebas rokok, internet nirkabel"
+    }
+  },
+  "cafeDining": {
+    "metaTitle": "Kafe & Restoran",
+    "hero": {
+      "cafe": "Counter dan lounge kafe 7oz",
+      "buffet": "Counter buffet Saji Nusantara"
+    },
+    "openWebsite": "Buka Website",
+    "venues": {
+      "restaurant": {
+        "heading": "Nikmati Cita Rasa Jalur Sutra",
+        "name": "Saji Nusantara",
+        "subname": "Kuliner Uzbekistan",
+        "description": "Ruang makan dengan 120 kursi yang dibingkai oleh mihrab marmer putih yang elegan. Menu menjelajahi Jalur Sutra dari plov Samarkand dan somsa Bukhara hingga kreasi bergaya Indonesia yang disiapkan oleh tim kuliner kami.",
+        "highlights": [
+          "Sarapan, makan siang, dan makan malam",
+          "Ruang makan privat",
+          "Bersertifikat halal"
+        ],
+        "gallery": {
+          "diningRoom": "Ruang makan Saji Nusantara",
+          "buffetCounter": "Counter buffet Saji Nusantara"
+        }
+      },
+      "cafe": {
+        "heading": "Cita Rasa Indonesia",
+        "name": "7oz Espresso",
+        "description": "Temukan kue kering Indonesia pilihan dan kopi spesial dari seluruh Nusantara, termasuk klasik seperti Kopi Luwak. Kafe ini menawarkan suasana sosial yang hangat sambil merayakan kekayaan budaya kopi Indonesia.",
+        "highlights": [
+          "Kopi spesial Indonesia",
+          "Kue kering Indonesia pilihan",
+          "Suasana sosial yang santai"
+        ],
+        "gallery": {
+          "counterLounge": "Counter dan lounge kafe 7oz",
+          "coffeeBar": "Bar kopi 7oz"
+        }
+      }
+    },
+    "carousel": {
+      "ariaLabel": "Galeri {name}",
+      "previous": "Sebelumnya",
+      "next": "Berikutnya",
+      "prevPhotoAria": "Foto {name} sebelumnya",
+      "nextPhotoAria": "Foto {name} berikutnya"
+    }
+  },
+  "experience": {
+    "metaTitle": "Pengalaman",
+    "hero": {
+      "hamam": "Hammam Turki HADITH Hotel",
+      "pool": "Kolam renang indoor HADITH Hotel"
+    },
+    "wellness": {
+      "heading": "Kebugaran & Relaksasi",
+      "lede": "Pulihkan tubuh dan pikiran dengan ritual spa, pengalaman termal, dan kolam renang indoor yang menenangkan.",
+      "ariaLabel": "Fasilitas kebugaran dan relaksasi",
+      "cardEyebrow": "Kebugaran & Relaksasi",
+      "prevSlideAria": "Slide sebelumnya, {title}",
+      "nextSlideAria": "Slide berikutnya, {title}",
+      "previous": "Sebelumnya",
+      "next": "Berikutnya",
+      "progressAria": "Progres carousel",
+      "photoSoonAria": "{title} — segera hadir",
+      "photoSoon": "Foto — Segera Hadir",
+      "slides": {
+        "spa": "Suite Spa / Pijat",
+        "sauna": "Sauna",
+        "hammam": "Hammam Turki",
+        "pool": "Kolam Renang Indoor",
+        "salon": "Salon Kecantikan",
+        "fitness": "Pusat Kebugaran"
+      }
+    },
+    "destinations": {
+      "eyebrow": "Di Luar Hotel",
+      "heading": "Jelajahi Samarkand",
+      "lede": "Dari jantung spiritual kompleks Imam Al-Bukhari hingga Registan Square di Samarkand yang bersejarah, temukan dua perjalanan yang dibentuk mengikuti lokasi hotel.",
+      "highlightsAriaLabel": "Sorotan",
+      "mapsAria": "Buka {name} di Google Maps",
+      "maps": "Peta",
+      "galleryAria": "Galeri {title}",
+      "prevMediaAria": "Media sebelumnya dalam galeri {title}",
+      "nextMediaAria": "Media berikutnya dalam galeri {title}",
+      "galleryProgressAria": "Progres galeri {title}",
+      "previous": "Sebelumnya",
+      "next": "Berikutnya",
+      "journeys": {
+        "imamAlBukhariLegacy": {
+          "eyebrow": "Kunjungan singkat · sekitar 0.9 km",
+          "title": "Warisan Imam Al-Bukhari",
+          "description": "Kunjungi tempat peristirahatan Imam Muhammad Al-Bukhari, lalu lanjutkan ke pusat yang didedikasikan untuk keilmuan, manuskrip, penelitian, dan pertukaran internasional.",
+          "highlights": ["Ziarah spiritual", "Keilmuan Islam", "Arsitektur monumental"],
+          "destinations": {
+            "mausoleum": { "name": "Makam Imam Al-Bukhari", "detail": "0.9 km dari hotel" },
+            "center": { "name": "Pusat Internasional Imam Bukhari", "detail": "0.9 km dari hotel" }
+          },
+          "slideAlts": [
+            "Kompleks Makam Imam Al-Bukhari dekat HADITH Hotel",
+            "Aula interior di kompleks Imam Al-Bukhari",
+            "Pameran di Pusat Internasional Imam Bukhari",
+            "Manuskrip Islam yang dipamerkan di Pusat Internasional Imam Bukhari",
+            "Masjid dan taman di dalam kompleks Imam Al-Bukhari"
+          ]
+        },
+        "registanSquare": {
+          "eyebrow": "Perjalanan setengah hari · sekitar 17.2 km",
+          "title": "Registan Square",
+          "description": "Masuki jantung Samarkand di Registan Square, tempat tiga madrasah monumental membentuk salah satu ansambel arsitektur paling ikonik di Asia Tengah. Temukan gerbang megah, ukiran ubin biru yang rumit, dan sejarah Jalur Sutra selama berabad-abad.",
+          "highlights": ["Arsitektur Islam", "Ukiran ubin biru", "Warisan Jalur Sutra"],
+          "destinations": {
+            "square": { "name": "Registan Square", "detail": "17.2 km dari hotel" },
+            "madrasas": { "name": "Madrasah Ulugh Beg, Sher-Dor & Tilla-Kori", "detail": "Di dalam kompleks" }
+          },
+          "slideAlts": [
+            "Video tur Registan Square di Samarkand",
+            "Registan Square saat matahari terbenam dengan Madrasah Tilla-Kori dan Sher-Dor",
+            "Halaman Registan Square yang dikelilingi tiga madrasah era Timurid",
+            "Gerbang megah dan ukiran ubin biru di Registan Square"
+          ]
+        }
+      }
+    },
+    "active": {
+      "heading": "Aktif & Keluarga",
+      "lede": "Lapangan dan area bermain untuk tamu yang ingin tetap aktif selama menginap.",
+      "ariaLabel": "Fasilitas aktif dan keluarga",
+      "badge": "Segera Hadir",
+      "prevItemAria": "Sebelumnya: {name}",
+      "nextItemAria": "Berikutnya: {name}",
+      "prevFacilityAria": "Fasilitas sebelumnya",
+      "nextFacilityAria": "Fasilitas berikutnya",
+      "previous": "Sebelumnya",
+      "next": "Berikutnya",
+      "progressAria": "Progres carousel",
+      "items": {
+        "tennis": "Lapangan Tenis",
+        "padel": "Lapangan Padel",
+        "kidsPlayground": "Taman Bermain Anak"
+      }
+    }
+  },
+  "meetingsWeddings": {
+    "metaTitle": "Pertemuan & Pernikahan",
+    "hero": {
+      "hall": "Aula pertemuan dan pernikahan di HADITH Hotel"
+    },
+    "intro": {
+      "eyebrow": "Pertemuan & Pernikahan",
+      "heading": "Ruang untuk setiap acara",
+      "body": "Suasana elegan untuk pertemuan yang fokus, acara resmi, dan perayaan pernikahan."
+    },
+    "eventUses": {
+      "eyebrow": "Pertemuan & Pernikahan",
+      "heading": "Satu Aula, Banyak Kemungkinan",
+      "lead": "Satu tempat yang fleksibel, ditata secara cermat sesuai karakter dan skala setiap acara.",
+      "meetings": {
+        "eyebrow": "Acara Bisnis",
+        "title": "Pertemuan & Konferensi",
+        "description": "Atur aula untuk pertemuan yang fokus, konferensi, dan acara korporat, dengan penataan fleksibel yang didukung fasilitas modern.",
+        "highlights": ["Penataan acara fleksibel", "Fasilitas modern", "Tim acara khusus"]
+      },
+      "weddings": {
+        "eyebrow": "Acara Sosial",
+        "title": "Pernikahan & Perayaan",
+        "description": "Ubah aula yang sama menjadi tempat elegan untuk pernikahan dan perayaan sosial, menampung hingga 250 tamu.",
+        "highlights": ["Ballroom elegan", "Hingga 250 tamu", "Pernikahan dan acara sosial"]
+      }
+    },
+    "facts": {
+      "heading": "Detail Tempat",
+      "capacity": { "value": "250 Tamu", "label": "Kapasitas Maksimum" },
+      "setups": { "value": "Fleksibel", "label": "Penataan Acara" },
+      "facilities": { "value": "Modern", "label": "Fasilitas" }
+    },
+    "enquiry": {
+      "title": "Rencanakan Acara Anda",
+      "body": "Beri tahu kami tentang pertemuan, pernikahan, atau perayaan Anda mendatang. Tim kami akan membantu merencanakan acara sesuai kebutuhan Anda.",
+      "button": "Ajukan Proposal",
+      "comingSoonEyebrow": "Permintaan Acara",
+      "comingSoonBody": "Permintaan acara akan segera dibuka. Terima kasih telah mempertimbangkan HADITH Hotel untuk acara Anda."
+    }
+  },
+  "reviews": {
+    "metaTitle": "Cerita & Momen Terbaik",
+    "intro": {
+      "eyebrow": "Cerita HADITH",
+      "heading": "Ulasan"
+    },
+    "people": {
+      "mohamedShaheemAliSaeed": { "name": "Mohamed Shaheem Ali Saeed", "role": "Menteri Urusan Islam, Republik Maladewa" },
+      "shadyAlSuleiman": { "name": "Shady Al Suleiman", "role": "Presiden United Muslims of Australia" },
+      "syekhMohamedElDuwaini": { "name": "Syekh Mohamed El Duwaini", "role": "Wakil Sekretaris Al-Azhar Al-Sharif" },
+      "drZulkifliHasan": { "name": "Dr. Zulkifli Hasan", "role": "Menteri Urusan Agama, Malaysia" },
+      "talgatSafichTadzetdinov": { "name": "Talgat Safich Tadzetdinov (Tajuddin)", "role": "Grand Mufti dan Kepala Administrasi Spiritual Pusat Muslim Rusia" },
+      "emadAlDinHamdan": { "name": "Emad Al-Din Hamdan", "role": "Menteri Kebudayaan Negara Palestina" },
+      "reviewLandscape": { "name": "Imad Abdullah Hamdan", "role": "Menteri Kebudayaan Negara Palestina" }
+    },
+    "testimonialQuotes": {
+      "syekhMohamedElDuwaini": "Hotel yang luar biasa dengan pelayanan yang sangat baik. Semoga Allah senantiasa memberkati kesuksesannya.",
+      "mohamedShaheemAliSaeed": "Hotel yang menakjubkan dengan pelayanan sangat baik dan lokasi strategis dekat Kompleks Imam Al-Bukhari.",
+      "shadyAlSuleiman": "Hotel yang sangat bagus dengan lokasi yang indah. Sangat direkomendasikan untuk pengunjung Samarkand.",
+      "emadAlDinHamdan": "Indah, modern, dikelola dengan baik, dan berlokasi sempurna dekat Kompleks Imam Al-Bukhari.",
+      "drZulkifliHasan": "Hotel Indonesia yang mengesankan di Samarkand dengan lokasi yang sangat strategis.",
+      "talgatSafichTadzetdinov": "Hotel ini menjadi kebanggaan seluruh umat Muslim di dunia, dan terutama bagi rakyat Uzbekistan."
+    },
+    "videoReviews": {
+      "ariaLabel": "Ulasan video tamu",
+      "playAria": "Putar ulasan dari {name}",
+      "prevAria": "Cerita sebelumnya",
+      "nextAria": "Cerita berikutnya",
+      "closeReviewAria": "Tutup ulasan",
+      "reviewByAria": "Ulasan dari {name}"
+    },
+    "videoShowcase": {
+      "eyebrow": "Acara Unggulan",
+      "title": "Konferensi Internasional Pertama",
+      "citeTitle": "Al-Jami’ al-Musnad al-Sahih: The Book of an Ummah",
+      "bodyRest": ", diselenggarakan di HADITH Hotel, Kompleks Peringatan Imam al-Bukhari, Samarkand, Uzbekistan, pada 9–10 Juli 2026."
+    },
+    "testimonials": {
+      "eyebrow": "Kata Mereka",
+      "heading": "Perspektif Tamu",
+      "ariaLabel": "Testimoni tamu",
+      "prevAria": "Testimoni sebelumnya",
+      "nextAria": "Testimoni berikutnya",
+      "quotePlaceholder": "Kutipan tamu akan segera hadir.",
+      "photoPlaceholder": "Foto"
+    }
+  },
+  "gallery": {
+    "metaTitle": "Galeri",
+    "eyebrow": "Di Dalam HADITH Hotel",
+    "title": "Galeri",
+    "body": "Sebuah perjalanan visual melalui hotel, ruang-ruangnya, dan warisan yang mengelilinginya.",
+    "gridAriaLabel": "Galeri foto HADITH Hotel",
+    "viewAria": "Lihat {alt}",
+    "lightbox": {
+      "ariaLabel": "Gambar galeri",
+      "closeAria": "Tutup gambar"
+    },
+    "images": {
+      "hotelExterior": "Eksterior HADITH Hotel saat matahari terbenam",
+      "juniorSuite": "Interior Junior Suite di HADITH Hotel",
+      "restaurant": "Ruang makan restoran di HADITH Hotel",
+      "buffet": "Pengalaman bersantap buffet di HADITH Hotel",
+      "cafe": "Kafe di HADITH Hotel",
+      "eventsHall": "Aula acara di HADITH Hotel",
+      "indoorPool": "Kolam renang indoor di HADITH Hotel",
+      "turkishHammam": "Hammam Turki di HADITH Hotel",
+      "massageSuite": "Ruang perawatan pijat di HADITH Hotel",
+      "sauna": "Sauna di HADITH Hotel",
+      "fitnessCentre": "Pusat kebugaran di HADITH Hotel",
+      "tennisCourt": "Lapangan tenis di HADITH Hotel",
+      "padelCourt": "Lapangan padel di HADITH Hotel",
+      "playground": "Taman bermain anak di HADITH Hotel",
+      "cafeBar": "Bar kopi 7oz di HADITH Hotel"
+    }
+  }
+}

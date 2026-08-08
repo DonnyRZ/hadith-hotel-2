@@ -2,6 +2,7 @@
 
 import SiteImage from "@/components/SiteImage";
 import { useCallback, useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { ComingSoonModal } from "@/components/ComingSoonModal";
 import {
   GeographicBreakdownModal,
@@ -13,17 +14,9 @@ import {
   fetchVisitorMetrics,
 } from "@/lib/siteMetrics";
 
-const comingSoonCopy = {
-  reserve: {
-    eyebrow: "Reservations",
-    body: "Online booking will be available shortly. Thank you for your interest in HADITH Hotel.",
-  },
-} as const;
-
 export function OverviewFarewell() {
-  const [comingSoon, setComingSoon] = useState<
-    keyof typeof comingSoonCopy | null
-  >(null);
+  const t = useTranslations("overview.farewell");
+  const [comingSoonOpen, setComingSoonOpen] = useState(false);
   const [visitorCount, setVisitorCount] = useState<number | null>(null);
   const [downloadCount, setDownloadCount] = useState<number | null>(null);
   const [geographicMetric, setGeographicMetric] =
@@ -49,12 +42,12 @@ export function OverviewFarewell() {
     {
       id: "downloads",
       value: downloadCount?.toLocaleString("en") ?? "—",
-      label: "Profile Downloads",
+      label: t("downloadsLabel"),
     },
     {
       id: "visitors",
       value: visitorCount?.toLocaleString("en") ?? "—",
-      label: "Profile Visitors",
+      label: t("visitorsLabel"),
     },
   ];
   const closeGeography = useCallback(() => setGeographicMetric(null), []);
@@ -78,18 +71,17 @@ export function OverviewFarewell() {
         </div>
 
         <div className="overview-farewell__copy">
-          <p className="overview-farewell__eyebrow">Until we welcome you</p>
+          <p className="overview-farewell__eyebrow">{t("eyebrow")}</p>
           <h2
             id="overview-farewell-heading"
             className="overview-farewell__title"
           >
-            Some hotels give you somewhere to stay. HADITH Hotel gives you
-            peace worth remembering at the Complex of Imam Al Bukhari.
+            {t("title")}
           </h2>
         </div>
 
         <div className="overview-farewell__footer">
-          <div className="overview-farewell__stats" aria-label="Hotel profile metrics">
+          <div className="overview-farewell__stats" aria-label={t("statsAriaLabel")}>
             {stats.map((stat) => (
               <button
                 key={stat.id}
@@ -103,7 +95,7 @@ export function OverviewFarewell() {
                 <span className="overview-farewell__stat-value">{stat.value}</span>
                 <span className="overview-farewell__stat-label">{stat.label}</span>
                 <span className="overview-farewell__stat-action">
-                  View locations <span aria-hidden="true">↗</span>
+                  {t("viewLocations")} <span aria-hidden="true">↗</span>
                 </span>
               </button>
             ))}
@@ -116,25 +108,25 @@ export function OverviewFarewell() {
                 setDownloadCount(metrics.totalDownloads)
               }
             >
-              Download Profile
+              {t("downloadProfile")}
             </ProfileDownloadLink>
             <button
               type="button"
               className="overview-farewell__reserve"
               data-reserve-anchor
-              onClick={() => setComingSoon("reserve")}
+              onClick={() => setComingSoonOpen(true)}
             >
-              <span>Reserve</span>
+              <span>{t("reserve")}</span>
             </button>
           </div>
         </div>
       </section>
 
       <ComingSoonModal
-        open={comingSoon !== null}
-        onClose={() => setComingSoon(null)}
-        eyebrow={comingSoon ? comingSoonCopy[comingSoon].eyebrow : undefined}
-        body={comingSoon ? comingSoonCopy[comingSoon].body : undefined}
+        open={comingSoonOpen}
+        onClose={() => setComingSoonOpen(false)}
+        eyebrow={t("comingSoon.eyebrow")}
+        body={t("comingSoon.body")}
       />
       <GeographicBreakdownModal
         metric={geographicMetric}
