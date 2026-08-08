@@ -24,7 +24,6 @@ const venues: Venue[] = [
     description:
       "A 120-seat dining room framed by a slender white marble mihrab. The menu travels the Silk Road from Samarkand plov and Bukhara somsa to Indonesian-inspired creations prepared by our culinary team.",
     highlights: [
-      "120 seats",
       "Breakfast, lunch and dinner",
       "Private dining room",
       "Halal certified",
