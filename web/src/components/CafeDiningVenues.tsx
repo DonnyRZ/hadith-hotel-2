@@ -44,7 +44,7 @@ const venues: Venue[] = [
   {
     id: "cafe",
     heading: "A Taste of Indonesia",
-    name: "7OZ",
+    name: "7OZ Espresso",
     description:
       "Discover curated Indonesian pastries and specialty coffees from across the archipelago, including classics such as Kopi Luwak. The cafe offers a warm social setting celebrating Indonesia’s rich coffee culture.",
     highlights: [
