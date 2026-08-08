@@ -44,7 +44,7 @@ const venues: Venue[] = [
   {
     id: "cafe",
     heading: "A Taste of Indonesia",
-    name: "7OZ Espresso",
+    name: "7oz Espresso",
     description:
       "Discover curated Indonesian pastries and specialty coffees from across the archipelago, including classics such as Kopi Luwak. The cafe offers a warm social setting celebrating Indonesia’s rich coffee culture.",
     highlights: [
@@ -57,11 +57,11 @@ const venues: Venue[] = [
     gallery: [
       {
         src: "/images/cafe-dining/cafe-1.webp",
-        label: "7OZ cafe counter and lounge",
+        label: "7oz cafe counter and lounge",
       },
       {
         src: "/images/cafe-dining/cafe-2.webp",
-        label: "7OZ coffee bar",
+        label: "7oz coffee bar",
       },
     ],
   },

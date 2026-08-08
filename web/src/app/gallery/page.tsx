@@ -83,7 +83,7 @@ const galleryImages: GalleryImage[] = [
   {
     id: "cafe-bar",
     src: "/images/cafe-dining/cafe-2.webp",
-    alt: "7OZ coffee bar at HADITH Hotel",
+    alt: "7oz coffee bar at HADITH Hotel",
   },
 ];
 

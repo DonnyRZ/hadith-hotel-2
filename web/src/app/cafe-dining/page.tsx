@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const heroSlides = [
   {
     id: "dining-hero-cafe",
-    label: "7OZ cafe counter and lounge",
+    label: "7oz cafe counter and lounge",
     src: "/images/cafe-dining/cafe-1.webp",
     position: "50% 50%",
     mobilePosition: "42% 50%",

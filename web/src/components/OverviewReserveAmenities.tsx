@@ -52,7 +52,7 @@ const leftGroups: AmenityGroup[] = [
         href: "/cafe-dining",
       },
       { label: "Bar & Lounge", href: "/cafe-dining" },
-      { label: "7OZ Espresso Cafe", href: "/cafe-dining" },
+      { label: "7oz Espresso Cafe", href: "/cafe-dining" },
     ],
   },
 ];
