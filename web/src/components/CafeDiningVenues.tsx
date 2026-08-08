@@ -9,6 +9,7 @@ type Venue = {
   id: string;
   heading: string;
   name: string;
+  subname?: string;
   description: string;
   highlights: string[];
   variant: "blue" | "paper";
@@ -21,6 +22,7 @@ const venues: Venue[] = [
     id: "restaurant",
     heading: "Savour the Silk Road",
     name: "Saji Nusantara",
+    subname: "Uzbek Cuisine",
     description:
       "A 120-seat dining room framed by a slender white marble mihrab. The menu travels the Silk Road from Samarkand plov and Bukhara somsa to Indonesian-inspired creations prepared by our culinary team.",
     highlights: [
@@ -149,6 +151,9 @@ export function CafeDiningVenues() {
 
               <div className="venue__card">
                 <h3 className="venue__name">{venue.name}</h3>
+                {venue.subname ? (
+                  <p className="venue__subname">{venue.subname}</p>
+                ) : null}
                 <p className="venue__body">{venue.description}</p>
 
                 <ul className="venue__highlights">
