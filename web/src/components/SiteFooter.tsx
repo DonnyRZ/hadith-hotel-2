@@ -73,9 +73,8 @@ export function SiteFooter() {
 
           <address className="site-footer__address">
             <strong>{t("addressLabel")}</strong>
-            <span>{t("addressName")}</span>
-            <span>{t("addressComplex")}</span>
-            <span>{t("addressPlace")}</span>
+            <span>{t("addressLine1")}</span>
+            <span>{t("addressLine2")}</span>
           </address>
 
           <div className="site-footer__contacts">

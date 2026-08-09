@@ -36,9 +36,8 @@
       "eyebrow": "HADITH Hotel",
       "title": "Complex of Imam Al Bukhari",
       "addressLabel": "Address",
-      "addressName": "Hadith Hotel",
-      "addressComplex": "Imam Al-Bukhari Complex",
-      "addressPlace": "Samarkand · Republic of Uzbekistan",
+      "addressLine1": "Hadith Hotel",
+      "addressLine2": "Imam Al-Bukhari Complex · Samarkand · Republic of Uzbekistan",
       "instagram": "Instagram",
       "youtube": "YouTube",
       "copyright": "© {year} HADITH Hotel. All rights reserved."
@@ -245,9 +244,8 @@
       "titleLine1": "Getting",
       "titleLine2": "Here",
       "addressLabel": "Address",
-      "addressName": "Hadith Hotel",
-      "addressComplex": "Imam Al-Bukhari Complex",
-      "addressPlace": "Samarkand · Republic of Uzbekistan",
+      "addressLine1": "Hadith Hotel",
+      "addressLine2": "Imam Al-Bukhari Complex · Samarkand · Republic of Uzbekistan",
       "mapTitle": "HADITH Hotel location on Google Maps",
       "mapOverlayAria": "Open HADITH Hotel location in Google Maps",
       "viewOnMaps": "View on Google Maps"

@@ -36,9 +36,8 @@
       "eyebrow": "HADITH Hotel",
       "title": "Комплекс Имама Аль-Бухари",
       "addressLabel": "Адрес",
-      "addressName": "Hadith Hotel",
-      "addressComplex": "Комплекс имама Аль-Бухари",
-      "addressPlace": "Самарканд · Республика Узбекистан",
+      "addressLine1": "Hadith Hotel",
+      "addressLine2": "Комплекс имама Аль-Бухари · Самарканд · Республика Узбекистан",
       "instagram": "Instagram",
       "youtube": "YouTube",
       "copyright": "© {year} HADITH Hotel. Все права защищены."
@@ -245,9 +244,8 @@
       "titleLine1": "Как",
       "titleLine2": "добраться",
       "addressLabel": "Адрес",
-      "addressName": "Hadith Hotel",
-      "addressComplex": "Комплекс имама Аль-Бухари",
-      "addressPlace": "Самарканд · Республика Узбекистан",
+      "addressLine1": "Hadith Hotel",
+      "addressLine2": "Комплекс имама Аль-Бухари · Самарканд · Республика Узбекистан",
       "mapTitle": "Расположение HADITH Hotel на Google Maps",
       "mapOverlayAria": "Открыть расположение HADITH Hotel на Google Maps",
       "viewOnMaps": "Посмотреть на Google Maps"

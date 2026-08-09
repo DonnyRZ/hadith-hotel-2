@@ -36,9 +36,8 @@
       "eyebrow": "HADITH Hotel",
       "title": "Imom Al-Buxoriy majmuasi",
       "addressLabel": "Manzil",
-      "addressName": "Hadith Hotel",
-      "addressComplex": "Imom Al-Buxoriy Majmuasi",
-      "addressPlace": "Samarqand · Oʻzbekiston Respublikasi",
+      "addressLine1": "Hadith Hotel",
+      "addressLine2": "Imom Al-Buxoriy Majmuasi · Samarqand · Oʻzbekiston Respublikasi",
       "instagram": "Instagram",
       "youtube": "YouTube",
       "copyright": "© {year} HADITH Hotel. Barcha huquqlar himoyalangan."
@@ -245,9 +244,8 @@
       "titleLine1": "Bizga",
       "titleLine2": "qanday yetib borish",
       "addressLabel": "Manzil",
-      "addressName": "Hadith Hotel",
-      "addressComplex": "Imom Al-Buxoriy Majmuasi",
-      "addressPlace": "Samarqand · Oʻzbekiston Respublikasi",
+      "addressLine1": "Hadith Hotel",
+      "addressLine2": "Imom Al-Buxoriy Majmuasi · Samarqand · Oʻzbekiston Respublikasi",
       "mapTitle": "Google Xaritada HADITH Hotel manzili",
       "mapOverlayAria": "Google Xaritada HADITH Hotel manzilini ochish",
       "viewOnMaps": "Google Xaritada ko'rish"
