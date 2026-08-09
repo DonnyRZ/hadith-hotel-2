@@ -35,9 +35,12 @@
     "footer": {
       "eyebrow": "HADITH Hotel",
       "title": "Комплекс Имама Аль-Бухари",
-      "addressLine1": "RW5X+9P, Xoʻja Ismoil,",
-      "addressLine2": "Самаркандская область, Узбекистан",
+      "addressLabel": "Адрес",
+      "addressName": "Hadith Hotel",
+      "addressComplex": "Комплекс имама Аль-Бухари",
+      "addressPlace": "Самарканд · Республика Узбекистан",
       "instagram": "Instagram",
+      "youtube": "YouTube",
       "copyright": "© {year} HADITH Hotel. Все права защищены."
     },
     "pageHero": {
@@ -241,6 +244,10 @@
       "eyebrow": "Наше расположение",
       "titleLine1": "Как",
       "titleLine2": "добраться",
+      "addressLabel": "Адрес",
+      "addressName": "Hadith Hotel",
+      "addressComplex": "Комплекс имама Аль-Бухари",
+      "addressPlace": "Самарканд · Республика Узбекистан",
       "mapTitle": "Расположение HADITH Hotel на Google Maps",
       "mapOverlayAria": "Открыть расположение HADITH Hotel на Google Maps",
       "viewOnMaps": "Посмотреть на Google Maps"

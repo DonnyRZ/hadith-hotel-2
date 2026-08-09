@@ -35,9 +35,12 @@
     "footer": {
       "eyebrow": "HADITH Hotel",
       "title": "Kompleks Imam Al Bukhari",
-      "addressLine1": "RW5X+9P, Xo‘ja Ismoil,",
-      "addressLine2": "Samarqand viloyati, Uzbekistan",
+      "addressLabel": "Alamat",
+      "addressName": "Hadith Hotel",
+      "addressComplex": "Kompleks Imam Al-Bukhari",
+      "addressPlace": "Samarkand · Republik Uzbekistan",
       "instagram": "Instagram",
+      "youtube": "YouTube",
       "copyright": "© {year} HADITH Hotel. Seluruh hak cipta dilindungi."
     },
     "pageHero": {
@@ -241,6 +244,10 @@
       "eyebrow": "Lokasi Kami",
       "titleLine1": "Cara",
       "titleLine2": "Menuju",
+      "addressLabel": "Alamat",
+      "addressName": "Hadith Hotel",
+      "addressComplex": "Kompleks Imam Al-Bukhari",
+      "addressPlace": "Samarkand · Republik Uzbekistan",
       "mapTitle": "Lokasi HADITH Hotel di Google Maps",
       "mapOverlayAria": "Buka lokasi HADITH Hotel di Google Maps",
       "viewOnMaps": "Lihat di Google Maps"

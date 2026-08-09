@@ -2,7 +2,8 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { navItems } from "@/lib/navigation";
 
-const INSTAGRAM_URL = "https://www.instagram.com/hadithhotel/";
+const INSTAGRAM_URL = "https://www.instagram.com/hadith.hotel/";
+const YOUTUBE_URL = "https://www.youtube.com/channel/UC9x645ycCx46N5zrO2749Fg";
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
@@ -29,6 +30,33 @@ function InstagramIcon({ className }: { className?: string }) {
   );
 }
 
+function YouTubeIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      width="14"
+      height="14"
+      fill="none"
+      aria-hidden="true"
+    >
+      <rect
+        x="2.5"
+        y="5.5"
+        width="19"
+        height="13"
+        rx="3.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+      <path
+        d="M10.5 9.5v5l5-2.5-5-2.5Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 export function SiteFooter() {
   const t = useTranslations("common.footer");
   const tNav = useTranslations("common.nav");
@@ -44,8 +72,10 @@ export function SiteFooter() {
           </h2>
 
           <address className="site-footer__address">
-            <span>{t("addressLine1")}</span>
-            <span>{t("addressLine2")}</span>
+            <strong>{t("addressLabel")}</strong>
+            <span>{t("addressName")}</span>
+            <span>{t("addressComplex")}</span>
+            <span>{t("addressPlace")}</span>
           </address>
 
           <div className="site-footer__contacts">
@@ -53,13 +83,22 @@ export function SiteFooter() {
               info@hadith-hotel.com
             </a>
             <a
-              className="site-footer__instagram"
+              className="site-footer__social"
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <InstagramIcon className="site-footer__instagram-icon" />
+              <InstagramIcon className="site-footer__social-icon" />
               {t("instagram")}
+            </a>
+            <a
+              className="site-footer__social"
+              href={YOUTUBE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <YouTubeIcon className="site-footer__social-icon" />
+              {t("youtube")}
             </a>
           </div>
         </div>

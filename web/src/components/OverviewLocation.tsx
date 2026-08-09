@@ -22,9 +22,10 @@ export function OverviewLocation() {
           </h2>
 
           <address className="overview-location__address">
-            <strong>HADITH Hotel</strong>
-            <span>RW5X+9P, Xo&lsquo;ja Ismoil,</span>
-            <span>Samarqand viloyati, Uzbekistan</span>
+            <strong>{t("addressLabel")}</strong>
+            <span>{t("addressName")}</span>
+            <span>{t("addressComplex")}</span>
+            <span>{t("addressPlace")}</span>
           </address>
         </div>
 

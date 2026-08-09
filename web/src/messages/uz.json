@@ -35,9 +35,12 @@
     "footer": {
       "eyebrow": "HADITH Hotel",
       "title": "Imom Al-Buxoriy majmuasi",
-      "addressLine1": "RW5X+9P, Xoʻja Ismoil,",
-      "addressLine2": "Samarqand viloyati, Oʻzbekiston",
+      "addressLabel": "Manzil",
+      "addressName": "Hadith Hotel",
+      "addressComplex": "Imom Al-Buxoriy Majmuasi",
+      "addressPlace": "Samarqand · Oʻzbekiston Respublikasi",
       "instagram": "Instagram",
+      "youtube": "YouTube",
       "copyright": "© {year} HADITH Hotel. Barcha huquqlar himoyalangan."
     },
     "pageHero": {
@@ -241,6 +244,10 @@
       "eyebrow": "Bizning manzilimiz",
       "titleLine1": "Bizga",
       "titleLine2": "qanday yetib borish",
+      "addressLabel": "Manzil",
+      "addressName": "Hadith Hotel",
+      "addressComplex": "Imom Al-Buxoriy Majmuasi",
+      "addressPlace": "Samarqand · Oʻzbekiston Respublikasi",
       "mapTitle": "Google Xaritada HADITH Hotel manzili",
       "mapOverlayAria": "Google Xaritada HADITH Hotel manzilini ochish",
       "viewOnMaps": "Google Xaritada ko'rish"
