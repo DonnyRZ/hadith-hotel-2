@@ -26,6 +26,21 @@ function formatArrivalDate(date: Date): string {
   return date.toISOString().slice(0, 10);
 }
 
+const SUBMITTED_AT_FORMATTER = new Intl.DateTimeFormat("en-GB", {
+  timeZone: "Asia/Jakarta",
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: false,
+});
+
+/** e.g. "12 Aug 2026, 14:40" (Jakarta time) — readable for the ops team in the sheet. */
+function formatSubmittedAt(date: Date): string {
+  return SUBMITTED_AT_FORMATTER.format(date);
+}
+
 export async function appendGuestRegistrationRow(
   registration: GuestRegistration,
 ): Promise<void> {
@@ -40,7 +55,7 @@ export async function appendGuestRegistrationRow(
   const sheets = google.sheets({ version: "v4", auth });
 
   const row = [
-    registration.createdAt.toISOString(),
+    formatSubmittedAt(registration.createdAt),
     registration.name,
     registration.surname,
     registration.position,
@@ -54,7 +69,10 @@ export async function appendGuestRegistrationRow(
 
   await sheets.spreadsheets.values.append({
     spreadsheetId: config.spreadsheetId,
-    range: `${config.sheetName}!A:J`,
+    // Column A is reserved for the "No" cumulative-headcount formula set up
+    // directly in the sheet; the append range starts at B so it's never
+    // overwritten.
+    range: `${config.sheetName}!B:K`,
     // RAW keeps strings literal (e.g. a leading "+" on phone numbers survives;
     // USER_ENTERED would parse it as a number and drop the "+").
     valueInputOption: "RAW",
