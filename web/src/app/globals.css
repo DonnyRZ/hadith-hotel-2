@@ -426,9 +426,9 @@ button {
   position: absolute;
   inset: 0;
   border: 0;
-  background: rgba(26, 26, 26, 0.45);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(12, 10, 8, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   cursor: pointer;
 }
 
