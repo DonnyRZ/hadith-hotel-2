@@ -642,8 +642,10 @@
       "generic": "Terjadi kesalahan. Silakan coba lagi."
     },
     "thankYou": {
+      "eyebrow": "HADITH Hotel — Soft Opening",
       "title": "Terima Kasih",
-      "body": "Pendaftaran Anda telah diterima. Kami menantikan kedatangan Anda di HADITH Hotel."
+      "body": "Kami tak sabar menyambut kedatangan Anda pada masa soft opening kami.",
+      "close": "Tutup"
     }
   }
 }

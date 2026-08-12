@@ -642,8 +642,10 @@
       "generic": "Xatolik yuz berdi. Iltimos, qayta urinib ko'ring."
     },
     "thankYou": {
+      "eyebrow": "HADITH Hotel — Soft Opening",
       "title": "Rahmat",
-      "body": "Ro'yxatga olish ma'lumotlaringiz qabul qilindi. Sizni HADITH Hotel'da kutib olishdan mamnunmiz."
+      "body": "Mehmonxonamizning soft opening davrida sizni kutib olishga sabrsizlik bilan intiqmiz.",
+      "close": "Yopish"
     }
   }
 }

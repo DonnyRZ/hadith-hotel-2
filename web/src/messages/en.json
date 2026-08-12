@@ -642,8 +642,10 @@
       "generic": "Something went wrong. Please try again."
     },
     "thankYou": {
+      "eyebrow": "HADITH Hotel — Soft Opening",
       "title": "Thank you",
-      "body": "Your registration has been received. We look forward to welcoming you at HADITH Hotel."
+      "body": "We can't wait to welcome you during our soft opening season.",
+      "close": "Close"
     }
   }
 }

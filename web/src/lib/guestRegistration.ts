@@ -4,6 +4,8 @@ export const COMPANIONS_DROPDOWN_MAX = 10;
 export const COMPANIONS_COUNT_HARD_CAP = 500;
 /** Minimum time (ms) a real visitor needs before submitting; filters instant bot posts. */
 export const MIN_SUBMIT_DELAY_MS = 1500;
+/** sessionStorage key set right before redirecting to the homepage on success. */
+export const GUEST_REGISTRATION_SUCCESS_FLAG = "hadith:guestRegistrationSuccess";
 
 export type GuestRegistrationPayload = {
   name: string;

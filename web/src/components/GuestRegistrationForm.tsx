@@ -4,8 +4,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
   COMPANIONS_DROPDOWN_MAX,
+  GUEST_REGISTRATION_SUCCESS_FLAG,
   type GuestRegistrationErrors,
 } from "@/lib/guestRegistration";
+import { CustomSelect } from "@/components/CustomSelect";
+import { useRouter } from "@/i18n/navigation";
 
 type CompanionsOption = "" | `${number}` | "other";
 
@@ -56,6 +59,7 @@ function resolveCompanionsCount(state: FormState): number | null {
 export function GuestRegistrationForm() {
   const t = useTranslations("guestRegistration");
   const locale = useLocale();
+  const router = useRouter();
   const renderedAtRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -65,13 +69,17 @@ export function GuestRegistrationForm() {
   const [form, setForm] = useState<FormState>(INITIAL_STATE);
   const [errors, setErrors] = useState<GuestRegistrationErrors>({});
   const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const [serverError, setServerError] = useState(false);
 
-  const companionsOptions = useMemo(
-    () =>
-      Array.from({ length: COMPANIONS_DROPDOWN_MAX }, (_, index) => index + 1),
-    [],
+  const companionsSelectOptions = useMemo(
+    () => [
+      ...Array.from({ length: COMPANIONS_DROPDOWN_MAX }, (_, index) => {
+        const count = String(index + 1);
+        return { value: count, label: count };
+      }),
+      { value: "other", label: t("companions.otherOption") },
+    ],
+    [t],
   );
 
   function updateField<K extends keyof FormState>(key: K, value: FormState[K]) {
@@ -139,31 +147,18 @@ export function GuestRegistrationForm() {
         } else {
           setServerError(true);
         }
+        setSubmitting(false);
         return;
       }
 
-      setSubmitted(true);
+      // Keep the button in its loading state until navigation actually
+      // happens — the confirmation now lives in an overlay on the homepage.
+      sessionStorage.setItem(GUEST_REGISTRATION_SUCCESS_FLAG, "1");
+      router.push("/");
     } catch {
       setServerError(true);
-    } finally {
       setSubmitting(false);
     }
-  }
-
-  if (submitted) {
-    return (
-      <div className="guest-registration">
-        <div className="guest-registration__thank-you" role="status">
-          <p className="guest-registration__eyebrow">{t("eyebrow")}</p>
-          <h1 className="guest-registration__thank-you-title">
-            {t("thankYou.title")}
-          </h1>
-          <p className="guest-registration__thank-you-body">
-            {t("thankYou.body")}
-          </p>
-        </div>
-      </div>
-    );
   }
 
   return (
@@ -336,26 +331,19 @@ export function GuestRegistrationForm() {
               error={errors.companionsCount}
               errorText={t("errors.invalidCompanions")}
             >
-              <select
+              <CustomSelect
                 id="companionsCount"
                 value={form.companionsOption}
-                onChange={(event) =>
+                onChange={(nextValue) =>
                   updateField(
                     "companionsOption",
-                    event.target.value as CompanionsOption,
+                    nextValue as CompanionsOption,
                   )
                 }
-              >
-                <option value="" disabled>
-                  {t("companions.selectPlaceholder")}
-                </option>
-                {companionsOptions.map((count) => (
-                  <option key={count} value={String(count)}>
-                    {count}
-                  </option>
-                ))}
-                <option value="other">{t("companions.otherOption")}</option>
-              </select>
+                options={companionsSelectOptions}
+                placeholder={t("companions.selectPlaceholder")}
+                invalid={Boolean(errors.companionsCount)}
+              />
             </Field>
 
             {form.companionsOption === "other" && (
@@ -391,10 +379,18 @@ export function GuestRegistrationForm() {
 
         <button
           type="submit"
-          className="guest-registration__submit"
+          className={
+            submitting
+              ? "guest-registration__submit is-loading"
+              : "guest-registration__submit"
+          }
           disabled={submitting}
         >
-          {submitting ? t("submitting") : t("submit")}
+          <span className="guest-registration__submit-label">
+            {t("submit")}
+          </span>
+          <span className="guest-registration__submit-spinner" aria-hidden="true" />
+          {submitting && <span className="sr-only">{t("submitting")}</span>}
         </button>
       </form>
     </div>

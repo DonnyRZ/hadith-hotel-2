@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { GuestRegistrationThankYouOverlay } from "@/components/GuestRegistrationThankYouOverlay";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { OverviewReserveAmenities } from "@/components/OverviewReserveAmenities";
 import { OverviewDestinations } from "@/components/OverviewDestinations";
@@ -98,6 +99,8 @@ export default async function OverviewPage() {
 
   return (
     <main className="overview">
+      <GuestRegistrationThankYouOverlay />
+
       <section className="overview-hero" aria-label="Overview hero">
         <HeroCarousel slides={heroSlides} />
       </section>
