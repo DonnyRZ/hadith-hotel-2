@@ -618,8 +618,8 @@
       "name": { "label": "Имя" },
       "surname": { "label": "Фамилия" },
       "position": { "label": "Должность" },
-      "phone": { "label": "Телефон" },
-      "email": { "label": "Электронная почта" },
+      "phone": { "label": "Телефон (необязательно)" },
+      "email": { "label": "Электронная почта (необязательно)" },
       "arrivalDate": { "label": "Дата прибытия в HADITH Hotel" }
     },
     "companions": {

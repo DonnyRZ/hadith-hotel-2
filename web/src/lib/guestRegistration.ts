@@ -32,8 +32,8 @@ export type GuestRegistrationValidationResult =
         name: string;
         surname: string;
         position: string;
-        phone: string;
-        email: string;
+        phone: string | null;
+        email: string | null;
         arrivalDate: Date;
         hasCompanions: boolean;
         companionsCount: number;
@@ -74,11 +74,12 @@ export function validateGuestRegistration(
   const position = trimmed(raw.position, 120);
   if (!position) errors.position = "required";
 
+  // Optional: blank is allowed, but a provided value must still be well-formed.
   const phone = trimmed(raw.phone, 32);
-  if (!phone || !PHONE_PATTERN.test(phone)) errors.phone = "invalid";
+  if (phone && !PHONE_PATTERN.test(phone)) errors.phone = "invalid";
 
   const email = trimmed(raw.email, 160).toLowerCase();
-  if (!email || !EMAIL_PATTERN.test(email)) errors.email = "invalid";
+  if (email && !EMAIL_PATTERN.test(email)) errors.email = "invalid";
 
   const arrivalDate = new Date(trimmed(raw.arrivalDate, 32));
   if (!isPlausibleArrivalDate(arrivalDate)) errors.arrivalDate = "invalid";
@@ -125,8 +126,8 @@ export function validateGuestRegistration(
       name,
       surname,
       position,
-      phone,
-      email,
+      phone: phone || null,
+      email: email || null,
       arrivalDate,
       hasCompanions,
       companionsCount,

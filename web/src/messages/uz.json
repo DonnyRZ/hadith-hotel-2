@@ -618,8 +618,8 @@
       "name": { "label": "Ism" },
       "surname": { "label": "Familiya" },
       "position": { "label": "Lavozim" },
-      "phone": { "label": "Telefon" },
-      "email": { "label": "Email" },
+      "phone": { "label": "Telefon (ixtiyoriy)" },
+      "email": { "label": "Email (ixtiyoriy)" },
       "arrivalDate": { "label": "HADITH Hotel'ga kelish sanasi" }
     },
     "companions": {

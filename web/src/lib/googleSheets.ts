@@ -41,7 +41,32 @@ function formatSubmittedAt(date: Date): string {
   return SUBMITTED_AT_FORMATTER.format(date);
 }
 
-export async function appendGuestRegistrationRow(
+// `appendGuestRegistrationRowUnsafe` does a read (count existing rows) then
+// two writes; without serialization, two near-simultaneous submissions could
+// read the same count and both write to the same row, silently dropping one
+// guest's entry from the sheet. Chaining every call onto a single in-process
+// queue makes each read+write cycle atomic relative to the others. This is
+// sufficient because the app runs as a single container (see
+// docker-compose.yml); it would need a cross-process lock (e.g. a Postgres
+// advisory lock) if ever scaled to multiple replicas.
+let writeQueue: Promise<void> = Promise.resolve();
+
+export function appendGuestRegistrationRow(
+  registration: GuestRegistration,
+): Promise<void> {
+  const run = writeQueue.then(() =>
+    appendGuestRegistrationRowUnsafe(registration),
+  );
+  // Keep the queue alive even after a failure so one bad sync doesn't stall
+  // every submission after it; the caller still sees `run`'s own rejection.
+  writeQueue = run.then(
+    () => undefined,
+    () => undefined,
+  );
+  return run;
+}
+
+async function appendGuestRegistrationRowUnsafe(
   registration: GuestRegistration,
 ): Promise<void> {
   const config = credentials();
@@ -59,8 +84,8 @@ export async function appendGuestRegistrationRow(
     registration.name,
     registration.surname,
     registration.position,
-    registration.phone,
-    registration.email,
+    registration.phone ?? "",
+    registration.email ?? "",
     formatArrivalDate(registration.arrivalDate),
     registration.hasCompanions ? "Yes" : "No",
     registration.companionsCount,

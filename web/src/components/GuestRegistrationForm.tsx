@@ -92,10 +92,13 @@ export function GuestRegistrationForm() {
     if (!form.name.trim()) nextErrors.name = "required";
     if (!form.surname.trim()) nextErrors.surname = "required";
     if (!form.position.trim()) nextErrors.position = "required";
-    if (!/^[+\d][\d\s\-().]{5,24}$/.test(form.phone.trim())) {
+    // Optional: blank is allowed, but a provided value must still be well-formed.
+    const phoneValue = form.phone.trim();
+    if (phoneValue && !/^[+\d][\d\s\-().]{5,24}$/.test(phoneValue)) {
       nextErrors.phone = "invalid";
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+    const emailValue = form.email.trim();
+    if (emailValue && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
       nextErrors.email = "invalid";
     }
     if (!form.arrivalDate) nextErrors.arrivalDate = "invalid";

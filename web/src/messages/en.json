@@ -618,8 +618,8 @@
       "name": { "label": "Name" },
       "surname": { "label": "Surname" },
       "position": { "label": "Position" },
-      "phone": { "label": "Phone" },
-      "email": { "label": "Email" },
+      "phone": { "label": "Phone (optional)" },
+      "email": { "label": "Email (optional)" },
       "arrivalDate": { "label": "Date of arrival at HADITH Hotel" }
     },
     "companions": {
