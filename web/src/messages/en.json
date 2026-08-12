@@ -608,5 +608,42 @@
       "playground": "Children's playground at HADITH Hotel",
       "cafeBar": "7oz coffee bar at HADITH Hotel"
     }
+  },
+  "guestRegistration": {
+    "metaTitle": "Guest Registration",
+    "eyebrow": "HADITH Hotel",
+    "title": "Guest Registration",
+    "subtitle": "Please share your arrival details so our team can prepare for your visit.",
+    "fields": {
+      "name": { "label": "Name" },
+      "surname": { "label": "Surname" },
+      "position": { "label": "Position" },
+      "phone": { "label": "Phone" },
+      "email": { "label": "Email" },
+      "arrivalDate": { "label": "Date of arrival at HADITH Hotel" }
+    },
+    "companions": {
+      "question": "Travelling with companions?",
+      "yes": "Yes",
+      "no": "No",
+      "countLabel": "Number of companions",
+      "selectPlaceholder": "Select number",
+      "otherOption": "Others",
+      "otherLabel": "Please specify how many"
+    },
+    "submit": "Submit",
+    "submitting": "Submitting…",
+    "errors": {
+      "required": "This field is required.",
+      "invalidEmail": "Please enter a valid email address.",
+      "invalidPhone": "Please enter a valid phone number.",
+      "invalidDate": "Please choose a valid arrival date.",
+      "invalidCompanions": "Please choose a valid number.",
+      "generic": "Something went wrong. Please try again."
+    },
+    "thankYou": {
+      "title": "Thank you",
+      "body": "Your registration has been received. We look forward to welcoming you at HADITH Hotel."
+    }
   }
 }
