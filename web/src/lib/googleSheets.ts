@@ -67,16 +67,34 @@ export async function appendGuestRegistrationRow(
     registration.totalGuests,
   ];
 
-  await sheets.spreadsheets.values.append({
+  // `values.append` looks for a "table" across the whole sheet row, so with
+  // a full-width header (A:K) it keeps snapping back to column A even when
+  // asked to target B:K — landing data one column to the left of the "No"
+  // formula and clobbering it. Writing to an explicit row sidesteps that
+  // table-detection heuristic entirely.
+  const existing = await sheets.spreadsheets.values.get({
     spreadsheetId: config.spreadsheetId,
-    // Column A is reserved for the "No" cumulative-headcount formula set up
-    // directly in the sheet; the append range starts at B so it's never
-    // overwritten.
-    range: `${config.sheetName}!B:K`,
+    range: `${config.sheetName}!B2:B`,
+  });
+  const nextRow = (existing.data.values?.length ?? 0) + 2;
+
+  await sheets.spreadsheets.values.update({
+    spreadsheetId: config.spreadsheetId,
+    range: `${config.sheetName}!B${nextRow}:K${nextRow}`,
     // RAW keeps strings literal (e.g. a leading "+" on phone numbers survives;
     // USER_ENTERED would parse it as a number and drop the "+").
     valueInputOption: "RAW",
-    insertDataOption: "INSERT_ROWS",
     requestBody: { values: [row] },
+  });
+
+  // Running total of guests (No column), driven by a live formula so it
+  // self-corrects if a row is ever edited or removed by hand.
+  await sheets.spreadsheets.values.update({
+    spreadsheetId: config.spreadsheetId,
+    range: `${config.sheetName}!A${nextRow}`,
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      values: [[`=IF($K${nextRow}="","",SUM($K$2:K${nextRow}))`]],
+    },
   });
 }
