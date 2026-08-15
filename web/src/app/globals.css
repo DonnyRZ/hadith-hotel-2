@@ -3923,6 +3923,95 @@ body.has-room-lightbox .reserve-float {
   color: var(--accent);
 }
 
+.story-feature {
+  background: #16120e;
+  padding: clamp(72px, 9vh, 108px) var(--page-gutter);
+}
+
+.story-feature__inner {
+  width: min(1120px, 100%);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(280px, 0.88fr) minmax(0, 1.32fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+}
+
+.story-feature__copy {
+  min-width: 0;
+}
+
+.story-feature__eyebrow {
+  margin: 0;
+  color: var(--accent);
+  font-family: var(--sans);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.story-feature__title {
+  margin: 14px 0 0;
+  color: #f4efe6;
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 3vw, 2.7rem);
+  font-weight: 500;
+  line-height: 1.12;
+}
+
+.story-feature__body {
+  margin: 18px 0 0;
+  max-width: 36em;
+  color: rgba(244, 239, 230, 0.74);
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.story-feature__cta {
+  margin-top: clamp(26px, 3.4vw, 34px);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 22px;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font-family: var(--sans);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.story-feature__cta:hover {
+  background: var(--accent);
+  color: #16120e;
+}
+
+.story-feature__cta:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.story-feature__media {
+  position: relative;
+  min-height: clamp(280px, 38vw, 430px);
+  overflow: hidden;
+  background: #2a241c;
+}
+
+.story-feature__image {
+  object-fit: cover;
+  object-position: 50% 42%;
+}
+
 /* Video reviews carousel */
 
 .video-reviews {
@@ -4305,8 +4394,14 @@ body.has-room-lightbox .reserve-float {
 }
 
 @media (max-width: 900px) {
-  .video-showcase__inner {
+  .video-showcase__inner,
+  .story-feature__inner {
     grid-template-columns: 1fr;
+  }
+
+  .story-feature__media {
+    min-height: 240px;
+    order: -1;
   }
 }
 
@@ -5478,7 +5573,8 @@ body.has-room-lightbox .reserve-float {
   .venue,
   .event-facts,
   .event-enquiry,
-  .video-showcase {
+  .video-showcase,
+  .story-feature {
     padding: 68px var(--page-gutter);
   }
 
@@ -5495,6 +5591,7 @@ body.has-room-lightbox .reserve-float {
   .event-facts__heading,
   .event-enquiry__title,
   .video-showcase__title,
+  .story-feature__title,
   .video-reviews__heading,
   .testimonials__heading {
     font-size: clamp(1.85rem, 9vw, 2.3rem);
