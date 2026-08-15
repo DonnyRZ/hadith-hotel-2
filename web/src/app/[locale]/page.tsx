@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { GuestRegistrationThankYouOverlay } from "@/components/GuestRegistrationThankYouOverlay";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { OverviewReserveAmenities } from "@/components/OverviewReserveAmenities";
+import { ChessStoryFeature } from "@/components/ChessStoryFeature";
 import { OverviewDestinations } from "@/components/OverviewDestinations";
 import { OverviewFarewell } from "@/components/OverviewFarewell";
 import { OverviewHotelExperiences } from "@/components/OverviewHotelExperiences";
@@ -137,6 +138,8 @@ export default async function OverviewPage() {
         <OverviewRoomsSuites />
 
         <OverviewDestinations />
+
+        <ChessStoryFeature headingId="overview-chess-story-heading" />
 
         <OverviewHotelExperiences />
 

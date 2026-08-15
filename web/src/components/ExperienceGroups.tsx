@@ -1,7 +1,6 @@
 "use client";
 
 import SiteImage from "@/components/SiteImage";
-import { ChessStoryFeature } from "@/components/ChessStoryFeature";
 import { asset } from "@/lib/asset";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
@@ -661,8 +660,6 @@ export function ExperienceGroups() {
       </section>
 
       <DestinationsSection t={t} />
-
-      <ChessStoryFeature headingId="experience-chess-story-heading" />
 
       <section
         className="experience-active"
