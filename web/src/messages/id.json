@@ -615,5 +615,44 @@
       "playground": "Taman bermain anak di HADITH Hotel",
       "cafeBar": "Bar kopi 7oz di HADITH Hotel"
     }
+  },
+  "guestRegistration": {
+    "metaTitle": "Pendaftaran Tamu",
+    "eyebrow": "HADITH Hotel",
+    "title": "Pendaftaran Tamu",
+    "subtitle": "Silakan bagikan detail kedatangan Anda agar tim kami dapat mempersiapkan kunjungan Anda.",
+    "fields": {
+      "name": { "label": "Nama" },
+      "surname": { "label": "Nama Belakang" },
+      "position": { "label": "Jabatan" },
+      "phone": { "label": "Telepon (opsional)" },
+      "email": { "label": "Email (opsional)" },
+      "arrivalDate": { "label": "Tanggal kedatangan di HADITH Hotel" }
+    },
+    "companions": {
+      "question": "Bepergian dengan rombongan?",
+      "yes": "Ya",
+      "no": "Tidak",
+      "countLabel": "Jumlah rombongan",
+      "selectPlaceholder": "Pilih jumlah",
+      "otherOption": "Lainnya",
+      "otherLabel": "Sebutkan jumlahnya"
+    },
+    "submit": "Kirim",
+    "submitting": "Mengirim…",
+    "errors": {
+      "required": "Kolom ini wajib diisi.",
+      "invalidEmail": "Silakan masukkan alamat email yang valid.",
+      "invalidPhone": "Silakan masukkan nomor telepon yang valid.",
+      "invalidDate": "Silakan pilih tanggal kedatangan yang valid.",
+      "invalidCompanions": "Silakan pilih jumlah yang valid.",
+      "generic": "Terjadi kesalahan. Silakan coba lagi."
+    },
+    "thankYou": {
+      "eyebrow": "HADITH Hotel — Soft Opening",
+      "title": "Terima Kasih",
+      "body": "Kami tak sabar menyambut kedatangan Anda pada masa soft opening kami.",
+      "close": "Tutup"
+    }
   }
 }

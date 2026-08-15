@@ -62,3 +62,24 @@ model ProfileDownload {
   @@index([countryCode])
   @@unique([visitorHash, documentVersion])
 }
+
+model GuestRegistration {
+  id              String    @id @default(cuid())
+  name            String
+  surname         String
+  position        String
+  phone           String?
+  email           String?
+  arrivalDate     DateTime
+  hasCompanions   Boolean   @default(false)
+  /// Guests travelling with the registrant, not counting the registrant.
+  companionsCount Int       @default(0)
+  /// companionsCount + 1 (the registrant).
+  totalGuests     Int       @default(1)
+  locale          String    @default("en")
+  syncedToSheetAt DateTime?
+  syncError       String?
+  createdAt       DateTime  @default(now())
+
+  @@index([createdAt])
+}

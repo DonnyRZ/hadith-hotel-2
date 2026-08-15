@@ -615,5 +615,44 @@
       "playground": "HADITH Hotel'dagi bolalar o'yin maydonchasi",
       "cafeBar": "HADITH Hotel'dagi 7oz qahva bari"
     }
+  },
+  "guestRegistration": {
+    "metaTitle": "Mehmonni ro'yxatga olish",
+    "eyebrow": "HADITH Hotel",
+    "title": "Mehmonni ro'yxatga olish",
+    "subtitle": "Jamoamiz tashrifingizga tayyorgarlik ko'rishi uchun kelish tafsilotlaringizni bildiring.",
+    "fields": {
+      "name": { "label": "Ism" },
+      "surname": { "label": "Familiya" },
+      "position": { "label": "Lavozim" },
+      "phone": { "label": "Telefon (ixtiyoriy)" },
+      "email": { "label": "Email (ixtiyoriy)" },
+      "arrivalDate": { "label": "HADITH Hotel'ga kelish sanasi" }
+    },
+    "companions": {
+      "question": "Hamrohlar bilan sayohat qilasizmi?",
+      "yes": "Ha",
+      "no": "Yo'q",
+      "countLabel": "Hamrohlar soni",
+      "selectPlaceholder": "Sonni tanlang",
+      "otherOption": "Boshqa",
+      "otherLabel": "Sonini kiriting"
+    },
+    "submit": "Yuborish",
+    "submitting": "Yuborilmoqda…",
+    "errors": {
+      "required": "Bu maydonni to'ldirish shart.",
+      "invalidEmail": "Iltimos, to'g'ri email manzilini kiriting.",
+      "invalidPhone": "Iltimos, to'g'ri telefon raqamini kiriting.",
+      "invalidDate": "Iltimos, to'g'ri kelish sanasini tanlang.",
+      "invalidCompanions": "Iltimos, to'g'ri sonni tanlang.",
+      "generic": "Xatolik yuz berdi. Iltimos, qayta urinib ko'ring."
+    },
+    "thankYou": {
+      "eyebrow": "HADITH Hotel — Soft Opening",
+      "title": "Rahmat",
+      "body": "Mehmonxonamizning soft opening davrida sizni kutib olishga sabrsizlik bilan intiqmiz.",
+      "close": "Yopish"
+    }
   }
 }
