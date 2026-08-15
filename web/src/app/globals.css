@@ -4060,18 +4060,8 @@ body.has-room-lightbox .reserve-float {
   min-width: 0;
 }
 
-.story-feature__eyebrow {
-  margin: 0;
-  color: var(--accent);
-  font-family: var(--sans);
-  font-size: 9.5px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
 .story-feature__title {
-  margin: 14px 0 0;
+  margin: 0;
   color: #f4efe6;
   font-family: var(--serif);
   font-size: clamp(1.9rem, 3vw, 2.7rem);

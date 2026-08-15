@@ -28,7 +28,6 @@ export function ChessStoryFeature({ headingId = "chess-story-heading" }: { headi
     <section className="story-feature" aria-labelledby={headingId}>
       <div className="story-feature__inner">
         <div className="story-feature__copy">
-          <p className="story-feature__eyebrow">{t("eyebrow")}</p>
           <h2 id={headingId} className="story-feature__title">
             {t("title")}
           </h2>
