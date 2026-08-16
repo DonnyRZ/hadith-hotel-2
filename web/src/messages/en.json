@@ -572,9 +572,19 @@
     },
     "chessStory": {
       "title": "A Chess Journey along the Silk Road",
-      "body": "From 21 to 29 September 2026, a group tour visits Samarkand, Bukhara and Tashkent during the Chess Olympiad — culture, chess, and the cities of the Silk Road.",
+      "body": "From 21 to 29 September 2026, a group tour to Uzbekistan will combine cultural exploration with top-level chess.",
       "cta": "Read Article",
-      "imageAlt": "Registan Square in Samarkand"
+      "imageAlt": "Registan Square in Samarkand",
+      "article": {
+        "heading": "An unmissable opportunity",
+        "p1": "Uzbekistan, in Central Asia, is rapidly emerging as an attractive travel destination. This is largely thanks to its rich history and the remarkably preserved architecture of the Silk Road period. The historic cities of Samarkand and Bukhara, in particular, offer a wealth of cultural highlights. In addition, the country provides high-quality accommodation, reliable transport and excellent cuisine, while being considered a safe place to travel.",
+        "p2": "This group tour, running from 21 to 29 September 2026, will visit these renowned cities as well as the capital, Tashkent. The journey coincides with the Chess Olympiad in Samarkand, which will be attended on three separate days.",
+        "p3": "Uzbekistan is also increasingly establishing itself as a leading chess nation, not only through the hosting of major events but also thanks to its elite players, notably super GMs Nodirbek Abdusattorov and Javokhir Sindarov. Both recently finished first and second at the prestigious Tata Steel Masters in Wijk aan Zee, while Sindarov has also qualified for the forthcoming Candidates Tournament.",
+        "p4": "A chess event with local players will be organised at a historic venue in Bukhara. On the final day in Tashkent, a further event will take place in a park setting, again involving local players.",
+        "image1Alt": "Historic monuments and gardens in Samarkand",
+        "image2Alt": "A palatial building and lake in Tashkent at sunset",
+        "image3Alt": "Historic ensemble and minaret in Bukhara"
+      }
     },
     "testimonials": {
       "eyebrow": "In Their Words",

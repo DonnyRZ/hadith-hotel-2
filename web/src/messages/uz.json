@@ -572,9 +572,19 @@
     },
     "chessStory": {
       "title": "Ipak yo'li bo'ylab shaxmat sayohati",
-      "body": "2026-yil 21–29-sentabr kunlari guruh safari Shaxmat Olimpiadasi chog'ida Samarqand, Buxoro va Toshkentga tashrif buyuradi — madaniyat, shaxmat va Ipak yo'li shaharlari.",
+      "body": "2026-yil 21–29-sentabr kunlari O'zbekistonga guruh safari madaniy sayohatni yuqori darajadagi shaxmat bilan birlashtiradi.",
       "cta": "Maqolani o'qish",
-      "imageAlt": "Samarqanddagi Registon maydoni"
+      "imageAlt": "Samarqanddagi Registon maydoni",
+      "article": {
+        "heading": "O'tkazib yuborib bo'lmaydigan imkoniyat",
+        "p1": "Markaziy Osiyodagi O'zbekiston jozibador sayohat manzili sifatida tez rivojlanmoqda. Bunga asosan uning boy tarixi va Ipak yo'li davridagi ajoyib saqlanib qolgan me'morchiligi sabab. Ayniqsa, Samarqand va Buxoro kabi tarixiy shaharlar madaniy merosga boy. Bundan tashqari, mamlakat sifatli mehmonxonalar, ishonchli transport va a'lo oshxonani taqdim etadi hamda xavfsiz sayohat maskani hisoblanadi.",
+        "p2": "2026-yil 21–29-sentabr kunlari o'tadigan ushbu guruh safari ushbu mashhur shaharlar bilan birga poytaxt Toshkentga ham tashrif buyuradi. Sayohat Samarqanddagi Shaxmat Olimpiadasi bilan bir vaqtga to'g'ri keladi va ishtirokchilar unga uch kun davomida tashrif buyuradilar.",
+        "p3": "O'zbekiston yirik musobaqalarni mezbonlik qilish bilan birga, taniqli shaxmatchilari — xususan, super GM Nodirbek Abdusattorov va Javokhir Sindarov tufayli yetakchi shaxmat mamlakatiga aylanib bormoqda. Ular yaqinda Veyk-an-Zedagi nufuzli Tata Steel Masters musobaqasida birinchi va ikkinchi o'rinlarni egallashdi, Sindarov esa bo'lajak Nomzodlar turniriga yo'llanma oldi.",
+        "p4": "Buxorodagi tarixiy maskanda mahalliy shaxmatchilar ishtirokida musobaqa tashkil etiladi. Toshkentdagi so'nggi kunda park muhitida yana bir tadbir o'tkaziladi — unda ham mahalliy o'yinchilar qatnashadi.",
+        "image1Alt": "Samarqanddagi tarixiy yodgorliklar va bog'lar",
+        "image2Alt": "Toshkentdagi saroy binosi va ko'l quyosh botishida",
+        "image3Alt": "Buxorodagi tarixiy majmua va minorasi"
+      }
     },
     "testimonials": {
       "eyebrow": "Ularning So'zlari",

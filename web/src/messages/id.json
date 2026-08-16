@@ -572,9 +572,19 @@
     },
     "chessStory": {
       "title": "Perjalanan Catur di Jalur Sutra",
-      "body": "Dari 21 hingga 29 September 2026, tur grup mengunjungi Samarkand, Bukhara, dan Tashkent selama Chess Olympiad — budaya, catur, dan kota-kota Jalur Sutra.",
+      "body": "Dari 21 hingga 29 September 2026, tur grup ke Uzbekistan akan memadukan eksplorasi budaya dengan catur tingkat dunia.",
       "cta": "Baca Artikel",
-      "imageAlt": "Registan Square di Samarkand"
+      "imageAlt": "Registan Square di Samarkand",
+      "article": {
+        "heading": "Kesempatan yang tak boleh dilewatkan",
+        "p1": "Uzbekistan, di Asia Tengah, semakin menonjol sebagai destinasi wisata yang menarik. Hal ini terutama berkat sejarahnya yang kaya dan arsitektur periode Jalur Sutra yang terawat luar biasa. Kota bersejarah Samarkand dan Bukhara, khususnya, menawarkan kekayaan sorotan budaya. Selain itu, negara ini menyediakan akomodasi berkualitas, transportasi yang andal, dan kuliner yang unggul, serta dianggap sebagai tempat yang aman untuk dikunjungi.",
+        "p2": "Tur grup ini, yang berlangsung dari 21 hingga 29 September 2026, akan mengunjungi kota-kota terkenal tersebut sekaligus ibu kota Tashkent. Perjalanan ini bertepatan dengan Chess Olympiad di Samarkand, yang akan dihadiri selama tiga hari terpisah.",
+        "p3": "Uzbekistan juga semakin mapan sebagai bangsa catur terkemuka, tidak hanya melalui penyelenggaraan event besar, tetapi juga berkat para pemain elitnya, terutama super GM Nodirbek Abdusattorov dan Javokhir Sindarov. Keduanya baru-baru ini finis pertama dan kedua di Tata Steel Masters yang prestisius di Wijk aan Zee, sementara Sindarov juga telah lolos ke Candidates Tournament yang akan datang.",
+        "p4": "Sebuah event catur bersama pemain lokal akan diselenggarakan di venue bersejarah di Bukhara. Pada hari terakhir di Tashkent, event lanjutan akan berlangsung di taman, kembali melibatkan pemain lokal.",
+        "image1Alt": "Monumen bersejarah dan taman di Samarkand",
+        "image2Alt": "Bangunan istana dan danau di Tashkent saat senja",
+        "image3Alt": "Ensemble bersejarah dan menara di Bukhara"
+      }
     },
     "testimonials": {
       "eyebrow": "Kata Mereka",

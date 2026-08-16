@@ -4121,6 +4121,86 @@ body.has-room-lightbox .reserve-float {
   object-position: 50% 42%;
 }
 
+.story-article {
+  background: var(--paper);
+  padding: clamp(72px, 9vh, 120px) var(--page-gutter) clamp(96px, 12vh, 148px);
+}
+
+.story-article__header,
+.story-article__lede,
+.story-article__section {
+  width: min(720px, 100%);
+  margin-inline: auto;
+}
+
+.story-article__title {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(2.1rem, 3.4vw, 3.1rem);
+  font-weight: 500;
+  line-height: 1.12;
+}
+
+.story-article__lede {
+  margin-top: clamp(36px, 5vh, 56px);
+}
+
+.story-article__lede-text {
+  margin: 0;
+  color: var(--ink-soft);
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 1.7vw, 1.45rem);
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.story-article__figure {
+  width: min(1120px, 100%);
+  margin: clamp(40px, 6vh, 72px) auto 0;
+}
+
+.story-article__figure--follow {
+  margin-top: clamp(20px, 3vh, 32px);
+}
+
+.story-article__frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #ddd8cf;
+}
+
+.story-article__image {
+  object-fit: cover;
+  object-position: 50% 45%;
+}
+
+.story-article__section {
+  margin-top: clamp(48px, 7vh, 80px);
+}
+
+.story-article__heading {
+  margin: 0 0 22px;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 2.4vw, 2.2rem);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.story-article__section p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.story-article__section p + p {
+  margin-top: 1.15em;
+}
+
 /* Video reviews carousel */
 
 .video-reviews {
@@ -5687,6 +5767,10 @@ body.has-room-lightbox .reserve-float {
     padding: 68px var(--page-gutter);
   }
 
+  .story-article {
+    padding: 68px var(--page-gutter) 96px;
+  }
+
   .experience-group__intro {
     margin-bottom: 36px;
   }
@@ -5701,6 +5785,7 @@ body.has-room-lightbox .reserve-float {
   .event-enquiry__title,
   .video-showcase__title,
   .story-feature__title,
+  .story-article__title,
   .video-reviews__heading,
   .testimonials__heading {
     font-size: clamp(1.85rem, 9vw, 2.3rem);
