@@ -84,7 +84,7 @@ const rightGroups: AmenityGroup[] = [
       {
         key: "groups.events.occupancy",
         valueKey: "groups.events.occupancyValue",
-        href: "/meetings-weddings",
+        href: "/events",
       },
     ],
   },

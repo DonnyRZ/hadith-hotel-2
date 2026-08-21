@@ -10,7 +10,7 @@
       "suitesRooms": "Suite & Kamar",
       "cafeDining": "Kafe & Restoran",
       "experience": "Pengalaman",
-      "meetingsWeddings": "Pertemuan & Pernikahan",
+      "events": "Acara",
       "reviews": "Cerita & Sorotan",
       "gallery": "Galeri"
     },
@@ -222,7 +222,7 @@
         "suitesRooms": "Suite & Kamar",
         "cafeDining": "Kafe & Restoran",
         "experience": "Pengalaman",
-        "meetingsWeddings": "Pertemuan & Pernikahan"
+        "events": "Acara"
       }
     },
     "farewell": {
@@ -492,45 +492,45 @@
       }
     }
   },
-  "meetingsWeddings": {
-    "metaTitle": "Pertemuan & Pernikahan",
-    "hero": {
-      "hall": "Aula pertemuan dan pernikahan di HADITH Hotel"
+  "events": {
+    "metaTitle": "Acara",
+    "hallAlt": "Grand ballroom di HADITH Hotel",
+    "plan": {
+      "title": "Rencanakan Acara Anda",
+      "lead": "Dengan beragam venue untuk berbagai jenis pertemuan, HADITH Hotel, Samarkand adalah tempat yang tepat untuk acara Anda berikutnya. Baik pertemuan maupun pernikahan, kami menawarkan ruang rapat privat untuk sesi networking, serta function room mewah yang memukau.",
+      "help": "Jika Anda membutuhkan rekomendasi, hubungi tim Events kami. Kami akan senang membantu Anda menemukan yang tepat."
     },
-    "intro": {
-      "eyebrow": "Pertemuan & Pernikahan",
-      "heading": "Ruang untuk setiap acara",
-      "body": "Suasana elegan untuk pertemuan yang fokus, acara resmi, dan perayaan pernikahan."
+    "metrics": {
+      "pending": "Details to follow",
+      "venues": { "label": "Venue Acara" },
+      "space": { "label": "Total Ruang Acara" },
+      "capacity": { "label": "Kapasitas Ballroom" },
+      "floorPlans": "Denah Lantai",
+      "virtualTour": "Tur Virtual"
     },
-    "eventUses": {
-      "eyebrow": "Pertemuan & Pernikahan",
-      "heading": "Satu Aula, Banyak Kemungkinan",
-      "lead": "Satu tempat yang fleksibel, ditata secara cermat sesuai karakter dan skala setiap acara.",
+    "enquiry": "Enquiry",
+    "learnMore": "Pelajari Lebih Lanjut",
+    "features": {
       "meetings": {
-        "eyebrow": "Acara Bisnis",
-        "title": "Pertemuan & Konferensi",
-        "description": "Atur aula untuk pertemuan yang fokus, konferensi, dan acara korporat, dengan penataan fleksibel yang didukung fasilitas modern.",
-        "highlights": ["Penataan acara fleksibel", "Fasilitas modern", "Tim acara khusus"]
+        "title": "Meetings",
+        "body": "Dengan beragam venue untuk berbagai jenis pertemuan, HADITH Hotel, Samarkand adalah tempat yang tepat untuk acara Anda berikutnya. Kami menawarkan ruang rapat privat untuk sesi networking, serta function room mewah yang memukau."
       },
       "weddings": {
-        "eyebrow": "Acara Sosial",
-        "title": "Pernikahan & Perayaan",
-        "description": "Ubah aula yang sama menjadi tempat elegan untuk pernikahan dan perayaan sosial, menampung hingga 250 tamu.",
-        "highlights": ["Ballroom elegan", "Hingga 250 tamu", "Pernikahan dan acara sosial"]
+        "title": "Weddings",
+        "body": "Rayakan hari istimewa Anda di HADITH Hotel, Samarkand. Pukau tamu Anda dengan layanan sempurna dan venue pernikahan yang indah di hotel kami. Tim perencana pernikahan kami juga siap mewujudkan impian Anda, agar happily ever after dimulai dengan gaya."
+      },
+      "catering": {
+        "title": "The Hadith On-Site Catering",
+        "body": "HADITH Hotel, Samarkand menghadirkan keramahtamahan di luar hotel melalui layanan on-site catering yang disesuaikan dengan preferensi dan kebutuhan unik para tamu kami."
+      },
+      "social": {
+        "title": "Social Events",
+        "body": "Di HADITH Hotel, Samarkand, kami menawarkan setting yang tepat untuk momen spesial di restoran kami. Baik dinner ulang tahun yang intim, bridal shower, atau perayaan anniversary, restoran kami adalah venue yang ideal agar acara Anda tak terlupakan."
       }
     },
-    "facts": {
-      "heading": "Detail Tempat",
-      "capacity": { "value": "250 Tamu", "label": "Kapasitas Maksimum" },
-      "setups": { "value": "Fleksibel", "label": "Penataan Acara" },
-      "facilities": { "value": "Modern", "label": "Fasilitas" }
-    },
-    "enquiry": {
-      "title": "Rencanakan Acara Anda",
-      "body": "Beri tahu kami tentang pertemuan, pernikahan, atau perayaan Anda mendatang. Tim kami akan membantu merencanakan acara sesuai kebutuhan Anda.",
-      "button": "Ajukan Proposal",
-      "comingSoonEyebrow": "Permintaan Acara",
-      "comingSoonBody": "Permintaan acara akan segera dibuka. Terima kasih telah mempertimbangkan HADITH Hotel untuk acara Anda."
+    "comingSoon": {
+      "eyebrow": "Events",
+      "body": "Bagian Events ini akan segera dibuka. Terima kasih telah mempertimbangkan HADITH Hotel untuk acara Anda."
     }
   },
   "reviews": {

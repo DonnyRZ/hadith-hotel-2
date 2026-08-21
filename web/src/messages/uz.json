@@ -10,7 +10,7 @@
       "suitesRooms": "Xonalar va lyukslar",
       "cafeDining": "Kafe va restoranlar",
       "experience": "Tajriba",
-      "meetingsWeddings": "Uchrashuvlar va to'ylar",
+      "events": "Tadbirlar",
       "reviews": "Hikoyalar va lavhalar",
       "gallery": "Galereya"
     },
@@ -222,7 +222,7 @@
         "suitesRooms": "Xonalar va lyukslar",
         "cafeDining": "Kafe va restoranlar",
         "experience": "Tajriba",
-        "meetingsWeddings": "Uchrashuvlar va to'ylar"
+        "events": "Tadbirlar"
       }
     },
     "farewell": {
@@ -492,45 +492,45 @@
       }
     }
   },
-  "meetingsWeddings": {
-    "metaTitle": "Uchrashuvlar va To'ylar",
-    "hero": {
-      "hall": "HADITH Hotel'dagi uchrashuvlar va to'ylar zali"
+  "events": {
+    "metaTitle": "Tadbirlar",
+    "hallAlt": "HADITH Hotel grand ballroom",
+    "plan": {
+      "title": "Tadbiringizni rejalashtiring",
+      "lead": "Har xil yig'ilishlar uchun keng tanlovdagi makonlar bilan HADITH Hotel, Samarqand keyingi tadbiringiz uchun mukammal joy. Uchrashuvlar yoki to'ylar bo'lsin, biz networking uchun xususiy majlis xonalari hamda hayratga soladigan hashamatli function roomlarni taklif qilamiz.",
+      "help": "Tavsiya kerak bo'lsa, Events jamoamiz bilan bog'laning. Sizga mos variantni topishda mamnuniyat bilan yordam beramiz."
     },
-    "intro": {
-      "eyebrow": "Uchrashuvlar va To'ylar",
-      "heading": "Har bir tadbir uchun makon",
-      "body": "Diqqat markazidagi uchrashuvlar, rasmiy yig'ilishlar va to'y marosimlar uchun nafis muhit."
+    "metrics": {
+      "pending": "Details to follow",
+      "venues": { "label": "Tadbir makonlari" },
+      "space": { "label": "Umumiy tadbir maydoni" },
+      "capacity": { "label": "Ballroom sig'imi" },
+      "floorPlans": "Qavat rejalari",
+      "virtualTour": "Virtual tur"
     },
-    "eventUses": {
-      "eyebrow": "Uchrashuvlar va To'ylar",
-      "heading": "Bitta Zal, Ko'plab Imkoniyatlar",
-      "lead": "Har bir tadbirning xususiyati va ko'lamiga mos ravishda diqqat bilan tashkil etilgan moslashuvchan makon.",
+    "enquiry": "So'rov",
+    "learnMore": "Batafsil",
+    "features": {
       "meetings": {
-        "eyebrow": "Biznes Tadbirlari",
-        "title": "Uchrashuvlar va Konferensiyalar",
-        "description": "Zamonaviy jihozlar bilan qo'llab-quvvatlanadigan moslashuvchan tartiblar bilan zalni diqqat markazidagi uchrashuvlar, konferensiyalar va korporativ yig'ilishlar uchun sozlang.",
-        "highlights": ["Moslashuvchan tadbir tartibi", "Zamonaviy jihozlar", "Alohida tadbirlar jamoasi"]
+        "title": "Meetings",
+        "body": "Har xil yig'ilishlar uchun keng tanlovdagi makonlar bilan HADITH Hotel, Samarqand keyingi tadbiringiz uchun mukammal joy. Biz networking uchun xususiy majlis xonalari hamda hayratga soladigan hashamatli function roomlarni taklif qilamiz."
       },
       "weddings": {
-        "eyebrow": "Ijtimoiy Tadbirlar",
-        "title": "To'ylar va Bayramlar",
-        "description": "Bir xil zalni 250 tagacha mehmonni qabul qiladigan to'ylar va ijtimoiy bayramlar uchun nafis makonga aylantiring.",
-        "highlights": ["Nafis banket zali", "250 tagacha mehmon", "To'ylar va ijtimoiy tadbirlar"]
+        "title": "Weddings",
+        "body": "Maxsus kuningizni HADITH Hotel, Samarqandda nishonlang. Mehmonlaringizni benuqson xizmat va go'zal to'y makonlari bilan maftun eting. To'y rejalashtirish jamoamiz orzularingizni ro'yobga chiqarishga yordam beradi — baxtli hikoya uslub bilan boshlansin."
+      },
+      "catering": {
+        "title": "The Hadith On-Site Catering",
+        "body": "HADITH Hotel, Samarqand mehmonxonadan tashqarida ham mehmondo'stlikni davom ettiradi: mehmonlarimizning o'ziga xos istak va talablariga moslashtirilgan on-site catering xizmati."
+      },
+      "social": {
+        "title": "Social Events",
+        "body": "HADITH Hotel, Samarqandda restoranlarimiz maxsus tadbirlar uchun mukammal muhit yaratadi. Yaqin tug'ilgan kun kechasi, kelin bazmi yoki yubiley bayrami — restoranimiz tadbiringizni unutilmas qiladi."
       }
     },
-    "facts": {
-      "heading": "Makon Tafsilotlari",
-      "capacity": { "value": "250 Mehmon", "label": "Maksimal Sig'im" },
-      "setups": { "value": "Moslashuvchan", "label": "Tadbir Tartibi" },
-      "facilities": { "value": "Zamonaviy", "label": "Jihozlar" }
-    },
-    "enquiry": {
-      "title": "Tadbiringizni Rejalashtiring",
-      "body": "Bizga kelayotgan uchrashuv, to'y yoki bayram haqida ma'lumot bering. Jamoamiz talablaringizga mos tadbirni rejalashtirishga yordam beradi.",
-      "button": "Taklif So'rash",
-      "comingSoonEyebrow": "Tadbir So'rovi",
-      "comingSoonBody": "Tadbir so'rovlari tez orada ochiladi. HADITH Hotel'ni tadbiringiz uchun ko'rib chiqayotganingiz uchun rahmat."
+    "comingSoon": {
+      "eyebrow": "Events",
+      "body": "Events bo'limining bu qismi tez orada ochiladi. Tadbiringiz uchun HADITH Hotel'ni ko'rib chiqayotganingiz uchun rahmat."
     }
   },
   "reviews": {

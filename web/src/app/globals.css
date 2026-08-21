@@ -3673,225 +3673,216 @@ body.has-room-lightbox .reserve-float {
 
 }
 
-/* —— Meetings & Weddings: venue facts + enquiry —— */
+/* —— Events hub (Langham Jakarta structure) —— */
 
-.event-uses {
-  background: #e9f1f7;
-  padding: clamp(76px, 10vh, 120px) var(--page-gutter);
+.events-hub__media {
+  position: relative;
+  min-height: clamp(280px, 46vw, 520px);
+  overflow: hidden;
+  background: #171614;
 }
 
-.event-uses__inner {
-  width: min(1080px, 100%);
-  margin-inline: auto;
+.events-hub__media-image {
+  object-fit: cover;
+  object-position: 50% 50%;
 }
 
-.event-uses__intro {
-  width: min(680px, 100%);
-  margin: 0 auto clamp(48px, 6vh, 68px);
+.events-hub__soon {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(
+    to top,
+    rgba(12, 12, 12, 0.96) 0%,
+    rgba(12, 12, 12, 0.92) 45%,
+    rgba(12, 12, 12, 0.88) 100%
+  );
+  color: #fff;
+  font-family: var(--sans);
+  font-size: clamp(11px, 1.1vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.events-hub__plan {
+  padding: clamp(72px, 10vh, 120px) var(--page-gutter) clamp(72px, 10vh, 120px);
   text-align: center;
 }
 
-.event-uses__eyebrow,
-.event-use__eyebrow {
+.events-hub__title {
   margin: 0;
-  color: var(--muted);
-  font-family: var(--sans);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
-.event-uses__heading {
-  margin: 14px 0 0;
-  color: var(--ink);
-  font-family: var(--serif);
-  font-size: clamp(2rem, 3.2vw, 2.8rem);
-  font-weight: 500;
-  line-height: 1.12;
-}
-
-.event-uses__lead {
-  margin: 20px auto 0;
-  max-width: 54ch;
-  color: var(--ink-soft);
-  font-family: var(--serif);
-  font-size: clamp(1rem, 1.2vw, 1.15rem);
-  line-height: 1.7;
-}
-
-.event-uses__grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  background: var(--paper);
-  border: 1px solid var(--line);
-}
-
-.event-use {
-  min-width: 0;
-  padding: clamp(40px, 5vw, 64px);
-}
-
-.event-use + .event-use {
-  border-left: 1px solid var(--line);
-}
-
-.event-use__title {
-  margin: 14px 0 0;
-  color: var(--ink);
-  font-family: var(--serif);
-  font-size: clamp(1.55rem, 2.2vw, 2rem);
-  font-weight: 500;
-  line-height: 1.2;
-}
-
-.event-use__body {
-  margin: 20px 0 0;
+.events-hub__lead,
+.events-hub__help {
+  margin: 22px auto 0;
+  max-width: 68ch;
   color: var(--ink-soft);
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.75;
 }
 
-.event-use__highlights {
-  margin: 24px 0 0;
+.events-hub__help {
+  margin-top: 16px;
+}
+
+.events-hub__metrics {
+  width: min(920px, 100%);
+  margin: 40px auto 0;
   padding: 0;
   list-style: none;
-  display: grid;
-  gap: 10px;
-}
-
-.event-use__highlights li {
-  position: relative;
-  padding-left: 18px;
-  color: var(--muted);
-  font-family: var(--sans);
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.event-use__highlights li::before {
-  content: "";
-  position: absolute;
-  top: 0.7em;
-  left: 0;
-  width: 7px;
-  height: 1px;
-  background: var(--accent);
-}
-
-.event-facts {
-  background: var(--band);
-  padding: clamp(64px, 8vh, 96px) var(--page-gutter);
-}
-
-.event-facts__inner {
-  width: min(1080px, 100%);
-  margin-inline: auto;
-}
-
-.event-facts__heading {
-  margin: 0 0 clamp(36px, 5vh, 52px);
-  color: var(--ink);
-  font-family: var(--serif);
-  font-size: clamp(1.9rem, 2.8vw, 2.5rem);
-  font-weight: 500;
-  line-height: 1.15;
-  text-align: center;
-}
-
-.event-facts__grid {
-  margin: 0;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(28px, 4vw, 48px);
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: clamp(20px, 3vw, 36px);
 }
 
-.event-facts__item {
-  text-align: center;
-}
-
-.event-facts__value {
-  margin: 0;
-  color: var(--ink);
-  font-family: var(--serif);
-  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
-  font-weight: 500;
-  line-height: 1.1;
-}
-
-.event-facts__label {
-  margin: 10px 0 0;
+.events-hub__metrics li,
+.events-hub__metric-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 132px;
   color: var(--muted);
+}
+
+.events-hub__metrics span {
+  display: grid;
+  gap: 4px;
   font-family: var(--sans);
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 600;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-.event-enquiry {
-  background: var(--paper);
-  padding: clamp(72px, 9vh, 108px) var(--page-gutter);
-  text-align: center;
-}
-
-.event-enquiry__title {
-  margin: 0;
+.events-hub__metrics strong {
+  display: block;
+  max-width: 12em;
+  margin-inline: auto;
   color: var(--ink);
-  font-family: var(--serif);
-  font-size: clamp(1.9rem, 2.8vw, 2.5rem);
+  font-size: 9px;
   font-weight: 500;
-  line-height: 1.15;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  text-transform: none;
 }
 
-.event-enquiry__body {
-  margin: 18px auto 0;
-  max-width: 52ch;
-  color: var(--ink-soft);
-  font-family: var(--serif);
-  font-size: clamp(0.98rem, 1.05vw, 1.08rem);
-  line-height: 1.7;
-}
-
-.event-enquiry__button {
-  margin-top: 32px;
-  min-height: 46px;
-  padding: 0 30px;
+.events-hub__metric-btn {
   border: 0;
-  background: var(--reserve);
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.events-hub__metric-btn:hover,
+.events-hub__metric-btn:focus-visible {
+  color: var(--ink);
+}
+
+.events-hub__cta {
+  margin-top: 36px;
+  min-height: 48px;
+  padding: 0 34px;
+  border: 0;
+  background: #6a5f55;
   color: #fff;
   font-family: var(--sans);
   font-size: 10.5px;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.2s ease;
 }
 
-.event-enquiry__button:hover {
-  background: #1f1f1f;
+.events-hub__cta:hover {
+  background: #5a5047;
 }
 
-.event-enquiry__button:focus-visible {
+.events-hub__cta:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
-@media (max-width: 760px) {
-  .event-uses__grid {
+.events-hub__feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  align-items: stretch;
+  background: var(--paper);
+}
+
+.events-hub__feature + .events-hub__feature {
+  margin-top: clamp(56px, 8vh, 96px);
+}
+
+.events-hub__feature:last-of-type {
+  margin-bottom: clamp(96px, 14vh, 168px);
+}
+
+.events-hub__feature.is-reversed {
+  grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
+}
+
+.events-hub__feature.is-reversed .events-hub__media {
+  order: 2;
+}
+
+.events-hub__feature-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(40px, 6vw, 88px) clamp(32px, 5vw, 72px);
+  background: #f7f5f2;
+}
+
+.events-hub__feature-title {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 2.4vw, 2.2rem);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.events-hub__feature-copy p {
+  margin: 18px 0 0;
+  max-width: 42ch;
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.events-hub__feature-copy .events-hub__cta {
+  align-self: flex-start;
+}
+
+@media (max-width: 900px) {
+  .events-hub__feature,
+  .events-hub__feature.is-reversed {
     grid-template-columns: 1fr;
   }
 
-  .event-use + .event-use {
-    border-top: 1px solid var(--line);
-    border-left: 0;
+  .events-hub__feature.is-reversed .events-hub__media {
+    order: 0;
   }
 
-  .event-facts__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .events-hub__media {
+    min-height: 240px;
   }
 }
 
@@ -5760,8 +5751,6 @@ body.has-room-lightbox .reserve-float {
 
   .experience-group,
   .venue,
-  .event-facts,
-  .event-enquiry,
   .video-showcase,
   .story-feature {
     padding: 68px var(--page-gutter);
@@ -5781,8 +5770,6 @@ body.has-room-lightbox .reserve-float {
 
   .experience-group__title,
   .venue__heading,
-  .event-facts__heading,
-  .event-enquiry__title,
   .video-showcase__title,
   .story-feature__title,
   .story-article__title,
@@ -5815,24 +5802,6 @@ body.has-room-lightbox .reserve-float {
   .venue-carousel__nav {
     font-size: 9px;
     letter-spacing: 0.1em;
-  }
-
-  .event-facts__grid {
-    gap: 36px 16px;
-  }
-
-  .event-facts__value {
-    font-size: 1.5rem;
-  }
-
-  .event-facts__label {
-    font-size: 9px;
-    letter-spacing: 0.14em;
-    line-height: 1.5;
-  }
-
-  .event-enquiry__button {
-    width: 100%;
   }
 
   .video-reviews {

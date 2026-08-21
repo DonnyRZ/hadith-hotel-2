@@ -32,9 +32,9 @@ const slides: FeatureSlide[] = [
     src: "/images/overview-hero/pool.webp",
   },
   {
-    id: "meetings-weddings",
-    key: "meetingsWeddings",
-    href: "/meetings-weddings",
+    id: "events",
+    key: "events",
+    href: "/events",
     src: "/images/overview-features/meetings-weddings.webp",
   },
 ];

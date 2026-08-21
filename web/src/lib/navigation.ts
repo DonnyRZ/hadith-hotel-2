@@ -3,7 +3,7 @@ export const navItems = [
   { href: "/suites-rooms", key: "suitesRooms" },
   { href: "/cafe-dining", key: "cafeDining" },
   { href: "/experience", key: "experience" },
-  { href: "/meetings-weddings", key: "meetingsWeddings" },
+  { href: "/events", key: "events" },
   { href: "/reviews", key: "reviews" },
   { href: "/gallery", key: "gallery" },
 ] as const;
