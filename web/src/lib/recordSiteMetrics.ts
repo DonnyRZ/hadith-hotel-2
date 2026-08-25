@@ -5,7 +5,6 @@ import {
   geolocateIp,
   type GeographicLocation,
 } from "@/lib/geolocation";
-import { UNKNOWN_GEO_RETRY_MS } from "@/lib/metricsContract";
 
 async function lookupLocation(ip: string | null): Promise<GeographicLocation | null> {
   if (!ip) return null;
@@ -58,57 +57,16 @@ export async function recordProfileDownload(
   documentVersion: string,
 ) {
   const now = new Date();
-  const [existingVisitor, existingDownload] = await Promise.all([
-    prisma.websiteVisitor.findUnique({
-      where: { visitorHash },
-      select: {
-        city: true,
-        region: true,
-        countryCode: true,
-        geoCheckedAt: true,
-      },
-    }),
-    prisma.profileDownload.findUnique({
-      where: { visitorHash_documentVersion: { visitorHash, documentVersion } },
-      select: {
-        city: true,
-        region: true,
-        countryCode: true,
-        geoCheckedAt: true,
-      },
-    }),
-  ]);
-  const cachedLocation: GeographicLocation = {
-    city: existingDownload?.city ?? existingVisitor?.city ?? null,
-    region: existingDownload?.region ?? existingVisitor?.region ?? null,
-    countryCode:
-      existingDownload?.countryCode ?? existingVisitor?.countryCode ?? null,
+  const existingVisitor = await prisma.websiteVisitor.findUnique({
+    where: { visitorHash },
+    select: { visitorHash: true },
+  });
+  const location = ip ? await lookupLocation(ip) : null;
+  const geo = {
+    city: location?.city ?? null,
+    region: location?.region ?? null,
+    countryCode: location?.countryCode ?? null,
   };
-  const lastGeoCheck =
-    existingDownload?.geoCheckedAt ?? existingVisitor?.geoCheckedAt ?? null;
-  const hasCompleteLocation = Boolean(cachedLocation.countryCode);
-  const shouldLookupLocation =
-    !hasCompleteLocation &&
-    (!lastGeoCheck || lastGeoCheck.getTime() < Date.now() - UNKNOWN_GEO_RETRY_MS);
-  const freshLocation = shouldLookupLocation ? await lookupLocation(ip) : null;
-  const location: GeographicLocation = freshLocation ?? cachedLocation;
-  const locationUpdate = {
-    ...(location.city ? { city: location.city } : {}),
-    ...(location.region ? { region: location.region } : {}),
-    ...(location.countryCode ? { countryCode: location.countryCode } : {}),
-  };
-  const freshLocationUpdate = freshLocation
-    ? {
-        ...(freshLocation.city ? { city: freshLocation.city } : {}),
-        ...(freshLocation.region ? { region: freshLocation.region } : {}),
-        ...(freshLocation.countryCode
-          ? { countryCode: freshLocation.countryCode }
-          : {}),
-      }
-    : {};
-  const shouldFillDownloadLocation =
-    !existingDownload?.countryCode &&
-    Boolean(location.city || location.region || location.countryCode);
 
   await prisma.$transaction([
     prisma.profileDownload.upsert({
@@ -118,17 +76,12 @@ export async function recordProfileDownload(
         documentVersion,
         lastDownloadedAt: now,
         downloadCount: 1,
-        ...location,
+        ...geo,
         geoCheckedAt: now,
       },
       update: {
         lastDownloadedAt: now,
         downloadCount: { increment: 1 },
-        ...(shouldFillDownloadLocation
-          ? { ...locationUpdate, geoCheckedAt: now }
-          : shouldLookupLocation
-            ? { geoCheckedAt: now }
-            : {}),
       },
     }),
     prisma.websiteVisitor.upsert({
@@ -136,14 +89,19 @@ export async function recordProfileDownload(
       create: {
         visitorHash,
         lastSeenAt: now,
-        ...location,
+        ...geo,
         geoCheckedAt: now,
       },
       update: {
         lastSeenAt: now,
-        ...(shouldLookupLocation
-          ? { ...freshLocationUpdate, geoCheckedAt: now }
-          : {}),
+      },
+    }),
+    prisma.profileDownloadEvent.create({
+      data: {
+        visitorHash,
+        documentVersion,
+        downloadedAt: now,
+        ...geo,
       },
     }),
     ...(existingVisitor
@@ -153,9 +111,7 @@ export async function recordProfileDownload(
             data: {
               visitorHash,
               seenAt: now,
-              city: location.city,
-              region: location.region,
-              countryCode: location.countryCode,
+              ...geo,
             },
           }),
         ]),

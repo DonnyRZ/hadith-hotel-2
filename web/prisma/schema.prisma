@@ -82,6 +82,25 @@ model ProfileDownload {
   @@unique([visitorHash, documentVersion])
 }
 
+/// One row per counted profile-download click. Geography ranks these, not the
+/// first-seen city on ProfileDownload.
+model ProfileDownloadEvent {
+  id               String   @id @default(cuid())
+  visitorHash      String
+  documentVersion  String
+  downloadedAt     DateTime @default(now())
+  city             String?
+  region           String?
+  countryCode      String?
+
+  @@index([visitorHash])
+  @@index([documentVersion])
+  @@index([downloadedAt])
+  @@index([city])
+  @@index([region])
+  @@index([countryCode])
+}
+
 model GuestRegistration {
   id              String    @id @default(cuid())
   name            String

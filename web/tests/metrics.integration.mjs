@@ -194,6 +194,7 @@ async function main() {
   await runNode(PRISMA_BIN, ["db", "push", "--force-reset", "--skip-generate"], env);
   await runNode(PRISMA_BIN, ["db", "execute", "--file", "prisma/manual/prepare-repeat-event-counts.sql", "--url", DATABASE_URL], env);
   await runNode(PRISMA_BIN, ["db", "execute", "--file", "prisma/manual/visitor-view-events.sql", "--url", DATABASE_URL], env);
+  await runNode(PRISMA_BIN, ["db", "execute", "--file", "prisma/manual/profile-download-events.sql", "--url", DATABASE_URL], env);
   process.env.DATABASE_URL = DATABASE_URL;
   const { PrismaClient } = await import("@prisma/client");
   prisma = new PrismaClient();
@@ -300,6 +301,20 @@ async function main() {
   });
   assert.equal(repeatedDownload.downloadCount, 2);
   assert.ok(repeatedDownload.lastDownloadedAt > firstDownload.lastDownloadedAt);
+  assert.equal(repeatedDownload.city, "Paris");
+  const parisDownloadGeo = (await getJson("/api/downloads/profile/geography")).body;
+  assert.equal(metric(parisDownloadGeo.topCities, "Paris"), 2);
+  assert.equal(
+    metric(parisDownloadGeo.topCities, "New York"),
+    0,
+    "Downloads count at the click location, not the first-seen visit city",
+  );
+
+  browserA.ip = "203.0.113.10";
+  assert.equal((await browserA.post("/api/downloads/profile")).body.downloadEvents, 3);
+  const splitDownloadGeo = (await getJson("/api/downloads/profile/geography")).body;
+  assert.equal(metric(splitDownloadGeo.topCities, "Paris"), 2);
+  assert.equal(metric(splitDownloadGeo.topCities, "New York"), 1);
 
   assert.equal((await browserB.confirm("/api/downloads/profile")).body.totalDownloads, 2, "Same IP, different browser counts as a different downloader");
   assert.equal((await browserF.confirm("/api/downloads/profile")).body.totalDownloads, 3);
@@ -347,19 +362,40 @@ async function main() {
   );
 
   const downloadGeo = (await getJson("/api/downloads/profile/geography")).body;
-  const downloadEventSum = await prisma.profileDownload.aggregate({
-    _sum: { downloadCount: true },
+  const downloadEventCount = await prisma.profileDownloadEvent.count();
+  const downloadLocatedCount = await prisma.profileDownloadEvent.count({
+    where: {
+      OR: [
+        { city: { not: null } },
+        { region: { not: null } },
+        { countryCode: { not: null } },
+      ],
+    },
   });
-  assert.equal(downloadGeo.totalRecorded, downloadEventSum._sum.downloadCount);
-  assert.equal(downloadGeo.locatedRecords, downloadEventSum._sum.downloadCount);
-  const nyDownloads = (
-    await prisma.profileDownload.findMany({ where: { city: "New York" } })
-  ).reduce((sum, row) => sum + row.downloadCount, 0);
-  const tokyoDownloads = (
-    await prisma.profileDownload.findMany({ where: { city: "Tokyo" } })
-  ).reduce((sum, row) => sum + row.downloadCount, 0);
+  assert.equal(downloadGeo.totalRecorded, downloadEventCount);
+  assert.equal(downloadGeo.locatedRecords, downloadLocatedCount);
+  const nyDownloads = await prisma.profileDownloadEvent.count({ where: { city: "New York" } });
+  const tokyoDownloads = await prisma.profileDownloadEvent.count({ where: { city: "Tokyo" } });
+  const parisDownloads = await prisma.profileDownloadEvent.count({ where: { city: "Paris" } });
   assert.equal(metric(downloadGeo.topCities, "New York"), nyDownloads);
   assert.equal(metric(downloadGeo.topCities, "Tokyo"), tokyoDownloads);
+  assert.equal(metric(downloadGeo.topCities, "Paris"), parisDownloads);
+  assert.ok(parisDownloads >= 2);
+  assert.equal(
+    await prisma.profileDownloadEvent.count({
+      where: { visitorHash: firstDownload.visitorHash, documentVersion: "test-v1" },
+    }),
+    (
+      await prisma.profileDownload.findUniqueOrThrow({
+        where: {
+          visitorHash_documentVersion: {
+            visitorHash: firstDownload.visitorHash,
+            documentVersion: "test-v1",
+          },
+        },
+      })
+    ).downloadCount,
+  );
 
   const visitorRows = await prisma.websiteVisitor.findMany();
   const downloadRows = await prisma.profileDownload.findMany();

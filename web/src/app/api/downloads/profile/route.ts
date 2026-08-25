@@ -27,11 +27,10 @@ function response(
 }
 
 async function downloadOverview(): Promise<DownloadMetrics> {
-  const [uniqueDownloaders, eventSum] = await Promise.all([
+  const [uniqueDownloaders, downloadEvents] = await Promise.all([
     prisma.profileDownload.count(),
-    prisma.profileDownload.aggregate({ _sum: { downloadCount: true } }),
+    prisma.profileDownloadEvent.count(),
   ]);
-  const downloadEvents = eventSum._sum.downloadCount ?? 0;
 
   return {
     totalDownloads: uniqueDownloaders,

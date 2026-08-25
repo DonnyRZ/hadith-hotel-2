@@ -25,37 +25,32 @@ export async function GET() {
   if (!hasVisitorSecret()) return response(null, 503);
 
   try {
-    const [total, located, cities, regions, countries] = await Promise.all([
-      prisma.profileDownload.aggregate({ _sum: { downloadCount: true } }),
-      prisma.profileDownload.aggregate({
-        where: locatedWhere,
-        _sum: { downloadCount: true },
-      }),
-      prisma.profileDownload.groupBy({
-        by: ["city", "countryCode"],
-        where: { city: { not: null } },
-        _sum: { downloadCount: true },
-        orderBy: { _sum: { downloadCount: "desc" } },
-        take: TAKE,
-      }),
-      prisma.profileDownload.groupBy({
-        by: ["region", "countryCode"],
-        where: { region: { not: null } },
-        _sum: { downloadCount: true },
-        orderBy: { _sum: { downloadCount: "desc" } },
-        take: TAKE,
-      }),
-      prisma.profileDownload.groupBy({
-        by: ["countryCode"],
-        where: { countryCode: { not: null } },
-        _sum: { downloadCount: true },
-        orderBy: { _sum: { downloadCount: "desc" } },
-        take: TAKE,
-      }),
-    ]);
-
-    const totalRecorded = total._sum.downloadCount ?? 0;
-    const locatedRecords = located._sum.downloadCount ?? 0;
+    const [totalRecorded, locatedRecords, cities, regions, countries] =
+      await Promise.all([
+        prisma.profileDownloadEvent.count(),
+        prisma.profileDownloadEvent.count({ where: locatedWhere }),
+        prisma.profileDownloadEvent.groupBy({
+          by: ["city", "countryCode"],
+          where: { city: { not: null } },
+          _count: { id: true },
+          orderBy: { _count: { id: "desc" } },
+          take: TAKE,
+        }),
+        prisma.profileDownloadEvent.groupBy({
+          by: ["region", "countryCode"],
+          where: { region: { not: null } },
+          _count: { id: true },
+          orderBy: { _count: { id: "desc" } },
+          take: TAKE,
+        }),
+        prisma.profileDownloadEvent.groupBy({
+          by: ["countryCode"],
+          where: { countryCode: { not: null } },
+          _count: { id: true },
+          orderBy: { _count: { id: "desc" } },
+          take: TAKE,
+        }),
+      ]);
 
     return response({
       totalRecorded,
@@ -64,17 +59,17 @@ export async function GET() {
       topCities: cities.map((item) => ({
         name: item.city,
         context: countryName(item.countryCode),
-        count: item._sum.downloadCount ?? 0,
+        count: item._count.id,
       })),
       topRegions: regions.map((item) => ({
         name: item.region,
         context: countryName(item.countryCode),
-        count: item._sum.downloadCount ?? 0,
+        count: item._count.id,
       })),
       topCountries: countries.map((item) => ({
         name: countryName(item.countryCode),
         context: item.countryCode,
-        count: item._sum.downloadCount ?? 0,
+        count: item._count.id,
       })),
     });
   } catch (error) {

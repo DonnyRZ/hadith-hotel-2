@@ -2,9 +2,10 @@
  * Product vs storage for visitor and download metrics.
  *
  * Homepage numbers are event totals: viewEvents = COUNT(WebsiteVisitorEvent),
- * downloadEvents = SUM(downloadCount). One row per browser remains on
- * WebsiteVisitor; uniqueVisitors / uniqueDownloaders stay as row counts.
- * Visitor geography ranks visit events (location at the time of that visit).
+ * downloadEvents = COUNT(ProfileDownloadEvent). One row per browser remains on
+ * WebsiteVisitor / ProfileDownload; uniqueVisitors / uniqueDownloaders stay as
+ * row counts. Geography ranks visit and download events at the location of
+ * that event, not the first-seen city on the browser row.
  */
 
 export type CityMetric = {
@@ -29,7 +30,7 @@ export type DownloadMetrics = {
   /** Unique browsers per document version. */
   totalDownloads: number;
   uniqueDownloaders: number;
-  /** SUM(downloadCount) — what the homepage shows. */
+  /** COUNT(ProfileDownloadEvent) — what the homepage shows. */
   downloadEvents: number;
   identityPending?: boolean;
 };
