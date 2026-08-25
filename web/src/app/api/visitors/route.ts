@@ -28,15 +28,15 @@ function response(
 
 async function visitorTotals() {
   const activeSince = new Date(Date.now() - ACTIVE_VISITOR_WINDOW_MS);
-  const [count, activeVisitors, viewSum] = await Promise.all([
+  const [count, activeVisitors, viewEvents] = await Promise.all([
     prisma.websiteVisitor.count(),
     prisma.websiteVisitor.count({ where: { lastSeenAt: { gte: activeSince } } }),
-    prisma.websiteVisitor.aggregate({ _sum: { viewCount: true } }),
+    prisma.websiteVisitorEvent.count(),
   ]);
   return {
     count,
     uniqueVisitors: count,
-    viewEvents: viewSum._sum.viewCount ?? 0,
+    viewEvents,
     activeVisitors,
   };
 }
@@ -44,16 +44,16 @@ async function visitorTotals() {
 async function visitorOverview(): Promise<VisitorMetrics> {
   const [totals, cityGroups, topGroups] = await Promise.all([
     visitorTotals(),
-    prisma.websiteVisitor.groupBy({
+    prisma.websiteVisitorEvent.groupBy({
       by: ["city"],
       where: { city: { not: null } },
-      _count: { _all: true },
+      _count: { id: true },
     }),
-    prisma.websiteVisitor.groupBy({
+    prisma.websiteVisitorEvent.groupBy({
       by: ["city", "region"],
       where: { city: { not: null } },
-      _sum: { viewCount: true },
-      orderBy: { _sum: { viewCount: "desc" } },
+      _count: { id: true },
+      orderBy: { _count: { id: "desc" } },
       take: 8,
     }),
   ]);
@@ -66,7 +66,7 @@ async function visitorOverview(): Promise<VisitorMetrics> {
       .map((row) => ({
         city: row.city,
         region: row.region,
-        count: row._sum.viewCount ?? 0,
+        count: row._count.id,
       }))
       .sort((a, b) => b.count - a.count || a.city.localeCompare(b.city))
       .slice(0, 8),

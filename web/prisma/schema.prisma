@@ -46,6 +46,23 @@ model WebsiteVisitor {
   @@index([city])
 }
 
+/// One row per counted site visit. Geography ranks these, not the sticky
+/// first-seen city on WebsiteVisitor.
+model WebsiteVisitorEvent {
+  id          String   @id @default(cuid())
+  visitorHash String
+  seenAt      DateTime @default(now())
+  city        String?
+  region      String?
+  countryCode String?
+
+  @@index([visitorHash])
+  @@index([seenAt])
+  @@index([city])
+  @@index([region])
+  @@index([countryCode])
+}
+
 model ProfileDownload {
   id                String    @id @default(cuid())
   visitorHash       String

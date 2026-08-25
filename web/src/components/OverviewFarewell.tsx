@@ -11,7 +11,9 @@ import {
 import { ProfileDownloadLink } from "@/components/ProfileDownloadLink";
 import {
   fetchDownloadMetrics,
+  fetchVisitorMetrics,
   registerVisitor,
+  type GeographicBreakdown,
 } from "@/lib/siteMetrics";
 
 export function OverviewFarewell() {
@@ -25,16 +27,40 @@ export function OverviewFarewell() {
   useEffect(() => {
     let active = true;
 
-    Promise.all([registerVisitor(), fetchDownloadMetrics()]).then(
-      ([visitorMetrics, downloadMetrics]) => {
+    const showVisitorCount = (viewEvents: number | null) => {
+      if (active) setVisitorCount(viewEvents);
+    };
+    const showDownloadCount = (downloadEvents: number | null) => {
+      if (active) setDownloadCount(downloadEvents);
+    };
+
+    const refreshTotals = () => {
+      void fetchVisitorMetrics().then((metrics) => {
+        showVisitorCount(metrics?.viewEvents ?? null);
+      });
+      void fetchDownloadMetrics().then((metrics) => {
+        showDownloadCount(metrics?.downloadEvents ?? null);
+      });
+    };
+
+    void Promise.all([registerVisitor(), fetchDownloadMetrics()]).then(
+      ([, downloadMetrics]) => {
         if (!active) return;
-        setVisitorCount(visitorMetrics?.viewEvents ?? null);
-        setDownloadCount(downloadMetrics?.downloadEvents ?? null);
+        showDownloadCount(downloadMetrics?.downloadEvents ?? null);
+        void fetchVisitorMetrics().then((metrics) => {
+          showVisitorCount(metrics?.viewEvents ?? null);
+        });
       },
     );
 
+    const onPageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) refreshTotals();
+    };
+    window.addEventListener("pageshow", onPageShow);
+
     return () => {
       active = false;
+      window.removeEventListener("pageshow", onPageShow);
     };
   }, []);
 
@@ -51,6 +77,16 @@ export function OverviewFarewell() {
     },
   ];
   const closeGeography = useCallback(() => setGeographicMetric(null), []);
+  const handleGeographyLoaded = useCallback(
+    (breakdown: GeographicBreakdown) => {
+      if (geographicMetric === "visitors") {
+        setVisitorCount(breakdown.totalRecorded);
+      } else if (geographicMetric === "downloads") {
+        setDownloadCount(breakdown.totalRecorded);
+      }
+    },
+    [geographicMetric],
+  );
 
   return (
     <>
@@ -131,6 +167,7 @@ export function OverviewFarewell() {
       <GeographicBreakdownModal
         metric={geographicMetric}
         onClose={closeGeography}
+        onLoaded={handleGeographyLoaded}
       />
     </>
   );

@@ -25,37 +25,32 @@ export async function GET() {
   if (!hasVisitorSecret()) return response(null, 503);
 
   try {
-    const [total, located, cities, regions, countries] = await Promise.all([
-      prisma.websiteVisitor.aggregate({ _sum: { viewCount: true } }),
-      prisma.websiteVisitor.aggregate({
-        where: locatedWhere,
-        _sum: { viewCount: true },
-      }),
-      prisma.websiteVisitor.groupBy({
-        by: ["city", "countryCode"],
-        where: { city: { not: null } },
-        _sum: { viewCount: true },
-        orderBy: { _sum: { viewCount: "desc" } },
-        take: TAKE,
-      }),
-      prisma.websiteVisitor.groupBy({
-        by: ["region", "countryCode"],
-        where: { region: { not: null } },
-        _sum: { viewCount: true },
-        orderBy: { _sum: { viewCount: "desc" } },
-        take: TAKE,
-      }),
-      prisma.websiteVisitor.groupBy({
-        by: ["countryCode"],
-        where: { countryCode: { not: null } },
-        _sum: { viewCount: true },
-        orderBy: { _sum: { viewCount: "desc" } },
-        take: TAKE,
-      }),
-    ]);
-
-    const totalRecorded = total._sum.viewCount ?? 0;
-    const locatedRecords = located._sum.viewCount ?? 0;
+    const [totalRecorded, locatedRecords, cities, regions, countries] =
+      await Promise.all([
+        prisma.websiteVisitorEvent.count(),
+        prisma.websiteVisitorEvent.count({ where: locatedWhere }),
+        prisma.websiteVisitorEvent.groupBy({
+          by: ["city", "countryCode"],
+          where: { city: { not: null } },
+          _count: { id: true },
+          orderBy: { _count: { id: "desc" } },
+          take: TAKE,
+        }),
+        prisma.websiteVisitorEvent.groupBy({
+          by: ["region", "countryCode"],
+          where: { region: { not: null } },
+          _count: { id: true },
+          orderBy: { _count: { id: "desc" } },
+          take: TAKE,
+        }),
+        prisma.websiteVisitorEvent.groupBy({
+          by: ["countryCode"],
+          where: { countryCode: { not: null } },
+          _count: { id: true },
+          orderBy: { _count: { id: "desc" } },
+          take: TAKE,
+        }),
+      ]);
 
     return response({
       totalRecorded,
@@ -64,17 +59,17 @@ export async function GET() {
       topCities: cities.map((item) => ({
         name: item.city,
         context: countryName(item.countryCode),
-        count: item._sum.viewCount ?? 0,
+        count: item._count.id,
       })),
       topRegions: regions.map((item) => ({
         name: item.region,
         context: countryName(item.countryCode),
-        count: item._sum.viewCount ?? 0,
+        count: item._count.id,
       })),
       topCountries: countries.map((item) => ({
         name: countryName(item.countryCode),
         context: item.countryCode,
-        count: item._sum.viewCount ?? 0,
+        count: item._count.id,
       })),
     });
   } catch (error) {

@@ -21,34 +21,35 @@ export async function recordVisitorSighting(
   visitorHash: string,
   ip: string | null,
 ) {
-  const existing = await prisma.websiteVisitor.findUnique({
-    where: { visitorHash },
-    select: {
-      city: true,
-      region: true,
-      countryCode: true,
-      geoCheckedAt: true,
-    },
-  });
   const now = new Date();
-  const needsGeo = !existing && Boolean(ip);
-  const location = needsGeo ? await lookupLocation(ip) : null;
+  const location = ip ? await lookupLocation(ip) : null;
 
-  await prisma.websiteVisitor.upsert({
-    where: { visitorHash },
-    create: {
-      visitorHash,
-      lastSeenAt: now,
-      city: location?.city ?? null,
-      region: location?.region ?? null,
-      countryCode: location?.countryCode ?? null,
-      geoCheckedAt: now,
-    },
-    update: {
-      lastSeenAt: now,
-      viewCount: { increment: 1 },
-    },
-  });
+  await prisma.$transaction([
+    prisma.websiteVisitor.upsert({
+      where: { visitorHash },
+      create: {
+        visitorHash,
+        lastSeenAt: now,
+        city: location?.city ?? null,
+        region: location?.region ?? null,
+        countryCode: location?.countryCode ?? null,
+        geoCheckedAt: now,
+      },
+      update: {
+        lastSeenAt: now,
+        viewCount: { increment: 1 },
+      },
+    }),
+    prisma.websiteVisitorEvent.create({
+      data: {
+        visitorHash,
+        seenAt: now,
+        city: location?.city ?? null,
+        region: location?.region ?? null,
+        countryCode: location?.countryCode ?? null,
+      },
+    }),
+  ]);
 }
 
 export async function recordProfileDownload(
@@ -145,5 +146,18 @@ export async function recordProfileDownload(
           : {}),
       },
     }),
+    ...(existingVisitor
+      ? []
+      : [
+          prisma.websiteVisitorEvent.create({
+            data: {
+              visitorHash,
+              seenAt: now,
+              city: location.city,
+              region: location.region,
+              countryCode: location.countryCode,
+            },
+          }),
+        ]),
   ]);
 }

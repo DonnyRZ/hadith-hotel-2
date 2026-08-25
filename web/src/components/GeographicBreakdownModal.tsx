@@ -13,11 +13,13 @@ export type GeographicMetricKind = "downloads" | "visitors";
 type GeographicBreakdownModalProps = {
   metric: GeographicMetricKind | null;
   onClose: () => void;
+  onLoaded?: (breakdown: GeographicBreakdown) => void;
 };
 
 type GeographicDialogProps = {
   metric: GeographicMetricKind;
   onClose: () => void;
+  onLoaded?: (breakdown: GeographicBreakdown) => void;
 };
 
 const copy = {
@@ -108,6 +110,7 @@ function MetricSection({
 function GeographicDialog({
   metric,
   onClose,
+  onLoaded,
 }: GeographicDialogProps) {
   const titleId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -124,6 +127,7 @@ function GeographicDialog({
       if (!active) return;
       setData(result);
       setLoading(false);
+      if (result) onLoaded?.(result);
     });
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -136,7 +140,7 @@ function GeographicDialog({
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [metric, onClose]);
+  }, [metric, onClose, onLoaded]);
 
   const labels = copy[metric];
 
@@ -202,8 +206,14 @@ function GeographicDialog({
 export function GeographicBreakdownModal({
   metric,
   onClose,
+  onLoaded,
 }: GeographicBreakdownModalProps) {
   return metric ? (
-    <GeographicDialog key={metric} metric={metric} onClose={onClose} />
+    <GeographicDialog
+      key={metric}
+      metric={metric}
+      onClose={onClose}
+      onLoaded={onLoaded}
+    />
   ) : null;
 }

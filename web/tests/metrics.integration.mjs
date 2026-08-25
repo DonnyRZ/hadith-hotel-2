@@ -193,6 +193,7 @@ async function main() {
 
   await runNode(PRISMA_BIN, ["db", "push", "--force-reset", "--skip-generate"], env);
   await runNode(PRISMA_BIN, ["db", "execute", "--file", "prisma/manual/prepare-repeat-event-counts.sql", "--url", DATABASE_URL], env);
+  await runNode(PRISMA_BIN, ["db", "execute", "--file", "prisma/manual/visitor-view-events.sql", "--url", DATABASE_URL], env);
   process.env.DATABASE_URL = DATABASE_URL;
   const { PrismaClient } = await import("@prisma/client");
   prisma = new PrismaClient();
@@ -259,7 +260,15 @@ async function main() {
   browserA.ip = "198.51.100.20";
   assert.equal((await browserA.post("/api/visitors")).body.count, 2, "One browser changing IP remains one visitor");
   const persistedA = await prisma.websiteVisitor.findUniqueOrThrow({ where: { visitorHash: aFirstRow.visitorHash } });
-  assert.equal(persistedA.city, "New York", "First-event geography stays stable");
+  assert.equal(persistedA.city, "New York", "First-seen city on the browser row stays stable");
+  const movedGeo = (await getJson("/api/visitors/geography")).body;
+  assert.equal(
+    metric(movedGeo.topCities, "Paris"),
+    1,
+    "A later visit counts in the location of that visit",
+  );
+  assert.equal(metric(movedGeo.topCities, "New York"), 28);
+  assert.equal(movedGeo.totalRecorded, 29);
 
   const browserC = new TestBrowser(null);
   assert.equal((await browserC.confirm("/api/visitors")).body.count, 3, "A cookie identity does not require an IP");
@@ -308,8 +317,8 @@ async function main() {
   assert.equal(await prisma.profileDownload.count(), 5);
 
   const visitorGeo = (await getJson("/api/visitors/geography")).body;
-  const visitorViewSum = await prisma.websiteVisitor.aggregate({ _sum: { viewCount: true } });
-  const visitorLocatedSum = await prisma.websiteVisitor.aggregate({
+  const visitorEventCount = await prisma.websiteVisitorEvent.count();
+  const visitorLocatedCount = await prisma.websiteVisitorEvent.count({
     where: {
       OR: [
         { city: { not: null } },
@@ -317,22 +326,25 @@ async function main() {
         { countryCode: { not: null } },
       ],
     },
-    _sum: { viewCount: true },
   });
-  assert.equal(visitorGeo.totalRecorded, visitorViewSum._sum.viewCount);
-  assert.equal(visitorGeo.locatedRecords, visitorLocatedSum._sum.viewCount);
-  assert.equal(
-    visitorGeo.unclassified,
-    (visitorViewSum._sum.viewCount ?? 0) - (visitorLocatedSum._sum.viewCount ?? 0),
-  );
-  const nyViews = (
-    await prisma.websiteVisitor.findMany({ where: { city: "New York" } })
-  ).reduce((sum, row) => sum + row.viewCount, 0);
-  const usViews = (
-    await prisma.websiteVisitor.findMany({ where: { countryCode: "US" } })
-  ).reduce((sum, row) => sum + row.viewCount, 0);
+  assert.equal(visitorGeo.totalRecorded, visitorEventCount);
+  assert.equal(visitorGeo.locatedRecords, visitorLocatedCount);
+  assert.equal(visitorGeo.unclassified, visitorEventCount - visitorLocatedCount);
+  const nyViews = await prisma.websiteVisitorEvent.count({ where: { city: "New York" } });
+  const usViews = await prisma.websiteVisitorEvent.count({ where: { countryCode: "US" } });
+  const parisViews = await prisma.websiteVisitorEvent.count({ where: { city: "Paris" } });
   assert.equal(metric(visitorGeo.topCities, "New York"), nyViews);
   assert.equal(metric(visitorGeo.topCountries, "United States"), usViews);
+  assert.equal(metric(visitorGeo.topCities, "Paris"), parisViews);
+  assert.ok(parisViews >= 1, "Repeat visits from a new IP must appear in that city");
+  assert.equal(
+    await prisma.websiteVisitorEvent.count({ where: { visitorHash: aFirstRow.visitorHash } }),
+    (
+      await prisma.websiteVisitor.findUniqueOrThrow({
+        where: { visitorHash: aFirstRow.visitorHash },
+      })
+    ).viewCount,
+  );
 
   const downloadGeo = (await getJson("/api/downloads/profile/geography")).body;
   const downloadEventSum = await prisma.profileDownload.aggregate({
@@ -354,7 +366,7 @@ async function main() {
   assert.ok(visitorRows.every((row) => /^[a-f0-9]{64}$/.test(row.visitorHash)));
   assert.ok(downloadRows.every((row) => /^[a-f0-9]{64}$/.test(row.visitorHash)));
   assert.ok([...visitorRows, ...downloadRows].every((row) => !row.visitorHash.includes("203.0.113.10")));
-  assert.equal(geoRequests.get("203.0.113.10"), 2, "Location is resolved once per distinct browser, not used as identity");
+  assert.equal(geoRequests.get("203.0.113.10"), 1, "Location is resolved once per IP, not per visit");
 
   await prisma.profileDownload.create({
     data: { visitorHash: firstDownload.visitorHash, documentVersion: "test-v2", lastDownloadedAt: new Date() },
