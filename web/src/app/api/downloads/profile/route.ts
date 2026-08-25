@@ -2,23 +2,16 @@ export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
 import {
-  geolocateIp,
-  type GeographicLocation,
-} from "@/lib/geolocation";
+  profileDocumentVersion,
+  type DownloadMetrics,
+} from "@/lib/metricsContract";
+import { recordProfileDownload } from "@/lib/recordSiteMetrics";
 import {
   getClientIp,
   hasVisitorSecret,
   isSameOrigin,
   resolveVisitorIdentity,
 } from "@/lib/visitorIdentity";
-
-type DownloadMetrics = {
-  totalDownloads: number;
-  uniqueDownloaders: number;
-  identityPending?: boolean;
-};
-
-const UNKNOWN_GEO_RETRY_MS = 24 * 60 * 60 * 1000;
 
 function response(
   metrics: DownloadMetrics | null,
@@ -34,12 +27,26 @@ function response(
 }
 
 async function downloadOverview(): Promise<DownloadMetrics> {
-  const uniqueDownloaders = await prisma.profileDownload.count();
+  const [uniqueDownloaders, eventSum] = await Promise.all([
+    prisma.profileDownload.count(),
+    prisma.profileDownload.aggregate({ _sum: { downloadCount: true } }),
+  ]);
+  const downloadEvents = eventSum._sum.downloadCount ?? 0;
 
   return {
     totalDownloads: uniqueDownloaders,
     uniqueDownloaders,
+    downloadEvents,
   };
+}
+
+async function safeDownloadOverview(): Promise<DownloadMetrics> {
+  try {
+    return await downloadOverview();
+  } catch (error) {
+    console.error("Profile download metrics ack failed", error);
+    return { totalDownloads: 0, uniqueDownloaders: 0, downloadEvents: 0 };
+  }
 }
 
 export async function GET() {
@@ -58,110 +65,20 @@ export async function POST(request: Request) {
 
   try {
     const identity = await resolveVisitorIdentity(request);
-    if (identity.isBot) return response(await downloadOverview());
+    if (identity.isBot) return response(await safeDownloadOverview());
     if (!identity.visitorHash) {
       return response(
-        { ...(await downloadOverview()), identityPending: true },
+        { ...(await safeDownloadOverview()), identityPending: true },
         200,
         identity.setCookie,
       );
     }
-    const ip = getClientIp(request);
-    {
-      const visitorHash = identity.visitorHash;
-      const documentVersion = process.env.PROFILE_DOCUMENT_VERSION || "2026-07";
-      const now = new Date();
-      const [existingVisitor, existingDownload] = await Promise.all([
-        prisma.websiteVisitor.findUnique({
-          where: { visitorHash },
-          select: {
-            city: true,
-            region: true,
-            countryCode: true,
-            geoCheckedAt: true,
-          },
-        }),
-        prisma.profileDownload.findUnique({
-          where: { visitorHash_documentVersion: { visitorHash, documentVersion } },
-          select: {
-            city: true,
-            region: true,
-            countryCode: true,
-            geoCheckedAt: true,
-          },
-        }),
-      ]);
-      const cachedLocation: GeographicLocation = {
-        city: existingDownload?.city ?? existingVisitor?.city ?? null,
-        region: existingDownload?.region ?? existingVisitor?.region ?? null,
-        countryCode:
-          existingDownload?.countryCode ?? existingVisitor?.countryCode ?? null,
-      };
-      const lastGeoCheck =
-        existingDownload?.geoCheckedAt ?? existingVisitor?.geoCheckedAt ?? null;
-      const hasCompleteLocation = Boolean(cachedLocation.countryCode);
-      const shouldLookupLocation =
-        !hasCompleteLocation &&
-        (!lastGeoCheck ||
-          lastGeoCheck.getTime() < Date.now() - UNKNOWN_GEO_RETRY_MS);
-      const freshLocation = shouldLookupLocation && ip ? await geolocateIp(ip) : null;
-      const location: GeographicLocation = freshLocation ?? cachedLocation;
-      const locationUpdate = {
-        ...(location.city ? { city: location.city } : {}),
-        ...(location.region ? { region: location.region } : {}),
-        ...(location.countryCode ? { countryCode: location.countryCode } : {}),
-      };
-      const freshLocationUpdate = freshLocation
-        ? {
-            ...(freshLocation.city ? { city: freshLocation.city } : {}),
-            ...(freshLocation.region ? { region: freshLocation.region } : {}),
-            ...(freshLocation.countryCode
-              ? { countryCode: freshLocation.countryCode }
-              : {}),
-          }
-        : {};
-      const shouldFillDownloadLocation =
-        !existingDownload?.countryCode &&
-        Boolean(location.city || location.region || location.countryCode);
-
-      await prisma.$transaction([
-        prisma.profileDownload.upsert({
-          where: { visitorHash_documentVersion: { visitorHash, documentVersion } },
-          create: {
-            visitorHash,
-            documentVersion,
-            lastDownloadedAt: now,
-            downloadCount: 1,
-            ...location,
-            geoCheckedAt: now,
-          },
-          update: {
-            lastDownloadedAt: now,
-            ...(shouldFillDownloadLocation
-              ? { ...locationUpdate, geoCheckedAt: now }
-              : shouldLookupLocation
-                ? { geoCheckedAt: now }
-                : {}),
-          },
-        }),
-        prisma.websiteVisitor.upsert({
-          where: { visitorHash },
-          create: {
-            visitorHash,
-            lastSeenAt: now,
-            ...location,
-            geoCheckedAt: now,
-          },
-          update: {
-            lastSeenAt: now,
-            ...(shouldLookupLocation
-              ? { ...freshLocationUpdate, geoCheckedAt: now }
-              : {}),
-          },
-        }),
-      ]);
-    }
-    return response(await downloadOverview());
+    await recordProfileDownload(
+      identity.visitorHash,
+      getClientIp(request),
+      profileDocumentVersion(),
+    );
+    return response(await safeDownloadOverview());
   } catch (error) {
     console.error("Profile download track failed", error);
     return response(null, 503);

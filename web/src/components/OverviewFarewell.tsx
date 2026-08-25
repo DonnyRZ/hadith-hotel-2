@@ -11,7 +11,7 @@ import {
 import { ProfileDownloadLink } from "@/components/ProfileDownloadLink";
 import {
   fetchDownloadMetrics,
-  fetchVisitorMetrics,
+  registerVisitor,
 } from "@/lib/siteMetrics";
 
 export function OverviewFarewell() {
@@ -25,11 +25,11 @@ export function OverviewFarewell() {
   useEffect(() => {
     let active = true;
 
-    Promise.all([fetchVisitorMetrics(), fetchDownloadMetrics()]).then(
+    Promise.all([registerVisitor(), fetchDownloadMetrics()]).then(
       ([visitorMetrics, downloadMetrics]) => {
         if (!active) return;
-        setVisitorCount(visitorMetrics?.count ?? null);
-        setDownloadCount(downloadMetrics?.totalDownloads ?? null);
+        setVisitorCount(visitorMetrics?.viewEvents ?? null);
+        setDownloadCount(downloadMetrics?.downloadEvents ?? null);
       },
     );
 
@@ -105,7 +105,7 @@ export function OverviewFarewell() {
             <ProfileDownloadLink
               className="overview-farewell__download"
               onTracked={(metrics) =>
-                setDownloadCount(metrics.totalDownloads)
+                setDownloadCount(metrics.downloadEvents)
               }
             >
               {t("downloadProfile")}

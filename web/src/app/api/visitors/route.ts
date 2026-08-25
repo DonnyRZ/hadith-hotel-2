@@ -1,7 +1,11 @@
 export const dynamic = "force-dynamic";
 
 import { prisma } from "@/lib/prisma";
-import { geolocateIp } from "@/lib/geolocation";
+import {
+  ACTIVE_VISITOR_WINDOW_MS,
+  type VisitorMetrics,
+} from "@/lib/metricsContract";
+import { recordVisitorSighting } from "@/lib/recordSiteMetrics";
 import {
   getClientIp,
   hasVisitorSecret,
@@ -9,19 +13,8 @@ import {
   resolveVisitorIdentity,
 } from "@/lib/visitorIdentity";
 
-type CityMetric = { city: string; region: string | null; count: number };
-type Overview = {
-  count: number;
-  activeVisitors: number;
-  cities: number;
-  topCities: CityMetric[];
-  identityPending?: boolean;
-};
-
-const ACTIVE_WINDOW_MS = 7 * 24 * 60 * 60 * 1000;
-
 function response(
-  overview: Overview | null,
+  overview: VisitorMetrics | null,
   status = 200,
   setCookie: string | null = null,
 ) {
@@ -33,11 +26,24 @@ function response(
   });
 }
 
-async function visitorOverview(): Promise<Overview> {
-  const activeSince = new Date(Date.now() - ACTIVE_WINDOW_MS);
-  const [count, activeVisitors, cityGroups, topGroups] = await Promise.all([
+async function visitorTotals() {
+  const activeSince = new Date(Date.now() - ACTIVE_VISITOR_WINDOW_MS);
+  const [count, activeVisitors, viewSum] = await Promise.all([
     prisma.websiteVisitor.count(),
     prisma.websiteVisitor.count({ where: { lastSeenAt: { gte: activeSince } } }),
+    prisma.websiteVisitor.aggregate({ _sum: { viewCount: true } }),
+  ]);
+  return {
+    count,
+    uniqueVisitors: count,
+    viewEvents: viewSum._sum.viewCount ?? 0,
+    activeVisitors,
+  };
+}
+
+async function visitorOverview(): Promise<VisitorMetrics> {
+  const [totals, cityGroups, topGroups] = await Promise.all([
+    visitorTotals(),
     prisma.websiteVisitor.groupBy({
       by: ["city"],
       where: { city: { not: null } },
@@ -46,64 +52,47 @@ async function visitorOverview(): Promise<Overview> {
     prisma.websiteVisitor.groupBy({
       by: ["city", "region"],
       where: { city: { not: null } },
-      _count: { _all: true },
-      orderBy: { _count: { city: "desc" } },
+      _sum: { viewCount: true },
+      orderBy: { _sum: { viewCount: "desc" } },
       take: 8,
     }),
   ]);
 
   return {
-    count,
-    activeVisitors,
+    ...totals,
     cities: cityGroups.length,
     topCities: topGroups
       .filter((row): row is typeof row & { city: string } => row.city !== null)
       .map((row) => ({
         city: row.city,
         region: row.region,
-        count: row._count._all,
+        count: row._sum.viewCount ?? 0,
       }))
       .sort((a, b) => b.count - a.count || a.city.localeCompare(b.city))
       .slice(0, 8),
   };
 }
 
-async function registerVisitor(ip: string | null, visitorHash: string) {
-  const existing = await prisma.websiteVisitor.findUnique({
-    where: { visitorHash },
-    select: {
-      city: true,
-      region: true,
-      countryCode: true,
-      geoCheckedAt: true,
-    },
-  });
-  const now = new Date();
-  const needsGeo = !existing && Boolean(ip);
-  const location = needsGeo && ip ? await geolocateIp(ip) : null;
-  const locationUpdate = location
-    ? {
-        ...(location.city ? { city: location.city } : {}),
-        ...(location.region ? { region: location.region } : {}),
-        ...(location.countryCode ? { countryCode: location.countryCode } : {}),
-      }
-    : {};
+/** POST only needs unique counts for the cookie handshake; skip geo groupBys. */
+async function visitorWriteAck(): Promise<VisitorMetrics> {
+  const totals = await visitorTotals();
+  return { ...totals, cities: 0, topCities: [] };
+}
 
-  await prisma.websiteVisitor.upsert({
-    where: { visitorHash },
-    create: {
-      visitorHash,
-      lastSeenAt: now,
-      city: location?.city ?? null,
-      region: location?.region ?? null,
-      countryCode: location?.countryCode ?? null,
-      geoCheckedAt: now,
-    },
-    update: {
-      lastSeenAt: now,
-      ...(needsGeo ? { ...locationUpdate, geoCheckedAt: now } : {}),
-    },
-  });
+async function safeWriteAck(): Promise<VisitorMetrics> {
+  try {
+    return await visitorWriteAck();
+  } catch (error) {
+    console.error("Visitor counter ack failed", error);
+    return {
+      count: 0,
+      uniqueVisitors: 0,
+      viewEvents: 0,
+      activeVisitors: 0,
+      cities: 0,
+      topCities: [],
+    };
+  }
 }
 
 export async function GET() {
@@ -122,16 +111,16 @@ export async function POST(request: Request) {
 
   try {
     const identity = await resolveVisitorIdentity(request);
-    if (identity.isBot) return response(await visitorOverview());
+    if (identity.isBot) return response(await safeWriteAck());
     if (!identity.visitorHash) {
       return response(
-        { ...(await visitorOverview()), identityPending: true },
+        { ...(await safeWriteAck()), identityPending: true },
         200,
         identity.setCookie,
       );
     }
-    await registerVisitor(getClientIp(request), identity.visitorHash);
-    return response(await visitorOverview());
+    await recordVisitorSighting(identity.visitorHash, getClientIp(request));
+    return response(await safeWriteAck());
   } catch (error) {
     console.error("Visitor counter write failed", error);
     return response(null, 503);

@@ -192,7 +192,7 @@ async function main() {
   };
 
   await runNode(PRISMA_BIN, ["db", "push", "--force-reset", "--skip-generate"], env);
-  await runNode(PRISMA_BIN, ["db", "execute", "--file", "prisma/manual/enforce-unique-profile-download-count.sql", "--url", DATABASE_URL], env);
+  await runNode(PRISMA_BIN, ["db", "execute", "--file", "prisma/manual/prepare-repeat-event-counts.sql", "--url", DATABASE_URL], env);
   process.env.DATABASE_URL = DATABASE_URL;
   const { PrismaClient } = await import("@prisma/client");
   prisma = new PrismaClient();
@@ -239,12 +239,19 @@ async function main() {
   assert.match(browserA.lastSetCookie, /HttpOnly/);
   assert.match(browserA.lastSetCookie, /SameSite=Lax/);
   assert.match(browserA.lastSetCookie, /Secure/);
-  assert.equal((await browserA.post("/api/visitors")).body.count, 1);
+  const firstWrite = await browserA.post("/api/visitors");
+  assert.equal(firstWrite.body.count, 1);
+  assert.equal(firstWrite.body.uniqueVisitors, 1);
+  assert.equal(firstWrite.body.viewEvents, 1);
   const aFirstRow = await prisma.websiteVisitor.findFirstOrThrow();
+  assert.equal(aFirstRow.viewCount, 1);
   await delay(15);
-  assert.equal((await browserA.post("/api/visitors")).body.count, 1);
+  const repeatedVisit = await browserA.post("/api/visitors");
+  assert.equal(repeatedVisit.body.count, 1);
+  assert.equal(repeatedVisit.body.viewEvents, 2, "Repeat visits increment viewEvents");
   const aRepeatedRow = await prisma.websiteVisitor.findUniqueOrThrow({ where: { visitorHash: aFirstRow.visitorHash } });
   assert.ok(aRepeatedRow.lastSeenAt > aFirstRow.lastSeenAt);
+  assert.equal(aRepeatedRow.viewCount, 2);
 
   const browserB = new TestBrowser("203.0.113.10");
   assert.equal((await browserB.confirm("/api/visitors")).body.count, 2, "Two browsers behind one IP count separately");
@@ -273,13 +280,16 @@ async function main() {
   assert.equal((await getJson("/api/downloads/profile")).body.totalDownloads, 0);
 
   assert.equal((await browserA.confirm("/api/downloads/profile")).body.totalDownloads, 1);
+  assert.equal((await getJson("/api/downloads/profile")).body.downloadEvents, 1);
   const firstDownload = await prisma.profileDownload.findFirstOrThrow();
   await delay(15);
-  assert.equal((await browserA.post("/api/downloads/profile")).body.totalDownloads, 1);
+  const repeatedClick = await browserA.post("/api/downloads/profile");
+  assert.equal(repeatedClick.body.totalDownloads, 1);
+  assert.equal(repeatedClick.body.downloadEvents, 2, "Repeat clicks increment downloadEvents");
   const repeatedDownload = await prisma.profileDownload.findUniqueOrThrow({
     where: { visitorHash_documentVersion: { visitorHash: firstDownload.visitorHash, documentVersion: "test-v1" } },
   });
-  assert.equal(repeatedDownload.downloadCount, 1);
+  assert.equal(repeatedDownload.downloadCount, 2);
   assert.ok(repeatedDownload.lastDownloadedAt > firstDownload.lastDownloadedAt);
 
   assert.equal((await browserB.confirm("/api/downloads/profile")).body.totalDownloads, 2, "Same IP, different browser counts as a different downloader");
@@ -298,17 +308,46 @@ async function main() {
   assert.equal(await prisma.profileDownload.count(), 5);
 
   const visitorGeo = (await getJson("/api/visitors/geography")).body;
-  assert.equal(visitorGeo.totalRecorded, 7);
-  assert.equal(visitorGeo.locatedRecords, 5);
-  assert.equal(visitorGeo.unclassified, 2);
-  assert.equal(metric(visitorGeo.topCities, "New York"), 2);
-  assert.equal(metric(visitorGeo.topCountries, "United States"), 2);
+  const visitorViewSum = await prisma.websiteVisitor.aggregate({ _sum: { viewCount: true } });
+  const visitorLocatedSum = await prisma.websiteVisitor.aggregate({
+    where: {
+      OR: [
+        { city: { not: null } },
+        { region: { not: null } },
+        { countryCode: { not: null } },
+      ],
+    },
+    _sum: { viewCount: true },
+  });
+  assert.equal(visitorGeo.totalRecorded, visitorViewSum._sum.viewCount);
+  assert.equal(visitorGeo.locatedRecords, visitorLocatedSum._sum.viewCount);
+  assert.equal(
+    visitorGeo.unclassified,
+    (visitorViewSum._sum.viewCount ?? 0) - (visitorLocatedSum._sum.viewCount ?? 0),
+  );
+  const nyViews = (
+    await prisma.websiteVisitor.findMany({ where: { city: "New York" } })
+  ).reduce((sum, row) => sum + row.viewCount, 0);
+  const usViews = (
+    await prisma.websiteVisitor.findMany({ where: { countryCode: "US" } })
+  ).reduce((sum, row) => sum + row.viewCount, 0);
+  assert.equal(metric(visitorGeo.topCities, "New York"), nyViews);
+  assert.equal(metric(visitorGeo.topCountries, "United States"), usViews);
 
   const downloadGeo = (await getJson("/api/downloads/profile/geography")).body;
-  assert.equal(downloadGeo.totalRecorded, 5);
-  assert.equal(downloadGeo.locatedRecords, 5);
-  assert.equal(metric(downloadGeo.topCities, "New York"), 2);
-  assert.equal(metric(downloadGeo.topCities, "Tokyo"), 1);
+  const downloadEventSum = await prisma.profileDownload.aggregate({
+    _sum: { downloadCount: true },
+  });
+  assert.equal(downloadGeo.totalRecorded, downloadEventSum._sum.downloadCount);
+  assert.equal(downloadGeo.locatedRecords, downloadEventSum._sum.downloadCount);
+  const nyDownloads = (
+    await prisma.profileDownload.findMany({ where: { city: "New York" } })
+  ).reduce((sum, row) => sum + row.downloadCount, 0);
+  const tokyoDownloads = (
+    await prisma.profileDownload.findMany({ where: { city: "Tokyo" } })
+  ).reduce((sum, row) => sum + row.downloadCount, 0);
+  assert.equal(metric(downloadGeo.topCities, "New York"), nyDownloads);
+  assert.equal(metric(downloadGeo.topCities, "Tokyo"), tokyoDownloads);
 
   const visitorRows = await prisma.websiteVisitor.findMany();
   const downloadRows = await prisma.profileDownload.findMany();
@@ -327,9 +366,11 @@ async function main() {
     }),
     /unique constraint/i,
   );
-  await assert.rejects(
-    prisma.profileDownload.updateMany({ data: { downloadCount: 2 } }),
-    /ProfileDownload_downloadCount_unique_ip_check|constraint/i,
+  await prisma.profileDownload.updateMany({ data: { downloadCount: 2 } });
+  assert.equal(
+    (await prisma.profileDownload.aggregate({ _sum: { downloadCount: true } }))._sum.downloadCount,
+    await prisma.profileDownload.count() * 2,
+    "downloadCount is no longer locked to 1 at the database",
   );
 
   await stopApp();
@@ -339,7 +380,7 @@ async function main() {
     assert.equal((await rawRequest(endpoint)).status, 503);
   }
 
-  console.log("Metrics integration suite passed (anonymous identity, shared IP, cookie rejection, bot filtering, downloads, geo, concurrency, and privacy).");
+  console.log("Metrics integration suite passed (event counts, unique identity, shared IP, cookie rejection, bot filtering, downloads, geo, concurrency, and privacy).");
 }
 
 try {

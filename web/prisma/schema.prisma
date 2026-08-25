@@ -35,6 +35,8 @@ model WebsiteVisitor {
   visitorHash  String    @unique
   firstSeenAt  DateTime  @default(now())
   lastSeenAt   DateTime
+  /// Sightings for this browser. Increments on each full page load after the cookie exists.
+  viewCount    Int       @default(1)
   city         String?
   region       String?
   countryCode  String?
@@ -50,7 +52,7 @@ model ProfileDownload {
   documentVersion   String    @default("2026-07")
   firstDownloadedAt DateTime  @default(now())
   lastDownloadedAt  DateTime
-  /// One row represents one anonymous browser per document version.
+  /// Tracked clicks for this browser + document version. Increments on each tracked click.
   downloadCount     Int       @default(1)
   city              String?
   region            String?

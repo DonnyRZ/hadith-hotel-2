@@ -1,37 +1,16 @@
-export type CityMetric = {
-  city: string;
-  region: string | null;
-  count: number;
-};
+import type {
+  DownloadMetrics,
+  GeographicBreakdown,
+  VisitorMetrics,
+} from "@/lib/metricsContract";
 
-export type VisitorMetrics = {
-  activeVisitors: number;
-  cities: number;
-  count: number;
-  topCities: CityMetric[];
-  identityPending?: boolean;
-};
-
-export type DownloadMetrics = {
-  totalDownloads: number;
-  uniqueDownloaders: number;
-  identityPending?: boolean;
-};
-
-export type GeographicMetric = {
-  name: string;
-  context: string | null;
-  count: number;
-};
-
-export type GeographicBreakdown = {
-  totalRecorded: number;
-  locatedRecords: number;
-  unclassified: number;
-  topCities: GeographicMetric[];
-  topRegions: GeographicMetric[];
-  topCountries: GeographicMetric[];
-};
+export type {
+  CityMetric,
+  DownloadMetrics,
+  GeographicBreakdown,
+  GeographicMetric,
+  VisitorMetrics,
+} from "@/lib/metricsContract";
 
 let registration: Promise<VisitorMetrics | null> | null = null;
 
@@ -40,6 +19,7 @@ function isVisitorMetrics(value: unknown): value is VisitorMetrics {
   const metrics = value as Partial<VisitorMetrics>;
   return (
     typeof metrics.count === "number" &&
+    typeof metrics.viewEvents === "number" &&
     typeof metrics.activeVisitors === "number" &&
     typeof metrics.cities === "number" &&
     Array.isArray(metrics.topCities)
@@ -51,7 +31,8 @@ function isDownloadMetrics(value: unknown): value is DownloadMetrics {
   const metrics = value as Partial<DownloadMetrics>;
   return (
     typeof metrics.totalDownloads === "number" &&
-    typeof metrics.uniqueDownloaders === "number"
+    typeof metrics.uniqueDownloaders === "number" &&
+    typeof metrics.downloadEvents === "number"
   );
 }
 
