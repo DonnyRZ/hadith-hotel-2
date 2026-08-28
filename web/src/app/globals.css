@@ -1412,6 +1412,9 @@ button {
 
 .overview-rooms__type {
   min-width: 0;
+}
+
+.overview-rooms__type-link {
   min-height: 88px;
   padding: 18px 14px;
   display: flex;
@@ -1424,6 +1427,17 @@ button {
   font-family: var(--serif);
   font-size: clamp(0.95rem, 1.2vw, 1.1rem);
   line-height: 1.25;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.overview-rooms__type-link:hover .overview-rooms__type-name {
+  color: var(--accent);
+}
+
+.overview-rooms__type-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
 }
 
 .overview-rooms__type-number {
@@ -3140,6 +3154,12 @@ body.has-room-lightbox .reserve-float {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(32px, 4vw, 56px) clamp(24px, 3vw, 40px);
+}
+
+.room-card {
+  scroll-margin-top: calc(
+    var(--header-primary-h) + var(--header-utility-h) + 20px
+  );
 }
 
 .room-card__media {
@@ -5463,7 +5483,7 @@ body.has-room-lightbox .reserve-float {
     margin-top: 32px;
   }
 
-  .overview-rooms__type {
+  .overview-rooms__type-link {
     min-height: 76px;
     padding: 14px 10px;
     font-size: 0.95rem;

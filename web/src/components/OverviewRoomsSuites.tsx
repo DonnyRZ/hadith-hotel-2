@@ -13,11 +13,11 @@ type GallerySlide = {
 };
 
 const roomTypes = [
-  { key: "standardRoom", units: 62 },
-  { key: "balconyRoom", units: 23 },
-  { key: "suite", units: 18 },
-  { key: "juniorSuite", units: 9 },
-  { key: "presidentSuite", units: 2 },
+  { key: "standardRoom", id: "standard", units: 62 },
+  { key: "balconyRoom", id: "balcony", units: 23 },
+  { key: "suite", id: "suite", units: 18 },
+  { key: "juniorSuite", id: "junior", units: 9 },
+  { key: "presidentSuite", id: "president", units: 2 },
 ];
 
 const gallerySlides: GallerySlide[] = [
@@ -227,15 +227,20 @@ export function OverviewRoomsSuites() {
           <ul className="overview-rooms__types" aria-label={t("typesAriaLabel")}>
             {roomTypes.map((roomType, roomIndex) => (
               <li key={roomType.key} className="overview-rooms__type">
-                <span className="overview-rooms__type-number" aria-hidden="true">
-                  {String(roomIndex + 1).padStart(2, "0")}
-                </span>
-                <span className="overview-rooms__type-name">
-                  {t(`types.${roomType.key}`)}
-                </span>
-                <span className="overview-rooms__type-units">
-                  {t("unitsCount", { units: roomType.units })}
-                </span>
+                <Link
+                  href={`/suites-rooms#room-${roomType.id}`}
+                  className="overview-rooms__type-link"
+                >
+                  <span className="overview-rooms__type-number" aria-hidden="true">
+                    {String(roomIndex + 1).padStart(2, "0")}
+                  </span>
+                  <span className="overview-rooms__type-name">
+                    {t(`types.${roomType.key}`)}
+                  </span>
+                  <span className="overview-rooms__type-units">
+                    {t("unitsCount", { units: roomType.units })}
+                  </span>
+                </Link>
               </li>
             ))}
           </ul>

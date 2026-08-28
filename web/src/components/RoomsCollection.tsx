@@ -1,7 +1,7 @@
 "use client";
 
 import SiteImage from "@/components/SiteImage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ComingSoonModal } from "@/components/ComingSoonModal";
 import { RoomDetailModal } from "@/components/RoomDetailModal";
@@ -34,7 +34,7 @@ function RoomCard({
   onViewDetails: () => void;
 }) {
   return (
-    <article className="room-card">
+    <article className="room-card" id={`room-${room.id}`}>
       <button
         type="button"
         className={`room-card__media${comingSoon ? " room-card__media--coming-soon" : ""}`}
@@ -79,6 +79,24 @@ export function RoomsCollection() {
   const [tab, setTab] = useState<Tab>("all");
   const [comingSoonRoom, setComingSoonRoom] = useState<RoomType | null>(null);
   const [detailRoom, setDetailRoom] = useState<RoomType | null>(null);
+
+  useEffect(() => {
+    const scrollToHash = () => {
+      const id = window.location.hash.replace(/^#/, "");
+      if (!id.startsWith("room-")) return;
+      document.getElementById(id)?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    };
+
+    const frame = window.requestAnimationFrame(scrollToHash);
+    window.addEventListener("hashchange", scrollToHash);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("hashchange", scrollToHash);
+    };
+  }, []);
 
   return (
     <>
