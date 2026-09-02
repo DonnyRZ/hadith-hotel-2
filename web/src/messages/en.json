@@ -64,6 +64,7 @@
   },
   "overview": {
     "metaTitle": "Overview",
+    "metaDescription": "HADITH Hotel is a five-star sanctuary within the Imam Al Bukhari Complex in Samarkand — 114 rooms and suites, dining, wellness, and events.",
     "hero": {
       "hotelExterior": "HADITH Hotel exterior at sunset",
       "resto": "Saji Nusantara restaurant dining room",
@@ -253,6 +254,7 @@
   },
   "suitesRooms": {
     "metaTitle": "Suites & Rooms",
+    "metaDescription": "114 rooms and suites at HADITH Hotel, Samarkand — Standard, Balcony, Suite, Junior Suite, and President Suite within the Imam Al Bukhari Complex.",
     "hero": {
       "suite": "HADITH Hotel Suite",
       "junior": "Junior Suite living and dining area"
@@ -353,6 +355,7 @@
   },
   "cafeDining": {
     "metaTitle": "Cafe & Dining",
+    "metaDescription": "Dine at HADITH Hotel, Samarkand — Saji Nusantara restaurant, bar and lounge, and 7oz Espresso Cafe.",
     "hero": {
       "cafe": "7oz cafe counter and lounge",
       "buffet": "Saji Nusantara buffet counter"
@@ -399,6 +402,7 @@
   },
   "experience": {
     "metaTitle": "Experience",
+    "metaDescription": "Wellness and recreation at HADITH Hotel, Samarkand — indoor pool, spa, hammam, fitness, tennis, and padel.",
     "hero": {
       "hamam": "HADITH Hotel Turkish hammam",
       "pool": "HADITH Hotel indoor pool"
@@ -494,6 +498,7 @@
   },
   "events": {
     "metaTitle": "Events",
+    "metaDescription": "Meetings, weddings, and celebrations at HADITH Hotel, Samarkand — function rooms and a grand ballroom in the Imam Al Bukhari Complex.",
     "hallAlt": "Grand ballroom at HADITH Hotel",
     "plan": {
       "title": "Plan Your Event",
@@ -535,6 +540,7 @@
   },
   "reviews": {
     "metaTitle": "Stories & Highlights",
+    "metaDescription": "Stories and highlights from HADITH Hotel, Samarkand — guest voices and moments from the Imam Al Bukhari Complex.",
     "intro": {
       "eyebrow": "HADITH Stories",
       "heading": "Reviews"
@@ -598,6 +604,7 @@
   },
   "gallery": {
     "metaTitle": "Gallery",
+    "metaDescription": "Photo gallery of HADITH Hotel, Samarkand — rooms, dining, wellness, events, and the Imam Al Bukhari Complex.",
     "eyebrow": "Inside HADITH Hotel",
     "title": "Gallery",
     "body": "A visual journey through the hotel, its spaces, and the heritage that surrounds it.",
@@ -627,6 +634,7 @@
   },
   "guestRegistration": {
     "metaTitle": "Guest Registration",
+    "metaDescription": "Guest registration for HADITH Hotel, Samarkand.",
     "eyebrow": "HADITH Hotel",
     "title": "Guest Registration",
     "subtitle": "Please share your arrival details so our team can prepare for your visit.",

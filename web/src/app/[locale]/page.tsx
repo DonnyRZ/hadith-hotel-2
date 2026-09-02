@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { GuestRegistrationThankYouOverlay } from "@/components/GuestRegistrationThankYouOverlay";
 import { HeroCarousel } from "@/components/HeroCarousel";
+import { JsonLd } from "@/components/JsonLd";
 import { OverviewReserveAmenities } from "@/components/OverviewReserveAmenities";
 import { ChessStoryFeature } from "@/components/ChessStoryFeature";
 import { OverviewDestinations } from "@/components/OverviewDestinations";
@@ -9,13 +10,21 @@ import { OverviewFarewell } from "@/components/OverviewFarewell";
 import { OverviewHotelExperiences } from "@/components/OverviewHotelExperiences";
 import { OverviewLocation } from "@/components/OverviewLocation";
 import { OverviewRoomsSuites } from "@/components/OverviewRoomsSuites";
+import { homeJsonLd, pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
   const t = await getTranslations("overview");
-  return { title: t("metaTitle") };
+  return pageMetadata({
+    locale,
+    path: "/",
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+  });
 }
 
 export default async function OverviewPage() {
+  const locale = await getLocale();
   const t = await getTranslations("overview");
 
   const heroSlides = [
@@ -100,6 +109,7 @@ export default async function OverviewPage() {
 
   return (
     <main className="overview">
+      <JsonLd data={homeJsonLd(locale)} />
       <GuestRegistrationThankYouOverlay />
 
       <section className="overview-hero" aria-label="Overview hero">

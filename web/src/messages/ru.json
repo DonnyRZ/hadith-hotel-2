@@ -64,6 +64,7 @@
   },
   "overview": {
     "metaTitle": "Обзор",
+    "metaDescription": "HADITH Hotel — пятизвёздочная обитель в Комплексе Имама Аль-Бухари в Самарканде: 114 номеров и люксов, рестораны, wellness и мероприятия.",
     "hero": {
       "hotelExterior": "Фасад HADITH Hotel на закате",
       "resto": "Зал ресторана Saji Nusantara",
@@ -253,6 +254,7 @@
   },
   "suitesRooms": {
     "metaTitle": "Номера и люксы",
+    "metaDescription": "114 номеров и люксов в HADITH Hotel, Самарканд — Standard, Balcony, Suite, Junior Suite и President Suite в Комплексе Имама Аль-Бухари.",
     "hero": {
       "suite": "Люкс HADITH Hotel",
       "junior": "Гостиная и обеденная зона Junior Suite"
@@ -353,6 +355,7 @@
   },
   "cafeDining": {
     "metaTitle": "Кафе и рестораны",
+    "metaDescription": "Рестораны HADITH Hotel в Самарканде — Saji Nusantara, бар и лаунж, а также 7oz Espresso Cafe.",
     "hero": {
       "cafe": "Стойка и лаундж кафе 7oz",
       "buffet": "Буфетная стойка Saji Nusantara"
@@ -399,6 +402,7 @@
   },
   "experience": {
     "metaTitle": "Впечатления",
+    "metaDescription": "Wellness и отдых в HADITH Hotel, Самарканд — крытый бассейн, спа, хаммам, фитнес, теннис и падел.",
     "hero": {
       "hamam": "Турецкий хаммам HADITH Hotel",
       "pool": "Крытый бассейн HADITH Hotel"
@@ -494,6 +498,7 @@
   },
   "events": {
     "metaTitle": "Мероприятия",
+    "metaDescription": "Встречи, свадьбы и торжества в HADITH Hotel, Самарканд — банкетные залы в Комплексе Имама Аль-Бухари.",
     "hallAlt": "Большой банкетный зал HADITH Hotel",
     "plan": {
       "title": "Спланируйте своё событие",
@@ -535,6 +540,7 @@
   },
   "reviews": {
     "metaTitle": "Истории и события",
+    "metaDescription": "Истории и события HADITH Hotel в Самарканде — отзывы гостей и моменты из Комплекса Имама Аль-Бухари.",
     "intro": {
       "eyebrow": "Истории HADITH",
       "heading": "Отзывы"
@@ -598,6 +604,7 @@
   },
   "gallery": {
     "metaTitle": "Галерея",
+    "metaDescription": "Фотогалерея HADITH Hotel в Самарканде — номера, рестораны, wellness, мероприятия и Комплекс Имама Аль-Бухари.",
     "eyebrow": "Внутри HADITH Hotel",
     "title": "Галерея",
     "body": "Визуальное путешествие по отелю, его пространствам и окружающему наследию.",
@@ -627,6 +634,7 @@
   },
   "guestRegistration": {
     "metaTitle": "Регистрация гостя",
+    "metaDescription": "Регистрация гостя HADITH Hotel, Самарканд.",
     "eyebrow": "HADITH Hotel",
     "title": "Регистрация гостя",
     "subtitle": "Пожалуйста, укажите детали прибытия, чтобы наша команда могла подготовиться к вашему визиту.",

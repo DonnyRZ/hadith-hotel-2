@@ -1,14 +1,23 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { CafeDiningVenues } from "@/components/CafeDiningVenues";
+import { JsonLd } from "@/components/JsonLd";
 import { PageHeroCarousel } from "@/components/PageHeroCarousel";
+import { SITE_NAME, pageJsonLd, pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
   const t = await getTranslations("cafeDining");
-  return { title: t("metaTitle") };
+  return pageMetadata({
+    locale,
+    path: "/cafe-dining",
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+  });
 }
 
 export default async function CafeDiningPage() {
+  const locale = await getLocale();
   const t = await getTranslations("cafeDining");
 
   const heroSlides = [
@@ -30,6 +39,18 @@ export default async function CafeDiningPage() {
 
   return (
     <main className="content-page">
+      <JsonLd
+        data={pageJsonLd({
+          locale,
+          path: "/cafe-dining",
+          name: t("metaTitle"),
+          description: t("metaDescription"),
+          crumbs: [
+            { name: SITE_NAME, path: "/" },
+            { name: t("metaTitle"), path: "/cafe-dining" },
+          ],
+        })}
+      />
       <PageHeroCarousel title={t("metaTitle")} slides={heroSlides} />
       <CafeDiningVenues />
     </main>

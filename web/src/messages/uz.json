@@ -64,6 +64,7 @@
   },
   "overview": {
     "metaTitle": "Umumiy ma'lumot",
+    "metaDescription": "HADITH Hotel — Samarqanddagi Imom Al-Buxoriy majmuasidagi besh yulduzli oromgoh: 114 xona va lyuks, ovqatlanish, wellness va tadbirlar.",
     "hero": {
       "hotelExterior": "Quyosh botishida HADITH Hotel tashqi ko'rinishi",
       "resto": "Saji Nusantara restoranining ovqatlanish zali",
@@ -253,6 +254,7 @@
   },
   "suitesRooms": {
     "metaTitle": "Xonalar va lyukslar",
+    "metaDescription": "HADITH Hotel, Samarqanddagi 114 xona va lyuks — Standard, Balcony, Suite, Junior Suite va President Suite Imom Al-Buxoriy majmuasida.",
     "hero": {
       "suite": "HADITH Hotel Suite",
       "junior": "Junior Suite yashash va ovqatlanish zonasi"
@@ -353,6 +355,7 @@
   },
   "cafeDining": {
     "metaTitle": "Kafe va restoranlar",
+    "metaDescription": "HADITH Hotel, Samarqanddagi ovqatlanish — Saji Nusantara restorani, bar va lounge, hamda 7oz Espresso Cafe.",
     "hero": {
       "cafe": "7oz kafe peshtaxtasi va lounge",
       "buffet": "Saji Nusantara bufet peshtaxtasi"
@@ -399,6 +402,7 @@
   },
   "experience": {
     "metaTitle": "Tajriba",
+    "metaDescription": "HADITH Hotel, Samarqanddagi wellness va dam olish — yopiq basseyn, spa, hammam, fitnes, tennis va padel.",
     "hero": {
       "hamam": "HADITH Hotel turk hammomi",
       "pool": "HADITH Hotel yopiq basseyni"
@@ -494,6 +498,7 @@
   },
   "events": {
     "metaTitle": "Tadbirlar",
+    "metaDescription": "HADITH Hotel, Samarqanddagi uchrashuv, to'y va tantanalar — Imom Al-Buxoriy majmuasidagi function room va ballroom.",
     "hallAlt": "HADITH Hotel grand ballroom",
     "plan": {
       "title": "Tadbiringizni rejalashtiring",
@@ -535,6 +540,7 @@
   },
   "reviews": {
     "metaTitle": "Hikoyalar va Voqealar",
+    "metaDescription": "HADITH Hotel, Samarqand hikoyalari — mehmon ovozlari va Imom Al-Buxoriy majmuasidagi lahzalar.",
     "intro": {
       "eyebrow": "HADITH Hikoyalari",
       "heading": "Sharhlar"
@@ -598,6 +604,7 @@
   },
   "gallery": {
     "metaTitle": "Galereya",
+    "metaDescription": "HADITH Hotel, Samarqand foto galereyasi — xonalar, ovqatlanish, wellness, tadbirlar va Imom Al-Buxoriy majmuasi.",
     "eyebrow": "HADITH Hotel Ichida",
     "title": "Galereya",
     "body": "Mehmonxona, uning maydonlari va uni o'rab turgan meros bo'ylab vizual sayohat.",
@@ -627,6 +634,7 @@
   },
   "guestRegistration": {
     "metaTitle": "Mehmonni ro'yxatga olish",
+    "metaDescription": "HADITH Hotel, Samarqand mehmonini ro'yxatga olish.",
     "eyebrow": "HADITH Hotel",
     "title": "Mehmonni ro'yxatga olish",
     "subtitle": "Jamoamiz tashrifingizga tayyorgarlik ko'rishi uchun kelish tafsilotlaringizni bildiring.",

@@ -1,14 +1,23 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { ExperienceGroups } from "@/components/ExperienceGroups";
+import { JsonLd } from "@/components/JsonLd";
 import { PageHeroCarousel } from "@/components/PageHeroCarousel";
+import { SITE_NAME, pageJsonLd, pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
   const t = await getTranslations("experience");
-  return { title: t("metaTitle") };
+  return pageMetadata({
+    locale,
+    path: "/experience",
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+  });
 }
 
 export default async function ExperiencePage() {
+  const locale = await getLocale();
   const t = await getTranslations("experience");
 
   const heroSlides = [
@@ -30,6 +39,18 @@ export default async function ExperiencePage() {
 
   return (
     <main className="content-page">
+      <JsonLd
+        data={pageJsonLd({
+          locale,
+          path: "/experience",
+          name: t("metaTitle"),
+          description: t("metaDescription"),
+          crumbs: [
+            { name: SITE_NAME, path: "/" },
+            { name: t("metaTitle"), path: "/experience" },
+          ],
+        })}
+      />
       <PageHeroCarousel title={t("metaTitle")} slides={heroSlides} />
       <ExperienceGroups />
     </main>

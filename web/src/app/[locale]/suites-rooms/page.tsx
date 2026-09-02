@@ -1,14 +1,23 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
+import { JsonLd } from "@/components/JsonLd";
 import { PageHeroCarousel } from "@/components/PageHeroCarousel";
 import { RoomsCollection } from "@/components/RoomsCollection";
+import { SITE_NAME, pageJsonLd, pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
   const t = await getTranslations("suitesRooms");
-  return { title: t("metaTitle") };
+  return pageMetadata({
+    locale,
+    path: "/suites-rooms",
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+  });
 }
 
 export default async function SuitesRoomsPage() {
+  const locale = await getLocale();
   const t = await getTranslations("suitesRooms");
 
   const heroSlides = [
@@ -30,6 +39,18 @@ export default async function SuitesRoomsPage() {
 
   return (
     <main className="content-page">
+      <JsonLd
+        data={pageJsonLd({
+          locale,
+          path: "/suites-rooms",
+          name: t("metaTitle"),
+          description: t("metaDescription"),
+          crumbs: [
+            { name: SITE_NAME, path: "/" },
+            { name: t("metaTitle"), path: "/suites-rooms" },
+          ],
+        })}
+      />
       <PageHeroCarousel title={t("metaTitle")} slides={heroSlides} />
       <section className="rooms-page-intro" aria-labelledby="rooms-page-intro-title">
         <p className="rooms-page-intro__count" aria-hidden="true">

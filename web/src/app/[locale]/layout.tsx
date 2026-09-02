@@ -8,6 +8,15 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { VisitorTracker } from "@/components/VisitorTracker";
 import { asset } from "@/lib/asset";
 import { routing } from "@/i18n/routing";
+import {
+  BRAND_APPLE_ICON_PATH,
+  BRAND_ICON_PATH,
+  FAVICON_PATH,
+  OG_IMAGE_PATH,
+  SITE_NAME,
+  SITE_URL,
+  openGraphLocale,
+} from "@/lib/seo";
 import "../globals.css";
 
 const display = Cormorant_Garamond({
@@ -40,11 +49,41 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "common.metadata" });
 
   return {
+    metadataBase: new URL(SITE_URL),
     title: {
       default: t("title"),
       template: t("titleTemplate"),
     },
     description: t("description"),
+    icons: {
+      icon: [
+        { url: FAVICON_PATH, sizes: "48x48", type: "image/x-icon" },
+        { url: BRAND_ICON_PATH, sizes: "512x512", type: "image/png" },
+      ],
+      apple: [
+        { url: BRAND_APPLE_ICON_PATH, sizes: "180x180", type: "image/png" },
+      ],
+    },
+    openGraph: {
+      type: "website",
+      siteName: SITE_NAME,
+      locale: openGraphLocale(locale),
+      images: [
+        {
+          url: OG_IMAGE_PATH,
+          width: 1200,
+          height: 630,
+          alt: "HADITH Hotel exterior at sunset",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

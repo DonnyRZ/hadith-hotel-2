@@ -1,9 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { navItems } from "@/lib/navigation";
-
-const INSTAGRAM_URL = "https://www.instagram.com/hadith.hotel/";
-const YOUTUBE_URL = "https://www.youtube.com/channel/UC9x645ycCx46N5zrO2749Fg";
+import { INSTAGRAM_URL, YOUTUBE_URL } from "@/lib/seo";
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
