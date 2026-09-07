@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { HeroMedia, type HeroMediaSlide } from "@/components/HeroMedia";
-import { SoftOpeningFloat } from "@/components/SoftOpeningFloat";
 import { ScrollCue } from "@/components/ScrollCue";
 
 export type HeroSlide = HeroMediaSlide & { src: string };
@@ -111,8 +110,6 @@ export function HeroCarousel({ slides, intervalMs = 3000 }: HeroCarouselProps) {
           </button>
         </div>
       ) : null}
-
-      <SoftOpeningFloat />
 
       <ScrollCue href="#overview-content" />
 

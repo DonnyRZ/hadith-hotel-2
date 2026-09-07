@@ -55,11 +55,6 @@
     "heroCarousel": {
       "prevSlide": "Oldingi slayd",
       "nextSlide": "Keyingi slayd"
-    },
-    "softOpening": {
-      "announcement": "E'lon",
-      "title": "2026-yil 5-sentyabrda ochilish marosimi",
-      "dismiss": "Ochilish marosimi e'lonini yopish"
     }
   },
   "overview": {

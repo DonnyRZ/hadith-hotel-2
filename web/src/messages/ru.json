@@ -55,11 +55,6 @@
     "heroCarousel": {
       "prevSlide": "Предыдущий слайд",
       "nextSlide": "Следующий слайд"
-    },
-    "softOpening": {
-      "announcement": "Анонс",
-      "title": "Мягкое открытие 5 сентября 2026 года",
-      "dismiss": "Скрыть объявление о мягком открытии"
     }
   },
   "overview": {

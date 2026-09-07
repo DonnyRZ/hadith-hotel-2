@@ -55,11 +55,6 @@
     "heroCarousel": {
       "prevSlide": "Previous slide",
       "nextSlide": "Next slide"
-    },
-    "softOpening": {
-      "announcement": "Announcement",
-      "title": "Soft Opening September 5th 2026",
-      "dismiss": "Dismiss soft opening announcement"
     }
   },
   "overview": {
