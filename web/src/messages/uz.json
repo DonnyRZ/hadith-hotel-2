@@ -58,7 +58,7 @@
     }
   },
   "overview": {
-    "metaTitle": "Umumiy ma'lumot",
+    "metaTitle": "Umumiy ma'lumot | Hadith Hotel, Samarqand - Rasmiy veb-sayt",
     "metaDescription": "HADITH Hotel — Samarqanddagi Imom Al-Buxoriy majmuasidagi besh yulduzli oromgoh: 114 xona va lyuks, ovqatlanish, wellness va tadbirlar.",
     "hero": {
       "hotelExterior": "Quyosh botishida HADITH Hotel tashqi ko'rinishi",
@@ -275,6 +275,7 @@
       "unitsOnly": "{units} xona",
       "unitsAndSize": "{units} xona · {size}"
     },
+    "reserve": "Band qilish",
     "comingSoonBody": "{name} tez orada mavjud bo'ladi.",
     "rooms": {
       "president": "President Suite",
@@ -626,6 +627,12 @@
       "playground": "HADITH Hotel'dagi bolalar o'yin maydonchasi",
       "cafeBar": "HADITH Hotel'dagi 7oz qahva bari"
     }
+  },
+  "booking": {
+    "metaTitle": "Band qilish | Hadith Hotel, Samarqand - Rasmiy veb-sayt",
+    "metaDescription": "Samarqanddagi HADITH Hotel mehmonxonasida turar joyingizni band qiling. Imom al-Buxoriy majmuasidagi besh yulduzli xonalar va lyukslar, restoranlar, sog'lomlashtirish hamda tadbirlar uchun qulayliklar.",
+    "eyebrow": "HADITH Hotel Ichida",
+    "title": "Band qilish"
   },
   "guestRegistration": {
     "metaTitle": "Mehmonni ro'yxatga olish",

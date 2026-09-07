@@ -58,7 +58,7 @@
     }
   },
   "overview": {
-    "metaTitle": "Обзор",
+    "metaTitle": "Обзор | Hadith Hotel, Самарканд - Официальный сайт",
     "metaDescription": "HADITH Hotel — пятизвёздочная обитель в Комплексе Имама Аль-Бухари в Самарканде: 114 номеров и люксов, рестораны, wellness и мероприятия.",
     "hero": {
       "hotelExterior": "Фасад HADITH Hotel на закате",
@@ -275,6 +275,7 @@
       "unitsOnly": "{units} номеров",
       "unitsAndSize": "{units} номеров · {size}"
     },
+    "reserve": "Забронировать",
     "comingSoonBody": "{name} станет доступен в ближайшее время.",
     "rooms": {
       "president": "President Suite",
@@ -626,6 +627,12 @@
       "playground": "Детская площадка в HADITH Hotel",
       "cafeBar": "Кофейный бар 7oz в HADITH Hotel"
     }
+  },
+  "booking": {
+    "metaTitle": "Бронирование | Hadith Hotel, Самарканд - Официальный сайт",
+    "metaDescription": "Забронируйте проживание в HADITH Hotel в Самарканде. Пятизвёздочные номера и люксы в комплексе Имама Аль-Бухари, рестораны, оздоровительные услуги и площадки для мероприятий.",
+    "eyebrow": "Внутри HADITH Hotel",
+    "title": "Бронирование"
   },
   "guestRegistration": {
     "metaTitle": "Регистрация гостя",

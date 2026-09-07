@@ -3,6 +3,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { ChessJourneyArticle } from "@/components/ChessJourneyArticle";
 import { JsonLd } from "@/components/JsonLd";
 import { SITE_NAME, pageJsonLd, pageMetadata } from "@/lib/seo";
+import { BeSearchForm } from "@/components/be-forms/BeSearchForm";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -35,6 +36,7 @@ export default async function ChessJourneyPage() {
           ],
         })}
       />
+      <BeSearchForm beLocale={locale} />
       <ChessJourneyArticle />
     </main>
   );

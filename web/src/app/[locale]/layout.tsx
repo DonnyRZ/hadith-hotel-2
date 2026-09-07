@@ -106,6 +106,9 @@ export default async function RootLayout({
       lang={locale}
       className={`${display.variable} ${sans.variable} h-full`}
     >
+      <head>
+        <meta name="google-site-verification" content="s3-1dVGLrp1nvyPYDt23OoKly9lXcedxOrKowwZlfp8" />
+      </head>
       <body
         className="min-h-full antialiased"
         style={{ ["--decor-arches" as never]: decorArches }}

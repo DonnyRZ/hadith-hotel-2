@@ -128,14 +128,14 @@ export function SiteHeader() {
             </nav>
 
             <div className="site-header__mobile-actions">
-              <button
-                type="button"
-                className="site-header__mobile-reserve"
-                data-reserve-anchor
-                onClick={openComingSoon}
-              >
-                {t("reserve")}
-              </button>
+              <Link href="/booking">
+                <button
+                  type="button"
+                  className="site-header__mobile-reserve"
+                >
+                  {t("reserve")}
+                </button>
+              </Link>
               <button
                 type="button"
                 className={`site-header__menu-toggle${mobileMenuOpen ? " is-open" : ""}`}
@@ -203,27 +203,23 @@ export function SiteHeader() {
               <span>{t("viewMap")}</span>
             </a>
             <LanguageSwitcher />
-            <button
-              type="button"
-              className="site-header__reserve"
-              data-reserve-anchor
-              onClick={openComingSoon}
-            >
+            <Link href="/booking" className="site-header__reserve">
               <span>{t("reserve")}</span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>
 
-      <button
-        type="button"
-        className={`reserve-float${showFloatReserve ? " is-visible" : ""}`}
-        onClick={openComingSoon}
-        aria-hidden={!showFloatReserve}
-        tabIndex={showFloatReserve ? 0 : -1}
-      >
-        <span>{t("reserve")}</span>
-      </button>
+      <Link href="/booking">
+        <button
+          type="button"
+          className={`reserve-float${showFloatReserve ? " is-visible" : ""}`}
+          aria-hidden={!showFloatReserve}
+          tabIndex={showFloatReserve ? 0 : -1}
+        >
+          <span>{t("reserve")}</span>
+        </button>
+      </Link>
 
       <ComingSoonModal
         open={comingSoonOpen}

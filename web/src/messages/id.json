@@ -58,7 +58,7 @@
     }
   },
   "overview": {
-    "metaTitle": "Ikhtisar",
+    "metaTitle": "Ikhtisar | Hadith Hotel, Samarkand - Situs Resmi",
     "metaDescription": "HADITH Hotel adalah sanctuary bintang lima di Kompleks Imam Al Bukhari, Samarkand — 114 kamar dan suite, kuliner, wellness, dan acara.",
     "hero": {
       "hotelExterior": "Eksterior HADITH Hotel saat matahari terbenam",
@@ -275,6 +275,7 @@
       "unitsOnly": "{units} unit",
       "unitsAndSize": "{units} unit · {size}"
     },
+    "reserve": "Reservasi",
     "comingSoonBody": "{name} akan segera tersedia.",
     "rooms": {
       "president": "President Suite",
@@ -626,6 +627,12 @@
       "playground": "Taman bermain anak di HADITH Hotel",
       "cafeBar": "Bar kopi 7oz di HADITH Hotel"
     }
+  },
+  "booking": {
+    "metaTitle": "Pesan | Hadith Hotel, Samarkand – Situs Resmi",
+    "metaDescription": "Pesan masa menginap Anda di HADITH Hotel di Samarkand. Kamar dan suite bintang lima di Kompleks Imam Al-Bukhari, dengan fasilitas bersantap, kebugaran, dan acara.",
+    "eyebrow": "Di Dalam HADITH Hotel",
+    "title": "Pesan"
   },
   "guestRegistration": {
     "metaTitle": "Pendaftaran Tamu",

@@ -166,14 +166,9 @@ export function OverviewReserveAmenities() {
             >
               {t("title")}
             </h2>
-            <button
-              type="button"
-              className="overview-amenities__reserve-btn"
-              data-reserve-anchor
-              onClick={() => setComingSoonOpen(true)}
-            >
+            <Link href="/booking" className="overview-amenities__reserve-btn">
               <span>{t("reserve")}</span>
-            </button>
+            </Link>
           </div>
 
           <div className="overview-amenities__list-wrap">

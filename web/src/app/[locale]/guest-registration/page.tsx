@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
+import { BeSearchForm } from "@/components/be-forms/BeSearchForm";
 import { GuestRegistrationForm } from "@/components/GuestRegistrationForm";
 import { pageMetadata } from "@/lib/seo";
 
@@ -15,10 +16,15 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-export default function GuestRegistrationPage() {
+export default async function GuestRegistrationPage() {
+  const locale = await getLocale();
+
   return (
-    <main className="content-page guest-registration-page">
-      <GuestRegistrationForm />
-    </main>
+    <>
+      <BeSearchForm beLocale={locale} />
+      <main className="content-page guest-registration-page">
+        <GuestRegistrationForm />
+      </main>
+    </>
   );
 }
