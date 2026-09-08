@@ -3995,6 +3995,41 @@ body.has-room-lightbox .reserve-float {
   color: #101820;
 }
 
+.story-feature--uncropped .story-feature__media,
+.story-feature--soft-opening .story-feature__media {
+  min-height: 0;
+  overflow: visible;
+  background: transparent;
+}
+
+.story-feature--uncropped .story-feature__photo,
+.story-feature--soft-opening .story-feature__photo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.story-feature--indonesian-touch {
+  background:
+    radial-gradient(90% 70% at 82% 48%, rgb(176 141 87 / 9%), transparent 58%),
+    #1b1418;
+}
+
+.story-feature--indonesian-touch .story-feature__cta:hover {
+  color: #1b1418;
+}
+
+.story-article__frame--uncropped {
+  aspect-ratio: auto;
+  background: transparent;
+}
+
+.story-article__photo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .story-article {
   background: var(--paper);
   padding: clamp(72px, 9vh, 120px) var(--page-gutter) clamp(96px, 12vh, 148px);

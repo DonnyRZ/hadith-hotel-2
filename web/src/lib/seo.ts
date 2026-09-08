@@ -37,6 +37,7 @@ export const INDEXABLE_PATHS = [
   "/gallery",
   "/stories/chess-journey",
   "/stories/soft-opening",
+  "/stories/indonesian-touch",
 ] as const;
 
 const OG_LOCALE: Record<Locale, string> = {
