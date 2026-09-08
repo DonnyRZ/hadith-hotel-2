@@ -245,6 +245,20 @@
       "mapTitle": "Google Xaritada HADITH Hotel manzili",
       "mapOverlayAria": "Google Xaritada HADITH Hotel manzilini ochish",
       "viewOnMaps": "Google Xaritada ko'rish"
+    },
+    "news": {
+      "eyebrow": "Yangiliklar",
+      "items": {
+        "softOpening": {
+          "date": "2026-yil 5-sentabr",
+          "title": "EGI Resources global izini mustahkamladi: HADITH Hotel Samarqandda rasman soft opening qilindi",
+          "caption": "HADITH Hotelning Imam al-Buxoriy majmuasidagi soft opening marosimi, Samarqand",
+          "imageAlt": "Rasmiy shaxslar Samarqanddagi HADITH Hotel soft opening marosimida tantanali lentani kesmoqda, orqada yoritilgan Imam al-Buxoriy majmuasi.",
+          "p1": "PT EGI Resources xalqaro biznes ekspansiyasini mustahkamlab, 2026-yil 5-sentabr, shanba kuni O‘zbekiston, Samarqanddagi Imam al-Buxoriy majmuasida HADITH Hotelning soft opening marosimini o‘tkazdi. Mehmonxona EGI Resources uchun Indoneziya biznesining global bozorlardagi, xususan, turizm, mehmondo‘stlik va diniy sayohat sohasida katta salohiyatga ega Markaziy Osiyodagi izini kengaytirishda strategik qadam hisoblanadi.",
+          "p2": "Soft opening marosimida Indoneziya va O‘zbekistondan bir qator nufuzli shaxslar, jumladan, Indoneziya Respublikasi Haj va Umra vaziri Mochamad Irfan Yusuf, Indoneziya Respublikasining O‘zbekistondagi elchisi prof. dr. Siti Ruhaini Dzuhayatin hamda Indoneziya Respublikasining Qozog‘istondagi elchisi M. Fadjroel Rachman ishtirok etdi. Ularning ishtiroki Indoneziya–O‘zbekiston munosabatlarining yanada mustahkamlanayotganini va mintaqadagi iqtisodiy hamkorlik hamda investitsiya imkoniyatlarining kengligini ko‘rsatadi.",
+          "p3": "EGI Resources rahbariyati HADITH Hotel nafaqat xalqaro standartlardagi joylashuv, balki indoneziyalik mehmondo‘stlikni global maydonga olib chiqishini ta’kidladi. 114 ta xona va syuita, shuningdek, Nusantara restorani, Uzbek Cuisine Bar & Lounge, yopiq basseyn, spa, sauna, turk hammomi, tennis korti va padel korti kabi premium qulayliklar bilan HADITH Hotel Samarqandning xalqaro turizm ekotizimi o‘sishining bir qismi bo‘lishi va EGI Resourcesning global miqyosda kengayayotgan indoneziyalik kompaniya sifatidagi o‘rnini mustahkamlashi kutiladi."
+        }
+      }
     }
   },
   "suitesRooms": {

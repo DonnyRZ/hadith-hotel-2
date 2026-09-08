@@ -5,6 +5,7 @@ import { HeroCarousel } from "@/components/HeroCarousel";
 import { JsonLd } from "@/components/JsonLd";
 import { OverviewReserveAmenities } from "@/components/OverviewReserveAmenities";
 import { ChessStoryFeature } from "@/components/ChessStoryFeature";
+import { HomepageNews } from "@/components/HomepageNews";
 import { OverviewDestinations } from "@/components/OverviewDestinations";
 import { OverviewFarewell } from "@/components/OverviewFarewell";
 import { OverviewHotelExperiences } from "@/components/OverviewHotelExperiences";
@@ -150,6 +151,8 @@ export default async function OverviewPage() {
         <OverviewDestinations />
 
         <ChessStoryFeature headingId="overview-chess-story-heading" />
+
+        <HomepageNews />
 
         <OverviewHotelExperiences />
 
