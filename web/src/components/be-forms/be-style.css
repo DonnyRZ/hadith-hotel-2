@@ -1,0 +1,123 @@
+.block-search,
+.block-search * {
+    box-sizing: border-box;
+}
+
+.block-search {
+    background: #fbf7ef;
+}
+
+@media screen and (min-width: 1280px) and (min-height: 600px) {
+    .block-search--main {
+        position: absolute;
+        z-index: 2;
+        width: 360px;
+        margin-top: 12vh;
+        margin-left: 150px;
+    }
+}
+
+@media screen and (min-width: 1280px) and (min-height: 848px) {
+    .block-search--main {
+        margin-top: 180px;
+    }
+}
+
+.be-container {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.booking-page {
+    min-height: calc(100svh - var(--header-primary-h));
+    background: var(--paper);
+    padding: clamp(72px, 9vh, 112px) var(--page-gutter) clamp(88px, 10vh, 128px);
+}
+
+.booking-page__intro {
+    width: min(720px, 100%);
+    margin: 0 auto clamp(48px, 6vh, 72px);
+    text-align: center;
+}
+
+.booking-page__eyebrow {
+    margin: 0;
+    color: var(--accent);
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
+.booking-page__title {
+    margin: 16px 0 0;
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 500;
+    line-height: 1.05;
+}
+
+@media (max-width: 560px) {
+    .booking-page {
+        padding: 68px 15px 80px;
+    }
+
+    .booking-page__intro {
+        margin-bottom: 40px;
+    }
+}
+
+#be-booking-form {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+#tl-booking-cart {
+    z-index: 1 !important;
+}
+
+.room-card__details {
+    margin-right: 10px !important;
+}
+
+.room-card__booking {
+    display: inline-flex;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0 19px;
+    font-family: var(--sans);
+    font-size: 10.5px;
+    line-height: 1.5;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    align-items: center;
+    color: #ffffff;
+    background: var(--reserve);
+    border: 1px solid var(--reserve);
+    transition: background 0.2s;
+}
+
+.room-card__booking:hover {
+    background: #1f1f1f;
+}
+
+@media (max-width: 720px) {
+    .room-card__details {
+        margin-right: 0 !important;
+        margin-bottom: 10px !important;
+    }
+
+    .room-card__booking {
+        width: 100%;
+    }
+}
+
+body:has(#be-booking-form) .mobile-menu__map,
+body:has(#be-booking-form) .site-footer__social {
+    display: none;
+}

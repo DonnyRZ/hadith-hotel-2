@@ -15,6 +15,7 @@ import {
   registerVisitor,
   type GeographicBreakdown,
 } from "@/lib/siteMetrics";
+import { Link } from "@/i18n/navigation";
 
 export function OverviewFarewell() {
   const t = useTranslations("overview.farewell");
@@ -146,14 +147,9 @@ export function OverviewFarewell() {
             >
               {t("downloadProfile")}
             </ProfileDownloadLink>
-            <button
-              type="button"
-              className="overview-farewell__reserve"
-              data-reserve-anchor
-              onClick={() => setComingSoonOpen(true)}
-            >
+            <Link href="/booking" className="overview-farewell__reserve">
               <span>{t("reserve")}</span>
-            </button>
+            </Link>
           </div>
         </div>
       </section>

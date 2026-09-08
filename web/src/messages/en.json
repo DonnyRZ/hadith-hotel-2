@@ -58,7 +58,7 @@
     }
   },
   "overview": {
-    "metaTitle": "Overview",
+    "metaTitle": "Overview | Hadith Hotel, Samarkand - Official Website",
     "metaDescription": "HADITH Hotel is a five-star sanctuary within the Imam Al Bukhari Complex in Samarkand — 114 rooms and suites, dining, wellness, and events.",
     "hero": {
       "hotelExterior": "HADITH Hotel exterior at sunset",
@@ -275,6 +275,7 @@
       "unitsOnly": "{units} units",
       "unitsAndSize": "{units} units · {size}"
     },
+    "reserve": "Reserve",
     "comingSoonBody": "The {name} will be available soonest.",
     "rooms": {
       "president": "President Suite",
@@ -626,6 +627,12 @@
       "playground": "Children's playground at HADITH Hotel",
       "cafeBar": "7oz coffee bar at HADITH Hotel"
     }
+  },
+  "booking": {
+    "metaTitle": "Booking | Hadith Hotel, Samarkand - Official Website",
+    "metaDescription": "Book your stay at HADITH Hotel in Samarkand. Five‑star rooms and suites within the Imam Al‑Bukhari Complex with dining, wellness and event facilities.",
+    "eyebrow": "Inside HADITH Hotel",
+    "title": "Booking"
   },
   "guestRegistration": {
     "metaTitle": "Guest Registration",

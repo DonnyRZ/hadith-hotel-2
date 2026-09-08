@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { GuestRegistrationThankYouOverlay } from "@/components/GuestRegistrationThankYouOverlay";
+import { BeSearchForm } from "@/components/be-forms/BeSearchForm";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { JsonLd } from "@/components/JsonLd";
 import { OverviewReserveAmenities } from "@/components/OverviewReserveAmenities";
@@ -113,6 +114,8 @@ export default async function OverviewPage() {
     <main className="overview">
       <JsonLd data={homeJsonLd(locale)} />
       <GuestRegistrationThankYouOverlay />
+
+      <BeSearchForm beLocale={locale} formType="main"/>
 
       <section className="overview-hero" aria-label="Overview hero">
         <HeroCarousel slides={heroSlides} />

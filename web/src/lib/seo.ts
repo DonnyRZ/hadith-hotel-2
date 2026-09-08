@@ -35,6 +35,7 @@ export const INDEXABLE_PATHS = [
   "/events",
   "/reviews",
   "/gallery",
+  "/booking",
   "/stories/chess-journey",
   "/stories/soft-opening",
   "/stories/indonesian-touch",

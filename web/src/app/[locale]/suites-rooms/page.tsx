@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
+import { BeSearchForm } from "@/components/be-forms/BeSearchForm";
 import { PageHeroCarousel } from "@/components/PageHeroCarousel";
 import { RoomsCollection } from "@/components/RoomsCollection";
 import { SITE_NAME, pageJsonLd, pageMetadata } from "@/lib/seo";
@@ -51,6 +52,7 @@ export default async function SuitesRoomsPage() {
           ],
         })}
       />
+      <BeSearchForm beLocale={locale} />
       <PageHeroCarousel title={t("metaTitle")} slides={heroSlides} />
       <section className="rooms-page-intro" aria-labelledby="rooms-page-intro-title">
         <p className="rooms-page-intro__count" aria-hidden="true">
