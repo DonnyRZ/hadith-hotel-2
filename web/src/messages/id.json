@@ -245,20 +245,6 @@
       "mapTitle": "Lokasi HADITH Hotel di Google Maps",
       "mapOverlayAria": "Buka lokasi HADITH Hotel di Google Maps",
       "viewOnMaps": "Lihat di Google Maps"
-    },
-    "news": {
-      "eyebrow": "Berita",
-      "items": {
-        "softOpening": {
-          "date": "5 September 2026",
-          "title": "EGI Resources Tancapkan Jejak Global, Hadith Hotel Resmi Soft Opening di Samarkand",
-          "caption": "Soft opening HADITH Hotel di Kompleks Imam Al-Bukhari, Samarkand",
-          "imageAlt": "Para pejabat memotong pita pada soft opening HADITH Hotel di Samarkand, dengan Kompleks Imam Al-Bukhari yang terang di latar belakang.",
-          "p1": "PT EGI Resources memperkuat ekspansi bisnis internasional dengan menggelar soft opening Hadith Hotel di kawasan Kompleks Imam Al-Bukhari, Samarkand, Uzbekistan, Sabtu (5/9/2026). Kehadiran hotel ini menjadi langkah strategis EGI Resources untuk memperluas jejak bisnis Indonesia di pasar global, khususnya di Asia Tengah yang memiliki potensi besar dalam sektor pariwisata, hospitality, dan wisata religi.",
-          "p2": "Soft opening Hadith Hotel dihadiri sejumlah tokoh penting dari Indonesia dan Uzbekistan, di antaranya Menteri Haji dan Umrah Republik Indonesia Mochamad Irfan Yusuf, Duta Besar Republik Indonesia untuk Uzbekistan Prof. Dr. Siti Ruhaini Dzuhayatin, serta Duta Besar Republik Indonesia untuk Kazakhstan M. Fadjroel Rachman. Kehadiran para pejabat dan tokoh dari kedua negara mencerminkan semakin eratnya hubungan Indonesia-Uzbekistan sekaligus menunjukkan besarnya peluang kerja sama ekonomi dan investasi di kawasan tersebut.",
-          "p3": "Manajemen EGI Resources menegaskan bahwa Hadith Hotel tidak hanya menghadirkan akomodasi berstandar internasional, tetapi juga membawa nilai keramahtamahan Indonesia ke panggung global. Dengan 114 kamar dan suite serta fasilitas premium seperti restoran Nusantara, Uzbek Cuisine Bar & Lounge, kolam renang indoor, spa, sauna, Turkish Hammam, lapangan tenis, dan padel court, Hadith Hotel diharapkan menjadi bagian dari pertumbuhan ekosistem pariwisata internasional di Samarkand sekaligus memperkuat posisi EGI Resources sebagai perusahaan Indonesia yang terus berekspansi secara global."
-        }
-      }
     }
   },
   "suitesRooms": {
@@ -679,6 +665,20 @@
       "title": "Terima Kasih",
       "body": "Kami tak sabar menyambut kedatangan Anda pada masa soft opening kami.",
       "close": "Tutup"
+    }
+  },
+  "stories": {
+    "softOpening": {
+      "title": "EGI Resources Tancapkan Jejak Global, Hadith Hotel Resmi Soft Opening di Samarkand",
+      "body": "PT EGI Resources menggelar soft opening Hadith Hotel di Kompleks Imam Al-Bukhari, Samarkand.",
+      "cta": "Baca Artikel",
+      "imageAlt": "Para pejabat memotong pita pada soft opening HADITH Hotel di Samarkand, dengan Kompleks Imam Al-Bukhari yang terang di latar belakang.",
+      "article": {
+        "heading": "Langkah strategis di Asia Tengah",
+        "p1": "PT EGI Resources memperkuat ekspansi bisnis internasional dengan menggelar soft opening Hadith Hotel di kawasan Kompleks Imam Al-Bukhari, Samarkand, Uzbekistan, Sabtu (5/9/2026). Kehadiran hotel ini menjadi langkah strategis EGI Resources untuk memperluas jejak bisnis Indonesia di pasar global, khususnya di Asia Tengah yang memiliki potensi besar dalam sektor pariwisata, hospitality, dan wisata religi.",
+        "p2": "Soft opening Hadith Hotel dihadiri sejumlah tokoh penting dari Indonesia dan Uzbekistan, di antaranya Menteri Haji dan Umrah Republik Indonesia Mochamad Irfan Yusuf, Duta Besar Republik Indonesia untuk Uzbekistan Prof. Dr. Siti Ruhaini Dzuhayatin, serta Duta Besar Republik Indonesia untuk Kazakhstan M. Fadjroel Rachman. Kehadiran para pejabat dan tokoh dari kedua negara mencerminkan semakin eratnya hubungan Indonesia-Uzbekistan sekaligus menunjukkan besarnya peluang kerja sama ekonomi dan investasi di kawasan tersebut.",
+        "p3": "Manajemen EGI Resources menegaskan bahwa Hadith Hotel tidak hanya menghadirkan akomodasi berstandar internasional, tetapi juga membawa nilai keramahtamahan Indonesia ke panggung global. Dengan 114 kamar dan suite serta fasilitas premium seperti restoran Nusantara, Uzbek Cuisine Bar & Lounge, kolam renang indoor, spa, sauna, Turkish Hammam, lapangan tenis, dan padel court, Hadith Hotel diharapkan menjadi bagian dari pertumbuhan ekosistem pariwisata internasional di Samarkand sekaligus memperkuat posisi EGI Resources sebagai perusahaan Indonesia yang terus berekspansi secara global."
+      }
     }
   }
 }
