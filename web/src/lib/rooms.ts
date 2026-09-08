@@ -4,6 +4,7 @@ export type RoomType = {
   /** Null while the room specification is still being confirmed */
   size: string | null;
   hasSpecs: boolean;
+  beRoomType: string;
 };
 
 export const presidentSuite: RoomType = {
