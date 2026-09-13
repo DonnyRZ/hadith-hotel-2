@@ -3,7 +3,6 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { ChessJourneyArticle } from "@/components/ChessJourneyArticle";
 import { JsonLd } from "@/components/JsonLd";
 import { SITE_NAME, pageJsonLd, pageMetadata } from "@/lib/seo";
-import { BeSearchForm } from "@/components/be-forms/BeSearchForm";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -19,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ChessJourneyPage() {
   const locale = await getLocale();
   const t = await getTranslations("reviews.chessStory");
-  const tReviews = await getTranslations("reviews");
+  const tNews = await getTranslations("news");
 
   return (
     <main className="content-page">
@@ -31,12 +30,11 @@ export default async function ChessJourneyPage() {
           description: t("body"),
           crumbs: [
             { name: SITE_NAME, path: "/" },
-            { name: tReviews("metaTitle"), path: "/reviews" },
+            { name: tNews("metaTitle"), path: "/news" },
             { name: t("title"), path: "/stories/chess-journey" },
           ],
         })}
       />
-      <BeSearchForm beLocale={locale} />
       <ChessJourneyArticle />
     </main>
   );

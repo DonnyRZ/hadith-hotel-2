@@ -5,9 +5,6 @@ import { BeSearchForm } from "@/components/be-forms/BeSearchForm";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { JsonLd } from "@/components/JsonLd";
 import { OverviewReserveAmenities } from "@/components/OverviewReserveAmenities";
-import { ChessStoryFeature } from "@/components/ChessStoryFeature";
-import { SoftOpeningStoryFeature } from "@/components/SoftOpeningStoryFeature";
-import { IndonesianTouchStoryFeature } from "@/components/IndonesianTouchStoryFeature";
 import { OverviewDestinations } from "@/components/OverviewDestinations";
 import { OverviewFarewell } from "@/components/OverviewFarewell";
 import { OverviewHotelExperiences } from "@/components/OverviewHotelExperiences";
@@ -153,12 +150,6 @@ export default async function OverviewPage() {
         <OverviewRoomsSuites />
 
         <OverviewDestinations />
-
-        <ChessStoryFeature headingId="overview-chess-story-heading" />
-
-        <SoftOpeningStoryFeature headingId="overview-soft-opening-heading" />
-
-        <IndonesianTouchStoryFeature headingId="overview-indonesian-touch-heading" />
 
         <OverviewHotelExperiences />
 

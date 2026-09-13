@@ -20,6 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function SoftOpeningPage() {
   const locale = await getLocale();
   const t = await getTranslations("stories.softOpening");
+  const tNews = await getTranslations("news");
 
   return (
     <main className="content-page">
@@ -31,6 +32,7 @@ export default async function SoftOpeningPage() {
           description: t("body"),
           crumbs: [
             { name: SITE_NAME, path: "/" },
+            { name: tNews("metaTitle"), path: "/news" },
             { name: t("title"), path: PATH },
           ],
         })}

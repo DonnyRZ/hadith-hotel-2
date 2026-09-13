@@ -132,6 +132,7 @@ export function SiteHeader() {
                 <button
                   type="button"
                   className="site-header__mobile-reserve"
+                  data-reserve-anchor
                 >
                   {t("reserve")}
                 </button>
@@ -203,7 +204,7 @@ export function SiteHeader() {
               <span>{t("viewMap")}</span>
             </a>
             <LanguageSwitcher />
-            <Link href="/booking" className="site-header__reserve">
+            <Link href="/booking" className="site-header__reserve" data-reserve-anchor>
               <span>{t("reserve")}</span>
             </Link>
           </div>

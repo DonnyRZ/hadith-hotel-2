@@ -1,5 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import SiteImage from "@/components/SiteImage";
+import { StoryArticleNav } from "@/components/StoryArticleNav";
+import { StoryRelated } from "@/components/StoryRelated";
 
 const IMAGE = "/images/news/indonesian-touch-samarkand.webp";
 
@@ -8,6 +10,8 @@ export async function IndonesianTouchArticle() {
 
   return (
     <article className="story-article">
+      <StoryArticleNav kicker={t("kicker")} date={t("date")} />
+
       <header className="story-article__header">
         <h1 className="story-article__title">{t("title")}</h1>
       </header>
@@ -28,6 +32,7 @@ export async function IndonesianTouchArticle() {
             priority
           />
         </div>
+        <figcaption className="story-article__caption">{t("imageAlt")}</figcaption>
       </figure>
 
       <section className="story-article__section" aria-labelledby="indonesian-touch-article-heading">
@@ -38,6 +43,8 @@ export async function IndonesianTouchArticle() {
         <p>{t("article.p2")}</p>
         <p>{t("article.p3")}</p>
       </section>
+
+      <StoryRelated currentId="indonesian-touch" />
     </article>
   );
 }

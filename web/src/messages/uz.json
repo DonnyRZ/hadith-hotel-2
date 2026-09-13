@@ -11,6 +11,7 @@
       "cafeDining": "Kafe va restoranlar",
       "experience": "Tajriba",
       "events": "Tadbirlar",
+      "news": "Yangiliklar",
       "reviews": "Hikoyalar va lavhalar",
       "gallery": "Galereya"
     },
@@ -576,6 +577,8 @@
       "title": "Ipak yo'li bo'ylab shaxmat sayohati",
       "body": "2026-yil 21–29-sentabr kunlari O'zbekistonga guruh safari madaniy sayohatni yuqori darajadagi shaxmat bilan birlashtiradi.",
       "cta": "Maqolani o'qish",
+      "kicker": "Tanlangan hikoya",
+      "date": "21–29-sentabr 2026",
       "imageAlt": "Samarqanddagi Registon maydoni",
       "article": {
         "heading": "O'tkazib yuborib bo'lmaydigan imkoniyat",
@@ -628,6 +631,15 @@
       "cafeBar": "HADITH Hotel'dagi 7oz qahva bari"
     }
   },
+  "news": {
+    "metaTitle": "Yangiliklar",
+    "metaDescription": "Samarqanddagi HADITH Hotel yangiliklari — mehmonxona hikoyalari va Imom Al-Buxoriy majmuasidagi lahzalar.",
+    "eyebrow": "HADITH Hotel Ichida",
+    "title": "Yangiliklar",
+    "lede": "Imom Al-Buxoriy majmuasidagi HADITH Hotel lahzalari, marosimlari va hikoyalari.",
+    "back": "Barcha yangiliklar",
+    "related": "Davomini o'qing"
+  },
   "booking": {
     "metaTitle": "Band qilish | Hadith Hotel, Samarqand - Rasmiy veb-sayt",
     "metaDescription": "Samarqanddagi HADITH Hotel mehmonxonasida turar joyingizni band qiling. Imom al-Buxoriy majmuasidagi besh yulduzli xonalar va lyukslar, restoranlar, sog'lomlashtirish hamda tadbirlar uchun qulayliklar.",
@@ -679,6 +691,8 @@
       "title": "EGI Resources global izini mustahkamladi: HADITH Hotel Samarqandda rasman soft opening qilindi",
       "body": "HADITH Hotel Imam al-Buxoriy majmuasida, Samarqandda soft opening qilindi va EGI Resourcesning global izini kengaytirdi.",
       "cta": "Maqolani o'qish",
+      "kicker": "Mehmonxona yangiliklari",
+      "date": "5-sentabr 2026",
       "imageAlt": "Rasmiy shaxslar Samarqanddagi HADITH Hotel soft opening marosimida tantanali lentani kesmoqda, orqada yoritilgan Imam al-Buxoriy majmuasi.",
       "article": {
         "heading": "Markaziy Osiyodagi strategik qadam",
@@ -691,6 +705,8 @@
       "title": "Imom Buxoriy maqbarasi yonida HADITH Hotel Samarqandga indoneziyalik nafas olib keldi",
       "body": "HADITH Hotel Samarqanddagi Imam al-Buxoriy majmuasida, Imom Muhammad al-Buxoriy maqbarasidan bir kilometrdan kamroq masofada soft opening qilindi.",
       "cta": "Maqolani o'qish",
+      "kicker": "Mehmonxona yangiliklari",
+      "date": "5-sentabr 2026",
       "imageAlt": "HADITH Hotel soft opening marosimi: podiumdagi nutq, o‘zbek milliy libozi va indoneziyalik kebaya batik kiygan ijrochilar bilan.",
       "article": {
         "heading": "Samarqand ziyorat qalbida indoneziyalik nafas",

@@ -11,6 +11,7 @@
       "cafeDining": "Kafe & Restoran",
       "experience": "Pengalaman",
       "events": "Acara",
+      "news": "Berita",
       "reviews": "Cerita & Sorotan",
       "gallery": "Galeri"
     },
@@ -576,6 +577,8 @@
       "title": "Perjalanan Catur di Jalur Sutra",
       "body": "Dari 21 hingga 29 September 2026, tur grup ke Uzbekistan akan memadukan eksplorasi budaya dengan catur tingkat dunia.",
       "cta": "Baca Artikel",
+      "kicker": "Cerita Unggulan",
+      "date": "21–29 September 2026",
       "imageAlt": "Registan Square di Samarkand",
       "article": {
         "heading": "Kesempatan yang tak boleh dilewatkan",
@@ -628,6 +631,15 @@
       "cafeBar": "Bar kopi 7oz di HADITH Hotel"
     }
   },
+  "news": {
+    "metaTitle": "Berita",
+    "metaDescription": "Berita dari HADITH Hotel, Samarkand — cerita hotel dan momen dari Kompleks Imam Al-Bukhari.",
+    "eyebrow": "Di Dalam HADITH Hotel",
+    "title": "Berita",
+    "lede": "Momen, upacara, dan cerita dari HADITH Hotel di Kompleks Imam Al-Bukhari.",
+    "back": "Semua Berita",
+    "related": "Baca selanjutnya"
+  },
   "booking": {
     "metaTitle": "Pesan | Hadith Hotel, Samarkand – Situs Resmi",
     "metaDescription": "Pesan masa menginap Anda di HADITH Hotel di Samarkand. Kamar dan suite bintang lima di Kompleks Imam Al-Bukhari, dengan fasilitas bersantap, kebugaran, dan acara.",
@@ -679,6 +691,8 @@
       "title": "EGI Resources Tancapkan Jejak Global, Hadith Hotel Resmi Soft Opening di Samarkand",
       "body": "PT EGI Resources menggelar soft opening Hadith Hotel di Kompleks Imam Al-Bukhari, Samarkand.",
       "cta": "Baca Artikel",
+      "kicker": "Berita Hotel",
+      "date": "5 September 2026",
       "imageAlt": "Para pejabat memotong pita pada soft opening HADITH Hotel di Samarkand, dengan Kompleks Imam Al-Bukhari yang terang di latar belakang.",
       "article": {
         "heading": "Langkah strategis di Asia Tengah",
@@ -691,6 +705,8 @@
       "title": "Dekat Makam Imam Bukhari, Hadith Hotel Hadirkan Sentuhan Indonesia di Samarkand",
       "body": "Hadith Hotel resmi soft opening di Kompleks Imam Al-Bukhari, Samarkand, kurang dari satu kilometer dari makam Imam Muhammad Al-Bukhari.",
       "cta": "Baca Artikel",
+      "kicker": "Berita Hotel",
+      "date": "5 September 2026",
       "imageAlt": "Upacara soft opening HADITH Hotel: pidato di podium, dikelilingi penari berpakaian adat Uzbekistan dan kebaya batik Indonesia.",
       "article": {
         "heading": "Sentuhan Indonesia di jantung ziarah Samarkand",

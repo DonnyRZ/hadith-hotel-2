@@ -33,6 +33,7 @@ export const INDEXABLE_PATHS = [
   "/cafe-dining",
   "/experience",
   "/events",
+  "/news",
   "/reviews",
   "/gallery",
   "/booking",
