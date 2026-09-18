@@ -23,11 +23,11 @@ export default async function CafeDiningPage() {
 
   const heroSlides = [
     {
-      id: "dining-hero-cafe",
-      label: t("hero.cafe"),
-      src: "/images/cafe-dining/cafe-1.webp",
+      id: "dining-hero-restaurant",
+      label: t("hero.restaurant"),
+      src: "/images/cafe-dining/resto-1.png",
       position: "50% 50%",
-      mobilePosition: "42% 50%",
+      mobilePosition: "50% 50%",
     },
     {
       id: "dining-hero-buffet",
@@ -35,6 +35,20 @@ export default async function CafeDiningPage() {
       src: "/images/cafe-dining/buffet.webp",
       position: "50% 50%",
       mobilePosition: "55% 50%",
+    },
+    {
+      id: "dining-hero-cafe",
+      label: t("hero.cafe"),
+      src: "/images/cafe-dining/7oz.png",
+      position: "50% 50%",
+      mobilePosition: "50% 50%",
+    },
+    {
+      id: "dining-hero-lounge",
+      label: t("hero.lounge"),
+      src: "/images/cafe-dining/lounge-bar.png",
+      position: "0% 50%",
+      mobilePosition: "0% 50%",
     },
   ] as const;
 

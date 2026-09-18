@@ -103,7 +103,7 @@
           "title": "Kuliner",
           "sajiNusantara": "Saji Nusantara Restaurant",
           "sajiNusantaraDetail": "Kuliner Uzbekistan",
-          "barLounge": "Bar & Lounge",
+          "barLounge": "Lounge Bar",
           "espressoCafe": "7oz Espresso Cafe"
         },
         "wellness": {
@@ -352,12 +352,15 @@
   },
   "cafeDining": {
     "metaTitle": "Kafe & Restoran",
-    "metaDescription": "Kuliner di HADITH Hotel, Samarkand — restoran Saji Nusantara, bar dan lounge, serta 7oz Espresso Cafe.",
+    "metaDescription": "Kuliner di HADITH Hotel, Samarkand — restoran Saji Nusantara, 7oz Espresso Cafe, dan Lounge Bar.",
     "hero": {
-      "cafe": "Counter dan lounge kafe 7oz",
-      "buffet": "Counter buffet Saji Nusantara"
+      "restaurant": "Ruang makan Saji Nusantara",
+      "buffet": "Counter buffet Saji Nusantara",
+      "cafe": "Kafe 7oz Espresso",
+      "lounge": "Interior Lounge Bar"
     },
     "openWebsite": "Buka Website",
+    "photoSoon": "Foto {name}",
     "venues": {
       "restaurant": {
         "heading": "Nikmati Cita Rasa Jalur Sutra",
@@ -377,15 +380,28 @@
       "cafe": {
         "heading": "Cita Rasa Indonesia",
         "name": "7oz Espresso",
-        "description": "Temukan kue kering Indonesia pilihan dan kopi spesial dari seluruh Nusantara, termasuk klasik seperti Kopi Luwak. Kafe ini menawarkan suasana sosial yang hangat sambil merayakan kekayaan budaya kopi Indonesia.",
+        "description": "Kafe untuk duduk dan tinggal sebentar — kue kering Indonesia dan kopi spesial dari Nusantara, termasuk Kopi Luwak.",
         "highlights": [
           "Kopi spesial Indonesia",
           "Kue kering Indonesia pilihan",
-          "Suasana sosial yang santai"
+          "Tempat duduk dan tinggal sebentar"
         ],
         "gallery": {
-          "counterLounge": "Counter dan lounge kafe 7oz",
-          "coffeeBar": "Bar kopi 7oz"
+          "interior": "Kafe 7oz Espresso"
+        }
+      },
+      "lounge": {
+        "heading": "Berhenti sebentar, lalu lanjut",
+        "name": "Lounge Bar",
+        "subname": "Tempat berhenti sebentar",
+        "description": "Lounge tunggu yang elegan untuk jeda singkat: kopi atau minuman non-kopi sambil menunggu. Biji kopi premium dan merchandise Hotel Hadith siap dibawa pulang.",
+        "highlights": [
+          "Jeda singkat yang elegan",
+          "Kopi dan minuman non-kopi",
+          "Biji kopi dan merchandise hotel"
+        ],
+        "gallery": {
+          "interior": "Interior Lounge Bar"
         }
       }
     },
@@ -618,7 +634,8 @@
       "juniorSuite": "Interior Junior Suite di HADITH Hotel",
       "restaurant": "Ruang makan restoran di HADITH Hotel",
       "buffet": "Pengalaman bersantap buffet di HADITH Hotel",
-      "cafe": "Kafe di HADITH Hotel",
+      "cafe": "7oz Espresso di HADITH Hotel",
+      "lounge": "Lounge Bar di HADITH Hotel",
       "eventsHall": "Aula acara di HADITH Hotel",
       "indoorPool": "Kolam renang indoor di HADITH Hotel",
       "turkishHammam": "Hammam Turki di HADITH Hotel",
@@ -627,8 +644,7 @@
       "fitnessCentre": "Pusat kebugaran di HADITH Hotel",
       "tennisCourt": "Lapangan tenis di HADITH Hotel",
       "padelCourt": "Lapangan padel di HADITH Hotel",
-      "playground": "Taman bermain anak di HADITH Hotel",
-      "cafeBar": "Bar kopi 7oz di HADITH Hotel"
+      "playground": "Taman bermain anak di HADITH Hotel"
     }
   },
   "news": {

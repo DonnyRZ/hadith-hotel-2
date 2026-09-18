@@ -4,13 +4,13 @@ import SiteImage from "@/components/SiteImage";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
-type GallerySlide = { src: string; labelKey: string };
+type GallerySlide = { src?: string; labelKey: string };
 
 type Venue = {
   id: string;
   key: string;
   website?: string;
-  variant: "blue" | "paper";
+  variant: "blue" | "paper" | "stone";
   reversed?: boolean;
   gallery: GallerySlide[];
 };
@@ -36,7 +36,7 @@ const venues: Venue[] = [
     website: "https://saji-nusantara.com/",
     variant: "blue",
     gallery: [
-      { src: "/images/cafe-dining/saji-nusantara.webp", labelKey: "diningRoom" },
+      { src: "/images/cafe-dining/resto-1.png", labelKey: "diningRoom" },
       { src: "/images/cafe-dining/buffet.webp", labelKey: "buffetCounter" },
     ],
   },
@@ -47,8 +47,15 @@ const venues: Venue[] = [
     variant: "paper",
     reversed: true,
     gallery: [
-      { src: "/images/cafe-dining/cafe-1.webp", labelKey: "counterLounge" },
-      { src: "/images/cafe-dining/cafe-2.webp", labelKey: "coffeeBar" },
+      { src: "/images/cafe-dining/7oz.png", labelKey: "interior" },
+    ],
+  },
+  {
+    id: "lounge",
+    key: "lounge",
+    variant: "stone",
+    gallery: [
+      { src: "/images/cafe-dining/lounge-bar.png", labelKey: "interior" },
     ],
   },
 ];
@@ -62,9 +69,24 @@ function VenueMediaCarousel({
   name: string;
   t: ReturnType<typeof useTranslations>;
 }) {
-  const slides = venue.gallery;
+  const slides = venue.gallery.filter(
+    (slide): slide is GallerySlide & { src: string } => Boolean(slide.src),
+  );
   const [index, setIndex] = useState(0);
   const count = slides.length;
+
+  if (count === 0) {
+    return (
+      <div
+        className="venue__placeholder venue-carousel__slide venue-carousel__slide--soon"
+        role="img"
+        aria-label={t("photoSoon", { name })}
+      >
+        <span>{name}</span>
+      </div>
+    );
+  }
+
   const wrap = (value: number) => (value + count) % count;
   const progress = ((index + 1) / count) * 100;
   const slide = slides[index]!;
@@ -83,7 +105,7 @@ function VenueMediaCarousel({
         aria-label={slideLabel}
       >
         <SiteImage
-          className="venue-carousel__image"
+          className={`venue-carousel__image${venue.id === "lounge" ? " venue-carousel__image--bar" : ""}`}
           src={slide.src}
           alt=""
           fill
@@ -93,33 +115,35 @@ function VenueMediaCarousel({
         />
       </div>
 
-      <div className="venue-carousel__controls">
-        <button
-          type="button"
-          className="venue-carousel__nav"
-          onClick={() => setIndex((current) => wrap(current - 1))}
-          aria-label={t("carousel.prevPhotoAria", { name })}
-        >
-          <span aria-hidden="true">‹</span> {t("carousel.previous")}
-        </button>
+      {count > 1 ? (
+        <div className="venue-carousel__controls">
+          <button
+            type="button"
+            className="venue-carousel__nav"
+            onClick={() => setIndex((current) => wrap(current - 1))}
+            aria-label={t("carousel.prevPhotoAria", { name })}
+          >
+            <span aria-hidden="true">‹</span> {t("carousel.previous")}
+          </button>
 
-        <div className="venue-carousel__progress" aria-hidden="true">
-          <span style={{ width: `${progress}%` }} />
+          <div className="venue-carousel__progress" aria-hidden="true">
+            <span style={{ width: `${progress}%` }} />
+          </div>
+
+          <button
+            type="button"
+            className="venue-carousel__nav"
+            onClick={() => setIndex((current) => wrap(current + 1))}
+            aria-label={t("carousel.nextPhotoAria", { name })}
+          >
+            {t("carousel.next")} <span aria-hidden="true">›</span>
+          </button>
+
+          <p className="venue-carousel__counter">
+            {String(index + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
+          </p>
         </div>
-
-        <button
-          type="button"
-          className="venue-carousel__nav"
-          onClick={() => setIndex((current) => wrap(current + 1))}
-          aria-label={t("carousel.nextPhotoAria", { name })}
-        >
-          {t("carousel.next")} <span aria-hidden="true">›</span>
-        </button>
-
-        <p className="venue-carousel__counter">
-          {String(index + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
-        </p>
-      </div>
+      ) : null}
     </div>
   );
 }
@@ -152,10 +176,12 @@ export function CafeDiningVenues() {
                 </div>
 
                 <div className="venue__card">
-                  <h3 className="venue__name">{name}</h3>
-                  {subname ? (
-                    <p className="venue__subname">{subname}</p>
-                  ) : null}
+                  <div className="venue__identity">
+                    <h3 className="venue__name">{name}</h3>
+                    {subname ? (
+                      <p className="venue__subname">{subname}</p>
+                    ) : null}
+                  </div>
                   <p className="venue__body">{t(`${base}.description`)}</p>
 
                   <ul className="venue__highlights">

@@ -38,7 +38,7 @@ export default async function OverviewPage() {
     {
       id: "resto",
       label: t("hero.resto"),
-      src: "/images/overview-hero/resto.webp",
+      src: "/images/cafe-dining/resto-1.png",
       position: "50% 52%",
       mobilePosition: "50% 52%",
     },

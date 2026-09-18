@@ -103,7 +103,7 @@
           "title": "Рестораны",
           "sajiNusantara": "Ресторан Saji Nusantara",
           "sajiNusantaraDetail": "Узбекская кухня",
-          "barLounge": "Бар и лаундж",
+          "barLounge": "Lounge Bar",
           "espressoCafe": "Кафе 7oz Espresso"
         },
         "wellness": {
@@ -352,12 +352,15 @@
   },
   "cafeDining": {
     "metaTitle": "Кафе и рестораны",
-    "metaDescription": "Рестораны HADITH Hotel в Самарканде — Saji Nusantara, бар и лаунж, а также 7oz Espresso Cafe.",
+    "metaDescription": "Рестораны HADITH Hotel в Самарканде — Saji Nusantara, 7oz Espresso Cafe и Lounge Bar.",
     "hero": {
-      "cafe": "Стойка и лаундж кафе 7oz",
-      "buffet": "Буфетная стойка Saji Nusantara"
+      "restaurant": "Обеденный зал Saji Nusantara",
+      "buffet": "Буфетная стойка Saji Nusantara",
+      "cafe": "Кафе 7oz Espresso",
+      "lounge": "Интерьер Lounge Bar"
     },
     "openWebsite": "Открыть сайт",
+    "photoSoon": "Фото {name}",
     "venues": {
       "restaurant": {
         "heading": "Вкус Шёлкового пути",
@@ -377,15 +380,28 @@
       "cafe": {
         "heading": "Вкус Индонезии",
         "name": "7oz Espresso",
-        "description": "Откройте для себя изысканные индонезийские десерты и особые сорта кофе со всего архипелага, включая классику — кофе Копи Лувак. Кафе создаёт тёплую атмосферу для общения, отмечая богатую кофейную культуру Индонезии.",
+        "description": "Кафе, где можно сесть и задержаться — индонезийские десерты и особый кофе с архипелага, включая Копи Лувак.",
         "highlights": [
           "Особый индонезийский кофе",
           "Изысканные индонезийские десерты",
-          "Непринуждённая атмосфера для общения"
+          "Место, чтобы сесть и задержаться"
         ],
         "gallery": {
-          "counterLounge": "Стойка и лаундж кафе 7oz",
-          "coffeeBar": "Кофейный бар 7oz"
+          "interior": "Кафе 7oz Espresso"
+        }
+      },
+      "lounge": {
+        "heading": "Пауза, затем путь дальше",
+        "name": "Lounge Bar",
+        "subname": "Место для короткой паузы",
+        "description": "Изысканный зал ожидания для короткой паузы: кофе или напиток без кофе, пока вы ждёте. Премиальные зёрна и сувениры Hotel Hadith можно взять с собой.",
+        "highlights": [
+          "Короткая изысканная пауза",
+          "Кофе и напитки без кофе",
+          "Зёрна и сувениры отеля"
+        ],
+        "gallery": {
+          "interior": "Интерьер Lounge Bar"
         }
       }
     },
@@ -618,7 +634,8 @@
       "juniorSuite": "Интерьер Junior Suite в HADITH Hotel",
       "restaurant": "Обеденный зал ресторана в HADITH Hotel",
       "buffet": "Буфетное угощение в HADITH Hotel",
-      "cafe": "Кафе в HADITH Hotel",
+      "cafe": "7oz Espresso в HADITH Hotel",
+      "lounge": "Lounge Bar в HADITH Hotel",
       "eventsHall": "Зал для мероприятий в HADITH Hotel",
       "indoorPool": "Крытый бассейн в HADITH Hotel",
       "turkishHammam": "Турецкий хаммам в HADITH Hotel",
@@ -627,8 +644,7 @@
       "fitnessCentre": "Фитнес-центр в HADITH Hotel",
       "tennisCourt": "Теннисный корт в HADITH Hotel",
       "padelCourt": "Падел-корт в HADITH Hotel",
-      "playground": "Детская площадка в HADITH Hotel",
-      "cafeBar": "Кофейный бар 7oz в HADITH Hotel"
+      "playground": "Детская площадка в HADITH Hotel"
     }
   },
   "news": {

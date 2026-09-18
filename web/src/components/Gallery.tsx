@@ -15,9 +15,10 @@ type GalleryImage = { id: string; src: string; alt: string };
 const galleryImageConfigs: GalleryImageConfig[] = [
   { id: "hotel-exterior", key: "hotelExterior", src: "/images/overview-hero/hotel-exterior.webp" },
   { id: "junior-suite", key: "juniorSuite", src: "/images/overview-rooms/junior-1.png" },
-  { id: "restaurant", key: "restaurant", src: "/images/overview-hero/resto.webp" },
+  { id: "restaurant", key: "restaurant", src: "/images/cafe-dining/resto-1.png" },
   { id: "buffet", key: "buffet", src: "/images/cafe-dining/buffet.webp" },
-  { id: "cafe", key: "cafe", src: "/images/cafe-dining/cafe-1.webp" },
+  { id: "cafe", key: "cafe", src: "/images/cafe-dining/7oz.png" },
+  { id: "lounge", key: "lounge", src: "/images/cafe-dining/lounge-bar.png" },
   { id: "events-hall", key: "eventsHall", src: "/images/meetings-weddings/hall.webp" },
   { id: "indoor-pool", key: "indoorPool", src: "/images/experience/pool.webp" },
   { id: "turkish-hammam", key: "turkishHammam", src: "/images/experience/hamam.webp" },
@@ -27,7 +28,6 @@ const galleryImageConfigs: GalleryImageConfig[] = [
   { id: "tennis-court", key: "tennisCourt", src: "/images/experience/tennis.webp" },
   { id: "padel-court", key: "padelCourt", src: "/images/experience/padel.webp" },
   { id: "playground", key: "playground", src: "/images/experience/playground.webp" },
-  { id: "cafe-bar", key: "cafeBar", src: "/images/cafe-dining/cafe-2.webp" },
 ];
 
 function GalleryLightbox({

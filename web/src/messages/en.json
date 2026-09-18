@@ -103,7 +103,7 @@
           "title": "Dining",
           "sajiNusantara": "Saji Nusantara Restaurant",
           "sajiNusantaraDetail": "Uzbek Cuisine",
-          "barLounge": "Bar & Lounge",
+          "barLounge": "Lounge Bar",
           "espressoCafe": "7oz Espresso Cafe"
         },
         "wellness": {
@@ -352,12 +352,15 @@
   },
   "cafeDining": {
     "metaTitle": "Cafe & Dining",
-    "metaDescription": "Dine at HADITH Hotel, Samarkand — Saji Nusantara restaurant, bar and lounge, and 7oz Espresso Cafe.",
+    "metaDescription": "Dine at HADITH Hotel, Samarkand — Saji Nusantara restaurant, 7oz Espresso Cafe, and the Lounge Bar.",
     "hero": {
-      "cafe": "7oz cafe counter and lounge",
-      "buffet": "Saji Nusantara buffet counter"
+      "restaurant": "Saji Nusantara dining room",
+      "buffet": "Saji Nusantara buffet counter",
+      "cafe": "7oz Espresso cafe",
+      "lounge": "Lounge Bar interior"
     },
     "openWebsite": "Open Website",
+    "photoSoon": "{name} photograph",
     "venues": {
       "restaurant": {
         "heading": "Savour the Silk Road",
@@ -377,15 +380,28 @@
       "cafe": {
         "heading": "A Taste of Indonesia",
         "name": "7oz Espresso",
-        "description": "Discover curated Indonesian pastries and specialty coffees from across the archipelago, including classics such as Kopi Luwak. The cafe offers a warm social setting celebrating Indonesia’s rich coffee culture.",
+        "description": "A destination cafe to sit and stay awhile — Indonesian pastries and specialty coffees from across the archipelago, including Kopi Luwak.",
         "highlights": [
           "Indonesian specialty coffee",
           "Curated Indonesian pastries",
-          "Relaxed social setting"
+          "A place to sit and stay awhile"
         ],
         "gallery": {
-          "counterLounge": "7oz cafe counter and lounge",
-          "coffeeBar": "7oz coffee bar"
+          "interior": "7oz Espresso cafe"
+        }
+      },
+      "lounge": {
+        "heading": "Pause, then continue",
+        "name": "Lounge Bar",
+        "subname": "A place to pause",
+        "description": "A refined waiting lounge for a brief pause: coffee or a non-coffee drink while you wait. Premium beans and Hotel Hadith merchandise are ready to take home.",
+        "highlights": [
+          "A brief, elegant pause",
+          "Coffee and non-coffee drinks",
+          "Beans and hotel merchandise"
+        ],
+        "gallery": {
+          "interior": "Lounge Bar interior"
         }
       }
     },
@@ -618,7 +634,8 @@
       "juniorSuite": "Junior Suite interior at HADITH Hotel",
       "restaurant": "Restaurant dining room at HADITH Hotel",
       "buffet": "Buffet dining experience at HADITH Hotel",
-      "cafe": "The Cafe at HADITH Hotel",
+      "cafe": "7oz Espresso at HADITH Hotel",
+      "lounge": "Lounge Bar at HADITH Hotel",
       "eventsHall": "Events hall at HADITH Hotel",
       "indoorPool": "Indoor pool at HADITH Hotel",
       "turkishHammam": "Turkish hammam at HADITH Hotel",
@@ -627,8 +644,7 @@
       "fitnessCentre": "Fitness centre at HADITH Hotel",
       "tennisCourt": "Tennis court at HADITH Hotel",
       "padelCourt": "Padel court at HADITH Hotel",
-      "playground": "Children's playground at HADITH Hotel",
-      "cafeBar": "7oz coffee bar at HADITH Hotel"
+      "playground": "Children's playground at HADITH Hotel"
     }
   },
   "news": {

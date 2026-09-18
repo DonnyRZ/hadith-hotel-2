@@ -103,7 +103,7 @@
           "title": "Taomlanish",
           "sajiNusantara": "Saji Nusantara restorani",
           "sajiNusantaraDetail": "O'zbek taomlari",
-          "barLounge": "Bar & Lounge",
+          "barLounge": "Lounge Bar",
           "espressoCafe": "7oz Espresso Cafe"
         },
         "wellness": {
@@ -352,12 +352,15 @@
   },
   "cafeDining": {
     "metaTitle": "Kafe va restoranlar",
-    "metaDescription": "HADITH Hotel, Samarqanddagi ovqatlanish — Saji Nusantara restorani, bar va lounge, hamda 7oz Espresso Cafe.",
+    "metaDescription": "HADITH Hotel, Samarqanddagi ovqatlanish — Saji Nusantara restorani, 7oz Espresso Cafe va Lounge Bar.",
     "hero": {
-      "cafe": "7oz kafe peshtaxtasi va lounge",
-      "buffet": "Saji Nusantara bufet peshtaxtasi"
+      "restaurant": "Saji Nusantara ovqatlanish zali",
+      "buffet": "Saji Nusantara bufet peshtaxtasi",
+      "cafe": "7oz Espresso kafesi",
+      "lounge": "Lounge Bar interyeri"
     },
     "openWebsite": "Veb-saytni ochish",
+    "photoSoon": "{name} surati",
     "venues": {
       "restaurant": {
         "heading": "Ipak yo'li ta'mini his eting",
@@ -377,15 +380,28 @@
       "cafe": {
         "heading": "Indoneziya ta'mi",
         "name": "7oz Espresso",
-        "description": "Butun arxipelagdan tanlab olingan Indoneziya shirinliklari va maxsus qahvalarni, jumladan Kopi Luwak kabi klassikalarni kashf eting. Kafe Indoneziyaning boy qahva madaniyatini nishonlaydigan iliq ijtimoiy muhitni taklif etadi.",
+        "description": "O'tirib biroz qolish uchun kafe — Indoneziya shirinliklari va arxipelag maxsus qahvalari, jumladan Kopi Luwak.",
         "highlights": [
           "Indoneziya maxsus qahvasi",
           "Tanlangan Indoneziya shirinliklari",
-          "Bo'shashgan ijtimoiy muhit"
+          "O'tirib qolish uchun joy"
         ],
         "gallery": {
-          "counterLounge": "7oz kafe peshtaxtasi va lounge",
-          "coffeeBar": "7oz qahva bari"
+          "interior": "7oz Espresso kafesi"
+        }
+      },
+      "lounge": {
+        "heading": "Biroz to'xtang, so'ng davom eting",
+        "name": "Lounge Bar",
+        "subname": "Qisqa to'xtash joyi",
+        "description": "Qisqa pauza uchun nafis kutish lounge: kutayotganingizda qahva yoki qahvasiz ichimlik. Premium donalar va Hotel Hadith merchi olib ketish uchun tayyor.",
+        "highlights": [
+          "Qisqa, nafis pauza",
+          "Qahva va qahvasiz ichimliklar",
+          "Qahva donalari va mehmonxona merchi"
+        ],
+        "gallery": {
+          "interior": "Lounge Bar interyeri"
         }
       }
     },
@@ -618,7 +634,8 @@
       "juniorSuite": "HADITH Hotel'dagi Junior Suite ichki qismi",
       "restaurant": "HADITH Hotel'dagi restoran ovqatlanish zali",
       "buffet": "HADITH Hotel'dagi bufet tajribasi",
-      "cafe": "HADITH Hotel'dagi kafe",
+      "cafe": "HADITH Hotel'dagi 7oz Espresso",
+      "lounge": "HADITH Hotel'dagi Lounge Bar",
       "eventsHall": "HADITH Hotel'dagi tadbirlar zali",
       "indoorPool": "HADITH Hotel'dagi yopiq basseyn",
       "turkishHammam": "HADITH Hotel'dagi turk hammomi",
@@ -627,8 +644,7 @@
       "fitnessCentre": "HADITH Hotel'dagi fitnes markazi",
       "tennisCourt": "HADITH Hotel'dagi tennis korti",
       "padelCourt": "HADITH Hotel'dagi padel korti",
-      "playground": "HADITH Hotel'dagi bolalar o'yin maydonchasi",
-      "cafeBar": "HADITH Hotel'dagi 7oz qahva bari"
+      "playground": "HADITH Hotel'dagi bolalar o'yin maydonchasi"
     }
   },
   "news": {

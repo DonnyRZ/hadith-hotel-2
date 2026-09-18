@@ -3270,6 +3270,10 @@ body.has-room-lightbox .reserve-float {
   background: var(--paper);
 }
 
+.venue--stone {
+  background: #f3eee6;
+}
+
 .venue__inner {
   width: min(1080px, 100%);
   margin-inline: auto;
@@ -3329,9 +3333,27 @@ body.has-room-lightbox .reserve-float {
   object-position: 50% 45%;
 }
 
+.venue-carousel__image--bar {
+  object-position: 0% 50%;
+}
+
 .venue-carousel__slide--soon {
   display: grid;
   place-items: center;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      color-mix(in srgb, var(--placeholder) 88%, white),
+      color-mix(in srgb, var(--placeholder) 88%, white) 12px,
+      var(--placeholder) 12px,
+      var(--placeholder) 24px
+    );
+  color: var(--placeholder-text);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .venue-carousel__controls {
