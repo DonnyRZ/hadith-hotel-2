@@ -19,7 +19,7 @@
       "homeAriaLabel": "HADITH Hotel bosh sahifasi",
       "logoAlt": "Hadits Hotel — Imom Al-Buxoriy majmuasi",
       "viewMap": "Xaritada ko'rish",
-      "reserve": "Band qilish",
+      "reserve": "Find room",
       "openMenu": "Menyuni ochish",
       "closeMenu": "Menyuni yopish",
       "mobileEyebrow": "HADITH Hotelni kashf eting"
@@ -86,7 +86,7 @@
     "amenities": {
       "lede": "Turingizni boshlang",
       "title": "HADITH Hotelda band qiling",
-      "reserve": "Band qilish",
+      "reserve": "Find room",
       "label": "Qulayliklar va mehmonxona ma'lumotlari",
       "noPets": "Uy hayvonlari bilan kirish mumkin emas",
       "groups": {
@@ -230,7 +230,7 @@
       "visitorsLabel": "Profil tashrif buyuruvchilari",
       "viewLocations": "Manzillarni ko'rish",
       "downloadProfile": "Profilni yuklab olish",
-      "reserve": "Band qilish",
+      "reserve": "Find room",
       "comingSoon": {
         "eyebrow": "Bandlash",
         "body": "Onlayn bandlash tez orada mavjud bo'ladi. HADITH Hotelga bildirgan qizig'ingiz uchun rahmat."
@@ -276,7 +276,7 @@
       "unitsOnly": "{units} xona",
       "unitsAndSize": "{units} xona · {size}"
     },
-    "reserve": "Band qilish",
+    "reserve": "Find room",
     "comingSoonBody": "{name} tez orada mavjud bo'ladi.",
     "rooms": {
       "president": "President Suite",

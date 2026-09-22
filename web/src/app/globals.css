@@ -14,7 +14,7 @@
   --placeholder: #d8d3cb;
   --placeholder-text: #7a746c;
   --header-primary-h: 104px;
-  --header-utility-h: 108px;
+  --header-utility-h: 120px;
   --page-gutter: clamp(40px, 4.2vw, 72px);
   --page-max: 1600px;
   --serif: var(--font-display), "Times New Roman", serif;
@@ -65,12 +65,24 @@ button {
   top: 0;
   z-index: 50;
   background: var(--paper);
+  overflow-anchor: none;
 }
 
 .site-header__primary {
   height: var(--header-primary-h);
   border-bottom: 1px solid var(--line);
   overflow: visible;
+  transition:
+    transform 0.24s ease,
+    margin-bottom 0.24s ease;
+  will-change: transform, margin-bottom;
+}
+
+.site-header--primary-hidden .site-header__primary {
+  margin-bottom: calc(var(--header-primary-h) * -1);
+  pointer-events: none;
+  transform: translateY(-100%);
+  visibility: hidden;
 }
 
 .site-header__utility {
@@ -118,11 +130,12 @@ button {
 
 .site-header__desktop-nav {
   display: flex;
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   flex-wrap: nowrap;
   align-items: center;
   justify-content: flex-end;
   gap: clamp(14px, 1.35vw, 26px);
+  margin-left: auto;
   min-width: 0;
 }
 
@@ -160,24 +173,14 @@ button {
 
 .site-header__utility-inner {
   min-height: var(--header-utility-h);
-}
-
-.site-header__utility-inner--actions-only {
-  justify-content: flex-end;
-}
-
-.site-header__utility--actions-only {
-  height: 56px;
-  background: var(--paper);
-}
-
-.site-header__utility--actions-only .site-header__utility-inner {
-  min-height: 56px;
+  justify-content: stretch;
+  gap: 0;
 }
 
 .site-header__booking {
   flex: 1 1 auto;
   min-width: 0;
+  width: 100%;
 }
 
 .site-header__actions {
@@ -185,6 +188,10 @@ button {
   align-items: center;
   gap: clamp(20px, 2vw, 28px);
   flex: 0 0 auto;
+}
+
+.site-header__primary-actions {
+  margin-left: clamp(32px, 8vw, 160px);
 }
 
 .site-header__map {
@@ -5462,15 +5469,6 @@ body.has-room-lightbox .site-header__utility {
     width: 100%;
     min-height: 0;
     display: block;
-  }
-
-  .site-header__utility--actions-only {
-    height: 0;
-    border-bottom: 0;
-  }
-
-  .site-header__utility--actions-only .site-header__utility-inner {
-    min-height: 0;
   }
 
   .site-header__actions {

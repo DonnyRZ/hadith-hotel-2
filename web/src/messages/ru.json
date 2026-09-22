@@ -19,7 +19,7 @@
       "homeAriaLabel": "HADITH Hotel — главная страница",
       "logoAlt": "Hadits Hotel — Комплекс Имама Аль-Бухари",
       "viewMap": "Показать на карте",
-      "reserve": "Забронировать",
+      "reserve": "Find room",
       "openMenu": "Открыть меню",
       "closeMenu": "Закрыть меню",
       "mobileEyebrow": "Откройте для себя HADITH Hotel"
@@ -86,7 +86,7 @@
     "amenities": {
       "lede": "Начните ваше пребывание",
       "title": "Бронирование в HADITH Hotel",
-      "reserve": "Забронировать",
+      "reserve": "Find room",
       "label": "Удобства и информация об отеле",
       "noPets": "С животными не разрешено",
       "groups": {
@@ -230,7 +230,7 @@
       "visitorsLabel": "Посетители профиля",
       "viewLocations": "Посмотреть локации",
       "downloadProfile": "Скачать профиль",
-      "reserve": "Забронировать",
+      "reserve": "Find room",
       "comingSoon": {
         "eyebrow": "Бронирование",
         "body": "Онлайн-бронирование станет доступно в ближайшее время. Благодарим вас за интерес к HADITH Hotel."
@@ -276,7 +276,7 @@
       "unitsOnly": "{units} номеров",
       "unitsAndSize": "{units} номеров · {size}"
     },
-    "reserve": "Забронировать",
+    "reserve": "Find room",
     "comingSoonBody": "{name} станет доступен в ближайшее время.",
     "rooms": {
       "president": "President Suite",

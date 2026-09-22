@@ -2,7 +2,7 @@
 
 import SiteImage from "@/components/SiteImage";
 import { Link, usePathname } from "@/i18n/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { ComingSoonModal } from "@/components/ComingSoonModal";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
@@ -32,6 +32,8 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [primaryHeaderHidden, setPrimaryHeaderHidden] = useState(false);
+  const primaryHeaderHiddenRef = useRef(false);
   const isBookingPage = pathname === "/booking";
 
   useEffect(() => {
@@ -49,12 +51,77 @@ export function SiteHeader() {
     };
   }, [mobileMenuOpen]);
 
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let accumulatedDistance = 0;
+    let ignoreUntil = 0;
+    let frameId: number | null = null;
+
+    const updateHeaderVisibility = () => {
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollY;
+      const now = performance.now();
+
+      if (currentScrollY <= 12) {
+        accumulatedDistance = 0;
+        if (primaryHeaderHiddenRef.current) {
+          primaryHeaderHiddenRef.current = false;
+          setPrimaryHeaderHidden(false);
+        }
+      } else if (Math.abs(delta) > 0.01) {
+        if (now < ignoreUntil) {
+          accumulatedDistance = 0;
+          lastScrollY = currentScrollY;
+          frameId = null;
+          return;
+        }
+
+        if (primaryHeaderHiddenRef.current) {
+          accumulatedDistance = Math.min(0, accumulatedDistance + delta);
+
+          if (accumulatedDistance <= -12) {
+            primaryHeaderHiddenRef.current = false;
+            setPrimaryHeaderHidden(false);
+            accumulatedDistance = 0;
+            ignoreUntil = now + 260;
+          }
+        } else {
+          accumulatedDistance = Math.max(0, accumulatedDistance + delta);
+
+          if (accumulatedDistance >= 18) {
+            primaryHeaderHiddenRef.current = true;
+            setPrimaryHeaderHidden(true);
+            accumulatedDistance = 0;
+            ignoreUntil = now + 260;
+          }
+        }
+      }
+
+      lastScrollY = currentScrollY;
+      frameId = null;
+    };
+
+    const handleScroll = () => {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(updateHeaderVisibility);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+    };
+  }, []);
+
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <>
-      <header className="site-header">
+      <header
+        className={`site-header${primaryHeaderHidden && !mobileMenuOpen ? " site-header--primary-hidden" : ""}`}
+      >
         <div className="site-header__primary">
           <div className="site-header__primary-inner">
             <div className="site-header__brand-row">
@@ -68,6 +135,19 @@ export function SiteHeader() {
                   priority
                 />
               </Link>
+            </div>
+
+            <div className="site-header__actions site-header__primary-actions">
+              <a
+                className="site-header__map"
+                href="https://maps.app.goo.gl/71EH9gqP3kGgsMAB6"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <PinIcon />
+                <span>{t("viewMap")}</span>
+              </a>
+              <LanguageSwitcher />
             </div>
 
             <nav className="site-header__desktop-nav" aria-label="Primary">
@@ -98,11 +178,9 @@ export function SiteHeader() {
           </div>
         </div>
 
-        <div
-          className={`site-header__utility${isBookingPage ? " site-header__utility--actions-only" : ""}`}
-        >
-          <div className="site-header__utility-inner">
-            {!isBookingPage ? (
+        {!isBookingPage ? (
+          <div className="site-header__utility">
+            <div className="site-header__utility-inner">
               <div className="site-header__booking">
                 <BeSearchForm
                   beLocale={locale}
@@ -110,22 +188,9 @@ export function SiteHeader() {
                   mobileFindRoomLabel="Find room"
                 />
               </div>
-            ) : null}
-
-            <div className="site-header__actions">
-              <a
-                className="site-header__map"
-                href="https://maps.app.goo.gl/71EH9gqP3kGgsMAB6"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <PinIcon />
-                <span>{t("viewMap")}</span>
-              </a>
-              <LanguageSwitcher />
             </div>
           </div>
-        </div>
+        ) : null}
       </header>
 
       {mobileMenuOpen ? (

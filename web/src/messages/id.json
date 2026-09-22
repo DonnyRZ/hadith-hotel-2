@@ -19,7 +19,7 @@
       "homeAriaLabel": "Beranda HADITH Hotel",
       "logoAlt": "Hadits Hotel — Kompleks Imam Al Bukhari",
       "viewMap": "Lihat Peta",
-      "reserve": "Reservasi",
+      "reserve": "Find room",
       "openMenu": "Buka menu",
       "closeMenu": "Tutup menu",
       "mobileEyebrow": "Jelajahi HADITH Hotel"
@@ -86,7 +86,7 @@
     "amenities": {
       "lede": "Mulai masa menginap Anda",
       "title": "Reservasi di HADITH Hotel",
-      "reserve": "Reservasi",
+      "reserve": "Find room",
       "label": "Fasilitas & Informasi Hotel",
       "noPets": "Tidak Menerima Hewan Peliharaan",
       "groups": {
@@ -230,7 +230,7 @@
       "visitorsLabel": "Pengunjung Profil",
       "viewLocations": "Lihat lokasi",
       "downloadProfile": "Unduh Profil",
-      "reserve": "Reservasi",
+      "reserve": "Find room",
       "comingSoon": {
         "eyebrow": "Reservasi",
         "body": "Pemesanan online akan segera tersedia. Terima kasih atas minat Anda pada HADITH Hotel."
@@ -276,7 +276,7 @@
       "unitsOnly": "{units} unit",
       "unitsAndSize": "{units} unit · {size}"
     },
-    "reserve": "Reservasi",
+    "reserve": "Find room",
     "comingSoonBody": "{name} akan segera tersedia.",
     "rooms": {
       "president": "President Suite",

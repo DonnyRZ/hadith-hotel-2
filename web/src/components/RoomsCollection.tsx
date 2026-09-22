@@ -7,7 +7,6 @@ import { ComingSoonModal } from "@/components/ComingSoonModal";
 import { RoomDetailModal } from "@/components/RoomDetailModal";
 import { getRoomName, getRoomSpecs } from "@/lib/roomSpecs";
 import { presidentSuite, roomTypes, type RoomType } from "@/lib/rooms";
-import { Link } from "@/i18n/navigation";
 
 type Tab = "all" | "accessible";
 
@@ -71,10 +70,6 @@ function RoomCard({
       >
         {t("card.viewDetails")}
       </button>
-
-      <Link href={`/booking/?room-type=${room.beRoomType}`} className="room-card__booking">
-        {t("reserve")}
-      </Link>
     </article>
   );
 }

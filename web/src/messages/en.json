@@ -19,7 +19,7 @@
       "homeAriaLabel": "HADITH Hotel home",
       "logoAlt": "Hadits Hotel — Complex of Imam Al Bukhari",
       "viewMap": "View Map",
-      "reserve": "Reserve",
+      "reserve": "Find room",
       "openMenu": "Open menu",
       "closeMenu": "Close menu",
       "mobileEyebrow": "Explore HADITH Hotel"
@@ -86,7 +86,7 @@
     "amenities": {
       "lede": "Begin your stay",
       "title": "Reserve at HADITH Hotel",
-      "reserve": "Reserve",
+      "reserve": "Find room",
       "label": "Amenities & Hotel Information",
       "noPets": "No Pets",
       "groups": {
@@ -230,7 +230,7 @@
       "visitorsLabel": "Profile Visitors",
       "viewLocations": "View locations",
       "downloadProfile": "Download Profile",
-      "reserve": "Reserve",
+      "reserve": "Find room",
       "comingSoon": {
         "eyebrow": "Reservations",
         "body": "Online booking will be available shortly. Thank you for your interest in HADITH Hotel."
@@ -276,7 +276,7 @@
       "unitsOnly": "{units} units",
       "unitsAndSize": "{units} units · {size}"
     },
-    "reserve": "Reserve",
+    "reserve": "Find room",
     "comingSoonBody": "The {name} will be available soonest.",
     "rooms": {
       "president": "President Suite",
