@@ -747,7 +747,7 @@ export function ReviewsTestimonies() {
           <video
             className="video-reviews__landscape-player"
             src={asset(landscapeReview.src)}
-            poster={asset(landscapeReview.poster)}
+            poster={landscapeReview.poster ? asset(landscapeReview.poster) : undefined}
             controls
             playsInline
             preload="metadata"
