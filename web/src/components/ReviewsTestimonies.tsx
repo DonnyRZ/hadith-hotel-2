@@ -131,6 +131,27 @@ const testimonialConfigs: TestimonialConfig[] = [
     photo: "/images/testimonials/talgat-safich-tadzetdinov.webp",
     photoPosition: "50% 18%",
   },
+  {
+    id: "aleksa-strikovic",
+    personKey: "aleksaStrikovic",
+    quoteKey: "aleksaStrikovic",
+    photo: "/images/testimonials/aleksa-strikovic.webp",
+    photoPosition: "0% 50%",
+  },
+  {
+    id: "womens-team-dominica-chess-federation",
+    personKey: "womensTeamDominicaChessFederation",
+    quoteKey: "womensTeamDominicaChessFederation",
+    photo: "/images/testimonials/womens-team-dominica-chess-federation.webp",
+    photoPosition: "0% 50%",
+  },
+  {
+    id: "grand-master-evgenuj-miroshnichenko",
+    personKey: "grandMasterEvgenujMiroshnichenko",
+    quoteKey: "grandMasterEvgenujMiroshnichenko",
+    photo: "/images/testimonials/evgenuj-miroshnichenko.webp",
+    photoPosition: "50% 42%",
+  },
 ];
 
 function ChevronLeft() {
