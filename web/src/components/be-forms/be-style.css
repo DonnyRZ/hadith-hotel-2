@@ -7,20 +7,49 @@
     background: #fbf7ef;
 }
 
-@media screen and (min-width: 1280px) and (min-height: 600px) {
-    .block-search--main {
-        position: absolute;
-        z-index: 2;
-        width: 360px;
-        margin-top: 12vh;
-        margin-left: 150px;
-    }
+.block-search--header {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    overflow: visible;
 }
 
-@media screen and (min-width: 1280px) and (min-height: 848px) {
-    .block-search--main {
-        margin-top: 180px;
-    }
+.block-search--header .be-container {
+    position: relative;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.block-search--header #be-search-form {
+    width: 100%;
+    min-width: 0;
+}
+
+.be-search-form__fallback {
+    position: absolute;
+    inset: 50% 0 auto;
+    display: inline-flex;
+    width: max-content;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0 28px;
+    transform: translateY(-50%);
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.be-search-form__mobile-cta {
+    display: none;
 }
 
 .be-container {
@@ -74,6 +103,56 @@
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+    .block-search--header {
+        height: auto;
+        padding: 16px var(--page-gutter) 18px;
+    }
+
+    .block-search--header .be-container {
+        height: auto;
+        min-height: 0;
+    }
+
+    .block-search--header #be-search-form {
+        min-height: 0;
+    }
+
+    .be-search-form__fallback {
+        position: static;
+        width: 100%;
+        margin-top: 16px;
+        transform: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .block-search--header {
+        padding: 18px var(--page-gutter) 20px;
+    }
+
+    .block-search--header #be-search-form,
+    .block-search--header .be-search-form__fallback {
+        display: none;
+    }
+
+    .be-search-form__mobile-cta {
+        display: flex;
+        width: 100%;
+        min-height: 48px;
+        align-items: center;
+        justify-content: center;
+        background: var(--accent);
+        box-shadow: 0 2px 3px rgb(0 0 0 / 18%);
+        color: #fff;
+        font-family: var(--sans);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
 }
 
 #tl-booking-cart {

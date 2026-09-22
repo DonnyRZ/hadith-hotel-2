@@ -565,7 +565,10 @@
       "drZulkifliHasan": { "name": "Dr. Zulkifli Hasan", "role": "Minister of Religious Affairs, Malaysia" },
       "talgatSafichTadzetdinov": { "name": "Talgat Safich Tadzetdinov (Tajuddin)", "role": "Grand Mufti and Head of the Central Spiritual Administration of Muslims of Russia" },
       "emadAlDinHamdan": { "name": "Emad Al-Din Hamdan", "role": "Minister of Culture of the State of Palestine" },
-      "reviewLandscape": { "name": "Imad Abdullah Hamdan", "role": "Minister of Culture of the State of Palestine" }
+      "reviewLandscape": { "name": "Imad Abdullah Hamdan", "role": "Minister of Culture of the State of Palestine" },
+      "grandMasterEvgenujMiroshnichenko": { "name": "Evgenuj Miroshnichenko", "role": "Chess Grand Master, Ukraine" },
+      "womensTeamDominicaChessFederation": { "name": "Women's Team", "role": "Dominica Chess Federation" },
+      "aleksaStrikovic": { "name": "Aleksa Strikovic", "role": "Chess Grand Master, Serbia" }
     },
     "testimonialQuotes": {
       "syekhMohamedElDuwaini": "Outstanding hotel with excellent service. May Allah bless its continued success.",

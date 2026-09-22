@@ -9,9 +9,9 @@ import { asset } from "@/lib/asset";
 
 type VideoReviewConfig = {
   id: string;
-  personKey: string;
+  personKey?: string;
   src: string;
-  poster: string;
+  poster?: string;
 };
 
 type TestimonialConfig = {
@@ -24,7 +24,7 @@ type TestimonialConfig = {
 };
 
 type Person = { name: string; role: string };
-type VideoReview = { id: string; name: string; role: string; src: string; poster: string };
+type VideoReview = { id: string; name: string; role: string; src: string; poster?: string };
 type Testimonial = {
   id: string;
   quote?: string;
@@ -64,6 +64,21 @@ const videoReviewConfigs: VideoReviewConfig[] = [
     personKey: "talgatSafichTadzetdinov",
     src: "/videos/talgat-safich-tadzetdinov.mp4",
     poster: "/videos/talgat-safich-tadzetdinov-poster.jpg",
+  },
+  {
+    id: "grand-master-evgenuj-miroshnichenko",
+    personKey: "grandMasterEvgenujMiroshnichenko",
+    src: "/videos/grand-master-evgenuj-miroshnichenko-ukraine.mp4",
+  },
+  {
+    id: "video-2",
+    personKey: "aleksaStrikovic",
+    src: "/videos/video-2.mp4",
+  },
+  {
+    id: "video-3",
+    personKey: "womensTeamDominicaChessFederation",
+    src: "/videos/video-3.mp4",
   },
 ];
 
@@ -240,7 +255,7 @@ function ReviewLightbox({
           ref={videoRef}
           className="review-lightbox__player"
           src={asset(review.src)}
-          poster={asset(review.poster)}
+          poster={review.poster ? asset(review.poster) : undefined}
           controls
           autoPlay
           playsInline
@@ -464,14 +479,27 @@ function VideoReviewsCarousel({
                 aria-label={t("videoReviews.playAria", { name: review.name })}
                 onClick={() => openReview(review)}
               >
-                <SiteImage
-                  className="video-reviews__poster"
-                  src={review.poster}
-                  alt=""
-                  fill
-                  sizes="(max-width: 760px) 60vw, 22vw"
-                  draggable={false}
-                />
+                {review.poster ? (
+                  <SiteImage
+                    className="video-reviews__poster"
+                    src={review.poster}
+                    alt=""
+                    fill
+                    sizes="(max-width: 760px) 60vw, 22vw"
+                    draggable={false}
+                  />
+                ) : (
+                  <video
+                    className="video-reviews__video-preview"
+                    src={asset(review.src)}
+                    muted
+                    autoPlay
+                    loop
+                    playsInline
+                    preload="metadata"
+                    aria-hidden="true"
+                  />
+                )}
                 <span className="video-reviews__play" aria-hidden="true">
                   <PlayIcon size={20} />
                 </span>
@@ -674,10 +702,13 @@ function TestimonialsCarousel({
 export function ReviewsTestimonies() {
   const t = useTranslations("reviews");
 
-  const getPerson = (key: string): Person => ({
-    name: t(`people.${key}.name`),
-    role: t(`people.${key}.role`),
-  });
+  const getPerson = (key?: string): Person =>
+    key
+      ? {
+          name: t(`people.${key}.name`),
+          role: t(`people.${key}.role`),
+        }
+      : { name: "", role: "" };
 
   const videoReviews: VideoReview[] = videoReviewConfigs.map((config) => ({
     id: config.id,

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { EventsHub } from "@/components/EventsHub";
 import { JsonLd } from "@/components/JsonLd";
-import { BeSearchForm } from "@/components/be-forms/BeSearchForm";
 import { PageHeroCarousel } from "@/components/PageHeroCarousel";
 import { SITE_NAME, pageJsonLd, pageMetadata } from "@/lib/seo";
 
@@ -45,7 +44,6 @@ export default async function EventsPage() {
           ],
         })}
       />
-      <BeSearchForm beLocale={locale} />
       <PageHeroCarousel title={t("metaTitle")} slides={heroSlides} />
       <EventsHub />
     </main>

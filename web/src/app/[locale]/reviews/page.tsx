@@ -3,7 +3,6 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
 import { ReviewsTestimonies } from "@/components/ReviewsTestimonies";
 import { SITE_NAME, pageJsonLd, pageMetadata } from "@/lib/seo";
-import { BeSearchForm } from "@/components/be-forms/BeSearchForm";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -34,7 +33,6 @@ export default async function ReviewsPage() {
           ],
         })}
       />
-      <BeSearchForm beLocale={locale} />
       <ReviewsTestimonies />
     </main>
   );

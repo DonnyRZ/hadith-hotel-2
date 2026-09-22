@@ -565,7 +565,10 @@
       "drZulkifliHasan": { "name": "Dr. Zulkifli Hasan", "role": "Malayziya Diniy Ishlar Vaziri" },
       "talgatSafichTadzetdinov": { "name": "Talgat Safich Tadzetdinov (Tajuddin)", "role": "Rossiya Musulmonlari Markaziy Ruhiy Boshqarmasi Bosh Muftiysi va Rahbari" },
       "emadAlDinHamdan": { "name": "Emad Al-Din Hamdan", "role": "Falastin Davlati Madaniyat Vaziri" },
-      "reviewLandscape": { "name": "Imad Abdullah Hamdan", "role": "Falastin Davlati Madaniyat Vaziri" }
+      "reviewLandscape": { "name": "Imad Abdullah Hamdan", "role": "Falastin Davlati Madaniyat Vaziri" },
+      "grandMasterEvgenujMiroshnichenko": { "name": "Evgenuj Miroshnichenko", "role": "Chess Grand Master, Ukraina" },
+      "womensTeamDominicaChessFederation": { "name": "Women's Team", "role": "Dominica Chess Federation" },
+      "aleksaStrikovic": { "name": "Aleksa Strikovic", "role": "Chess Grand Master, Serbia" }
     },
     "testimonialQuotes": {
       "syekhMohamedElDuwaini": "Ajoyib xizmat ko'rsatuvchi zo'r mehmonxona. Alloh uning davomli muvaffaqiyatini barakali qilsin.",

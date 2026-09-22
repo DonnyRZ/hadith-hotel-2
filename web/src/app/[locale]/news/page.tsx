@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
-import { BeSearchForm } from "@/components/be-forms/BeSearchForm";
 import { JsonLd } from "@/components/JsonLd";
 import { NewsIndex } from "@/components/NewsIndex";
 import { SITE_NAME, pageJsonLd, pageMetadata } from "@/lib/seo";
@@ -34,7 +33,6 @@ export default async function NewsPage() {
           ],
         })}
       />
-      <BeSearchForm beLocale={locale} />
       <NewsIndex />
     </main>
   );

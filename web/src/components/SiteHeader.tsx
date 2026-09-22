@@ -3,10 +3,11 @@
 import SiteImage from "@/components/SiteImage";
 import { Link, usePathname } from "@/i18n/navigation";
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ComingSoonModal } from "@/components/ComingSoonModal";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { navItems } from "@/lib/navigation";
+import { BeSearchForm } from "@/components/be-forms/BeSearchForm";
 
 function PinIcon() {
   return (
@@ -27,10 +28,11 @@ function PinIcon() {
 export function SiteHeader() {
   const t = useTranslations("common.header");
   const tNav = useTranslations("common.nav");
+  const locale = useLocale();
   const pathname = usePathname();
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
-  const [showFloatReserve, setShowFloatReserve] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const isBookingPage = pathname === "/booking";
 
   useEffect(() => {
     if (!mobileMenuOpen) return;
@@ -47,55 +49,8 @@ export function SiteHeader() {
     };
   }, [mobileMenuOpen]);
 
-  useEffect(() => {
-    const primaryH =
-      parseFloat(
-        getComputedStyle(document.documentElement).getPropertyValue(
-          "--header-primary-h",
-        ),
-      ) || 92;
-
-    let observer: IntersectionObserver | null = null;
-    const frame = window.requestAnimationFrame(() => {
-      const anchors = Array.from(
-        document.querySelectorAll<HTMLElement>("[data-reserve-anchor]"),
-      );
-      if (anchors.length === 0) return;
-
-      const visibility = new Map<Element, boolean>();
-
-      observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            visibility.set(entry.target, entry.isIntersecting);
-          });
-
-          if (visibility.size === anchors.length) {
-            setShowFloatReserve(
-              !Array.from(visibility.values()).some(Boolean),
-            );
-          }
-        },
-        {
-          root: null,
-          threshold: 0,
-          rootMargin: `-${primaryH}px 0px 0px 0px`,
-        },
-      );
-
-      anchors.forEach((anchor) => observer?.observe(anchor));
-    });
-
-    return () => {
-      window.cancelAnimationFrame(frame);
-      observer?.disconnect();
-    };
-  }, [pathname]);
-
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
-
-  const openComingSoon = () => setComingSoonOpen(true);
 
   return (
     <>
@@ -128,15 +83,6 @@ export function SiteHeader() {
             </nav>
 
             <div className="site-header__mobile-actions">
-              <Link href="/booking">
-                <button
-                  type="button"
-                  className="site-header__mobile-reserve"
-                  data-reserve-anchor
-                >
-                  {t("reserve")}
-                </button>
-              </Link>
               <button
                 type="button"
                 className={`site-header__menu-toggle${mobileMenuOpen ? " is-open" : ""}`}
@@ -148,6 +94,35 @@ export function SiteHeader() {
                 <span />
                 <span />
               </button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className={`site-header__utility${isBookingPage ? " site-header__utility--actions-only" : ""}`}
+        >
+          <div className="site-header__utility-inner">
+            {!isBookingPage ? (
+              <div className="site-header__booking">
+                <BeSearchForm
+                  beLocale={locale}
+                  reserveLabel={t("reserve")}
+                  mobileFindRoomLabel="Find room"
+                />
+              </div>
+            ) : null}
+
+            <div className="site-header__actions">
+              <a
+                className="site-header__map"
+                href="https://maps.app.goo.gl/71EH9gqP3kGgsMAB6"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <PinIcon />
+                <span>{t("viewMap")}</span>
+              </a>
+              <LanguageSwitcher />
             </div>
           </div>
         </div>
@@ -190,37 +165,6 @@ export function SiteHeader() {
           </div>
         </div>
       ) : null}
-
-      <div className="site-header__utility">
-        <div className="site-header__utility-inner site-header__utility-inner--actions-only">
-          <div className="site-header__actions">
-            <a
-              className="site-header__map"
-              href="https://maps.app.goo.gl/71EH9gqP3kGgsMAB6"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <PinIcon />
-              <span>{t("viewMap")}</span>
-            </a>
-            <LanguageSwitcher />
-            <Link href="/booking" className="site-header__reserve" data-reserve-anchor>
-              <span>{t("reserve")}</span>
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      <Link href="/booking">
-        <button
-          type="button"
-          className={`reserve-float${showFloatReserve ? " is-visible" : ""}`}
-          aria-hidden={!showFloatReserve}
-          tabIndex={showFloatReserve ? 0 : -1}
-        >
-          <span>{t("reserve")}</span>
-        </button>
-      </Link>
 
       <ComingSoonModal
         open={comingSoonOpen}

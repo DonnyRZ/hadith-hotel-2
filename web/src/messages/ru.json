@@ -565,7 +565,10 @@
       "drZulkifliHasan": { "name": "Д-р Зулкифли Хасан", "role": "Министр по делам религии Малайзии" },
       "talgatSafichTadzetdinov": { "name": "Талгат Сафич Таджетдинов (Таджуддин)", "role": "Верховный муфтий и председатель Центрального духовного управления мусульман России" },
       "emadAlDinHamdan": { "name": "Эмад Аль-Дин Хамдан", "role": "Министр культуры Государства Палестина" },
-      "reviewLandscape": { "name": "Имад Абдулла Хамдан", "role": "Министр культуры Государства Палестина" }
+      "reviewLandscape": { "name": "Имад Абдулла Хамдан", "role": "Министр культуры Государства Палестина" },
+      "grandMasterEvgenujMiroshnichenko": { "name": "Evgenuj Miroshnichenko", "role": "Шахматный гроссмейстер, Украина" },
+      "womensTeamDominicaChessFederation": { "name": "Women's Team", "role": "Dominica Chess Federation" },
+      "aleksaStrikovic": { "name": "Aleksa Strikovic", "role": "Шахматный гроссмейстер, Сербия" }
     },
     "testimonialQuotes": {
       "syekhMohamedElDuwaini": "Выдающийся отель с превосходным сервисом. Пусть Аллах благословит его дальнейший успех.",
