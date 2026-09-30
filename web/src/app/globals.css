@@ -542,6 +542,21 @@ button {
   background: #171614;
 }
 
+.hero-media--soon {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #f6f1e8 0%, #e9dfce 52%, #d9cbb3 100%);
+  color: #705a3c;
+}
+
+.hero-media__placeholder-label {
+  font-family: var(--sans);
+  font-size: clamp(12px, 1.4vw, 15px);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
 .hero-media__image {
   object-fit: cover;
   object-position: var(--hero-position, 50% 50%);
@@ -1061,7 +1076,7 @@ button {
   }
 }
 
-/* —— Stats: 114 Rooms & Suites | ★★★★★ Class Rating —— */
+/* —— Stats: 112 Rooms & Suites | ★★★★★ Class Rating —— */
 
 .overview-stats {
   background: var(--paper);
@@ -1180,12 +1195,13 @@ button {
 }
 
 .overview-rooms__types {
-  width: min(1050px, 100%);
+  width: min(1320px, 100%);
   margin: clamp(34px, 4.5vh, 46px) auto 0;
   padding: 1px;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
   gap: 1px;
   background: var(--line);
 }
@@ -1195,6 +1211,9 @@ button {
 }
 
 .overview-rooms__type-link {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
   min-height: 88px;
   padding: 18px 14px;
   display: flex;
@@ -1239,6 +1258,12 @@ button {
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+@media (min-width: 721px) and (max-width: 1024px) {
+  .overview-rooms__types {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .overview-rooms__learn-more {
@@ -2955,40 +2980,14 @@ body.has-room-lightbox .site-header__utility {
   cursor: pointer;
 }
 
-.room-card__image {
-  object-fit: cover;
-  object-position: 50% 50%;
-  transition: transform 0.5s ease;
-}
-
-.room-card__media:hover .room-card__image {
-  transform: scale(1.02);
-}
-
-.room-card__soon {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(
-    to top,
-    rgba(12, 12, 12, 0.96) 0%,
-    rgba(12, 12, 12, 0.92) 45%,
-    rgba(12, 12, 12, 0.88) 100%
-  );
-  color: #fff;
-  font-family: var(--sans);
-  font-size: clamp(11px, 1.1vw, 13px);
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  pointer-events: none;
-}
-
 .room-card__media:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
+}
+
+.room-card__image {
+  object-fit: cover;
+  object-position: 50% 50%;
 }
 
 .room-card__name {
@@ -5047,20 +5046,6 @@ body.has-room-lightbox .site-header__utility {
   object-position: 50% 50%;
 }
 
-.room-detail__photo--soon {
-  display: grid;
-  place-items: center;
-  background:
-    linear-gradient(135deg, #ebe6dc 0%, #e0d8c8 48%, #d4cbb8 100%);
-  color: #5c5346;
-  font-family: var(--sans);
-  font-size: clamp(12px, 1.4vw, 14px);
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  text-align: center;
-}
-
 .room-detail__gallery-controls {
   position: absolute;
   inset: auto 0 0;
@@ -5787,10 +5772,6 @@ body.has-room-lightbox .site-header__utility {
     min-height: 76px;
     padding: 14px 10px;
     font-size: 0.95rem;
-  }
-
-  .overview-rooms__type:last-child {
-    grid-column: 1 / -1;
   }
 
   .overview-rooms__lede,

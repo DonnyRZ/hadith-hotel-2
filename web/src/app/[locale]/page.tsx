@@ -9,6 +9,7 @@ import { OverviewFarewell } from "@/components/OverviewFarewell";
 import { OverviewHotelExperiences } from "@/components/OverviewHotelExperiences";
 import { OverviewLocation } from "@/components/OverviewLocation";
 import { OverviewRoomsSuites } from "@/components/OverviewRoomsSuites";
+import { HOTEL_ROOM_COUNT, LEGACY_ROOM_COVERS } from "@/lib/rooms";
 import { homeJsonLd, pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -25,6 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function OverviewPage() {
   const locale = await getLocale();
   const t = await getTranslations("overview");
+  const roomT = await getTranslations("suitesRooms");
 
   const heroSlides = [
     {
@@ -42,16 +44,9 @@ export default async function OverviewPage() {
       mobilePosition: "50% 52%",
     },
     {
-      id: "junior-suite",
-      label: t("hero.juniorSuite"),
-      src: "/images/overview-hero/junior-suite.webp",
-      position: "48% 52%",
-      mobilePosition: "28% 52%",
-    },
-    {
-      id: "suite",
-      label: t("hero.suite"),
-      src: "/images/overview-hero/suite.webp",
+      id: "president-suite-balcony",
+      label: roomT("rooms.president-suite-balcony"),
+      src: LEGACY_ROOM_COVERS["president-suite-balcony"],
       position: "52% 52%",
       mobilePosition: "68% 52%",
     },
@@ -80,13 +75,6 @@ export default async function OverviewPage() {
       id: "hamam",
       label: t("hero.hamam"),
       src: "/images/experience/hamam.webp",
-      position: "50% 52%",
-      mobilePosition: "50% 52%",
-    },
-    {
-      id: "suite-living",
-      label: t("hero.suiteLiving"),
-      src: "/images/rooms/suite/suite-2.png",
       position: "50% 52%",
       mobilePosition: "50% 52%",
     },
@@ -132,7 +120,7 @@ export default async function OverviewPage() {
         <section className="overview-stats" aria-label="Hotel highlights">
           <div className="overview-stats__inner">
             <div className="overview-stats__item">
-              <p className="overview-stats__value">114</p>
+              <p className="overview-stats__value">{HOTEL_ROOM_COUNT}</p>
               <p className="overview-stats__label">{t("stats.roomsSuites")}</p>
             </div>
             <div className="overview-stats__item">

@@ -3,50 +3,11 @@
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
-import SiteImage from "@/components/SiteImage";
 import { Link } from "@/i18n/navigation";
+import SiteImage from "@/components/SiteImage";
+import { LEGACY_ROOM_COVERS, roomTypes } from "@/lib/rooms";
 
-type GallerySlide = {
-  id: string;
-  src: string;
-  altKey: string;
-};
-
-const roomTypes = [
-  { key: "standardRoom", id: "standard", units: 62 },
-  { key: "balconyRoom", id: "balcony", units: 23 },
-  { key: "suite", id: "suite", units: 18 },
-  { key: "juniorSuite", id: "junior", units: 9 },
-  { key: "presidentSuite", id: "president", units: 2 },
-];
-
-const gallerySlides: GallerySlide[] = [
-  {
-    id: "guest-room-1",
-    src: "/images/overview-rooms/junior-1.png",
-    altKey: "guestRoom1",
-  },
-  {
-    id: "guest-room-2",
-    src: "/images/overview-rooms/junior-3.png",
-    altKey: "guestRoom2",
-  },
-  {
-    id: "guest-room-3",
-    src: "/images/overview-rooms/suite-3.png",
-    altKey: "guestRoom3",
-  },
-  {
-    id: "guest-room-4",
-    src: "/images/overview-rooms/suite-4.png",
-    altKey: "guestRoom4",
-  },
-  {
-    id: "guest-room-5",
-    src: "/images/overview-rooms/suite-main.jpeg",
-    altKey: "guestRoom5",
-  },
-];
+const gallerySlides = roomTypes;
 
 function ExpandIcon() {
   return (
@@ -76,17 +37,15 @@ function CloseIcon() {
 }
 
 function GalleryMedia({
-  slide,
   alt,
+  src,
   featured = false,
   fullscreen = false,
-  priority = false,
 }: {
-  slide: GallerySlide;
   alt: string;
+  src: string;
   featured?: boolean;
   fullscreen?: boolean;
-  priority?: boolean;
 }) {
   return (
     <div
@@ -97,34 +56,29 @@ function GalleryMedia({
       ]
         .filter(Boolean)
         .join(" ")}
+      role="img"
+      aria-label={alt}
     >
       <SiteImage
         className="overview-rooms__image"
-        src={slide.src}
-        alt={alt}
+        src={src}
+        alt=""
         fill
-        sizes={
-          fullscreen
-            ? "100vw"
-            : featured
-              ? "(max-width: 720px) 100vw, 58vw"
-              : "(max-width: 720px) 0px, 22vw"
-        }
-        priority={priority}
+        sizes={fullscreen ? "100vw" : "(max-width: 900px) 100vw, 55vw"}
       />
     </div>
   );
 }
 
 function RoomLightbox({
-  slide,
   alt,
+  src,
   open,
   onClose,
   t,
 }: {
-  slide: GallerySlide;
   alt: string;
+  src: string;
   open: boolean;
   onClose: () => void;
   t: ReturnType<typeof useTranslations>;
@@ -183,7 +137,7 @@ function RoomLightbox({
           </button>
         </div>
         <div className="room-lightbox__media">
-          <GalleryMedia slide={slide} alt={alt} fullscreen />
+          <GalleryMedia alt={alt} src={src} fullscreen />
         </div>
       </div>
     </div>,
@@ -226,7 +180,7 @@ export function OverviewRoomsSuites() {
 
           <ul className="overview-rooms__types" aria-label={t("typesAriaLabel")}>
             {roomTypes.map((roomType, roomIndex) => (
-              <li key={roomType.key} className="overview-rooms__type">
+              <li key={roomType.id} className="overview-rooms__type">
                 <Link
                   href={`/suites-rooms#room-${roomType.id}`}
                   className="overview-rooms__type-link"
@@ -235,10 +189,10 @@ export function OverviewRoomsSuites() {
                     {String(roomIndex + 1).padStart(2, "0")}
                   </span>
                   <span className="overview-rooms__type-name">
-                    {t(`types.${roomType.key}`)}
+                    {t(`types.${roomType.id}`)}
                   </span>
                   <span className="overview-rooms__type-units">
-                    {t("unitsCount", { units: roomType.units })}
+                    {t("unitsSoonest")}
                   </span>
                 </Link>
               </li>
@@ -262,7 +216,7 @@ export function OverviewRoomsSuites() {
               onClick={goPrev}
               aria-label={t("gallery.prevImageAria")}
             >
-              <GalleryMedia slide={prev} alt={t(`gallery.${prev.altKey}`)} />
+              <GalleryMedia alt={t(`types.${prev.id}`)} src={LEGACY_ROOM_COVERS[prev.id]} />
             </button>
 
             <div
@@ -270,10 +224,9 @@ export function OverviewRoomsSuites() {
               aria-current="true"
             >
               <GalleryMedia
-                slide={current}
-                alt={t(`gallery.${current.altKey}`)}
+                alt={t(`types.${current.id}`)}
+                src={LEGACY_ROOM_COVERS[current.id]}
                 featured
-                priority
               />
               <button
                 type="button"
@@ -291,7 +244,7 @@ export function OverviewRoomsSuites() {
               onClick={goNext}
               aria-label={t("gallery.nextImageAria")}
             >
-              <GalleryMedia slide={next} alt={t(`gallery.${next.altKey}`)} />
+              <GalleryMedia alt={t(`types.${next.id}`)} src={LEGACY_ROOM_COVERS[next.id]} />
             </button>
           </div>
 
@@ -334,8 +287,8 @@ export function OverviewRoomsSuites() {
       </section>
 
       <RoomLightbox
-        slide={current}
-        alt={t(`gallery.${current.altKey}`)}
+        alt={t(`types.${current.id}`)}
+        src={LEGACY_ROOM_COVERS[current.id]}
         open={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
         t={t}

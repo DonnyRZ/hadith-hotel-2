@@ -3,18 +3,24 @@
 import SiteImage from "@/components/SiteImage";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { LEGACY_ROOM_COVERS } from "@/lib/rooms";
 
 type GalleryImageConfig = {
   id: string;
-  key: string;
   src: string;
+  key?: string;
+  roomTypeId?: string;
 };
 
 type GalleryImage = { id: string; src: string; alt: string };
 
 const galleryImageConfigs: GalleryImageConfig[] = [
   { id: "hotel-exterior", key: "hotelExterior", src: "/images/overview-hero/hotel-exterior.webp" },
-  { id: "junior-suite", key: "juniorSuite", src: "/images/overview-rooms/junior-1.png" },
+  {
+    id: "junior-suite",
+    src: LEGACY_ROOM_COVERS["junior-suite"],
+    roomTypeId: "junior-suite",
+  },
   { id: "restaurant", key: "restaurant", src: "/images/cafe-dining/resto-1.png" },
   { id: "buffet", key: "buffet", src: "/images/cafe-dining/buffet.webp" },
   { id: "cafe", key: "cafe", src: "/images/cafe-dining/7oz.png" },
@@ -87,12 +93,15 @@ function GalleryLightbox({
 
 export function Gallery() {
   const t = useTranslations("gallery");
+  const roomT = useTranslations("suitesRooms.rooms");
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
   const galleryImages: GalleryImage[] = galleryImageConfigs.map((config) => ({
     id: config.id,
     src: config.src,
-    alt: t(`images.${config.key}`),
+    alt: config.roomTypeId
+      ? roomT(config.roomTypeId)
+      : t(`images.${config.key ?? ""}`),
   }));
 
   return (

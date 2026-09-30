@@ -1,66 +1,52 @@
 "use client";
 
-import SiteImage from "@/components/SiteImage";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { ComingSoonModal } from "@/components/ComingSoonModal";
 import { RoomDetailModal } from "@/components/RoomDetailModal";
+import SiteImage from "@/components/SiteImage";
 import { getRoomName, getRoomSpecs } from "@/lib/roomSpecs";
-import { presidentSuite, roomTypes, type RoomType } from "@/lib/rooms";
+import { roomTypes, type RoomType } from "@/lib/rooms";
 
 type Tab = "all" | "accessible";
 
-const BALCONY_SRC = "/images/overview-rooms/balcony.webp";
-
-const roomImages: Record<string, string> = {
-  president: BALCONY_SRC,
-  junior: "/images/rooms/junior/junior-1.png",
-  suite: "/images/rooms/suite/suite-main.jpeg",
-  balcony: BALCONY_SRC,
-  standard: "/images/rooms/standard/standard-main.jpeg",
-};
+const featuredRoomTypeIds = new Set(["junior-suite", "president-suite-balcony"]);
+const collectionRoomTypes = [
+  ...roomTypes.filter((room) => featuredRoomTypeIds.has(room.id)),
+  ...roomTypes.filter((room) => !featuredRoomTypeIds.has(room.id)),
+];
 
 function RoomCard({
   room,
   name,
   t,
-  comingSoon = false,
   onViewDetails,
 }: {
   room: RoomType;
   name: string;
   t: ReturnType<typeof useTranslations>;
-  comingSoon?: boolean;
   onViewDetails: () => void;
 }) {
   return (
     <article className="room-card" id={`room-${room.id}`}>
       <button
         type="button"
-        className={`room-card__media${comingSoon ? " room-card__media--coming-soon" : ""}`}
-        aria-label={
-          comingSoon
-            ? t("card.comingSoonAria", { name })
-            : t("card.viewDetailsAria", { name })
-        }
+        className="room-card__media"
+        aria-label={t("card.viewDetailsAria", { name })}
         onClick={onViewDetails}
       >
         <SiteImage
           className="room-card__image"
-          src={roomImages[room.id] ?? BALCONY_SRC}
-          alt=""
+          src={room.images[0]!}
+          alt={name}
           fill
-          sizes="(max-width: 680px) 100vw, 50vw"
-          aria-hidden="true"
+          sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 33vw"
         />
-        {comingSoon ? (
-          <span className="room-card__soon">{t("card.comingSoonBadge")}</span>
-        ) : null}
       </button>
 
       <h3 className="room-card__name">{name}</h3>
       <p className="room-card__detail">
-        {room.size ? t("card.unitsAndSize", { units: room.units, size: room.size }) : t("card.unitsOnly", { units: room.units })}
+        {t("card.soonest")}
+        {room.size ? ` · ${room.size}` : ""}
       </p>
 
       <button
@@ -77,8 +63,8 @@ function RoomCard({
 export function RoomsCollection() {
   const t = useTranslations("suitesRooms");
   const [tab, setTab] = useState<Tab>("all");
-  const [comingSoonRoom, setComingSoonRoom] = useState<RoomType | null>(null);
   const [detailRoom, setDetailRoom] = useState<RoomType | null>(null);
+  const closeDetail = useCallback(() => setDetailRoom(null), []);
 
   useEffect(() => {
     const scrollToHash = () => {
@@ -133,18 +119,8 @@ export function RoomsCollection() {
             aria-labelledby="rooms-tab-all"
             className="rooms-collection__panel"
           >
-            <div className="rooms-collection__featured">
-              <RoomCard
-                room={presidentSuite}
-                name={getRoomName(t, presidentSuite.id)}
-                t={t}
-                comingSoon
-                onViewDetails={() => setComingSoonRoom(presidentSuite)}
-              />
-            </div>
-
             <div className="rooms-collection__grid">
-              {roomTypes.map((room) => (
+              {collectionRoomTypes.map((room) => (
                 <RoomCard
                   key={room.id}
                   room={room}
@@ -182,18 +158,7 @@ export function RoomsCollection() {
         room={detailRoom}
         name={detailRoom ? getRoomName(t, detailRoom.id) : ""}
         specs={detailRoom ? getRoomSpecs(t, detailRoom) : null}
-        onClose={() => setDetailRoom(null)}
-      />
-
-      <ComingSoonModal
-        open={comingSoonRoom !== null}
-        onClose={() => setComingSoonRoom(null)}
-        eyebrow={comingSoonRoom ? getRoomName(t, comingSoonRoom.id) : undefined}
-        body={
-          comingSoonRoom
-            ? t("comingSoonBody", { name: getRoomName(t, comingSoonRoom.id) })
-            : undefined
-        }
+        onClose={closeDetail}
       />
     </>
   );

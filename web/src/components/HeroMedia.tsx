@@ -5,6 +5,7 @@ export type HeroMediaSlide = {
   id: string;
   label: string;
   src: string;
+  placeholderLabel?: string;
   mobileSrc?: string;
   position?: string;
   mobilePosition?: string;
@@ -29,33 +30,40 @@ export function HeroMedia({
 
   return (
     <div
-      className={`hero-media${slide.mobileSrc ? " hero-media--has-mobile" : ""}`}
+      className={`hero-media${slide.mobileSrc ? " hero-media--has-mobile" : ""}${slide.placeholderLabel ? " hero-media--soon" : ""}`}
       role="img"
       aria-label={slide.label}
       style={positionStyle}
     >
-      <SiteImage
-        className="hero-media__image hero-media__image--desktop"
-        src={slide.src}
-        alt=""
-        fill
-        sizes="100vw"
-        priority={priority}
-        loading={priority ? undefined : eager ? "eager" : "lazy"}
-        aria-hidden="true"
-      />
-
-      {slide.mobileSrc ? (
-        <SiteImage
-          className="hero-media__image hero-media__image--mobile"
-          src={slide.mobileSrc}
-          alt=""
-          fill
-          sizes="(max-width: 720px) 100vw, 1px"
-          loading={eager ? "eager" : "lazy"}
-          aria-hidden="true"
-        />
-      ) : null}
+      {slide.placeholderLabel ? (
+        <span className="hero-media__placeholder-label">
+          {slide.placeholderLabel}
+        </span>
+      ) : (
+        <>
+          <SiteImage
+            className="hero-media__image hero-media__image--desktop"
+            src={slide.src}
+            alt=""
+            fill
+            sizes="100vw"
+            priority={priority}
+            loading={priority ? undefined : eager ? "eager" : "lazy"}
+            aria-hidden="true"
+          />
+          {slide.mobileSrc ? (
+            <SiteImage
+              className="hero-media__image hero-media__image--mobile"
+              src={slide.mobileSrc}
+              alt=""
+              fill
+              sizes="(max-width: 720px) 100vw, 1px"
+              loading={eager ? "eager" : "lazy"}
+              aria-hidden="true"
+            />
+          ) : null}
+        </>
+      )}
     </div>
   );
 }

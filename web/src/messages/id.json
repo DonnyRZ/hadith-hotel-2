@@ -60,17 +60,14 @@
   },
   "overview": {
     "metaTitle": "Ikhtisar | Hadith Hotel, Samarkand - Situs Resmi",
-    "metaDescription": "HADITH Hotel adalah sanctuary bintang lima di Kompleks Imam Al Bukhari, Samarkand — 114 kamar dan suite, kuliner, wellness, dan acara.",
+    "metaDescription": "HADITH Hotel adalah sanctuary bintang lima di Kompleks Imam Al Bukhari, Samarkand — 112 kamar dan suite, kuliner, wellness, dan acara.",
     "hero": {
       "hotelExterior": "Eksterior HADITH Hotel saat matahari terbenam",
       "resto": "Ruang makan restoran Saji Nusantara",
-      "juniorSuite": "Area duduk dan makan Junior Suite",
-      "suite": "Suite HADITH Hotel",
       "pool": "Kolam renang HADITH Hotel",
       "massage": "Ruang perawatan pijat",
       "sauna": "Sauna hotel",
       "hamam": "Hamam Turki",
-      "suiteLiving": "Area duduk suite",
       "hall": "Aula pertemuan dan pernikahan",
       "salon": "Salon kecantikan"
     },
@@ -93,11 +90,15 @@
         "accommodation": {
           "title": "Akomodasi",
           "roomsSuites": "Kamar & Suite",
-          "standardRoom": "Standard Room",
-          "balconyRoom": "Balcony Room",
-          "suite": "Suite",
-          "juniorSuite": "Junior Suite",
-          "presidentSuite": "President Suite"
+          "soonest": "Segera Hadir",
+          "roomTypes": {
+            "deluxe-double": "Deluxe Double Room",
+            "deluxe-double-balcony": "Deluxe Double Room with Balcony",
+            "deluxe-king": "Deluxe King Room",
+            "deluxe-king-balcony": "Deluxe King with Balcony",
+            "junior-suite": "Junior Suite",
+            "president-suite-balcony": "President Suite with Balcony"
+          }
         },
         "dining": {
           "title": "Kuliner",
@@ -128,23 +129,20 @@
     "rooms": {
       "lede": "Melarikan diri ke sanctuary kemewahan",
       "title": "Kamar dan Suite",
-      "blurb": "Dari Standard Room yang elegan hingga President Suite — 114 kamar dan suite dirancang untuk beristirahat setelah menjelajahi Kompleks Imam Al Bukhari.",
+      "blurb": "Jelajahi enam tipe kamar dan suite dalam total 112 kamar yang dirancang untuk beristirahat di Kompleks Imam Al Bukhari.",
       "typesAriaLabel": "Tipe kamar",
-      "unitsCount": "{units} unit",
+      "unitsSoonest": "Segera Hadir",
+      "soonest": "Segera Hadir",
       "learnMore": "Pelajari Lebih Lanjut",
       "types": {
-        "standardRoom": "Standard Room",
-        "balconyRoom": "Balcony Room",
-        "suite": "Suite",
-        "juniorSuite": "Junior Suite",
-        "presidentSuite": "President Suite"
+        "deluxe-double": "Deluxe Double Room",
+        "deluxe-double-balcony": "Deluxe Double Room with Balcony",
+        "deluxe-king": "Deluxe King Room",
+        "deluxe-king-balcony": "Deluxe King with Balcony",
+        "junior-suite": "Junior Suite",
+        "president-suite-balcony": "President Suite with Balcony"
       },
       "gallery": {
-        "guestRoom1": "Kamar tamu dengan headboard melengkung yang menyala",
-        "guestRoom2": "Interior kamar tamu yang luas di HADITH Hotel",
-        "guestRoom3": "Kamar mandi kamar tamu di HADITH Hotel",
-        "guestRoom4": "Interior kamar tamu kontemporer di HADITH Hotel",
-        "guestRoom5": "Interior kamar tamu yang elegan di HADITH Hotel",
         "ariaLabel": "Galeri kamar dan suite",
         "previous": "Sebelumnya",
         "next": "Berikutnya",
@@ -250,14 +248,10 @@
   },
   "suitesRooms": {
     "metaTitle": "Suite & Kamar",
-    "metaDescription": "114 kamar dan suite di HADITH Hotel, Samarkand — Standard, Balcony, Suite, Junior Suite, dan President Suite di Kompleks Imam Al Bukhari.",
-    "hero": {
-      "suite": "Suite HADITH Hotel",
-      "junior": "Area duduk dan makan Junior Suite"
-    },
+    "metaDescription": "112 kamar dan suite dalam enam tipe di HADITH Hotel, Samarkand, di Kompleks Imam Al Bukhari.",
     "intro": {
       "title": "Kamar & Suite",
-      "body": "114 kamar dan suite yang dirancang dengan cermat — sesuai jumlah Surah dalam Al-Qur'an — untuk masa menginap yang menenangkan di dalam Kompleks Imam Al Bukhari."
+      "body": "112 kamar dan suite dalam enam tipe yang dirancang untuk masa menginap yang menenangkan di Kompleks Imam Al Bukhari."
     },
     "tabs": {
       "all": "Semua Kamar",
@@ -269,21 +263,18 @@
       "body": "Kami sedang menyiapkan informasi rinci tentang kamar aksesibel kami. Silakan periksa kembali segera."
     },
     "card": {
-      "comingSoonBadge": "Segera Hadir",
+      "soonest": "Segera Hadir",
       "viewDetails": "Lihat Detail",
-      "comingSoonAria": "{name} — segera hadir",
-      "viewDetailsAria": "Lihat detail {name}",
-      "unitsOnly": "{units} unit",
-      "unitsAndSize": "{units} unit · {size}"
+      "viewDetailsAria": "Lihat detail {name}"
     },
     "reserve": "Find room",
-    "comingSoonBody": "{name} akan segera tersedia.",
     "rooms": {
-      "president": "President Suite",
-      "junior": "Junior Suite",
-      "suite": "Suite",
-      "balcony": "Balcony Room",
-      "standard": "Standard Room"
+      "deluxe-double": "Deluxe Double Room",
+      "deluxe-double-balcony": "Deluxe Double Room with Balcony",
+      "deluxe-king": "Deluxe King Room",
+      "deluxe-king-balcony": "Deluxe King with Balcony",
+      "junior-suite": "Junior Suite",
+      "president-suite-balcony": "President Suite with Balcony"
     },
     "specs": {
       "groupTitles": {
@@ -340,14 +331,11 @@
     "detail": {
       "closeDetails": "Tutup detail kamar",
       "close": "Tutup",
-      "photoAria": "Foto {name} {n}",
-      "morePhotosSoon": "Foto Lainnya — Segera Hadir",
-      "morePhotosSoonAria": "Foto lainnya — segera hadir",
-      "prev": "Sebelumnya",
-      "next": "Berikutnya",
-      "prevAria": "Foto sebelumnya",
-      "nextAria": "Foto berikutnya",
-      "summaryBody": "{units} unit, berpendingin udara, bebas rokok, internet nirkabel"
+      "galleryAria": "Galeri foto {name}",
+      "previousImage": "Foto sebelumnya",
+      "nextImage": "Foto berikutnya",
+      "imageCounterAria": "Foto {current} dari {total}",
+      "summaryBody": "Segera Hadir · ber-AC, bebas rokok, internet nirkabel"
     }
   },
   "cafeDining": {
@@ -637,7 +625,6 @@
     },
     "images": {
       "hotelExterior": "Eksterior HADITH Hotel saat matahari terbenam",
-      "juniorSuite": "Interior Junior Suite di HADITH Hotel",
       "restaurant": "Ruang makan restoran di HADITH Hotel",
       "buffet": "Pengalaman bersantap buffet di HADITH Hotel",
       "cafe": "7oz Espresso di HADITH Hotel",
@@ -720,7 +707,7 @@
         "heading": "Langkah strategis di Asia Tengah",
         "p1": "PT EGI Resources memperkuat ekspansi bisnis internasional dengan menggelar soft opening Hadith Hotel di kawasan Kompleks Imam Al-Bukhari, Samarkand, Uzbekistan, Sabtu (5/9/2026). Kehadiran hotel ini menjadi langkah strategis EGI Resources untuk memperluas jejak bisnis Indonesia di pasar global, khususnya di Asia Tengah yang memiliki potensi besar dalam sektor pariwisata, hospitality, dan wisata religi.",
         "p2": "Soft opening Hadith Hotel dihadiri sejumlah tokoh penting dari Indonesia dan Uzbekistan, di antaranya Menteri Haji dan Umrah Republik Indonesia Mochamad Irfan Yusuf, Duta Besar Republik Indonesia untuk Uzbekistan Prof. Dr. Siti Ruhaini Dzuhayatin, serta Duta Besar Republik Indonesia untuk Kazakhstan M. Fadjroel Rachman. Kehadiran para pejabat dan tokoh dari kedua negara mencerminkan semakin eratnya hubungan Indonesia-Uzbekistan sekaligus menunjukkan besarnya peluang kerja sama ekonomi dan investasi di kawasan tersebut.",
-        "p3": "Manajemen EGI Resources menegaskan bahwa Hadith Hotel tidak hanya menghadirkan akomodasi berstandar internasional, tetapi juga membawa nilai keramahtamahan Indonesia ke panggung global. Dengan 114 kamar dan suite serta fasilitas premium seperti restoran Nusantara, Uzbek Cuisine Bar & Lounge, kolam renang indoor, spa, sauna, Turkish Hammam, lapangan tenis, dan padel court, Hadith Hotel diharapkan menjadi bagian dari pertumbuhan ekosistem pariwisata internasional di Samarkand sekaligus memperkuat posisi EGI Resources sebagai perusahaan Indonesia yang terus berekspansi secara global."
+        "p3": "Manajemen EGI Resources menegaskan bahwa Hadith Hotel tidak hanya menghadirkan akomodasi berstandar internasional, tetapi juga membawa nilai keramahtamahan Indonesia ke panggung global. Dengan 112 kamar dan suite serta fasilitas premium seperti restoran Nusantara, Uzbek Cuisine Bar & Lounge, kolam renang indoor, spa, sauna, Turkish Hammam, lapangan tenis, dan padel court, Hadith Hotel diharapkan menjadi bagian dari pertumbuhan ekosistem pariwisata internasional di Samarkand sekaligus memperkuat posisi EGI Resources sebagai perusahaan Indonesia yang terus berekspansi secara global."
       }
     },
     "indonesianTouch": {
@@ -733,7 +720,7 @@
       "article": {
         "heading": "Sentuhan Indonesia di jantung ziarah Samarkand",
         "p1": "Hadith Hotel resmi menggelar soft opening di kawasan prestisius Kompleks Imam Al-Bukhari, Samarkand, Uzbekistan, Sabtu (5/9/2026). Berjarak kurang dari satu kilometer dari pusat ziarah Makam Imam Muhammad Al-Bukhari, hotel yang dikembangkan PT EGI Resources ini menawarkan konsep akomodasi modern yang memadukan nuansa Uzbekistan dengan kenyamanan berstandar internasional.",
-        "p2": "Hadith Hotel memiliki 114 kamar dan suite dengan kapasitas okupansi hingga 250 orang. Lima tipe kamar disiapkan untuk memenuhi kebutuhan peziarah, wisatawan, hingga tamu VIP, terdiri dari 62 Standard Room, 23 Balcony Room, 18 Suite, 9 Junior Suite, dan 2 President Suite. Lokasinya yang berada di kawasan Imam Al-Bukhari menjadikan hotel ini memiliki posisi strategis bagi wisatawan yang datang untuk melakukan ziarah sekaligus menjelajahi kekayaan sejarah dan budaya Samarkand.",
+        "p2": "Hadith Hotel memiliki 112 kamar dan suite dengan kapasitas okupansi hingga 250 orang. Enam tipe kamar disiapkan untuk memenuhi kebutuhan peziarah, wisatawan, hingga tamu VIP: Deluxe Double Room, Deluxe Double Room with Balcony, Deluxe King Room, Deluxe King with Balcony, Junior Suite, dan President Suite with Balcony. Lokasinya yang berada di kawasan Imam Al-Bukhari menjadikan hotel ini memiliki posisi strategis bagi wisatawan yang datang untuk melakukan ziarah sekaligus menjelajahi kekayaan sejarah dan budaya Samarkand.",
         "p3": "Selain akomodasi, Hadith Hotel menawarkan berbagai fasilitas premium, di antaranya Saji Nusantara Restaurant yang membawa cita rasa kuliner Indonesia, Uzbek Cuisine Bar & Lounge, kolam renang indoor, pusat kebugaran, spa, sauna, Turkish Hammam, serta fasilitas olahraga berupa lapangan tenis dan padel court. Kehadiran hotel ini diharapkan tidak hanya memperkuat sektor hospitality di Samarkand, tetapi juga menjadi jembatan pertukaran budaya antara Indonesia dan Uzbekistan melalui pariwisata dan keramahan khas Nusantara."
       }
     }

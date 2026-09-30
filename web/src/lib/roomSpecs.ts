@@ -8,13 +8,6 @@ export type SpecGroup = {
 
 type Translator = ReturnType<typeof useTranslations>;
 
-const SUITE_LIKE = new Set(["junior", "suite"]);
-const ADDITIONAL_KEYS: Record<string, string> = {
-  junior: "junior",
-  suite: "suite",
-  balcony: "balcony",
-};
-
 export function getRoomName(t: Translator, id: string): string {
   return t(`rooms.${id}`);
 }
@@ -23,7 +16,7 @@ export function getRoomSpecs(t: Translator, room: RoomType): SpecGroup[] | null 
   if (!room.hasSpecs) return null;
 
   const roomFeatures = t.raw(
-    SUITE_LIKE.has(room.id) ? "specs.suiteRoomFeatures" : "specs.baseRoomFeatures",
+    room.specProfile === "suite" ? "specs.suiteRoomFeatures" : "specs.baseRoomFeatures",
   ) as string[];
 
   const groups: SpecGroup[] = [
@@ -51,11 +44,12 @@ export function getRoomSpecs(t: Translator, room: RoomType): SpecGroup[] | null 
     },
   ];
 
-  const additionalKey = ADDITIONAL_KEYS[room.id];
-  if (additionalKey) {
+  if (room.additionalFeatures.length > 0) {
     groups.push({
       title: t("specs.groupTitles.additionalFeatures"),
-      items: t.raw(`specs.additional.${additionalKey}`) as string[],
+      items: room.additionalFeatures.flatMap(
+        (feature) => t.raw(`specs.additional.${feature}`) as string[],
+      ),
     });
   }
 

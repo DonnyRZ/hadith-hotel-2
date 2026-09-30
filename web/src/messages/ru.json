@@ -60,17 +60,14 @@
   },
   "overview": {
     "metaTitle": "Обзор | Hadith Hotel, Самарканд - Официальный сайт",
-    "metaDescription": "HADITH Hotel — пятизвёздочная обитель в Комплексе Имама Аль-Бухари в Самарканде: 114 номеров и люксов, рестораны, wellness и мероприятия.",
+    "metaDescription": "HADITH Hotel — пятизвёздочная обитель в Комплексе Имама Аль-Бухари в Самарканде: 112 номеров и люксов, рестораны, wellness и мероприятия.",
     "hero": {
       "hotelExterior": "Фасад HADITH Hotel на закате",
       "resto": "Зал ресторана Saji Nusantara",
-      "juniorSuite": "Гостиная и обеденная зона Junior Suite",
-      "suite": "Люкс HADITH Hotel",
       "pool": "Бассейн HADITH Hotel",
       "massage": "Кабинет массажа",
       "sauna": "Сауна отеля",
       "hamam": "Турецкий хаммам",
-      "suiteLiving": "Гостиная зона люкса",
       "hall": "Зал для мероприятий и свадеб",
       "salon": "Салон красоты"
     },
@@ -93,11 +90,15 @@
         "accommodation": {
           "title": "Номерной фонд",
           "roomsSuites": "Номера и люксы",
-          "standardRoom": "Standard Room",
-          "balconyRoom": "Balcony Room",
-          "suite": "Suite",
-          "juniorSuite": "Junior Suite",
-          "presidentSuite": "President Suite"
+          "soonest": "Скоро",
+          "roomTypes": {
+            "deluxe-double": "Deluxe Double Room",
+            "deluxe-double-balcony": "Deluxe Double Room with Balcony",
+            "deluxe-king": "Deluxe King Room",
+            "deluxe-king-balcony": "Deluxe King with Balcony",
+            "junior-suite": "Junior Suite",
+            "president-suite-balcony": "President Suite with Balcony"
+          }
         },
         "dining": {
           "title": "Рестораны",
@@ -128,23 +129,20 @@
     "rooms": {
       "lede": "Обитель роскоши и покоя",
       "title": "Номера и люксы",
-      "blurb": "От изысканных Standard-номеров до President Suite — 114 номеров и люксов, созданных для отдыха после дня, проведённого в Комплексе Имама Аль-Бухари.",
+      "blurb": "Шесть типов номеров и люксов — всего 112 номеров, созданных для отдыха в Комплексе Имама Аль-Бухари.",
       "typesAriaLabel": "Типы номеров",
-      "unitsCount": "{units} номеров",
+      "unitsSoonest": "Скоро",
+      "soonest": "Скоро",
       "learnMore": "Узнать больше",
       "types": {
-        "standardRoom": "Standard Room",
-        "balconyRoom": "Balcony Room",
-        "suite": "Suite",
-        "juniorSuite": "Junior Suite",
-        "presidentSuite": "President Suite"
+        "deluxe-double": "Deluxe Double Room",
+        "deluxe-double-balcony": "Deluxe Double Room with Balcony",
+        "deluxe-king": "Deluxe King Room",
+        "deluxe-king-balcony": "Deluxe King with Balcony",
+        "junior-suite": "Junior Suite",
+        "president-suite-balcony": "President Suite with Balcony"
       },
       "gallery": {
-        "guestRoom1": "Номер с подсвеченным арочным изголовьем кровати",
-        "guestRoom2": "Интерьер просторного номера в HADITH Hotel",
-        "guestRoom3": "Ванная комната номера в HADITH Hotel",
-        "guestRoom4": "Интерьер номера в современном стиле в HADITH Hotel",
-        "guestRoom5": "Интерьер изысканного номера в HADITH Hotel",
         "ariaLabel": "Галерея номеров и люксов",
         "previous": "Назад",
         "next": "Далее",
@@ -250,14 +248,10 @@
   },
   "suitesRooms": {
     "metaTitle": "Номера и люксы",
-    "metaDescription": "114 номеров и люксов в HADITH Hotel, Самарканд — Standard, Balcony, Suite, Junior Suite и President Suite в Комплексе Имама Аль-Бухари.",
-    "hero": {
-      "suite": "Люкс HADITH Hotel",
-      "junior": "Гостиная и обеденная зона Junior Suite"
-    },
+    "metaDescription": "112 номеров и люксов шести типов в HADITH Hotel, Самарканд, в Комплексе Имама Аль-Бухари.",
     "intro": {
       "title": "Номера и люксы",
-      "body": "114 продуманных номеров и люксов — по числу сур в Коране — для спокойного отдыха в Комплексе Имама Аль-Бухари."
+      "body": "112 продуманных номеров и люксов шести типов для спокойного отдыха в Комплексе Имама Аль-Бухари."
     },
     "tabs": {
       "all": "Все номера",
@@ -269,21 +263,18 @@
       "body": "Мы готовим подробную информацию о номерах, доступных для людей с инвалидностью. Пожалуйста, зайдите позже."
     },
     "card": {
-      "comingSoonBadge": "Очень скоро",
+      "soonest": "Скоро",
       "viewDetails": "Подробнее",
-      "comingSoonAria": "{name} — скоро",
-      "viewDetailsAria": "Подробнее о номере {name}",
-      "unitsOnly": "{units} номеров",
-      "unitsAndSize": "{units} номеров · {size}"
+      "viewDetailsAria": "Подробнее о номере {name}"
     },
     "reserve": "Find room",
-    "comingSoonBody": "{name} станет доступен в ближайшее время.",
     "rooms": {
-      "president": "President Suite",
-      "junior": "Junior Suite",
-      "suite": "Suite",
-      "balcony": "Balcony Room",
-      "standard": "Standard Room"
+      "deluxe-double": "Deluxe Double Room",
+      "deluxe-double-balcony": "Deluxe Double Room with Balcony",
+      "deluxe-king": "Deluxe King Room",
+      "deluxe-king-balcony": "Deluxe King with Balcony",
+      "junior-suite": "Junior Suite",
+      "president-suite-balcony": "President Suite with Balcony"
     },
     "specs": {
       "groupTitles": {
@@ -340,14 +331,11 @@
     "detail": {
       "closeDetails": "Закрыть информацию о номере",
       "close": "Закрыть",
-      "photoAria": "Фото {name} {n}",
-      "morePhotosSoon": "Больше фото — очень скоро",
-      "morePhotosSoonAria": "Больше фото — очень скоро",
-      "prev": "Назад",
-      "next": "Далее",
-      "prevAria": "Предыдущее фото",
-      "nextAria": "Следующее фото",
-      "summaryBody": "{units} номеров, кондиционер, для некурящих, беспроводной интернет"
+      "galleryAria": "Фотогалерея: {name}",
+      "previousImage": "Предыдущее фото",
+      "nextImage": "Следующее фото",
+      "imageCounterAria": "Фото {current} из {total}",
+      "summaryBody": "Скоро · кондиционер, для некурящих, беспроводной интернет"
     }
   },
   "cafeDining": {
@@ -637,7 +625,6 @@
     },
     "images": {
       "hotelExterior": "Фасад HADITH Hotel на закате",
-      "juniorSuite": "Интерьер Junior Suite в HADITH Hotel",
       "restaurant": "Обеденный зал ресторана в HADITH Hotel",
       "buffet": "Буфетное угощение в HADITH Hotel",
       "cafe": "7oz Espresso в HADITH Hotel",
@@ -720,7 +707,7 @@
         "heading": "Стратегический шаг в Центральной Азии",
         "p1": "PT EGI Resources укрепила международную экспансию, проведя soft opening HADITH Hotel в комплексе Имама аль-Бухари в Самарканде, Узбекистан, в субботу, 5 сентября 2026 года. Открытие отеля — стратегический шаг EGI Resources по расширению присутствия индонезийского бизнеса на мировых рынках, прежде всего в Центральной Азии, где высок потенциал туризма, гостеприимства и религиозных путешествий.",
         "p2": "На soft opening присутствовали видные деятели Индонезии и Узбекистана, среди них министр хаджа и умры Республики Индонезия Мохамад Ирфан Юсуф, посол Республики Индонезия в Узбекистане проф. д-р Сити Рухайни Дзухаятин и посол Республики Индонезия в Казахстане М. Фаджроэль Рахман. Их присутствие отражает всё более тесные отношения Индонезии и Узбекистана и масштаб возможностей экономического и инвестиционного сотрудничества в регионе.",
-        "p3": "Руководство EGI Resources подчеркнуло, что HADITH Hotel предлагает не только размещение международного уровня, но и индонезийское гостеприимство на мировой сцене. Со 114 номерами и сюитами, а также премиальными удобствами — рестораном Nusantara, Uzbek Cuisine Bar & Lounge, крытым бассейном, спа, сауной, турецким хаммамом, теннисным кортом и кортом для падела — HADITH Hotel призван стать частью международной туристической экосистемы Самарканда и укрепить позиции EGI Resources как индонезийской компании, продолжающей глобальную экспансию."
+        "p3": "Руководство EGI Resources подчеркнуло, что HADITH Hotel предлагает не только размещение международного уровня, но и индонезийское гостеприимство на мировой сцене. Со 112 номерами и люксами, а также премиальными удобствами — рестораном Nusantara, Uzbek Cuisine Bar & Lounge, крытым бассейном, спа, сауной, турецким хаммамом, теннисным кортом и кортом для падела — HADITH Hotel призван стать частью международной туристической экосистемы Самарканда и укрепить позиции EGI Resources как индонезийской компании, продолжающей глобальную экспансию."
       }
     },
     "indonesianTouch": {
@@ -733,7 +720,7 @@
       "article": {
         "heading": "Индонезийский акцент в сердце паломничества Самарканда",
         "p1": "HADITH Hotel официально провёл soft opening в престижном комплексе Имама аль-Бухари в Самарканде, Узбекистан, в субботу, 5 сентября 2026 года. Менее чем в одном километре от центра паломничества у мавзолея Имама Мухаммада аль-Бухари отель, созданный PT EGI Resources, предлагает современное размещение, соединяющее узбекский характер с комфортом международного уровня.",
-        "p2": "В HADITH Hotel 114 номеров и сюитов вместимостью до 250 гостей. Пять типов номеров рассчитаны на паломников, путешественников и VIP-гостей: 62 Standard Room, 23 Balcony Room, 18 Suite, 9 Junior Suite и 2 President Suite. Расположение в комплексе Имама аль-Бухари делает отель стратегической точкой для тех, кто приезжает и для зиярата, и чтобы открыть историю и культуру Самарканда.",
+        "p2": "В HADITH Hotel 112 номеров и люксов вместимостью до 250 гостей. Шесть типов номеров предназначены для паломников, путешественников и VIP-гостей: Deluxe Double Room, Deluxe Double Room with Balcony, Deluxe King Room, Deluxe King with Balcony, Junior Suite и President Suite with Balcony. Расположение в комплексе Имама аль-Бухари делает отель стратегической точкой для тех, кто приезжает и для зиярата, и чтобы открыть историю и культуру Самарканда.",
         "p3": "Помимо размещения HADITH Hotel предлагает премиальные удобства: ресторан Saji Nusantara с индонезийской кухней, Uzbek Cuisine Bar & Lounge, крытый бассейн, фитнес-центр, спа, сауну, турецкий хаммам, а также теннисный корт и корт для падела. Ожидается, что отель не только укрепит сферу гостеприимства Самарканда, но и станет мостом культурного обмена между Индонезией и Узбекистаном через туризм и характерное гостеприимство Нусантары."
       }
     }

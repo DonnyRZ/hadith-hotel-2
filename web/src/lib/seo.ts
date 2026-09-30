@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { routing, type Locale } from "@/i18n/routing";
+import { HOTEL_ROOM_COUNT } from "@/lib/rooms";
 
 export const SITE_URL = "https://hadith-hotel.com";
 export const SITE_NAME = "HADITH Hotel";
@@ -170,7 +171,7 @@ export function homeJsonLd(locale: string): JsonLdNode {
           "HADITH Hotel is a five-star sanctuary within the Complex of Imam Al Bukhari in Samarkand.",
         email: HOTEL_EMAIL,
         petsAllowed: false,
-        numberOfRooms: 114,
+        numberOfRooms: HOTEL_ROOM_COUNT,
         logo: {
           "@type": "ImageObject",
           url: logoUrl,

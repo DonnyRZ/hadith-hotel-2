@@ -4,6 +4,7 @@ import SiteImage from "@/components/SiteImage";
 import { Link } from "@/i18n/navigation";
 import { useCallback, useState } from "react";
 import { useTranslations } from "next-intl";
+import { LEGACY_ROOM_COVERS } from "@/lib/rooms";
 
 type FeatureSlide = {
   id: string;
@@ -17,7 +18,7 @@ const slides: FeatureSlide[] = [
     id: "suites-rooms",
     key: "suitesRooms",
     href: "/suites-rooms",
-    src: "/images/overview-hero/junior-suite.webp",
+    src: LEGACY_ROOM_COVERS["president-suite-balcony"],
   },
   {
     id: "cafe-dining",
@@ -42,16 +43,18 @@ const slides: FeatureSlide[] = [
 function FeatureMedia({
   slide,
   title,
+  alt,
 }: {
   slide: FeatureSlide;
   title: string;
+  alt?: string;
 }) {
   return (
     <div className="overview-features__media">
       <SiteImage
         className="overview-features__image"
         src={slide.src}
-        alt={title}
+        alt={alt ?? title}
         fill
         sizes="(max-width: 720px) 100vw, 60vw"
       />
@@ -61,6 +64,7 @@ function FeatureMedia({
 
 export function OverviewHotelExperiences() {
   const t = useTranslations("overview.experiences");
+  const roomT = useTranslations("suitesRooms.rooms");
   const [index, setIndex] = useState(0);
   const count = slides.length;
 
@@ -78,6 +82,10 @@ export function OverviewHotelExperiences() {
   const progress = ((index + 1) / count) * 100;
 
   const titleFor = (slide: FeatureSlide) => t(`slides.${slide.key}`);
+  const imageAltFor = (slide: FeatureSlide) =>
+    slide.id === "suites-rooms"
+      ? roomT("president-suite-balcony")
+      : titleFor(slide);
 
   return (
     <section
@@ -107,11 +115,19 @@ export function OverviewHotelExperiences() {
             onClick={goPrevious}
             aria-label={t("prevSlideAria", { title: titleFor(previous) })}
           >
-            <FeatureMedia slide={previous} title={titleFor(previous)} />
+            <FeatureMedia
+              slide={previous}
+              title={titleFor(previous)}
+              alt={imageAltFor(previous)}
+            />
           </button>
 
           <div className="overview-features__active">
-            <FeatureMedia slide={current} title={titleFor(current)} />
+            <FeatureMedia
+              slide={current}
+              title={titleFor(current)}
+              alt={imageAltFor(current)}
+            />
             <div className="overview-features__card overview-features__card--compact">
               <p className="overview-features__card-eyebrow">
                 {t("cardEyebrow")}
@@ -134,7 +150,11 @@ export function OverviewHotelExperiences() {
             onClick={goNext}
             aria-label={t("nextSlideAria", { title: titleFor(next) })}
           >
-            <FeatureMedia slide={next} title={titleFor(next)} />
+            <FeatureMedia
+              slide={next}
+              title={titleFor(next)}
+              alt={imageAltFor(next)}
+            />
           </button>
         </div>
 

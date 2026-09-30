@@ -12,6 +12,7 @@ import {
   UtensilsCrossed,
 } from "lucide-react";
 import { ComingSoonModal } from "@/components/ComingSoonModal";
+import { HOTEL_ROOM_COUNT, roomTypes } from "@/lib/rooms";
 
 type AmenityRow = {
   key: string;
@@ -35,12 +36,16 @@ const leftGroups: AmenityGroup[] = [
     titleKey: "groups.accommodation.title",
     icon: BedDouble,
     rows: [
-      { key: "groups.accommodation.roomsSuites", value: "114", href: "/suites-rooms" },
-      { key: "groups.accommodation.standardRoom", value: "62", href: "/suites-rooms" },
-      { key: "groups.accommodation.balconyRoom", value: "23", href: "/suites-rooms" },
-      { key: "groups.accommodation.suite", value: "18", href: "/suites-rooms" },
-      { key: "groups.accommodation.juniorSuite", value: "9", href: "/suites-rooms" },
-      { key: "groups.accommodation.presidentSuite", value: "2", href: "/suites-rooms" },
+      {
+        key: "groups.accommodation.roomsSuites",
+        value: String(HOTEL_ROOM_COUNT),
+        href: "/suites-rooms",
+      },
+      ...roomTypes.map((room) => ({
+        key: `groups.accommodation.roomTypes.${room.id}`,
+        valueKey: "groups.accommodation.soonest",
+        href: "/suites-rooms",
+      })),
     ],
   },
   {
