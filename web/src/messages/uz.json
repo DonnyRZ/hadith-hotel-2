@@ -90,7 +90,6 @@
         "accommodation": {
           "title": "Turar joy",
           "roomsSuites": "Xonalar va lyukslar",
-          "soonest": "Tez kunda",
           "roomTypes": {
             "deluxe-double": "Deluxe Double Room",
             "deluxe-double-balcony": "Deluxe Double Room with Balcony",
@@ -131,8 +130,6 @@
       "title": "Xonalar va lyukslar",
       "blurb": "Imom Al-Buxoriy majmuasida orom olish uchun mo'ljallangan 112 ta xona va lyuksning olti turini kashf eting.",
       "typesAriaLabel": "Xona turlari",
-      "unitsSoonest": "Tez kunda",
-      "soonest": "Tez kunda",
       "learnMore": "Batafsil ma'lumot",
       "types": {
         "deluxe-double": "Deluxe Double Room",
@@ -263,7 +260,6 @@
       "body": "Biz nogironlar uchun xonalar haqida batafsil ma'lumot tayyorlamoqdamiz. Iltimos, yaqinda qayta tekshiring."
     },
     "card": {
-      "soonest": "Tez kunda",
       "viewDetails": "Batafsil ko'rish",
       "viewDetailsAria": "{name} tafsilotlarini ko'rish"
     },
@@ -335,7 +331,7 @@
       "previousImage": "Oldingi surat",
       "nextImage": "Keyingi surat",
       "imageCounterAria": "{current} / {total} surat",
-      "summaryBody": "Tez kunda · konditsioner, chekish taqiqlangan, simsiz internet"
+      "summaryBody": "Konditsioner · chekish taqiqlangan · simsiz internet"
     }
   },
   "cafeDining": {

@@ -191,9 +191,6 @@ export function OverviewRoomsSuites() {
                   <span className="overview-rooms__type-name">
                     {t(`types.${roomType.id}`)}
                   </span>
-                  <span className="overview-rooms__type-units">
-                    {t("unitsSoonest")}
-                  </span>
                 </Link>
               </li>
             ))}

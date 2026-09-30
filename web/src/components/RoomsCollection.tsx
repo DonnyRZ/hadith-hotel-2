@@ -9,10 +9,13 @@ import { roomTypes, type RoomType } from "@/lib/rooms";
 
 type Tab = "all" | "accessible";
 
-const featuredRoomTypeIds = new Set(["junior-suite", "president-suite-balcony"]);
+const featuredRoomTypeIds = ["president-suite-balcony", "junior-suite"];
+const featuredRoomTypes = featuredRoomTypeIds
+  .map((id) => roomTypes.find((room) => room.id === id))
+  .filter((room): room is RoomType => room !== undefined);
 const collectionRoomTypes = [
-  ...roomTypes.filter((room) => featuredRoomTypeIds.has(room.id)),
-  ...roomTypes.filter((room) => !featuredRoomTypeIds.has(room.id)),
+  ...featuredRoomTypes,
+  ...roomTypes.filter((room) => !featuredRoomTypeIds.includes(room.id)),
 ];
 
 function RoomCard({
@@ -44,10 +47,7 @@ function RoomCard({
       </button>
 
       <h3 className="room-card__name">{name}</h3>
-      <p className="room-card__detail">
-        {t("card.soonest")}
-        {room.size ? ` · ${room.size}` : ""}
-      </p>
+      {room.size ? <p className="room-card__detail">{room.size}</p> : null}
 
       <button
         type="button"

@@ -90,7 +90,6 @@
         "accommodation": {
           "title": "Akomodasi",
           "roomsSuites": "Kamar & Suite",
-          "soonest": "Segera Hadir",
           "roomTypes": {
             "deluxe-double": "Deluxe Double Room",
             "deluxe-double-balcony": "Deluxe Double Room with Balcony",
@@ -131,8 +130,6 @@
       "title": "Kamar dan Suite",
       "blurb": "Jelajahi enam tipe kamar dan suite dalam total 112 kamar yang dirancang untuk beristirahat di Kompleks Imam Al Bukhari.",
       "typesAriaLabel": "Tipe kamar",
-      "unitsSoonest": "Segera Hadir",
-      "soonest": "Segera Hadir",
       "learnMore": "Pelajari Lebih Lanjut",
       "types": {
         "deluxe-double": "Deluxe Double Room",
@@ -263,7 +260,6 @@
       "body": "Kami sedang menyiapkan informasi rinci tentang kamar aksesibel kami. Silakan periksa kembali segera."
     },
     "card": {
-      "soonest": "Segera Hadir",
       "viewDetails": "Lihat Detail",
       "viewDetailsAria": "Lihat detail {name}"
     },
@@ -335,7 +331,7 @@
       "previousImage": "Foto sebelumnya",
       "nextImage": "Foto berikutnya",
       "imageCounterAria": "Foto {current} dari {total}",
-      "summaryBody": "Segera Hadir · ber-AC, bebas rokok, internet nirkabel"
+      "summaryBody": "Ber-AC · bebas rokok · internet nirkabel"
     }
   },
   "cafeDining": {

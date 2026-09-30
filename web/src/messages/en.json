@@ -90,7 +90,6 @@
         "accommodation": {
           "title": "Accommodation",
           "roomsSuites": "Rooms & Suites",
-          "soonest": "Soonest",
           "roomTypes": {
             "deluxe-double": "Deluxe Double Room",
             "deluxe-double-balcony": "Deluxe Double Room with Balcony",
@@ -131,8 +130,6 @@
       "title": "Rooms and Suites",
       "blurb": "Discover six room and suite types across 112 thoughtfully designed rooms within the Imam Al Bukhari Complex.",
       "typesAriaLabel": "Room types",
-      "unitsSoonest": "Soonest",
-      "soonest": "Soonest",
       "learnMore": "Learn More",
       "types": {
         "deluxe-double": "Deluxe Double Room",
@@ -263,7 +260,6 @@
       "body": "We are preparing detailed information about our accessible rooms. Please check back soon."
     },
     "card": {
-      "soonest": "Soonest",
       "viewDetails": "View Details",
       "viewDetailsAria": "View {name} details"
     },
@@ -335,7 +331,7 @@
       "previousImage": "Previous photo",
       "nextImage": "Next photo",
       "imageCounterAria": "Image {current} of {total}",
-      "summaryBody": "Soonest · air-conditioned, non-smoking, wireless internet"
+      "summaryBody": "Air-conditioned · non-smoking · wireless internet"
     }
   },
   "cafeDining": {

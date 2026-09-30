@@ -90,7 +90,6 @@
         "accommodation": {
           "title": "Номерной фонд",
           "roomsSuites": "Номера и люксы",
-          "soonest": "Скоро",
           "roomTypes": {
             "deluxe-double": "Deluxe Double Room",
             "deluxe-double-balcony": "Deluxe Double Room with Balcony",
@@ -131,8 +130,6 @@
       "title": "Номера и люксы",
       "blurb": "Шесть типов номеров и люксов — всего 112 номеров, созданных для отдыха в Комплексе Имама Аль-Бухари.",
       "typesAriaLabel": "Типы номеров",
-      "unitsSoonest": "Скоро",
-      "soonest": "Скоро",
       "learnMore": "Узнать больше",
       "types": {
         "deluxe-double": "Deluxe Double Room",
@@ -263,7 +260,6 @@
       "body": "Мы готовим подробную информацию о номерах, доступных для людей с инвалидностью. Пожалуйста, зайдите позже."
     },
     "card": {
-      "soonest": "Скоро",
       "viewDetails": "Подробнее",
       "viewDetailsAria": "Подробнее о номере {name}"
     },
@@ -335,7 +331,7 @@
       "previousImage": "Предыдущее фото",
       "nextImage": "Следующее фото",
       "imageCounterAria": "Фото {current} из {total}",
-      "summaryBody": "Скоро · кондиционер, для некурящих, беспроводной интернет"
+      "summaryBody": "Кондиционер · для некурящих · беспроводной интернет"
     }
   },
   "cafeDining": {
