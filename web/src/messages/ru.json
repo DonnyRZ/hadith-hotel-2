@@ -96,7 +96,7 @@
             "deluxe-king": "Deluxe King Room",
             "deluxe-king-balcony": "Deluxe King with Balcony",
             "junior-suite": "Junior Suite",
-            "president-suite-balcony": "President Suite with Balcony"
+            "president-suite-balcony": "President Suite"
           }
         },
         "dining": {
@@ -137,7 +137,7 @@
         "deluxe-king": "Deluxe King Room",
         "deluxe-king-balcony": "Deluxe King with Balcony",
         "junior-suite": "Junior Suite",
-        "president-suite-balcony": "President Suite with Balcony"
+        "president-suite-balcony": "President Suite"
       },
       "gallery": {
         "ariaLabel": "Галерея номеров и люксов",
@@ -270,7 +270,7 @@
       "deluxe-king": "Deluxe King Room",
       "deluxe-king-balcony": "Deluxe King with Balcony",
       "junior-suite": "Junior Suite",
-      "president-suite-balcony": "President Suite with Balcony"
+      "president-suite-balcony": "President Suite"
     },
     "specs": {
       "groupTitles": {
@@ -716,7 +716,7 @@
       "article": {
         "heading": "Индонезийский акцент в сердце паломничества Самарканда",
         "p1": "HADITH Hotel официально провёл soft opening в престижном комплексе Имама аль-Бухари в Самарканде, Узбекистан, в субботу, 5 сентября 2026 года. Менее чем в одном километре от центра паломничества у мавзолея Имама Мухаммада аль-Бухари отель, созданный PT EGI Resources, предлагает современное размещение, соединяющее узбекский характер с комфортом международного уровня.",
-        "p2": "В HADITH Hotel 112 номеров и люксов вместимостью до 250 гостей. Шесть типов номеров предназначены для паломников, путешественников и VIP-гостей: Deluxe Double Room, Deluxe Double Room with Balcony, Deluxe King Room, Deluxe King with Balcony, Junior Suite и President Suite with Balcony. Расположение в комплексе Имама аль-Бухари делает отель стратегической точкой для тех, кто приезжает и для зиярата, и чтобы открыть историю и культуру Самарканда.",
+        "p2": "В HADITH Hotel 112 номеров и люксов вместимостью до 250 гостей. Шесть типов номеров предназначены для паломников, путешественников и VIP-гостей: Deluxe Double Room, Deluxe Double Room with Balcony, Deluxe King Room, Deluxe King with Balcony, Junior Suite и President Suite. Расположение в комплексе Имама аль-Бухари делает отель стратегической точкой для тех, кто приезжает и для зиярата, и чтобы открыть историю и культуру Самарканда.",
         "p3": "Помимо размещения HADITH Hotel предлагает премиальные удобства: ресторан Saji Nusantara с индонезийской кухней, Uzbek Cuisine Bar & Lounge, крытый бассейн, фитнес-центр, спа, сауну, турецкий хаммам, а также теннисный корт и корт для падела. Ожидается, что отель не только укрепит сферу гостеприимства Самарканда, но и станет мостом культурного обмена между Индонезией и Узбекистаном через туризм и характерное гостеприимство Нусантары."
       }
     }

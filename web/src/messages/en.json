@@ -96,7 +96,7 @@
             "deluxe-king": "Deluxe King Room",
             "deluxe-king-balcony": "Deluxe King with Balcony",
             "junior-suite": "Junior Suite",
-            "president-suite-balcony": "President Suite with Balcony"
+            "president-suite-balcony": "President Suite"
           }
         },
         "dining": {
@@ -137,7 +137,7 @@
         "deluxe-king": "Deluxe King Room",
         "deluxe-king-balcony": "Deluxe King with Balcony",
         "junior-suite": "Junior Suite",
-        "president-suite-balcony": "President Suite with Balcony"
+        "president-suite-balcony": "President Suite"
       },
       "gallery": {
         "ariaLabel": "Rooms and suites gallery",
@@ -270,7 +270,7 @@
       "deluxe-king": "Deluxe King Room",
       "deluxe-king-balcony": "Deluxe King with Balcony",
       "junior-suite": "Junior Suite",
-      "president-suite-balcony": "President Suite with Balcony"
+      "president-suite-balcony": "President Suite"
     },
     "specs": {
       "groupTitles": {
@@ -716,7 +716,7 @@
       "article": {
         "heading": "An Indonesian touch at the heart of Samarkand pilgrimage",
         "p1": "HADITH Hotel officially held its soft opening in the distinguished Imam Al-Bukhari Complex, Samarkand, Uzbekistan, on Saturday, 5 September 2026. Less than a kilometre from the pilgrimage centre at the tomb of Imam Muhammad Al-Bukhari, the hotel developed by PT EGI Resources offers a modern stay that weaves Uzbek character with internationally standardised comfort.",
-        "p2": "HADITH Hotel has 112 rooms and suites with occupancy for up to 250 guests. Six room types serve pilgrims, travellers, and VIP guests alike: Deluxe Double Room, Deluxe Double Room with Balcony, Deluxe King Room, Deluxe King with Balcony, Junior Suite, and President Suite with Balcony. Its setting within the Imam Al-Bukhari precinct gives the hotel a strategic position for visitors who come both to make pilgrimage and to explore Samarkand’s history and culture.",
+        "p2": "HADITH Hotel has 112 rooms and suites with occupancy for up to 250 guests. Six room types serve pilgrims, travellers, and VIP guests alike: Deluxe Double Room, Deluxe Double Room with Balcony, Deluxe King Room, Deluxe King with Balcony, Junior Suite, and President Suite. Its setting within the Imam Al-Bukhari precinct gives the hotel a strategic position for visitors who come both to make pilgrimage and to explore Samarkand’s history and culture.",
         "p3": "Beyond accommodation, HADITH Hotel offers premium facilities including Saji Nusantara Restaurant, which brings Indonesian flavours to the table, Uzbek Cuisine Bar & Lounge, an indoor pool, a fitness centre, spa, sauna, Turkish hammam, and sports courts for tennis and padel. The hotel is expected not only to strengthen hospitality in Samarkand, but also to become a bridge of cultural exchange between Indonesia and Uzbekistan through travel and Nusantara hospitality."
       }
     }
