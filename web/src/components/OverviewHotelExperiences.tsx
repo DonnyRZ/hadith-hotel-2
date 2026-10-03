@@ -4,7 +4,6 @@ import SiteImage from "@/components/SiteImage";
 import { Link } from "@/i18n/navigation";
 import { useCallback, useState } from "react";
 import { useTranslations } from "next-intl";
-import { LEGACY_ROOM_COVERS } from "@/lib/rooms";
 
 type FeatureSlide = {
   id: string;
@@ -18,7 +17,7 @@ const slides: FeatureSlide[] = [
     id: "suites-rooms",
     key: "suitesRooms",
     href: "/suites-rooms",
-    src: LEGACY_ROOM_COVERS["president-suite-balcony"],
+    src: "/images/rooms/president-suite-balcony/03.jpg",
   },
   {
     id: "cafe-dining",

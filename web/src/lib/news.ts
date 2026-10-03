@@ -25,6 +25,16 @@ export type NewsStory = {
 
 export const NEWS_STORIES: readonly NewsStory[] = [
   {
+    id: "chess-olympiad",
+    href: "/stories/chess-olympiad",
+    image: "/images/news/turkish-chess-teams-hd.png",
+    width: 2564,
+    height: 2564,
+    uncropped: true,
+    dateISO: "2026-09-27",
+    namespace: "stories.chessOlympiad",
+  },
+  {
     id: "soft-opening",
     href: "/stories/soft-opening",
     image: "/images/news/soft-opening-samarkand.webp",
@@ -41,16 +51,6 @@ export const NEWS_STORIES: readonly NewsStory[] = [
     height: 576,
     uncropped: true,
     namespace: "stories.indonesianTouch",
-  },
-  {
-    id: "chess-olympiad",
-    href: "/stories/chess-olympiad",
-    image: "/images/news/turkish-chess-teams-hd.png",
-    width: 2564,
-    height: 2564,
-    uncropped: true,
-    dateISO: "2026-09-27",
-    namespace: "stories.chessOlympiad",
   },
   {
     id: "chess-journey",
