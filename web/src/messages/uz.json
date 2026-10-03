@@ -692,6 +692,20 @@
     }
   },
   "stories": {
+    "chessOlympiad": {
+      "title": "Turkiya shaxmat jamoalari Samarqand Olimpiadasini muvaffaqiyatli yakunladi",
+      "body": "Turkiyaning Open va Women’s jamoalari Samarqandda o‘tgan 46-FIDE shaxmat Olimpiadasida kuchli 15 talikka kirdi.",
+      "cta": "Maqolani o‘qish",
+      "kicker": "Samarqand yangiliklari",
+      "date": "2026-yil 27-sentabr",
+      "imageAlt": "Turkiyaning Open va Women’s shaxmat jamoalari Samarqanddagi 46-FIDE shaxmat Olimpiadasida hashamatli zinapoyada suratga tushmoqda.",
+      "article": {
+        "heading": "Samarqanddagi unutilmas yakun",
+        "p1": "46-FIDE shaxmat Olimpiadasi 2026-yil 27-sentabr kuni Samarqandda yakunlandi. Dunyoning turli mamlakatlari milliy jamoalari 11 tur davomida bellashdi.",
+        "p2": "Turkiyaning Open jamoasi 15 match ochkosi bilan 13-o‘rinni, Women’s jamoasi esa 16 ochko bilan 11-o‘rinni egalladi. Grossmeyster Yağız Kaan Erdoğmuş birinchi taxtada mag‘lubiyatsiz 8/10 natija qayd etib, individual kumush medalni ham qo‘lga kiritdi.",
+        "p3": "Jamoalarning portret suratlari turnirdagi unutilmas lahzani aks ettiradi. HADITH Hotel Samarqandning xalqaro ruhini va shahar merosini kashf etishga kelayotgan mehmonlarni qadrlaydi."
+      }
+    },
     "softOpening": {
       "title": "EGI Resources global izini mustahkamladi: HADITH Hotel Samarqandda rasman soft opening qilindi",
       "body": "HADITH Hotel Imam al-Buxoriy majmuasida, Samarqandda soft opening qilindi va EGI Resourcesning global izini kengaytirdi.",

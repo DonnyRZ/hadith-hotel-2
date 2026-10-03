@@ -692,6 +692,20 @@
     }
   },
   "stories": {
+    "chessOlympiad": {
+      "title": "Tim Catur Türkiye Tutup Olimpiade Samarkand dengan Hasil Gemilang",
+      "body": "Tim Open dan Women’s Türkiye meraih posisi 15 besar pada Olimpiade Catur FIDE ke-46 di Samarkand.",
+      "cta": "Baca Artikel",
+      "kicker": "Berita Samarkand",
+      "date": "27 September 2026",
+      "imageAlt": "Tim Open dan Women’s Türkiye berpose di tangga megah pada Olimpiade Catur FIDE ke-46 di Samarkand.",
+      "article": {
+        "heading": "Penutup yang berkesan di Samarkand",
+        "p1": "Olimpiade Catur FIDE ke-46 berakhir di Samarkand pada 27 September 2026, setelah 11 babak pertandingan yang diikuti tim nasional dari berbagai negara.",
+        "p2": "Tim Open Türkiye finis di peringkat ke-13 dengan 15 poin pertandingan, sementara tim Women’s berada di posisi ke-11 dengan 16 poin. Grandmaster Yağız Kaan Erdoğmuş juga meraih perak individu di papan pertama dengan skor 8/10 tanpa kekalahan.",
+        "p3": "Potret kedua tim mengabadikan momen berkesan dari turnamen tersebut. HADITH Hotel turut merayakan semangat internasional Samarkand dan para pengunjung yang menghidupkan warisan kota ini."
+      }
+    },
     "softOpening": {
       "title": "EGI Resources Tancapkan Jejak Global, Hadith Hotel Resmi Soft Opening di Samarkand",
       "body": "PT EGI Resources menggelar soft opening Hadith Hotel di Kompleks Imam Al-Bukhari, Samarkand.",

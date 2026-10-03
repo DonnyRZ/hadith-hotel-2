@@ -60,7 +60,7 @@ export async function NewsIndex() {
           <p className="news-meta">
             <span>{tFeatured("kicker")}</span>
             <span aria-hidden="true">·</span>
-            <time dateTime="2026-09-05">{tFeatured("date")}</time>
+            <time dateTime={featured.dateISO}>{tFeatured("date")}</time>
           </p>
           <h2 className="news-feature__title">
             <Link href={featured.href}>{tFeatured("title")}</Link>

@@ -1,16 +1,26 @@
 export type NewsStoryId =
   | "soft-opening"
   | "indonesian-touch"
+  | "chess-olympiad"
   | "chess-journey";
 
 export type NewsStory = {
   id: NewsStoryId;
-  href: "/stories/soft-opening" | "/stories/indonesian-touch" | "/stories/chess-journey";
+  href:
+    | "/stories/soft-opening"
+    | "/stories/indonesian-touch"
+    | "/stories/chess-olympiad"
+    | "/stories/chess-journey";
   image: string;
   width: number;
   height: number;
   uncropped: boolean;
-  namespace: "stories.softOpening" | "stories.indonesianTouch" | "reviews.chessStory";
+  dateISO?: string;
+  namespace:
+    | "stories.softOpening"
+    | "stories.indonesianTouch"
+    | "stories.chessOlympiad"
+    | "reviews.chessStory";
 };
 
 export const NEWS_STORIES: readonly NewsStory[] = [
@@ -31,6 +41,16 @@ export const NEWS_STORIES: readonly NewsStory[] = [
     height: 576,
     uncropped: true,
     namespace: "stories.indonesianTouch",
+  },
+  {
+    id: "chess-olympiad",
+    href: "/stories/chess-olympiad",
+    image: "/images/news/turkish-chess-teams-hd.png",
+    width: 2564,
+    height: 2564,
+    uncropped: true,
+    dateISO: "2026-09-27",
+    namespace: "stories.chessOlympiad",
   },
   {
     id: "chess-journey",

@@ -692,6 +692,20 @@
     }
   },
   "stories": {
+    "chessOlympiad": {
+      "title": "Türkiye’s Chess Teams Finish Strong at the Samarkand Olympiad",
+      "body": "Türkiye’s Open and Women’s teams secured top-15 finishes at the 46th FIDE Chess Olympiad in Samarkand.",
+      "cta": "Read Article",
+      "kicker": "Samarkand News",
+      "date": "27 September 2026",
+      "imageAlt": "Türkiye’s Open and Women’s chess teams pose on the grand staircase at the 46th FIDE Chess Olympiad in Samarkand.",
+      "article": {
+        "heading": "A memorable finish in Samarkand",
+        "p1": "The 46th FIDE Chess Olympiad concluded in Samarkand on 27 September 2026, after 11 rounds of competition among national teams from around the world.",
+        "p2": "Türkiye finished 13th in the Open section with 15 match points and 11th in the Women’s section with 16. Grandmaster Yağız Kaan Erdoğmuş also won individual silver on board one, scoring 8/10 without a loss.",
+        "p3": "The team portraits capture a memorable moment from the tournament. HADITH Hotel celebrates Samarkand’s international spirit and the visitors who bring the city’s heritage to life."
+      }
+    },
     "softOpening": {
       "title": "EGI Resources Marks Its Global Footprint as HADITH Hotel Soft-Opens in Samarkand",
       "body": "HADITH Hotel has soft-opened at the Imam Al-Bukhari Complex in Samarkand, extending EGI Resources’ presence across Central Asia.",
