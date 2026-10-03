@@ -113,6 +113,17 @@ export default async function OverviewPage() {
             {t("welcome.title")}
           </h1>
           <p className="overview-welcome__body">{t("welcome.body")}</p>
+          <div className="overview-leadership-note">
+            <h2 className="overview-leadership-note__eyebrow">
+              {t("leadership.eyebrow")}
+            </h2>
+            <blockquote className="overview-leadership-note__quote">
+              <p>{t("leadership.quote")}</p>
+              <footer>
+                <cite>{t("leadership.attribution")}</cite>
+              </footer>
+            </blockquote>
+          </div>
         </section>
 
         <OverviewReserveAmenities />

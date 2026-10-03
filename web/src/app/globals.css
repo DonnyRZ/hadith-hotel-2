@@ -823,6 +823,53 @@ button {
   line-height: 1.75;
 }
 
+.overview-leadership-note {
+  width: min(760px, 100%);
+  margin: clamp(36px, 5vw, 56px) auto 0;
+  padding-top: clamp(26px, 3.5vw, 38px);
+  border-top: 1px solid var(--line);
+}
+
+.overview-leadership-note__eyebrow {
+  margin: 0;
+  color: var(--accent);
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.overview-leadership-note__quote {
+  margin: 14px 0 0;
+}
+
+.overview-leadership-note__quote > p {
+  margin: 0 auto;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(1.35rem, 2.1vw, 1.8rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.overview-leadership-note__quote footer {
+  margin-top: 18px;
+}
+
+.overview-leadership-note__quote cite {
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.67rem;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
 /* Empty band under Welcome (Ritz light-grey block) — content later */
 .overview-band {
   background: var(--band);
@@ -5695,6 +5742,15 @@ body.has-room-lightbox .site-header__utility {
     margin-top: 24px;
     font-size: 1rem;
     line-height: 1.7;
+  }
+
+  .overview-leadership-note {
+    margin-top: 36px;
+    padding-top: 26px;
+  }
+
+  .overview-leadership-note__quote > p {
+    font-size: 1.4rem;
   }
 
   .overview-amenities {
