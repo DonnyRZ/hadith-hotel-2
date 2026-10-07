@@ -557,7 +557,10 @@
       "reviewLandscape": { "name": "Imad Abdullah Hamdan", "role": "Falastin Davlati Madaniyat Vaziri" },
       "grandMasterEvgenujMiroshnichenko": { "name": "Evgenuj Miroshnichenko", "role": "Chess Grand Master, Ukraina" },
       "womensTeamDominicaChessFederation": { "name": "Women's Team", "role": "Dominica Chess Federation" },
-      "aleksaStrikovic": { "name": "Aleksa Strikovic", "role": "Chess Grand Master, Serbia" }
+      "aleksaStrikovic": { "name": "Aleksa Strikovic", "role": "Chess Grand Master, Serbia" },
+      "muhamadRozaimiBinRamle": { "name": "Prof. Dr. Muhamad Rozaimi bin Ramle", "role": "Tuanku Syed Sirajuddin Islom Xalqaro Universiteti (UniSIRAJ) prorektori, Perlis, Malayziya" },
+      "mohdAsriBinZainulAbidin": { "name": "Dr. Mohd Asri bin Zainul Abidin (Dr. MAZA)", "role": "Perlis shtati muftiysi, Malayziya" },
+      "rafedahBintiAbdulAziz": { "name": "Rafedah binti Abdul Aziz", "role": "Malayziyaning O‘zbekistondagi elchisi" }
     },
     "testimonialQuotes": {
       "syekhMohamedElDuwaini": "Ajoyib xizmat ko'rsatuvchi zo'r mehmonxona. Alloh uning davomli muvaffaqiyatini barakali qilsin.",
@@ -568,7 +571,10 @@
       "talgatSafichTadzetdinov": "Bu mehmonxona butun dunyo musulmonlari, ayniqsa O'zbekiston xalqining faxridir.",
       "aleksaStrikovic": "Iliq va yoqimli muhitga ega chiroyli mehmonxona. Qahvasi ajoyib, baristasi esa samimiy va e'tiborli.",
       "womensTeamDominicaChessFederation": "Band kundan so'ng dam olish uchun go'zal joy. Qahvasi mazali, samimiy xizmat esa o'zimizni uyimizdagidek his qildirdi.",
-      "grandMasterEvgenujMiroshnichenko": "Ajoyib qahva va chinakam samimiy xizmatga ega chiroyli mehmonxona. Samarqandda qolish uchun ajoyib maskan."
+      "grandMasterEvgenujMiroshnichenko": "Ajoyib qahva va chinakam samimiy xizmatga ega chiroyli mehmonxona. Samarqandda qolish uchun ajoyib maskan.",
+      "muhamadRozaimiBinRamle": "Chiroyli mehmonxona, samimiy mehmondo'stlik va e'tiborli xizmat.",
+      "mohdAsriBinZainulAbidin": "Nafis muhit va e'tiborli xizmat tashrifimizni yoqimli qildi.",
+      "rafedahBintiAbdulAziz": "Shinam turar joy va samimiy mehmondo'stlik tashrifimizni esda qolarli qildi."
     },
     "videoReviews": {
       "ariaLabel": "Mehmonlarning video sharhlari",

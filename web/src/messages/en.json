@@ -557,7 +557,10 @@
       "reviewLandscape": { "name": "Imad Abdullah Hamdan", "role": "Minister of Culture of the State of Palestine" },
       "grandMasterEvgenujMiroshnichenko": { "name": "Evgenuj Miroshnichenko", "role": "Chess Grand Master, Ukraine" },
       "womensTeamDominicaChessFederation": { "name": "Women's Team", "role": "Dominica Chess Federation" },
-      "aleksaStrikovic": { "name": "Aleksa Strikovic", "role": "Chess Grand Master, Serbia" }
+      "aleksaStrikovic": { "name": "Aleksa Strikovic", "role": "Chess Grand Master, Serbia" },
+      "muhamadRozaimiBinRamle": { "name": "Prof. Dr. Muhamad Rozaimi bin Ramle", "role": "Vice Chancellor, Universiti Islam Antarabangsa Tuanku Syed Sirajuddin (UniSIRAJ), Perlis, Malaysia" },
+      "mohdAsriBinZainulAbidin": { "name": "Dr. Mohd Asri bin Zainul Abidin (Dr. MAZA)", "role": "Mufti of the State of Perlis, Malaysia" },
+      "rafedahBintiAbdulAziz": { "name": "Rafedah binti Abdul Aziz", "role": "Ambassador of Malaysia to Uzbekistan" }
     },
     "testimonialQuotes": {
       "syekhMohamedElDuwaini": "Outstanding hotel with excellent service. May Allah bless its continued success.",
@@ -568,7 +571,10 @@
       "talgatSafichTadzetdinov": "This hotel is the pride of all Muslims in the world, and above all, the people of Uzbekistan.",
       "aleksaStrikovic": "A beautiful hotel with a welcoming atmosphere. The coffee was excellent, and the barista was warm and attentive.",
       "womensTeamDominicaChessFederation": "A beautiful place to unwind after a busy day. The coffee was delicious, and the friendly service made us feel right at home.",
-      "grandMasterEvgenujMiroshnichenko": "A beautiful hotel with excellent coffee and genuinely friendly service. A wonderful place to stay in Samarkand."
+      "grandMasterEvgenujMiroshnichenko": "A beautiful hotel with excellent coffee and genuinely friendly service. A wonderful place to stay in Samarkand.",
+      "muhamadRozaimiBinRamle": "A beautiful hotel with warm hospitality and thoughtful service.",
+      "mohdAsriBinZainulAbidin": "Elegant surroundings and attentive service made the visit a pleasure.",
+      "rafedahBintiAbdulAziz": "A comfortable stay and gracious hospitality made the visit memorable."
     },
     "videoReviews": {
       "ariaLabel": "Guest video reviews",

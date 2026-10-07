@@ -557,7 +557,10 @@
       "reviewLandscape": { "name": "Имад Абдулла Хамдан", "role": "Министр культуры Государства Палестина" },
       "grandMasterEvgenujMiroshnichenko": { "name": "Evgenuj Miroshnichenko", "role": "Шахматный гроссмейстер, Украина" },
       "womensTeamDominicaChessFederation": { "name": "Women's Team", "role": "Dominica Chess Federation" },
-      "aleksaStrikovic": { "name": "Aleksa Strikovic", "role": "Шахматный гроссмейстер, Сербия" }
+      "aleksaStrikovic": { "name": "Aleksa Strikovic", "role": "Шахматный гроссмейстер, Сербия" },
+      "muhamadRozaimiBinRamle": { "name": "Prof. Dr. Muhamad Rozaimi bin Ramle", "role": "Вице-канцлер Исламского международного университета Туанку Сайеда Сираджуддина (UniSIRAJ), Перлис, Малайзия" },
+      "mohdAsriBinZainulAbidin": { "name": "Dr. Mohd Asri bin Zainul Abidin (Dr. MAZA)", "role": "Муфтий штата Перлис, Малайзия" },
+      "rafedahBintiAbdulAziz": { "name": "Rafedah binti Abdul Aziz", "role": "Посол Малайзии в Узбекистане" }
     },
     "testimonialQuotes": {
       "syekhMohamedElDuwaini": "Выдающийся отель с превосходным сервисом. Пусть Аллах благословит его дальнейший успех.",
@@ -568,7 +571,10 @@
       "talgatSafichTadzetdinov": "Этот отель — гордость всех мусульман мира и, прежде всего, народа Узбекистана.",
       "aleksaStrikovic": "Прекрасный отель с тёплой и гостеприимной атмосферой. Кофе был великолепным, а бариста — внимательным и дружелюбным.",
       "womensTeamDominicaChessFederation": "Прекрасное место, чтобы отдохнуть после насыщенного дня. Вкусный кофе и дружелюбное обслуживание подарили ощущение домашнего уюта.",
-      "grandMasterEvgenujMiroshnichenko": "Красивый отель с отличным кофе и по-настоящему дружелюбным сервисом. Прекрасное место для проживания в Самарканде."
+      "grandMasterEvgenujMiroshnichenko": "Красивый отель с отличным кофе и по-настоящему дружелюбным сервисом. Прекрасное место для проживания в Самарканде.",
+      "muhamadRozaimiBinRamle": "Красивый отель, тёплое гостеприимство и внимательное обслуживание.",
+      "mohdAsriBinZainulAbidin": "Элегантная обстановка и заботливый сервис сделали визит приятным.",
+      "rafedahBintiAbdulAziz": "Комфортное проживание и радушный приём оставили приятные впечатления."
     },
     "videoReviews": {
       "ariaLabel": "Видеоотзывы гостей",

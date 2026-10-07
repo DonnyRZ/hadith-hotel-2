@@ -80,6 +80,24 @@ const videoReviewConfigs: VideoReviewConfig[] = [
     personKey: "womensTeamDominicaChessFederation",
     src: "/videos/video-3.mp4",
   },
+  {
+    id: "muhamad-rozaimi-bin-ramle",
+    personKey: "muhamadRozaimiBinRamle",
+    src: "/videos/prof-dr-muhamad-rozaimi-bin-ramle.mp4",
+    poster: "/images/testimonials/prof-dr-muhamad-rozaimi-bin-ramle.webp",
+  },
+  {
+    id: "mohd-asri-bin-zainul-abidin",
+    personKey: "mohdAsriBinZainulAbidin",
+    src: "/videos/dr-mohd-asri-bin-zainul-abidin.mp4",
+    poster: "/images/testimonials/dr-mohd-asri-bin-zainul-abidin.webp",
+  },
+  {
+    id: "rafedah-binti-abdul-aziz",
+    personKey: "rafedahBintiAbdulAziz",
+    src: "/videos/rafedah-binti-abdul-aziz.mp4",
+    poster: "/images/testimonials/rafedah-binti-abdul-aziz.webp",
+  },
 ];
 
 const landscapeReviewConfig: VideoReviewConfig = {
@@ -151,6 +169,24 @@ const testimonialConfigs: TestimonialConfig[] = [
     quoteKey: "grandMasterEvgenujMiroshnichenko",
     photo: "/images/testimonials/evgenuj-miroshnichenko.webp",
     photoPosition: "50% 42%",
+  },
+  {
+    id: "muhamad-rozaimi-bin-ramle",
+    personKey: "muhamadRozaimiBinRamle",
+    quoteKey: "muhamadRozaimiBinRamle",
+    photo: "/images/testimonials/prof-dr-muhamad-rozaimi-bin-ramle.webp",
+  },
+  {
+    id: "mohd-asri-bin-zainul-abidin",
+    personKey: "mohdAsriBinZainulAbidin",
+    quoteKey: "mohdAsriBinZainulAbidin",
+    photo: "/images/testimonials/dr-mohd-asri-bin-zainul-abidin.webp",
+  },
+  {
+    id: "rafedah-binti-abdul-aziz",
+    personKey: "rafedahBintiAbdulAziz",
+    quoteKey: "rafedahBintiAbdulAziz",
+    photo: "/images/testimonials/rafedah-binti-abdul-aziz.webp",
   },
 ];
 
