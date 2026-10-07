@@ -4447,6 +4447,45 @@ body.has-room-lightbox .site-header__utility {
   margin-top: clamp(20px, 3vh, 32px);
 }
 
+.swan-x-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 3vw, 32px);
+  width: min(1120px, 100%);
+  margin: clamp(28px, 5vh, 48px) auto 0;
+}
+
+.swan-x-gallery__item {
+  min-width: 0;
+  margin: 0;
+  box-shadow: 0 18px 44px rgb(26 18 12 / 8%);
+}
+
+.swan-x-source {
+  width: min(720px, 100%);
+  margin: 28px auto 0;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.swan-x-source a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.swan-x-source a:hover {
+  color: var(--ink);
+}
+
+@media (max-width: 720px) {
+  .swan-x-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
 .story-article__frame {
   position: relative;
   aspect-ratio: 16 / 9;

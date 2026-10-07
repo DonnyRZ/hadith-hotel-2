@@ -1,4 +1,5 @@
 export type NewsStoryId =
+  | "swan-x-2026"
   | "soft-opening"
   | "indonesian-touch"
   | "chess-olympiad"
@@ -7,6 +8,7 @@ export type NewsStoryId =
 export type NewsStory = {
   id: NewsStoryId;
   href:
+    | "/stories/swan-x-2026"
     | "/stories/soft-opening"
     | "/stories/indonesian-touch"
     | "/stories/chess-olympiad"
@@ -17,6 +19,7 @@ export type NewsStory = {
   uncropped: boolean;
   dateISO?: string;
   namespace:
+    | "stories.swanX2026"
     | "stories.softOpening"
     | "stories.indonesianTouch"
     | "stories.chessOlympiad"
@@ -24,6 +27,16 @@ export type NewsStory = {
 };
 
 export const NEWS_STORIES: readonly NewsStory[] = [
+  {
+    id: "swan-x-2026",
+    href: "/stories/swan-x-2026",
+    image: "/images/news/swan-x-2026-cover.webp",
+    width: 1448,
+    height: 1086,
+    uncropped: true,
+    dateISO: "2026-10-07",
+    namespace: "stories.swanX2026",
+  },
   {
     id: "chess-olympiad",
     href: "/stories/chess-olympiad",

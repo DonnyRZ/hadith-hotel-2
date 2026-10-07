@@ -703,6 +703,23 @@
     }
   },
   "stories": {
+    "swanX2026": {
+      "title": "Delegasi Perlis Menginap di HADITH Hotel untuk SWAN X 2026",
+      "body": "Tuanku Syed Faizuddin Putra Jamalullail dan delegasi Perlis menginap di HADITH Hotel saat berada di Samarkand untuk menghadiri Konferensi Internasional Warisan Nabawi ke-10 (SWAN X 2026).",
+      "cta": "Baca Artikel",
+      "kicker": "Berita Samarkand",
+      "date": "7 Oktober 2026",
+      "imageAlt": "Tuanku Syed Faizuddin Putra Jamalullail dan anggota delegasi di HADITH Hotel, Samarkand.",
+      "imageAltSecond": "Perwakilan delegasi menyerahkan cendera mata di HADITH Hotel.",
+      "imageAltThird": "Para tamu dari Perlis berfoto bersama di dalam HADITH Hotel.",
+      "sourceLabel": "Konteks konferensi:",
+      "article": {
+        "heading": "Kunjungan untuk SWAN X 2026",
+        "p1": "Tuanku Syed Faizuddin Putra Jamalullail, Raja Muda Perlis, bersama anggota delegasi Perlis menginap di HADITH Hotel selama kunjungan mereka ke Samarkand.",
+        "p2": "Kunjungan tersebut berlangsung bertepatan dengan Konferensi Internasional Warisan Nabawi ke-10 (SWAN X 2026), yang dibuka secara resmi oleh Raja Muda Perlis. Konferensi ini mengangkat warisan Nabawi sebagai panduan kepemimpinan dalam menghadapi ketidakstabilan global.",
+        "p3": "HADITH Hotel merasa terhormat dapat menyambut delegasi tersebut. Kehadiran mereka mempertemukan tamu dari Malaysia dengan keramahan Samarkand dalam pertemuan internasional yang membahas warisan bersama dan tantangan masa kini."
+      }
+    },
     "chessOlympiad": {
       "title": "Tim Catur Türkiye Tutup Olimpiade Samarkand dengan Hasil Gemilang",
       "body": "Tim Open dan Women’s Türkiye meraih posisi 15 besar pada Olimpiade Catur FIDE ke-46 di Samarkand.",
