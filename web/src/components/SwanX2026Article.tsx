@@ -62,17 +62,6 @@ export async function SwanX2026Article() {
         ))}
       </div>
 
-      <p className="swan-x-source">
-        <span>{t("sourceLabel")}</span>{" "}
-        <a
-          href="https://malaysiagazette.com/2026/10/07/raja-muda-perlis-rasmi-swan-2026-angkat-warisan-nabawi-hadapi-ketidakstabilan-global/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          MalaysiaGazette
-        </a>
-      </p>
-
       <StoryRelated currentId="swan-x-2026" />
     </article>
   );
