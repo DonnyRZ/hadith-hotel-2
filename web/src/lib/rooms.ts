@@ -1,4 +1,4 @@
-export const HOTEL_ROOM_COUNT = 112;
+export const HOTEL_ROOM_COUNT = 114;
 
 export type RoomType = {
   id: string;
