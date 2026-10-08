@@ -13,7 +13,8 @@ export const OG_IMAGE_PATH = "/brand/og-default.jpg";
 export const FAVICON_PATH = "/favicon.ico";
 
 export const HOTEL_EMAIL = "info@hadith-hotel.com";
-export const INSTAGRAM_URL = "https://www.instagram.com/hadith.hotel/";
+export const INSTAGRAM_URL =
+  "https://www.instagram.com/hadithhotelsamarkand?stkn=MXRtdjJ4ZTJ5NjZ5Yw%3D%3D";
 export const YOUTUBE_URL =
   "https://www.youtube.com/channel/UC9x645ycCx46N5zrO2749Fg";
 
