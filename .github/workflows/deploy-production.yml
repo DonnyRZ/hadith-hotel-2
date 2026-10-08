@@ -1,0 +1,213 @@
+name: Deploy production
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hadith-hotel-2-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and deploy to VPS
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Validate deployment settings
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_ROOT_PASSWORD_1: ${{ secrets.VPS_ROOT_PASSWORD_1 }}
+          VPS_KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          VISITOR_IP_HASH_SECRET: ${{ secrets.VISITOR_IP_HASH_SECRET }}
+          VPS_PORT: ${{ vars.VPS_PORT || '22' }}
+          VPS_APP_DIR: ${{ vars.VPS_APP_DIR || '/opt/hadith-hotel-2' }}
+        run: |
+          set -euo pipefail
+          for name in VPS_HOST VPS_USER VPS_ROOT_PASSWORD_1 VPS_KNOWN_HOSTS POSTGRES_PASSWORD VISITOR_IP_HASH_SECRET; do
+            if [[ -z "${!name:-}" ]]; then
+              echo "::error::$name is required in the production environment"
+              exit 1
+            fi
+          done
+          [[ "$VPS_HOST" =~ ^[A-Za-z0-9][A-Za-z0-9.-]*$ ]] || { echo "::error::VPS_HOST must be an IP address or hostname"; exit 1; }
+          [[ "$VPS_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]*\$?$ ]] || { echo "::error::VPS_USER contains unsupported characters"; exit 1; }
+          [[ "$VPS_PORT" =~ ^[0-9]+$ ]] || { echo "::error::VPS_PORT must be numeric"; exit 1; }
+          (( VPS_PORT >= 1 && VPS_PORT <= 65535 )) || { echo "::error::VPS_PORT must be between 1 and 65535"; exit 1; }
+          [[ "$VPS_APP_DIR" =~ ^/[A-Za-z0-9._/-]+$ ]] || {
+            echo "::error::VPS_APP_DIR must be an absolute path without spaces"
+            exit 1
+          }
+
+      - name: Configure pinned SSH
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+          VPS_PORT: ${{ vars.VPS_PORT || '22' }}
+        run: |
+          set -euo pipefail
+          install -d -m 700 "$HOME/.ssh"
+          printf '%s\n' "$VPS_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/known_hosts"
+          known_hosts_host="$VPS_HOST"
+          if [[ "$VPS_PORT" != 22 ]]; then
+            known_hosts_host="[$VPS_HOST]:$VPS_PORT"
+          fi
+          ssh-keygen -F "$known_hosts_host" -f "$HOME/.ssh/known_hosts" >/dev/null || {
+            echo "::error::VPS_KNOWN_HOSTS does not contain the configured host"
+            exit 1
+          }
+
+      - name: Install SSH password client
+        run: |
+          set -euo pipefail
+          if ! command -v sshpass >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install --no-install-recommends -y sshpass
+          fi
+
+      - name: Check Docker access on VPS
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          SSHPASS: ${{ secrets.VPS_ROOT_PASSWORD_1 }}
+          VPS_PORT: ${{ vars.VPS_PORT || '22' }}
+        run: |
+          set -euo pipefail
+          ssh_args=(
+            -T
+            -p "$VPS_PORT"
+            -o PreferredAuthentications=password
+            -o PubkeyAuthentication=no
+            -o KbdInteractiveAuthentication=no
+            -o NumberOfPasswordPrompts=1
+            -o StrictHostKeyChecking=yes
+            -o UserKnownHostsFile="$HOME/.ssh/known_hosts"
+            -o ConnectTimeout=10
+          )
+          sshpass -e ssh "${ssh_args[@]}" "$VPS_USER@$VPS_HOST" 'docker compose version >/dev/null && docker info --format "{{.ServerVersion}}" >/dev/null'
+
+      - name: Upload source snapshot
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          SSHPASS: ${{ secrets.VPS_ROOT_PASSWORD_1 }}
+          VPS_PORT: ${{ vars.VPS_PORT || '22' }}
+          VPS_APP_DIR: ${{ vars.VPS_APP_DIR || '/opt/hadith-hotel-2' }}
+        run: |
+          set -euo pipefail
+          ssh_args=(
+            -T
+            -p "$VPS_PORT"
+            -o PreferredAuthentications=password
+            -o PubkeyAuthentication=no
+            -o KbdInteractiveAuthentication=no
+            -o NumberOfPasswordPrompts=1
+            -o StrictHostKeyChecking=yes
+            -o UserKnownHostsFile="$HOME/.ssh/known_hosts"
+            -o ConnectTimeout=10
+          )
+          release_dir="$VPS_APP_DIR/releases/$GITHUB_SHA"
+          sshpass -e ssh "${ssh_args[@]}" "$VPS_USER@$VPS_HOST" "mkdir -p '$release_dir'"
+          tar -C "$GITHUB_WORKSPACE" \
+            --exclude=.git \
+            --exclude=web/node_modules \
+            --exclude=web/.next \
+            --exclude=web/.env \
+            --exclude='web/.env.*' \
+            -czf - . |
+            sshpass -e ssh "${ssh_args[@]}" "$VPS_USER@$VPS_HOST" "tar -xzf - -C '$release_dir'"
+
+      - name: Update production environment file
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          SSHPASS: ${{ secrets.VPS_ROOT_PASSWORD_1 }}
+          VPS_PORT: ${{ vars.VPS_PORT || '22' }}
+          VPS_APP_DIR: ${{ vars.VPS_APP_DIR || '/opt/hadith-hotel-2' }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          VISITOR_IP_HASH_SECRET: ${{ secrets.VISITOR_IP_HASH_SECRET }}
+        run: |
+          set -euo pipefail
+          ssh_args=(
+            -T
+            -p "$VPS_PORT"
+            -o PreferredAuthentications=password
+            -o PubkeyAuthentication=no
+            -o KbdInteractiveAuthentication=no
+            -o NumberOfPasswordPrompts=1
+            -o StrictHostKeyChecking=yes
+            -o UserKnownHostsFile="$HOME/.ssh/known_hosts"
+            -o ConnectTimeout=10
+          )
+          target="$VPS_USER@$VPS_HOST"
+          {
+            printf 'POSTGRES_PASSWORD=%s\n' "$POSTGRES_PASSWORD"
+            printf 'VISITOR_IP_HASH_SECRET=%s\n' "$VISITOR_IP_HASH_SECRET"
+          } | sshpass -e ssh "${ssh_args[@]}" "$target" "umask 077; mkdir -p '$VPS_APP_DIR'; cat > '$VPS_APP_DIR/.env.incoming'"
+          sshpass -e ssh "${ssh_args[@]}" "$target" "bash -s -- '$VPS_APP_DIR'" <<'REMOTE'
+          set -euo pipefail
+          app_dir=$1
+          tmp="$app_dir/.env.tmp"
+          incoming="$app_dir/.env.incoming"
+          trap 'rm -f "$tmp" "$incoming"' EXIT
+          if [[ -f "$app_dir/.env" ]]; then
+            awk -F= '$1 != "POSTGRES_PASSWORD" && $1 != "VISITOR_IP_HASH_SECRET"' "$app_dir/.env" > "$tmp"
+          fi
+          cat "$incoming" >> "$tmp"
+          chmod 600 "$tmp"
+          mv "$tmp" "$app_dir/.env"
+          rm -f "$incoming"
+          trap - EXIT
+          REMOTE
+
+      - name: Build, start, and smoke-check production
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          SSHPASS: ${{ secrets.VPS_ROOT_PASSWORD_1 }}
+          VPS_PORT: ${{ vars.VPS_PORT || '22' }}
+          VPS_APP_DIR: ${{ vars.VPS_APP_DIR || '/opt/hadith-hotel-2' }}
+        run: |
+          set -euo pipefail
+          ssh_args=(
+            -T
+            -p "$VPS_PORT"
+            -o PreferredAuthentications=password
+            -o PubkeyAuthentication=no
+            -o KbdInteractiveAuthentication=no
+            -o NumberOfPasswordPrompts=1
+            -o StrictHostKeyChecking=yes
+            -o UserKnownHostsFile="$HOME/.ssh/known_hosts"
+            -o ConnectTimeout=10
+          )
+          sshpass -e ssh "${ssh_args[@]}" "$VPS_USER@$VPS_HOST" "bash -s -- '$VPS_APP_DIR' '$GITHUB_SHA'" <<'REMOTE'
+          set -euo pipefail
+          app_dir=$1
+          release_dir="$app_dir/releases/$2"
+          compose=(docker compose --project-name hadith-hotel-2 --project-directory "$release_dir" --env-file "$app_dir/.env" -f "$release_dir/docker-compose.yml")
+          "${compose[@]}" build web
+          "${compose[@]}" up -d web
+          for attempt in $(seq 1 30); do
+            if docker exec hadith-hotel-2-web node -e 'fetch("http://127.0.0.1:3000/").then((response) => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))' >/dev/null 2>&1; then
+              printf '%s\n' 'Production homepage returned HTTP 2xx.'
+              exit 0
+            fi
+            sleep 2
+          done
+          "${compose[@]}" ps
+          printf '%s\n' 'Production homepage health check failed.' >&2
+          exit 1
+          REMOTE
