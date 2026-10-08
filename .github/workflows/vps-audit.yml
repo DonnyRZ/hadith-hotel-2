@@ -100,6 +100,8 @@ jobs:
           free -h 2>/dev/null || true
           uptime 2>/dev/null || true
           nproc 2>/dev/null || true
+          printf 'METRIC cpus=%s disk_available_kib=%s ram_available_kib=%s rsync=%s\n' "$(nproc)" "$(df -Pk / | awk 'NR==2 {print $4}')" "$(free -k | awk '/^Mem:/ {print $7}')" "$(command -v rsync >/dev/null && printf installed || printf missing)"
+          printf 'METRIC staged_public_kib=%s\n' "$(du -sk /opt/hadith-hotel-2/releases/*/web/public 2>/dev/null | awk '{sum+=$1} END {print sum+0}')"
           printf '%s\n' '=== Transfer tools and staged source sizes ==='
           command -v rsync || true
           command -v git || true
@@ -155,6 +157,9 @@ jobs:
           transfer_status=$?
           printf 'Transfer exit: %s, elapsed: %ss\n' "$transfer_status" "$((SECONDS-transfer_started))" >>"$audit_file"
           set -e
+          while IFS= read -r metric; do
+            echo "::notice title=VPS deployment audit::$metric"
+          done < <(grep -E '^METRIC |^Transfer exit:' "$audit_file")
           python3 - "$audit_file" "$GITHUB_STEP_SUMMARY" <<'SUMMARY'
           import html, pathlib, sys
           data = pathlib.Path(sys.argv[1]).read_text()
