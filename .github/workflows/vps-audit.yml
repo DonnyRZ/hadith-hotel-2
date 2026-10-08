@@ -125,10 +125,17 @@ jobs:
 
           printf '%s\n' '=== Production target and active build ==='
           if [[ -d /var/www ]]; then
-            find /var/www -maxdepth 2 -type d 2>/dev/null | while IFS= read -r directory; do
+            find /var/www -maxdepth 2 \( -type d -o -type l \) 2>/dev/null | while IFS= read -r directory; do
               printf 'METRIC www_directory=%s\n' "$directory"
             done
           fi
+          docker ps --format 'METRIC running_container={{.Names}} image={{.Image}} ports={{.Ports}}' 2>/dev/null || true
+          for pid in $(pgrep -x node 2>/dev/null); do
+            printf 'METRIC node_pid=%s cwd=%s\n' "$pid" "$(readlink "/proc/$pid/cwd" 2>/dev/null)"
+          done
+          for container in $(docker ps -q 2>/dev/null); do
+            docker inspect "$container" --format 'METRIC container={{.Name}} working_dir={{index .Config.Labels "com.docker.compose.project.working_dir"}} config_files={{index .Config.Labels "com.docker.compose.project.config_files"}}' 2>/dev/null || true
+          done
           docker inspect hadith-hotel-2-web --format 'METRIC production_container={{.Name}} project={{index .Config.Labels "com.docker.compose.project"}} working_dir={{index .Config.Labels "com.docker.compose.project.working_dir"}} config_files={{index .Config.Labels "com.docker.compose.project.config_files"}} image={{.Image}}' 2>/dev/null || true
           for directory in "$1" /opt/hadith-hotel-2; do
             [[ -d "$directory/source-cache" ]] || continue
@@ -171,7 +178,7 @@ jobs:
             if [[ -d "$root" ]]; then
               find "$root" -maxdepth 5 -type f \
                 \( -name docker-compose.yml -o -name compose.yml -o -name compose.yaml \) \
-                -print 2>/dev/null || true
+                -print 2>/dev/null | sed 's/^/METRIC compose_file=/' || true
             fi
           done
 
@@ -193,9 +200,13 @@ jobs:
           transfer_status=$?
           printf 'Transfer exit: %s, elapsed: %ss\n' "$transfer_status" "$((SECONDS-transfer_started))" >>"$audit_file"
           set -e
-          while IFS= read -r metric; do
-            echo "::notice title=VPS deployment audit::$metric"
-          done < <(grep -E '^METRIC |^Transfer exit:' "$audit_file")
+          python3 - "$audit_file" <<'METRICS'
+          import pathlib, re, sys
+          metrics = '\n'.join(line for line in pathlib.Path(sys.argv[1]).read_text().splitlines() if line.startswith(('METRIC ', 'Transfer exit:')))
+          metrics = re.sub(r'(https?://)[^ /]+@', r'\1[redacted]@', metrics)
+          metrics = metrics.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+          print('::notice title=VPS deployment audit::' + metrics)
+          METRICS
           python3 - "$audit_file" "$GITHUB_STEP_SUMMARY" <<'SUMMARY'
           import html, pathlib, sys
           data = pathlib.Path(sys.argv[1]).read_text()
