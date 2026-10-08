@@ -257,16 +257,6 @@ export function OverviewRoomsSuites() {
             </button>
           </div>
 
-          <div className="overview-rooms__meta-row">
-            <div className="overview-rooms__meta-spacer" aria-hidden="true" />
-            <div className="overview-rooms__meta">
-              <p className="overview-rooms__room-name">
-                {t(`types.${current.id}`)}
-              </p>
-            </div>
-            <div className="overview-rooms__meta-spacer" aria-hidden="true" />
-          </div>
-
           <div className="overview-rooms__controls">
             <button
               type="button"

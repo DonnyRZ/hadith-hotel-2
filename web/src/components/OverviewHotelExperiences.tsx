@@ -38,7 +38,7 @@ const slides: FeatureSlide[] = [
     id: "events",
     key: "events",
     href: "/events",
-    src: FACILITY_IMAGES.wedding,
+    src: FACILITY_IMAGES.hall,
   },
 ];
 

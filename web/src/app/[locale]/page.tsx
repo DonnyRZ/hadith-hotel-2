@@ -39,19 +39,12 @@ export default async function OverviewPage() {
       mobilePosition: "50% 52%",
     },
     {
-      id: "resto",
-      label: t("hero.resto"),
-      src: "/images/cafe-dining/resto-1.png",
-      position: "50% 52%",
-      mobilePosition: "50% 52%",
-    },
-    ...PRESIDENT_SUITE_IMAGES.map((src, index) => ({
-      id: `president-suite-${index + 1}`,
+      id: "president-suite",
       label: roomT("rooms.president-suite"),
-      src,
+      src: PRESIDENT_SUITE_IMAGES[1],
       position: "50% 50%",
       mobilePosition: "50% 50%",
-    })),
+    },
     {
       id: "pool",
       label: t("hero.pool"),
@@ -86,13 +79,6 @@ export default async function OverviewPage() {
       src: FACILITY_IMAGES.hall,
       position: "50% 50%",
       mobilePosition: "50% 50%",
-    },
-    {
-      id: "salon",
-      label: t("hero.salon"),
-      src: "/images/overview-hero/salon.jpeg",
-      position: "50% 52%",
-      mobilePosition: "50% 52%",
     },
   ];
 
