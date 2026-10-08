@@ -2,6 +2,9 @@ name: VPS read-only audit
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
   workflow_run:
     workflows:
       - Deploy production
@@ -16,7 +19,7 @@ permissions:
 jobs:
   audit:
     name: Read-only VPS audit
-    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && (github.event.workflow_run.conclusion == 'failure' || github.event.workflow_run.conclusion == 'timed_out' || github.event.workflow_run.conclusion == 'cancelled') && (github.event.workflow_run.event == 'workflow_run' || github.event.workflow_run.event == 'workflow_dispatch') && github.event.workflow_run.head_branch == 'main') }}
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[audit deploy]')) || (github.event_name == 'workflow_run' && (github.event.workflow_run.conclusion == 'failure' || github.event.workflow_run.conclusion == 'timed_out' || github.event.workflow_run.conclusion == 'cancelled') && (github.event.workflow_run.event == 'workflow_run' || github.event.workflow_run.event == 'workflow_dispatch') && github.event.workflow_run.head_branch == 'main') }}
     runs-on: ubuntu-latest
     environment: production
     timeout-minutes: 10
@@ -79,6 +82,9 @@ jobs:
             -o StrictHostKeyChecking=yes
             -o UserKnownHostsFile="$HOME/.ssh/known_hosts"
             -o ConnectTimeout=10
+            -o ServerAliveInterval=10
+            -o ServerAliveCountMax=2
+            -o Compression=no
           )
           set +e
           sshpass -e ssh "${ssh_args[@]}" "$VPS_USER@$VPS_HOST" 'bash -s' >"$audit_file" 2>&1 <<'REMOTE'
@@ -92,6 +98,16 @@ jobs:
           printf '%s\n' '=== Resources ==='
           df -h / 2>/dev/null || true
           free -h 2>/dev/null || true
+          uptime 2>/dev/null || true
+          nproc 2>/dev/null || true
+          printf '%s\n' '=== Transfer tools and staged source sizes ==='
+          command -v rsync || true
+          command -v git || true
+          du -sh /opt/hadith-hotel-2/releases/*/web/public /opt/hadith-hotel-2/releases/*/Asset 2>/dev/null || true
+          printf '%s\n' '=== GitHub and container registry HTTPS connectivity ==='
+          for url in https://github.com https://ghcr.io/v2/; do
+            curl --max-time 10 -sS -o /dev/null -w 'HTTP %{http_code}, time %{time_total}s, bytes %{size_download}\n' "$url" || true
+          done
 
           printf '%s\n' '=== Listening ports ==='
           if command -v ss >/dev/null 2>&1; then
@@ -133,7 +149,18 @@ jobs:
           done
           REMOTE
           ssh_status=$?
+          transfer_started=$SECONDS
+          printf '%s\n' '=== 4 MiB SSH stdin transfer to wc (no files written) ===' >>"$audit_file"
+          head -c 4194304 /dev/zero | timeout 30 sshpass -e ssh "${ssh_args[@]}" "$VPS_USER@$VPS_HOST" 'wc -c' >>"$audit_file" 2>&1
+          transfer_status=$?
+          printf 'Transfer exit: %s, elapsed: %ss\n' "$transfer_status" "$((SECONDS-transfer_started))" >>"$audit_file"
           set -e
+          python3 - "$audit_file" "$GITHUB_STEP_SUMMARY" <<'SUMMARY'
+          import html, pathlib, sys
+          data = pathlib.Path(sys.argv[1]).read_text()
+          with open(sys.argv[2], 'a') as output:
+              output.write('<details open><summary>Read-only deployment diagnostics</summary><pre>' + html.escape(data) + '</pre></details>\n')
+          SUMMARY
           token="$(openssl rand -hex 16)"
           echo "::stop-commands::$token"
           cat "$audit_file"
