@@ -65,6 +65,7 @@ jobs:
 
       - name: Run read-only inventory
         env:
+          VPS_APP_DIR: ${{ vars.VPS_APP_DIR || '/opt/hadith-hotel-2' }}
           VPS_HOST: ${{ secrets.VPS_HOST }}
           VPS_USER: ${{ secrets.VPS_USER }}
           SSHPASS: ${{ secrets.VPS_ROOT_PASSWORD_1 }}
@@ -72,6 +73,8 @@ jobs:
         run: |
           set -euo pipefail
           audit_file="$RUNNER_TEMP/vps-audit.txt"
+          configured_app_dir="${VPS_APP_DIR:-/opt/hadith-hotel-2}"
+          [[ "$configured_app_dir" =~ ^/[A-Za-z0-9._/-]+$ ]] || exit 1
           ssh_args=(
             -T
             -p "$VPS_PORT"
@@ -87,8 +90,9 @@ jobs:
             -o Compression=no
           )
           set +e
-          sshpass -e ssh "${ssh_args[@]}" "$VPS_USER@$VPS_HOST" 'bash -s' >"$audit_file" 2>&1 <<'REMOTE'
+          sshpass -e ssh "${ssh_args[@]}" "$VPS_USER@$VPS_HOST" "bash -s -- '$configured_app_dir'" >"$audit_file" 2>&1 <<'REMOTE'
           set -u
+          printf 'METRIC configured_app_dir=%s\n' "$1"
           printf '%s\n' '=== Host ==='
           hostname 2>/dev/null || true
           id 2>/dev/null || true
@@ -118,6 +122,30 @@ jobs:
           else
             printf '%s\n' 'METRIC git_read_access=failed'
           fi
+
+          printf '%s\n' '=== Production target and active build ==='
+          if [[ -d /var/www ]]; then
+            find /var/www -maxdepth 2 -type d 2>/dev/null | while IFS= read -r directory; do
+              printf 'METRIC www_directory=%s\n' "$directory"
+            done
+          fi
+          docker inspect hadith-hotel-2-web --format 'METRIC production_container={{.Name}} project={{index .Config.Labels "com.docker.compose.project"}} working_dir={{index .Config.Labels "com.docker.compose.project.working_dir"}} config_files={{index .Config.Labels "com.docker.compose.project.config_files"}} image={{.Image}}' 2>/dev/null || true
+          for directory in "$1" /opt/hadith-hotel-2; do
+            [[ -d "$directory/source-cache" ]] || continue
+            printf 'METRIC git_cache=%s head=%s\n' "$directory/source-cache" "$(git -C "$directory/source-cache" rev-parse --verify HEAD 2>/dev/null || printf not_checked_out)"
+            du -sk "$directory/source-cache/.git" "$directory/source-cache/web/public" 2>/dev/null | while read -r size path; do
+              printf 'METRIC cache_size_kib=%s path=%s\n' "$size" "$path"
+            done
+          done
+          ps -eo comm,etime,pcpu,pmem --sort=-pcpu | head -12 | while IFS= read -r process; do
+            printf 'METRIC process=%s\n' "$process"
+          done
+          for config in /etc/nginx/sites-enabled/*; do
+            [[ -f "$config" ]] || continue
+            grep -E '^[[:space:]]*(server_name|root|proxy_pass)[[:space:]]' "$config" | while IFS= read -r line; do
+              printf 'METRIC nginx_config=%s directive=%s\n' "$config" "$line"
+            done
+          done
 
           printf '%s\n' '=== Listening ports ==='
           if command -v ss >/dev/null 2>&1; then

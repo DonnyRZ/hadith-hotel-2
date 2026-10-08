@@ -1,0 +1,36 @@
+name: Cancel stalled deploy
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  actions: write
+
+jobs:
+  cancel:
+    if: ${{ contains(github.event.head_commit.message, '[cancel stalled deploy]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pause deployment while verifying the production target
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runId = 37810363587;
+            const run = await github.rest.actions.getWorkflowRun({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: runId,
+            });
+
+            if (run.data.status === 'in_progress' || run.data.status === 'queued') {
+              await github.rest.actions.cancelWorkflowRun({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                run_id: runId,
+              });
+              core.info(`Requested cancellation of stalled run ${runId}.`);
+            } else {
+              core.info(`Run ${runId} is already ${run.data.status}; nothing to cancel.`);
+            }
