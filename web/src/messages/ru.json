@@ -560,7 +560,8 @@
       "aleksaStrikovic": { "name": "Aleksa Strikovic", "role": "Шахматный гроссмейстер, Сербия" },
       "muhamadRozaimiBinRamle": { "name": "Prof. Dr. Muhamad Rozaimi bin Ramle", "role": "Вице-канцлер Исламского международного университета Туанку Сайеда Сираджуддина (UniSIRAJ), Перлис, Малайзия" },
       "mohdAsriBinZainulAbidin": { "name": "Dr. Mohd Asri bin Zainul Abidin (Dr. MAZA)", "role": "Муфтий штата Перлис, Малайзия" },
-      "rafedahBintiAbdulAziz": { "name": "Rafedah binti Abdul Aziz", "role": "Посол Малайзии в Узбекистане" }
+      "rafedahBintiAbdulAziz": { "name": "Rafedah binti Abdul Aziz", "role": "Посол Малайзии в Узбекистане" },
+      "mochamadIrfanYusufHasyim": { "name": "K.H. Mochamad Irfan Yusuf Hasyim", "role": "Министр по делам хаджа и умры Республики Индонезия" }
     },
     "testimonialQuotes": {
       "syekhMohamedElDuwaini": "Выдающийся отель с превосходным сервисом. Пусть Аллах благословит его дальнейший успех.",
@@ -574,7 +575,8 @@
       "grandMasterEvgenujMiroshnichenko": "Красивый отель с отличным кофе и по-настоящему дружелюбным сервисом. Прекрасное место для проживания в Самарканде.",
       "muhamadRozaimiBinRamle": "Красивый отель, тёплое гостеприимство и внимательное обслуживание.",
       "mohdAsriBinZainulAbidin": "Элегантная обстановка и заботливый сервис сделали визит приятным.",
-      "rafedahBintiAbdulAziz": "Комфортное проживание и радушный приём оставили приятные впечатления."
+      "rafedahBintiAbdulAziz": "Комфортное проживание и радушный приём оставили приятные впечатления.",
+      "mochamadIrfanYusufHasyim": "HADITH Hotel — пятизвёздочный отель с индонезийской атмосферой. Благодаря стратегическому расположению рядом с музеем Имама Бухари он играет важную роль в развитии туризма и религиозного туризма, особенно для паломников из Индонезии."
     },
     "videoReviews": {
       "ariaLabel": "Видеоотзывы гостей",

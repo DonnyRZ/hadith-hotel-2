@@ -188,6 +188,12 @@ const testimonialConfigs: TestimonialConfig[] = [
     quoteKey: "rafedahBintiAbdulAziz",
     photo: "/images/testimonials/rafedah-binti-abdul-aziz.webp",
   },
+  {
+    id: "mochamad-irfan-yusuf-hasyim",
+    personKey: "mochamadIrfanYusufHasyim",
+    quoteKey: "mochamadIrfanYusufHasyim",
+    photo: "/images/testimonials/mochamad-irfan-yusuf-hasyim.webp",
+  },
 ];
 
 function ChevronLeft() {
