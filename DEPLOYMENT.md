@@ -13,7 +13,6 @@ Create the `production` environment in repository settings. Limit deployments to
 | `VPS_ROOT_PASSWORD_1` | SSH password for `VPS_USER`. Store a rotated password here; the password shared in chat should not be reused. |
 | `VPS_KNOWN_HOSTS` | Verified SSH host-key line(s) for the VPS. Reuse the existing value only if it is for this exact server and port; otherwise get the fingerprint from the VPS provider and verify it before saving. GitHub will not reveal an existing secret's value. |
 | `POSTGRES_PASSWORD` | Password for the `hadith` PostgreSQL role expected by `docker-compose.yml`. |
-| `VISITOR_IP_HASH_SECRET` | A stable random value; generate one with `openssl rand -hex 32` on a trusted device and enter it directly in GitHub. |
 
 Optional environment variables:
 
@@ -22,7 +21,7 @@ Optional environment variables:
 | `VPS_PORT` | `22` |
 | `VPS_APP_DIR` | `/opt/hadith-hotel-2` |
 
-The deployment creates or updates `$VPS_APP_DIR/.env` with the two required app secrets while preserving other keys already there. It transfers the checked-out source to a versioned release directory, builds the Docker image on the VPS, starts the Compose `web` service, and checks the homepage inside the container.
+The deployment creates or updates `$VPS_APP_DIR/.env` with the PostgreSQL password while preserving other keys already there. It generates and preserves `VISITOR_IP_HASH_SECRET` on the VPS if it is missing. It transfers the checked-out source to a versioned release directory, builds the Docker image on the VPS, starts the Compose `web` service, and checks the homepage inside the container.
 
 ## VPS prerequisites
 

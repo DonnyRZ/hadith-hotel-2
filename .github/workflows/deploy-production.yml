@@ -31,12 +31,11 @@ jobs:
           VPS_ROOT_PASSWORD_1: ${{ secrets.VPS_ROOT_PASSWORD_1 }}
           VPS_KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          VISITOR_IP_HASH_SECRET: ${{ secrets.VISITOR_IP_HASH_SECRET }}
           VPS_PORT: ${{ vars.VPS_PORT || '22' }}
           VPS_APP_DIR: ${{ vars.VPS_APP_DIR || '/opt/hadith-hotel-2' }}
         run: |
           set -euo pipefail
-          for name in VPS_HOST VPS_USER VPS_ROOT_PASSWORD_1 VPS_KNOWN_HOSTS POSTGRES_PASSWORD VISITOR_IP_HASH_SECRET; do
+          for name in VPS_HOST VPS_USER VPS_ROOT_PASSWORD_1 VPS_KNOWN_HOSTS POSTGRES_PASSWORD; do
             if [[ -z "${!name:-}" ]]; then
               echo "::error::$name is required in the production environment"
               exit 1
@@ -138,7 +137,6 @@ jobs:
           VPS_PORT: ${{ vars.VPS_PORT || '22' }}
           VPS_APP_DIR: ${{ vars.VPS_APP_DIR || '/opt/hadith-hotel-2' }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          VISITOR_IP_HASH_SECRET: ${{ secrets.VISITOR_IP_HASH_SECRET }}
         run: |
           set -euo pipefail
           ssh_args=(
@@ -153,10 +151,8 @@ jobs:
             -o ConnectTimeout=10
           )
           target="$VPS_USER@$VPS_HOST"
-          {
-            printf 'POSTGRES_PASSWORD=%s\n' "$POSTGRES_PASSWORD"
-            printf 'VISITOR_IP_HASH_SECRET=%s\n' "$VISITOR_IP_HASH_SECRET"
-          } | sshpass -e ssh "${ssh_args[@]}" "$target" "umask 077; mkdir -p '$VPS_APP_DIR'; cat > '$VPS_APP_DIR/.env.incoming'"
+          printf 'POSTGRES_PASSWORD=%s\n' "$POSTGRES_PASSWORD" |
+            sshpass -e ssh "${ssh_args[@]}" "$target" "umask 077; mkdir -p '$VPS_APP_DIR'; cat > '$VPS_APP_DIR/.env.incoming'"
           sshpass -e ssh "${ssh_args[@]}" "$target" "bash -s -- '$VPS_APP_DIR'" <<'REMOTE'
           set -euo pipefail
           app_dir=$1
@@ -164,9 +160,15 @@ jobs:
           incoming="$app_dir/.env.incoming"
           trap 'rm -f "$tmp" "$incoming"' EXIT
           if [[ -f "$app_dir/.env" ]]; then
-            awk -F= '$1 != "POSTGRES_PASSWORD" && $1 != "VISITOR_IP_HASH_SECRET"' "$app_dir/.env" > "$tmp"
+            awk -F= '$1 != "POSTGRES_PASSWORD"' "$app_dir/.env" > "$tmp"
+          else
+            : > "$tmp"
           fi
           cat "$incoming" >> "$tmp"
+          if ! grep -q '^VISITOR_IP_HASH_SECRET=.' "$tmp"; then
+            hash_secret="$(openssl rand -hex 32)"
+            printf 'VISITOR_IP_HASH_SECRET=%s\n' "$hash_secret" >> "$tmp"
+          fi
           chmod 600 "$tmp"
           mv "$tmp" "$app_dir/.env"
           rm -f "$incoming"
