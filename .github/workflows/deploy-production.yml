@@ -132,7 +132,7 @@ jobs:
             --exclude=web/.next \
             --exclude=web/.env \
             --exclude='web/.env.*' \
-            -czf - . |
+            -czf - docker-compose.yml web |
             sshpass -e ssh "${ssh_args[@]}" "$VPS_USER@$VPS_HOST" "tar -xzf - -C '$release_dir'"
 
       - name: Update production environment file
