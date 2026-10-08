@@ -23,12 +23,20 @@ jobs:
     if: ${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main' && !contains(github.event.workflow_run.head_commit.message, '[skip deploy]')) }}
     runs-on: ubuntu-latest
     environment: production
-    timeout-minutes: 45
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.workflow_run.head_sha || github.sha }}
           persist-credentials: false
+          sparse-checkout: .github
+
+      - name: Select CI-tested commit
+        env:
+          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+        run: |
+          [[ "$DEPLOY_SHA" =~ ^[a-f0-9]{40}$ ]]
+          printf 'DEPLOY_SHA=%s\n' "$DEPLOY_SHA" >> "$GITHUB_ENV"
 
       - name: Validate deployment settings
         env:
@@ -101,39 +109,10 @@ jobs:
             -o StrictHostKeyChecking=yes
             -o UserKnownHostsFile="$HOME/.ssh/known_hosts"
             -o ConnectTimeout=10
+            -o ServerAliveInterval=10
+            -o ServerAliveCountMax=2
           )
           sshpass -e ssh "${ssh_args[@]}" "$VPS_USER@$VPS_HOST" 'docker compose version >/dev/null && docker info --format "{{.ServerVersion}}" >/dev/null'
-
-      - name: Upload source snapshot
-        env:
-          VPS_HOST: ${{ secrets.VPS_HOST }}
-          VPS_USER: ${{ secrets.VPS_USER }}
-          SSHPASS: ${{ secrets.VPS_ROOT_PASSWORD_1 }}
-          VPS_PORT: ${{ vars.VPS_PORT || '22' }}
-          VPS_APP_DIR: ${{ vars.VPS_APP_DIR || '/opt/hadith-hotel-2' }}
-        run: |
-          set -euo pipefail
-          ssh_args=(
-            -T
-            -p "$VPS_PORT"
-            -o PreferredAuthentications=password
-            -o PubkeyAuthentication=no
-            -o KbdInteractiveAuthentication=no
-            -o NumberOfPasswordPrompts=1
-            -o StrictHostKeyChecking=yes
-            -o UserKnownHostsFile="$HOME/.ssh/known_hosts"
-            -o ConnectTimeout=10
-          )
-          release_dir="$VPS_APP_DIR/releases/$GITHUB_SHA"
-          sshpass -e ssh "${ssh_args[@]}" "$VPS_USER@$VPS_HOST" "mkdir -p '$release_dir'"
-          tar -C "$GITHUB_WORKSPACE" \
-            --exclude=.git \
-            --exclude=web/node_modules \
-            --exclude=web/.next \
-            --exclude=web/.env \
-            --exclude='web/.env.*' \
-            -czf - docker-compose.yml web |
-            sshpass -e ssh "${ssh_args[@]}" "$VPS_USER@$VPS_HOST" "tar -xzf - -C '$release_dir'"
 
       - name: Update production environment file
         env:
@@ -155,6 +134,8 @@ jobs:
             -o StrictHostKeyChecking=yes
             -o UserKnownHostsFile="$HOME/.ssh/known_hosts"
             -o ConnectTimeout=10
+            -o ServerAliveInterval=10
+            -o ServerAliveCountMax=2
           )
           target="$VPS_USER@$VPS_HOST"
           printf 'POSTGRES_PASSWORD=%s\n' "$POSTGRES_PASSWORD" |
@@ -181,7 +162,8 @@ jobs:
           trap - EXIT
           REMOTE
 
-      - name: Build, start, and smoke-check production
+      - name: Fetch, build, and verify production
+        timeout-minutes: 20
         env:
           VPS_HOST: ${{ secrets.VPS_HOST }}
           VPS_USER: ${{ secrets.VPS_USER }}
@@ -200,22 +182,7 @@ jobs:
             -o StrictHostKeyChecking=yes
             -o UserKnownHostsFile="$HOME/.ssh/known_hosts"
             -o ConnectTimeout=10
+            -o ServerAliveInterval=10
+            -o ServerAliveCountMax=2
           )
-          sshpass -e ssh "${ssh_args[@]}" "$VPS_USER@$VPS_HOST" "bash -s -- '$VPS_APP_DIR' '$GITHUB_SHA'" <<'REMOTE'
-          set -euo pipefail
-          app_dir=$1
-          release_dir="$app_dir/releases/$2"
-          compose=(docker compose --project-name hadith-hotel-2 --project-directory "$release_dir" --env-file "$app_dir/.env" -f "$release_dir/docker-compose.yml")
-          "${compose[@]}" build web
-          "${compose[@]}" up -d web
-          for attempt in $(seq 1 30); do
-            if docker exec hadith-hotel-2-web node -e 'fetch("http://127.0.0.1:3000/").then((response) => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))' >/dev/null 2>&1; then
-              printf '%s\n' 'Production homepage returned HTTP 2xx.'
-              exit 0
-            fi
-            sleep 2
-          done
-          "${compose[@]}" ps
-          printf '%s\n' 'Production homepage health check failed.' >&2
-          exit 1
-          REMOTE
+          sshpass -e ssh "${ssh_args[@]}" "$VPS_USER@$VPS_HOST" "bash -s -- '$VPS_APP_DIR' '$DEPLOY_SHA'" < .github/scripts/deploy-production.sh
