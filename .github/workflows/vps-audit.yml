@@ -111,6 +111,14 @@ jobs:
             curl --max-time 10 -sS -o /dev/null -w 'HTTP %{http_code}, time %{time_total}s, bytes %{size_download}\n' "$url" || true
           done
 
+          printf '%s\n' '=== Direct GitHub source download benchmark ==='
+          curl --max-time 20 -fsS -o /dev/null -w 'METRIC github_download http=%{http_code} bytes=%{size_download} elapsed=%{time_total} speed_bytes_sec=%{speed_download}\n' https://raw.githubusercontent.com/DonnyRZ/hadith-hotel-2/main/web/public/videos/video-2.mp4 || true
+          if GIT_TERMINAL_PROMPT=0 timeout 15 git ls-remote https://github.com/DonnyRZ/hadith-hotel-2.git refs/heads/main >/dev/null 2>&1; then
+            printf '%s\n' 'METRIC git_read_access=ok'
+          else
+            printf '%s\n' 'METRIC git_read_access=failed'
+          fi
+
           printf '%s\n' '=== Listening ports ==='
           if command -v ss >/dev/null 2>&1; then
             ss -lnt 2>/dev/null | awk 'NR == 1 || /:22|:80|:443|:5432|:3006/' || true
