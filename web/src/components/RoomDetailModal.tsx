@@ -4,6 +4,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 import SiteImage from "@/components/SiteImage";
+import { RoomImagePlaceholder } from "@/components/RoomImagePlaceholder";
 import type { RoomType } from "@/lib/rooms";
 import type { SpecGroup } from "@/lib/roomSpecs";
 
@@ -37,6 +38,7 @@ export function RoomDetailModal({ room, name, specs, onClose }: RoomDetailModalP
   const imageCount = room?.images.length ?? 0;
   const moveImage = useCallback(
     (direction: number) => {
+      if (imageCount < 2) return;
       setImageIndex((current) => (current + direction + imageCount) % imageCount);
     },
     [imageCount],
@@ -105,17 +107,17 @@ export function RoomDetailModal({ room, name, specs, onClose }: RoomDetailModalP
         <div className="room-detail__scroll">
           <div
             className="room-detail__gallery"
-            aria-roledescription="carousel"
-            aria-label={t("galleryAria", { name })}
+            aria-roledescription={imageCount > 1 ? "carousel" : undefined}
+            aria-label={imageCount > 0 ? t("galleryAria", { name }) : undefined}
           >
             <div className="room-detail__photo">
-              <SiteImage
+              {imageCount > 0 ? <SiteImage
                 className="room-detail__image"
                 src={room.images[imageIndex] ?? room.images[0]!}
                 alt={name}
                 fill
                 sizes="100vw"
-              />
+              /> : <RoomImagePlaceholder />}
             </div>
             {imageCount > 1 ? (
               <div className="room-detail__gallery-controls">

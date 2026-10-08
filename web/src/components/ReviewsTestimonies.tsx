@@ -98,6 +98,12 @@ const videoReviewConfigs: VideoReviewConfig[] = [
     src: "/videos/rafedah-binti-abdul-aziz.mp4",
     poster: "/images/testimonials/rafedah-binti-abdul-aziz.webp",
   },
+  {
+    id: "mochamad-irfan-yusuf-hasyim",
+    personKey: "mochamadIrfanYusufHasyim",
+    src: "/videos/mochamad-irfan-yusuf-hasyim.mp4",
+    poster: "/images/testimonials/mochamad-irfan-yusuf-hasyim.webp",
+  },
 ];
 
 const landscapeReviewConfig: VideoReviewConfig = {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { FACILITY_IMAGES } from "@/lib/facilityImages";
 import { getLocale, getTranslations } from "next-intl/server";
 import { ExperienceGroups } from "@/components/ExperienceGroups";
 import { JsonLd } from "@/components/JsonLd";
@@ -24,16 +25,16 @@ export default async function ExperiencePage() {
     {
       id: "experience-hero-hamam",
       label: t("hero.hamam"),
-      src: "/images/experience/hamam.webp",
+      src: FACILITY_IMAGES.hammam,
       position: "50% 50%",
       mobilePosition: "54% 50%",
     },
     {
       id: "experience-hero-pool",
       label: t("hero.pool"),
-      src: "/images/experience/pool.webp",
+      src: FACILITY_IMAGES.pool,
       position: "50% 50%",
-      mobilePosition: "52% 50%",
+      mobilePosition: "35% 50%",
     },
   ] as const;
 

@@ -1,35 +1,38 @@
 "use client";
 
 import SiteImage from "@/components/SiteImage";
+import { FACILITY_IMAGES } from "@/lib/facilityImages";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { LEGACY_ROOM_COVERS } from "@/lib/rooms";
+import { PRESIDENT_SUITE_IMAGES } from "@/lib/roomGallery";
+import { RoomImagePlaceholder } from "@/components/RoomImagePlaceholder";
 
 type GalleryImageConfig = {
   id: string;
-  src: string;
+  src: string | null;
   key?: string;
   roomTypeId?: string;
 };
 
-type GalleryImage = { id: string; src: string; alt: string };
+type GalleryImage = { id: string; src: string | null; alt: string };
 
 const galleryImageConfigs: GalleryImageConfig[] = [
   { id: "hotel-exterior", key: "hotelExterior", src: "/images/overview-hero/hotel-exterior.webp" },
-  {
-    id: "junior-suite",
-    src: LEGACY_ROOM_COVERS["junior-suite"],
-    roomTypeId: "junior-suite",
-  },
+  ...PRESIDENT_SUITE_IMAGES.map((src, index) => ({
+    id: `president-suite-${index + 1}`,
+    src,
+    roomTypeId: "president-suite",
+  })),
   { id: "restaurant", key: "restaurant", src: "/images/cafe-dining/resto-1.png" },
   { id: "buffet", key: "buffet", src: "/images/cafe-dining/buffet.webp" },
   { id: "cafe", key: "cafe", src: "/images/cafe-dining/7oz.png" },
   { id: "lounge", key: "lounge", src: "/images/cafe-dining/lounge-bar.png" },
-  { id: "events-hall", key: "eventsHall", src: "/images/meetings-weddings/hall.webp" },
-  { id: "indoor-pool", key: "indoorPool", src: "/images/experience/pool.webp" },
-  { id: "turkish-hammam", key: "turkishHammam", src: "/images/experience/hamam.webp" },
-  { id: "massage-suite", key: "massageSuite", src: "/images/experience/massage.webp" },
-  { id: "sauna", key: "sauna", src: "/images/experience/sauna.webp" },
+  { id: "events-hall", key: "eventsHall", src: FACILITY_IMAGES.hall },
+  { id: "outdoor-wedding", key: "outdoorWedding", src: FACILITY_IMAGES.wedding },
+  { id: "indoor-pool", key: "indoorPool", src: FACILITY_IMAGES.pool },
+  { id: "turkish-hammam", key: "turkishHammam", src: FACILITY_IMAGES.hammam },
+  { id: "massage-suite", key: "massageSuite", src: FACILITY_IMAGES.massage },
+  { id: "sauna", key: "sauna", src: FACILITY_IMAGES.sauna },
   { id: "fitness-centre", key: "fitnessCentre", src: "/images/experience/gym.webp" },
   { id: "tennis-court", key: "tennisCourt", src: "/images/experience/tennis.webp" },
   { id: "padel-court", key: "padelCourt", src: "/images/experience/padel.webp" },
@@ -46,6 +49,7 @@ function GalleryLightbox({
   t: ReturnType<typeof useTranslations>;
 }) {
   useEffect(() => {
+    if (!image.src) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
@@ -58,7 +62,9 @@ function GalleryLightbox({
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [onClose]);
+  }, [image.src, onClose]);
+
+  if (!image.src) return null;
 
   return (
     <div
@@ -113,7 +119,7 @@ export function Gallery() {
       </header>
 
       <section className="gallery-grid" aria-label={t("gridAriaLabel")}>
-        {galleryImages.map((image, index) => (
+        {galleryImages.map((image, index) => image.src ? (
           <button
             key={image.id}
             type="button"
@@ -130,6 +136,10 @@ export function Gallery() {
               priority={index < 4}
             />
           </button>
+        ) : (
+          <div key={image.id} className="gallery-grid__item" aria-hidden="true">
+            <RoomImagePlaceholder />
+          </div>
         ))}
       </section>
 

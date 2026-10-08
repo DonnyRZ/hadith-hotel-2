@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { HeroMedia, type HeroMediaSlide } from "@/components/HeroMedia";
 import { ScrollCue } from "@/components/ScrollCue";
 
-export type HeroSlide = HeroMediaSlide & { src: string };
+export type HeroSlide = HeroMediaSlide;
 
 type HeroCarouselProps = {
   slides: HeroSlide[];

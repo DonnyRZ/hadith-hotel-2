@@ -4,14 +4,26 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import SiteImage from "@/components/SiteImage";
 import { ComingSoonModal } from "@/components/ComingSoonModal";
-
-const HALL_IMAGE = "/images/events/hall.png";
+import { FACILITY_IMAGES } from "@/lib/facilityImages";
 
 const FEATURES = [
-  { id: "weddings", reversed: false, soon: true },
-  { id: "meetings", reversed: true, soon: true },
-  { id: "catering", reversed: false, soon: true },
-  { id: "social", reversed: true, soon: true },
+  {
+    id: "weddings", reversed: false, soon: true,
+    image: FACILITY_IMAGES.wedding, altKey: "weddingAlt", showPhoto: true,
+  },
+  {
+    id: "meetings", reversed: true, soon: true,
+    image: FACILITY_IMAGES.hall, altKey: "hallAlt", showPhoto: true,
+  },
+  // Dedicated catering and restaurant-event photographs are still pending.
+  {
+    id: "catering", reversed: false, soon: true,
+    image: FACILITY_IMAGES.hall, altKey: "hallAlt", showPhoto: false,
+  },
+  {
+    id: "social", reversed: true, soon: true,
+    image: FACILITY_IMAGES.hall, altKey: "hallAlt", showPhoto: false,
+  },
 ] as const;
 
 function VenuesIcon() {
@@ -111,13 +123,17 @@ export function EventsHub() {
           <div className="events-hub__media">
             <SiteImage
               className="events-hub__media-image"
-              src={HALL_IMAGE}
-              alt={feature.soon ? "" : t("hallAlt")}
+              src={feature.image}
+              alt={feature.showPhoto ? t(feature.altKey) : ""}
               fill
               sizes="(max-width: 900px) 100vw, 58vw"
             />
             {feature.soon ? (
-              <span className="events-hub__soon">{tSoon("title")}</span>
+              <span
+                className={`events-hub__soon${feature.showPhoto ? " events-hub__soon--badge" : ""}`}
+              >
+                {tSoon("title")}
+              </span>
             ) : null}
           </div>
           <div className="events-hub__feature-copy">

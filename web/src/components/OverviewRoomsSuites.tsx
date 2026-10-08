@@ -5,9 +5,14 @@ import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import SiteImage from "@/components/SiteImage";
-import { LEGACY_ROOM_COVERS, roomTypes } from "@/lib/rooms";
+import { RoomImagePlaceholder } from "@/components/RoomImagePlaceholder";
+import { ALL_ROOMS_GALLERY_IMAGES } from "@/lib/roomGallery";
+import { roomTypes } from "@/lib/rooms";
 
-const gallerySlides = roomTypes;
+const gallerySlides = roomTypes.map((room) => ({
+  id: room.id,
+  src: ALL_ROOMS_GALLERY_IMAGES[room.id]?.[0] ?? null,
+}));
 
 function ExpandIcon() {
   return (
@@ -43,7 +48,7 @@ function GalleryMedia({
   fullscreen = false,
 }: {
   alt: string;
-  src: string;
+  src: string | null;
   featured?: boolean;
   fullscreen?: boolean;
 }) {
@@ -56,16 +61,17 @@ function GalleryMedia({
       ]
         .filter(Boolean)
         .join(" ")}
-      role="img"
-      aria-label={alt}
+      role={src ? "img" : undefined}
+      aria-label={src ? alt : undefined}
+      aria-hidden={!src ? true : undefined}
     >
-      <SiteImage
+      {src ? <SiteImage
         className="overview-rooms__image"
         src={src}
         alt=""
         fill
         sizes={fullscreen ? "100vw" : "(max-width: 900px) 100vw, 55vw"}
-      />
+      /> : <RoomImagePlaceholder />}
     </div>
   );
 }
@@ -213,7 +219,10 @@ export function OverviewRoomsSuites() {
               onClick={goPrev}
               aria-label={t("gallery.prevImageAria")}
             >
-              <GalleryMedia alt={t(`types.${prev.id}`)} src={LEGACY_ROOM_COVERS[prev.id]} />
+              <GalleryMedia
+                alt={t(`types.${prev.id}`)}
+                src={prev.src}
+              />
             </button>
 
             <div
@@ -222,17 +231,17 @@ export function OverviewRoomsSuites() {
             >
               <GalleryMedia
                 alt={t(`types.${current.id}`)}
-                src={LEGACY_ROOM_COVERS[current.id]}
+                src={current.src}
                 featured
               />
-              <button
+              {current.src ? <button
                 type="button"
                 className="overview-rooms__expand"
                 aria-label={t("gallery.expandAria")}
                 onClick={() => setLightboxOpen(true)}
               >
                 <ExpandIcon />
-              </button>
+              </button> : null}
             </div>
 
             <button
@@ -241,8 +250,21 @@ export function OverviewRoomsSuites() {
               onClick={goNext}
               aria-label={t("gallery.nextImageAria")}
             >
-              <GalleryMedia alt={t(`types.${next.id}`)} src={LEGACY_ROOM_COVERS[next.id]} />
+              <GalleryMedia
+                alt={t(`types.${next.id}`)}
+                src={next.src}
+              />
             </button>
+          </div>
+
+          <div className="overview-rooms__meta-row">
+            <div className="overview-rooms__meta-spacer" aria-hidden="true" />
+            <div className="overview-rooms__meta">
+              <p className="overview-rooms__room-name">
+                {t(`types.${current.id}`)}
+              </p>
+            </div>
+            <div className="overview-rooms__meta-spacer" aria-hidden="true" />
           </div>
 
           <div className="overview-rooms__controls">
@@ -283,13 +305,13 @@ export function OverviewRoomsSuites() {
         </div>
       </section>
 
-      <RoomLightbox
+      {current.src ? <RoomLightbox
         alt={t(`types.${current.id}`)}
-        src={LEGACY_ROOM_COVERS[current.id]}
+        src={current.src}
         open={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
         t={t}
-      />
+      /> : null}
     </>
   );
 }

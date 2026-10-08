@@ -96,12 +96,13 @@
           "title": "Accommodation",
           "roomsSuites": "Rooms & Suites",
           "roomTypes": {
-            "deluxe-double": "Deluxe Double Room",
-            "deluxe-double-balcony": "Deluxe Double Room with Balcony",
-            "deluxe-king": "Deluxe King Room",
-            "deluxe-king-balcony": "Deluxe King with Balcony",
+            "president-suite": "President Suite",
             "junior-suite": "Junior Suite",
-            "president-suite-balcony": "President Suite"
+            "suite": "Suite",
+            "deluxe-double": "Deluxe Double",
+            "deluxe-double-balcony": "Deluxe Double with Balcony",
+            "deluxe-king": "Deluxe King",
+            "deluxe-king-balcony": "Deluxe King with Balcony"
           }
         },
         "dining": {
@@ -133,16 +134,17 @@
     "rooms": {
       "lede": "Escape to a sanctuary of luxury",
       "title": "Rooms and Suites",
-      "blurb": "Discover six room and suite types across 114 thoughtfully designed rooms within the Imam Al Bukhari Complex.",
+      "blurb": "Discover seven room and suite types across 114 thoughtfully designed rooms within the Imam Al Bukhari Complex.",
       "typesAriaLabel": "Room types",
       "learnMore": "Learn More",
       "types": {
-        "deluxe-double": "Deluxe Double Room",
-        "deluxe-double-balcony": "Deluxe Double Room with Balcony",
-        "deluxe-king": "Deluxe King Room",
-        "deluxe-king-balcony": "Deluxe King with Balcony",
+        "president-suite": "President Suite",
         "junior-suite": "Junior Suite",
-        "president-suite-balcony": "President Suite"
+        "suite": "Suite",
+        "deluxe-double": "Deluxe Double",
+        "deluxe-double-balcony": "Deluxe Double with Balcony",
+        "deluxe-king": "Deluxe King",
+        "deluxe-king-balcony": "Deluxe King with Balcony"
       },
       "gallery": {
         "ariaLabel": "Rooms and suites gallery",
@@ -250,10 +252,10 @@
   },
   "suitesRooms": {
     "metaTitle": "Suites & Rooms",
-    "metaDescription": "114 rooms and suites across six room types at HADITH Hotel, Samarkand, within the Imam Al Bukhari Complex.",
+    "metaDescription": "114 rooms and suites across seven room types at HADITH Hotel, Samarkand, within the Imam Al Bukhari Complex.",
     "intro": {
       "title": "Rooms & Suites",
-      "body": "114 thoughtfully designed rooms and suites across six room types, created for restful stays within the Imam Al Bukhari Complex."
+      "body": "114 thoughtfully designed rooms and suites across seven room types, created for restful stays within the Imam Al Bukhari Complex."
     },
     "tabs": {
       "all": "All Rooms",
@@ -270,12 +272,13 @@
     },
     "reserve": "Find room",
     "rooms": {
-      "deluxe-double": "Deluxe Double Room",
-      "deluxe-double-balcony": "Deluxe Double Room with Balcony",
-      "deluxe-king": "Deluxe King Room",
-      "deluxe-king-balcony": "Deluxe King with Balcony",
+      "president-suite": "President Suite",
       "junior-suite": "Junior Suite",
-      "president-suite-balcony": "President Suite"
+      "suite": "Suite",
+      "deluxe-double": "Deluxe Double",
+      "deluxe-double-balcony": "Deluxe Double with Balcony",
+      "deluxe-king": "Deluxe King",
+      "deluxe-king-balcony": "Deluxe King with Balcony"
     },
     "specs": {
       "groupTitles": {
@@ -501,7 +504,8 @@
   "events": {
     "metaTitle": "Events",
     "metaDescription": "Meetings, weddings, and celebrations at HADITH Hotel, Samarkand — function rooms and a grand ballroom in the Imam Al Bukhari Complex.",
-    "hallAlt": "Grand ballroom at HADITH Hotel",
+    "hallAlt": "Events hall at HADITH Hotel",
+    "weddingAlt": "Outdoor wedding venue at HADITH Hotel",
     "plan": {
       "title": "Plan Your Event",
       "lead": "With a wide range of venues to accommodate all types of gatherings, HADITH Hotel, Samarkand is the perfect place to host your next event. Whether meetings or weddings, we offer private meeting spaces for networking sessions, as well as luxurious function rooms made to impress.",
@@ -639,6 +643,7 @@
       "cafe": "7oz Espresso at HADITH Hotel",
       "lounge": "Lounge Bar at HADITH Hotel",
       "eventsHall": "Events hall at HADITH Hotel",
+      "outdoorWedding": "Outdoor wedding venue at HADITH Hotel",
       "indoorPool": "Indoor pool at HADITH Hotel",
       "turkishHammam": "Turkish hammam at HADITH Hotel",
       "massageSuite": "Massage treatment room at HADITH Hotel",
@@ -759,7 +764,7 @@
       "article": {
         "heading": "An Indonesian touch at the heart of Samarkand pilgrimage",
         "p1": "HADITH Hotel officially held its soft opening in the distinguished Imam Al-Bukhari Complex, Samarkand, Uzbekistan, on Saturday, 5 September 2026. Less than a kilometre from the pilgrimage centre at the tomb of Imam Muhammad Al-Bukhari, the hotel developed by PT EGI Resources offers a modern stay that weaves Uzbek character with internationally standardised comfort.",
-        "p2": "HADITH Hotel has 114 rooms and suites with occupancy for up to 250 guests. Six room types serve pilgrims, travellers, and VIP guests alike: Deluxe Double Room, Deluxe Double Room with Balcony, Deluxe King Room, Deluxe King with Balcony, Junior Suite, and President Suite. Its setting within the Imam Al-Bukhari precinct gives the hotel a strategic position for visitors who come both to make pilgrimage and to explore Samarkand’s history and culture.",
+        "p2": "HADITH Hotel has 114 rooms and suites with occupancy for up to 250 guests. Seven room types serve pilgrims, travellers, and VIP guests alike: President Suite, Junior Suite, Suite, Deluxe Double, Deluxe Double with Balcony, Deluxe King, and Deluxe King with Balcony. Its setting within the Imam Al-Bukhari precinct gives the hotel a strategic position for visitors who come both to make pilgrimage and to explore Samarkand’s history and culture.",
         "p3": "Beyond accommodation, HADITH Hotel offers premium facilities including Saji Nusantara Restaurant, which brings Indonesian flavours to the table, Uzbek Cuisine Bar & Lounge, an indoor pool, a fitness centre, spa, sauna, Turkish hammam, and sports courts for tennis and padel. The hotel is expected not only to strengthen hospitality in Samarkand, but also to become a bridge of cultural exchange between Indonesia and Uzbekistan through travel and Nusantara hospitality."
       }
     }

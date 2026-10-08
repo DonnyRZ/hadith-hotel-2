@@ -1,6 +1,9 @@
 "use client";
 
 import SiteImage from "@/components/SiteImage";
+import { FACILITY_IMAGES } from "@/lib/facilityImages";
+import { RoomImagePlaceholder } from "@/components/RoomImagePlaceholder";
+import { PRESIDENT_SUITE_IMAGES } from "@/lib/roomGallery";
 import { Link } from "@/i18n/navigation";
 import { useCallback, useState } from "react";
 import { useTranslations } from "next-intl";
@@ -9,7 +12,7 @@ type FeatureSlide = {
   id: string;
   key: string;
   href: string;
-  src: string;
+  src: string | null;
 };
 
 const slides: FeatureSlide[] = [
@@ -17,7 +20,7 @@ const slides: FeatureSlide[] = [
     id: "suites-rooms",
     key: "suitesRooms",
     href: "/suites-rooms",
-    src: "/images/rooms/president-suite-balcony/03.jpg",
+    src: PRESIDENT_SUITE_IMAGES[0],
   },
   {
     id: "cafe-dining",
@@ -29,13 +32,13 @@ const slides: FeatureSlide[] = [
     id: "experience",
     key: "experience",
     href: "/experience",
-    src: "/images/overview-hero/pool.webp",
+    src: FACILITY_IMAGES.pool,
   },
   {
     id: "events",
     key: "events",
     href: "/events",
-    src: "/images/overview-features/meetings-weddings.webp",
+    src: FACILITY_IMAGES.wedding,
   },
 ];
 
@@ -50,13 +53,13 @@ function FeatureMedia({
 }) {
   return (
     <div className="overview-features__media">
-      <SiteImage
+      {slide.src ? <SiteImage
         className="overview-features__image"
         src={slide.src}
         alt={alt ?? title}
         fill
         sizes="(max-width: 720px) 100vw, 60vw"
-      />
+      /> : <RoomImagePlaceholder />}
     </div>
   );
 }
@@ -83,7 +86,7 @@ export function OverviewHotelExperiences() {
   const titleFor = (slide: FeatureSlide) => t(`slides.${slide.key}`);
   const imageAltFor = (slide: FeatureSlide) =>
     slide.id === "suites-rooms"
-      ? roomT("president-suite-balcony")
+      ? roomT("president-suite")
       : titleFor(slide);
 
   return (

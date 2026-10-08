@@ -4,7 +4,8 @@ import { JsonLd } from "@/components/JsonLd";
 import { PageHeroCarousel } from "@/components/PageHeroCarousel";
 import { RoomsCollection } from "@/components/RoomsCollection";
 import { SITE_NAME, pageJsonLd, pageMetadata } from "@/lib/seo";
-import { HOTEL_ROOM_COUNT, LEGACY_ROOM_COVERS, roomTypes } from "@/lib/rooms";
+import { HOTEL_ROOM_COUNT } from "@/lib/rooms";
+import { PRESIDENT_SUITE_IMAGES } from "@/lib/roomGallery";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -21,10 +22,10 @@ export default async function SuitesRoomsPage() {
   const locale = await getLocale();
   const t = await getTranslations("suitesRooms");
 
-  const heroSlides = roomTypes.map((room) => ({
-    id: `rooms-hero-${room.id}`,
-    label: t(`rooms.${room.id}`),
-    src: LEGACY_ROOM_COVERS[room.id],
+  const heroSlides = PRESIDENT_SUITE_IMAGES.map((src, index) => ({
+    id: `rooms-hero-president-suite-${index + 1}`,
+    label: t("rooms.president-suite"),
+    src,
   }));
 
   return (

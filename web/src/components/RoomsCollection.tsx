@@ -4,19 +4,19 @@ import { useCallback, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { RoomDetailModal } from "@/components/RoomDetailModal";
 import SiteImage from "@/components/SiteImage";
+import { RoomImagePlaceholder } from "@/components/RoomImagePlaceholder";
 import { getRoomName, getRoomSpecs } from "@/lib/roomSpecs";
+import { ALL_ROOMS_GALLERY_IMAGES } from "@/lib/roomGallery";
 import { roomTypes, type RoomType } from "@/lib/rooms";
 
 type Tab = "all" | "accessible";
 
-const featuredRoomTypeIds = ["president-suite-balcony", "junior-suite"];
-const featuredRoomTypes = featuredRoomTypeIds
-  .map((id) => roomTypes.find((room) => room.id === id))
-  .filter((room): room is RoomType => room !== undefined);
-const collectionRoomTypes = [
-  ...featuredRoomTypes,
-  ...roomTypes.filter((room) => !featuredRoomTypeIds.includes(room.id)),
-];
+const allRoomsTypes = roomTypes.map((room) => ({
+  ...room,
+  images: ALL_ROOMS_GALLERY_IMAGES[room.id] ?? room.images,
+}));
+const presidentSuite = allRoomsTypes.find((room) => room.id === "president-suite")!;
+const collectionRoomTypes = allRoomsTypes.filter((room) => room.id !== "president-suite");
 
 function RoomCard({
   room,
@@ -37,13 +37,13 @@ function RoomCard({
         aria-label={t("card.viewDetailsAria", { name })}
         onClick={onViewDetails}
       >
-        <SiteImage
+        {room.images[0] ? <SiteImage
           className="room-card__image"
-          src={room.images[0]!}
+          src={room.images[0]}
           alt={name}
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 33vw"
-        />
+          sizes="(max-width: 680px) 100vw, 50vw"
+        /> : <RoomImagePlaceholder />}
       </button>
 
       <h3 className="room-card__name">{name}</h3>
@@ -68,7 +68,8 @@ export function RoomsCollection() {
 
   useEffect(() => {
     const scrollToHash = () => {
-      const id = window.location.hash.replace(/^#/, "");
+      const hash = window.location.hash.replace(/^#/, "");
+      const id = hash === "room-president-suite-balcony" ? "room-president-suite" : hash;
       if (!id.startsWith("room-")) return;
       document.getElementById(id)?.scrollIntoView({
         behavior: "smooth",
@@ -119,6 +120,14 @@ export function RoomsCollection() {
             aria-labelledby="rooms-tab-all"
             className="rooms-collection__panel"
           >
+            <div className="rooms-collection__featured">
+              <RoomCard
+                room={presidentSuite}
+                name={getRoomName(t, presidentSuite.id)}
+                t={t}
+                onViewDetails={() => setDetailRoom(presidentSuite)}
+              />
+            </div>
             <div className="rooms-collection__grid">
               {collectionRoomTypes.map((room) => (
                 <RoomCard

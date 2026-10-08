@@ -96,12 +96,13 @@
           "title": "Turar joy",
           "roomsSuites": "Xonalar va lyukslar",
           "roomTypes": {
-            "deluxe-double": "Deluxe Double Room",
-            "deluxe-double-balcony": "Deluxe Double Room with Balcony",
-            "deluxe-king": "Deluxe King Room",
-            "deluxe-king-balcony": "Deluxe King with Balcony",
+            "president-suite": "President Suite",
             "junior-suite": "Junior Suite",
-            "president-suite-balcony": "President Suite"
+            "suite": "Suite",
+            "deluxe-double": "Deluxe Double",
+            "deluxe-double-balcony": "Deluxe Double with Balcony",
+            "deluxe-king": "Deluxe King",
+            "deluxe-king-balcony": "Deluxe King with Balcony"
           }
         },
         "dining": {
@@ -133,16 +134,17 @@
     "rooms": {
       "lede": "Hashamat va orom maskaniga qoching",
       "title": "Xonalar va lyukslar",
-      "blurb": "Imom Al-Buxoriy majmuasida orom olish uchun mo'ljallangan 114 ta xona va lyuksning olti turini kashf eting.",
+      "blurb": "Imom Al-Buxoriy majmuasida orom olish uchun mo'ljallangan 114 ta xona va lyuksning yetti turini kashf eting.",
       "typesAriaLabel": "Xona turlari",
       "learnMore": "Batafsil ma'lumot",
       "types": {
-        "deluxe-double": "Deluxe Double Room",
-        "deluxe-double-balcony": "Deluxe Double Room with Balcony",
-        "deluxe-king": "Deluxe King Room",
-        "deluxe-king-balcony": "Deluxe King with Balcony",
+        "president-suite": "President Suite",
         "junior-suite": "Junior Suite",
-        "president-suite-balcony": "President Suite"
+        "suite": "Suite",
+        "deluxe-double": "Deluxe Double",
+        "deluxe-double-balcony": "Deluxe Double with Balcony",
+        "deluxe-king": "Deluxe King",
+        "deluxe-king-balcony": "Deluxe King with Balcony"
       },
       "gallery": {
         "ariaLabel": "Xonalar va lyukslar galereyasi",
@@ -250,10 +252,10 @@
   },
   "suitesRooms": {
     "metaTitle": "Xonalar va lyukslar",
-    "metaDescription": "Imom Al-Buxoriy majmuasidagi HADITH Hotelda olti turdagi 114 xona va lyuks.",
+    "metaDescription": "Imom Al-Buxoriy majmuasidagi HADITH Hotelda yetti turdagi 114 xona va lyuks.",
     "intro": {
       "title": "Xonalar va lyukslar",
-      "body": "Imom Al-Buxoriy majmuasida orom olish uchun mo'ljallangan olti turdagi 114 ta xona va lyuks."
+      "body": "Imom Al-Buxoriy majmuasida orom olish uchun mo'ljallangan yetti turdagi 114 ta xona va lyuks."
     },
     "tabs": {
       "all": "Barcha xonalar",
@@ -270,12 +272,13 @@
     },
     "reserve": "Find room",
     "rooms": {
-      "deluxe-double": "Deluxe Double Room",
-      "deluxe-double-balcony": "Deluxe Double Room with Balcony",
-      "deluxe-king": "Deluxe King Room",
-      "deluxe-king-balcony": "Deluxe King with Balcony",
+      "president-suite": "President Suite",
       "junior-suite": "Junior Suite",
-      "president-suite-balcony": "President Suite"
+      "suite": "Suite",
+      "deluxe-double": "Deluxe Double",
+      "deluxe-double-balcony": "Deluxe Double with Balcony",
+      "deluxe-king": "Deluxe King",
+      "deluxe-king-balcony": "Deluxe King with Balcony"
     },
     "specs": {
       "groupTitles": {
@@ -501,7 +504,8 @@
   "events": {
     "metaTitle": "Tadbirlar",
     "metaDescription": "HADITH Hotel, Samarqanddagi uchrashuv, to'y va tantanalar — Imom Al-Buxoriy majmuasidagi function room va ballroom.",
-    "hallAlt": "HADITH Hotel grand ballroom",
+    "hallAlt": "HADITH Hoteldagi tadbirlar zali",
+    "weddingAlt": "HADITH Hoteldagi ochiq havodagi to‘y maydoni",
     "plan": {
       "title": "Tadbiringizni rejalashtiring",
       "lead": "Har xil yig'ilishlar uchun keng tanlovdagi makonlar bilan HADITH Hotel, Samarqand keyingi tadbiringiz uchun mukammal joy. Uchrashuvlar yoki to'ylar bo'lsin, biz networking uchun xususiy majlis xonalari hamda hayratga soladigan hashamatli function roomlarni taklif qilamiz.",
@@ -639,6 +643,7 @@
       "cafe": "HADITH Hotel'dagi 7oz Espresso",
       "lounge": "HADITH Hotel'dagi Lounge Bar",
       "eventsHall": "HADITH Hotel'dagi tadbirlar zali",
+      "outdoorWedding": "HADITH Hoteldagi ochiq havodagi to‘y maydoni",
       "indoorPool": "HADITH Hotel'dagi yopiq basseyn",
       "turkishHammam": "HADITH Hotel'dagi turk hammomi",
       "massageSuite": "HADITH Hotel'dagi massaj xonasi",
@@ -759,7 +764,7 @@
       "article": {
         "heading": "Samarqand ziyorat qalbida indoneziyalik nafas",
         "p1": "HADITH Hotel 2026-yil 5-sentabr, shanba kuni O‘zbekiston, Samarqanddagi nufuzli Imam al-Buxoriy majmuasida rasman soft opening qildi. Imom Muhammad al-Buxoriy maqbarasidagi ziyorat markazidan bir kilometrdan kamroq masofada joylashgan, PT EGI Resources tomonidan rivojlantirilgan mehmonxona o‘zbekona ruhni xalqaro standartlardagi qulaylik bilan uyg‘unlashtirgan zamonaviy joylashuvni taklif etadi.",
-        "p2": "HADITH Hotelda 114 ta xona va lyuks bo‘lib, 250 nafargacha mehmonni qabul qila oladi. Ziyoratchilar, sayyohlar va VIP mehmonlar uchun olti turdagi xona mavjud: Deluxe Double Room, Deluxe Double Room with Balcony, Deluxe King Room, Deluxe King with Balcony, Junior Suite va President Suite. Imam al-Buxoriy hududidagi joylashuvi mehmonxonani ziyorat qilish bilan birga Samarqandning tarixiy va madaniy merosini kashf etishga kelgan mehmonlar uchun strategik nuqtaga aylantiradi.",
+        "p2": "HADITH Hotelda 114 ta xona va lyuks bo‘lib, 250 nafargacha mehmonni qabul qila oladi. Ziyoratchilar, sayyohlar va VIP mehmonlar uchun yetti turdagi xona mavjud: President Suite, Junior Suite, Suite, Deluxe Double, Deluxe Double with Balcony, Deluxe King va Deluxe King with Balcony. Imam al-Buxoriy hududidagi joylashuvi mehmonxonani ziyorat qilish bilan birga Samarqandning tarixiy va madaniy merosini kashf etishga kelgan mehmonlar uchun strategik nuqtaga aylantiradi.",
         "p3": "Joylashtirishdan tashqari, HADITH Hotel Saji Nusantara Restaurant orqali indoneziyalik taomlar, Uzbek Cuisine Bar & Lounge, yopiq basseyn, fitnes markazi, spa, sauna, turk hammomi, tennis va padel kortlari kabi premium qulayliklarni taklif etadi. Mehmonxona nafaqat Samarqand mehmondo‘stlik sohasini mustahkamlashi, balki turizm va Nusantara mehmondo‘stligi orqali Indoneziya va O‘zbekiston o‘rtasida madaniy almashinuv ko‘prigiga aylanishi kutiladi."
       }
     }

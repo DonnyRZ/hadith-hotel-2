@@ -1,10 +1,11 @@
 import SiteImage from "@/components/SiteImage";
+import { RoomImagePlaceholder } from "@/components/RoomImagePlaceholder";
 import type { CSSProperties } from "react";
 
 export type HeroMediaSlide = {
   id: string;
   label: string;
-  src: string;
+  src: string | null;
   placeholderLabel?: string;
   mobileSrc?: string;
   position?: string;
@@ -31,15 +32,16 @@ export function HeroMedia({
   return (
     <div
       className={`hero-media${slide.mobileSrc ? " hero-media--has-mobile" : ""}${slide.placeholderLabel ? " hero-media--soon" : ""}`}
-      role="img"
-      aria-label={slide.label}
+      role={slide.src || slide.placeholderLabel ? "img" : undefined}
+      aria-label={slide.src || slide.placeholderLabel ? slide.label : undefined}
+      aria-hidden={!slide.src && !slide.placeholderLabel ? true : undefined}
       style={positionStyle}
     >
       {slide.placeholderLabel ? (
         <span className="hero-media__placeholder-label">
           {slide.placeholderLabel}
         </span>
-      ) : (
+      ) : slide.src ? (
         <>
           <SiteImage
             className="hero-media__image hero-media__image--desktop"
@@ -63,7 +65,7 @@ export function HeroMedia({
             />
           ) : null}
         </>
-      )}
+      ) : <RoomImagePlaceholder />}
     </div>
   );
 }

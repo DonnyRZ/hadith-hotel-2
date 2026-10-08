@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { FACILITY_IMAGES } from "@/lib/facilityImages";
 import { getLocale, getTranslations } from "next-intl/server";
 import { GuestRegistrationThankYouOverlay } from "@/components/GuestRegistrationThankYouOverlay";
 import { HeroCarousel } from "@/components/HeroCarousel";
@@ -9,7 +10,8 @@ import { OverviewFarewell } from "@/components/OverviewFarewell";
 import { OverviewHotelExperiences } from "@/components/OverviewHotelExperiences";
 import { OverviewLocation } from "@/components/OverviewLocation";
 import { OverviewRoomsSuites } from "@/components/OverviewRoomsSuites";
-import { HOTEL_ROOM_COUNT, LEGACY_ROOM_COVERS } from "@/lib/rooms";
+import { HOTEL_ROOM_COUNT } from "@/lib/rooms";
+import { PRESIDENT_SUITE_IMAGES } from "@/lib/roomGallery";
 import { homeJsonLd, pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -43,47 +45,47 @@ export default async function OverviewPage() {
       position: "50% 52%",
       mobilePosition: "50% 52%",
     },
-    {
-      id: "president-suite-balcony",
-      label: roomT("rooms.president-suite-balcony"),
-      src: LEGACY_ROOM_COVERS["president-suite-balcony"],
-      position: "52% 52%",
-      mobilePosition: "68% 52%",
-    },
+    ...PRESIDENT_SUITE_IMAGES.map((src, index) => ({
+      id: `president-suite-${index + 1}`,
+      label: roomT("rooms.president-suite"),
+      src,
+      position: "50% 50%",
+      mobilePosition: "50% 50%",
+    })),
     {
       id: "pool",
       label: t("hero.pool"),
-      src: "/images/overview-hero/pool.webp",
-      position: "50% 52%",
-      mobilePosition: "50% 52%",
+      src: FACILITY_IMAGES.pool,
+      position: "50% 50%",
+      mobilePosition: "35% 50%",
     },
     {
       id: "massage",
       label: t("hero.massage"),
-      src: "/images/overview-hero/massage.webp",
-      position: "50% 100%",
-      mobilePosition: "50% 100%",
+      src: FACILITY_IMAGES.massage,
+      position: "50% 50%",
+      mobilePosition: "65% 50%",
     },
     {
       id: "sauna",
       label: t("hero.sauna"),
-      src: "/images/overview-hero/sauna.webp",
-      position: "50% 52%",
-      mobilePosition: "50% 52%",
+      src: FACILITY_IMAGES.sauna,
+      position: "50% 50%",
+      mobilePosition: "50% 50%",
     },
     {
       id: "hamam",
       label: t("hero.hamam"),
-      src: "/images/experience/hamam.webp",
-      position: "50% 52%",
-      mobilePosition: "50% 52%",
+      src: FACILITY_IMAGES.hammam,
+      position: "50% 50%",
+      mobilePosition: "50% 50%",
     },
     {
       id: "hall",
       label: t("hero.hall"),
-      src: "/images/meetings-weddings/hall.webp",
-      position: "50% 52%",
-      mobilePosition: "50% 52%",
+      src: FACILITY_IMAGES.hall,
+      position: "50% 50%",
+      mobilePosition: "50% 50%",
     },
     {
       id: "salon",

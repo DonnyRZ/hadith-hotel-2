@@ -1,6 +1,7 @@
 "use client";
 
 import SiteImage from "@/components/SiteImage";
+import { FACILITY_IMAGES } from "@/lib/facilityImages";
 import { asset } from "@/lib/asset";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
@@ -12,10 +13,10 @@ type WellnessSlideConfig = {
 };
 
 const wellnessSlideConfigs: WellnessSlideConfig[] = [
-  { id: "spa", key: "spa", src: "/images/experience/massage.webp" },
-  { id: "sauna", key: "sauna", src: "/images/experience/sauna.webp" },
-  { id: "hammam", key: "hammam", src: "/images/experience/hamam.webp" },
-  { id: "pool", key: "pool", src: "/images/experience/pool.webp" },
+  { id: "spa", key: "spa", src: FACILITY_IMAGES.massage },
+  { id: "sauna", key: "sauna", src: FACILITY_IMAGES.sauna },
+  { id: "hammam", key: "hammam", src: FACILITY_IMAGES.hammam },
+  { id: "pool", key: "pool", src: FACILITY_IMAGES.pool },
   { id: "salon", key: "salon", src: "/images/experience/salon.jpeg" },
   { id: "fitness", key: "fitness", src: "/images/experience/gym.webp" },
 ];

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { FACILITY_IMAGES } from "@/lib/facilityImages";
 import { getLocale, getTranslations } from "next-intl/server";
 import { EventsHub } from "@/components/EventsHub";
 import { JsonLd } from "@/components/JsonLd";
@@ -24,9 +25,16 @@ export default async function EventsPage() {
     {
       id: "events-hero-hall",
       label: t("hallAlt"),
-      src: "/images/events/hall.png",
+      src: FACILITY_IMAGES.hall,
       position: "50% 50%",
       mobilePosition: "50% 48%",
+    },
+    {
+      id: "events-hero-wedding",
+      label: t("weddingAlt"),
+      src: FACILITY_IMAGES.wedding,
+      position: "50% 50%",
+      mobilePosition: "50% 50%",
     },
   ] as const;
 
