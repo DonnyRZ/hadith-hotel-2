@@ -1,0 +1,39 @@
+name: Temporary VPS host key probe
+
+on:
+  push:
+    branches:
+      - codex/hadith-hotel-deploy-workflows
+    paths:
+      - .github/workflows/vps-host-key-probe.yml
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read the public SSH host key
+        run: |
+          set -euo pipefail
+          output="$RUNNER_TEMP/vps-known-hosts"
+          ssh-keyscan -T 10 -H -p 22 212.85.24.238 >"$output" 2>/dev/null || true
+          if [[ ! -s "$output" ]]; then
+            echo "::error::GitHub runner received no SSH host key from 212.85.24.238:22"
+            exit 1
+          fi
+          ssh-keygen -lf "$output"
+          install -m 644 "$output" .github/vps-known-hosts-probe.txt
+
+      - name: Save probe result to this branch
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/vps-known-hosts-probe.txt
+          git commit -m "Record VPS SSH host key probe result"
+          git push
