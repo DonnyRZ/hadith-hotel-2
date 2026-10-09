@@ -47,6 +47,7 @@ const venues: Venue[] = [
     variant: "paper",
     reversed: true,
     gallery: [
+      { src: FACILITY_IMAGES.cafeExterior, labelKey: "exterior", position: "50% 50%" },
       { src: FACILITY_IMAGES.cafe, labelKey: "interior", position: "50% 50%" },
       { src: FACILITY_IMAGES.cafeCounter, labelKey: "counter", position: "45% 50%" },
     ],

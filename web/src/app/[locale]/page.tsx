@@ -9,6 +9,7 @@ import { OverviewFarewell } from "@/components/OverviewFarewell";
 import { OverviewHotelExperiences } from "@/components/OverviewHotelExperiences";
 import { OverviewLocation } from "@/components/OverviewLocation";
 import { OverviewRoomsSuites } from "@/components/OverviewRoomsSuites";
+import { FACILITY_IMAGES } from "@/lib/facilityImages";
 import { HOTEL_ROOM_COUNT } from "@/lib/rooms";
 import { homeJsonLd, pageMetadata } from "@/lib/seo";
 
@@ -41,6 +42,13 @@ export default async function OverviewPage() {
       id: "president-suite",
       label: roomT("rooms.president-suite"),
       src: "/images/overview-hero/homepage-02.webp",
+      position: "50% 50%",
+      mobilePosition: "50% 50%",
+    },
+    {
+      id: "cafe-exterior",
+      label: diningT("cafe"),
+      src: FACILITY_IMAGES.cafeExterior,
       position: "50% 50%",
       mobilePosition: "50% 50%",
     },

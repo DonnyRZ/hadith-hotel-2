@@ -375,6 +375,7 @@
           "Место, чтобы сесть и задержаться"
         ],
         "gallery": {
+          "exterior": "Фасад и терраса кафе 7oz Espresso",
           "interior": "Кафе 7oz Espresso",
           "counter": "Кофейная стойка и витрина с выпечкой в 7oz Espresso"
         }
@@ -424,6 +425,7 @@
       "slides": {
         "spa": "Спа / массажный кабинет",
         "sauna": "Сауна",
+        "sauna2": "Сауна 2",
         "hammam": "Турецкий хаммам",
         "pool": "Крытый бассейн",
         "fitness": "Фитнес-центр"
@@ -644,6 +646,7 @@
       "turkishHammam": "Турецкий хаммам в HADITH Hotel",
       "massageSuite": "Массажный кабинет в HADITH Hotel",
       "sauna": "Сауна в HADITH Hotel",
+      "sauna2": "Сауна 2 в HADITH Hotel",
       "fitnessCentre": "Фитнес-центр в HADITH Hotel",
       "tennisCourt": "Теннисный корт в HADITH Hotel",
       "padelCourt": "Падел-корт в HADITH Hotel",

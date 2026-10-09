@@ -375,6 +375,7 @@
           "O'tirib qolish uchun joy"
         ],
         "gallery": {
+          "exterior": "7oz Espresso kafesi tashqi ko‘rinishi va ayvoni",
           "interior": "7oz Espresso kafesi",
           "counter": "7oz Espresso qahva va pishiriqlar peshtaxtasi"
         }
@@ -424,6 +425,7 @@
       "slides": {
         "spa": "Spa / Massaj Xonasi",
         "sauna": "Sauna",
+        "sauna2": "Sauna 2",
         "hammam": "Turk Hammomi",
         "pool": "Yopiq Basseyn",
         "fitness": "Fitnes Markazi"
@@ -644,6 +646,7 @@
       "turkishHammam": "HADITH Hotel'dagi turk hammomi",
       "massageSuite": "HADITH Hotel'dagi massaj xonasi",
       "sauna": "HADITH Hotel'dagi sauna",
+      "sauna2": "HADITH Hotel'dagi Sauna 2",
       "fitnessCentre": "HADITH Hotel'dagi fitnes markazi",
       "tennisCourt": "HADITH Hotel'dagi tennis korti",
       "padelCourt": "HADITH Hotel'dagi padel korti",

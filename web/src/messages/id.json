@@ -375,6 +375,7 @@
           "Tempat duduk dan tinggal sebentar"
         ],
         "gallery": {
+          "exterior": "Eksterior dan teras 7oz Espresso Cafe",
           "interior": "Kafe 7oz Espresso",
           "counter": "Counter kopi dan pastry di 7oz Espresso"
         }
@@ -424,6 +425,7 @@
       "slides": {
         "spa": "Suite Spa / Pijat",
         "sauna": "Sauna",
+        "sauna2": "Sauna 2",
         "hammam": "Hammam Turki",
         "pool": "Kolam Renang Indoor",
         "fitness": "Pusat Kebugaran"
@@ -644,6 +646,7 @@
       "turkishHammam": "Hammam Turki di HADITH Hotel",
       "massageSuite": "Ruang perawatan pijat di HADITH Hotel",
       "sauna": "Sauna di HADITH Hotel",
+      "sauna2": "Sauna 2 di HADITH Hotel",
       "fitnessCentre": "Pusat kebugaran di HADITH Hotel",
       "tennisCourt": "Lapangan tenis di HADITH Hotel",
       "padelCourt": "Lapangan padel di HADITH Hotel",

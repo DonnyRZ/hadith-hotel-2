@@ -375,6 +375,7 @@
           "A place to sit and stay awhile"
         ],
         "gallery": {
+          "exterior": "7oz Espresso cafe exterior and terrace",
           "interior": "7oz Espresso cafe",
           "counter": "Coffee and pastry counter at 7oz Espresso"
         }
@@ -424,6 +425,7 @@
       "slides": {
         "spa": "Spa / Massage Suite",
         "sauna": "Sauna",
+        "sauna2": "Sauna 2",
         "hammam": "Turkish Hammam",
         "pool": "Indoor Pool",
         "fitness": "Fitness Centre"
@@ -644,6 +646,7 @@
       "turkishHammam": "Turkish hammam at HADITH Hotel",
       "massageSuite": "Massage treatment room at HADITH Hotel",
       "sauna": "Sauna at HADITH Hotel",
+      "sauna2": "Sauna 2 at HADITH Hotel",
       "fitnessCentre": "Fitness centre at HADITH Hotel",
       "tennisCourt": "Tennis court at HADITH Hotel",
       "padelCourt": "Padel court at HADITH Hotel",

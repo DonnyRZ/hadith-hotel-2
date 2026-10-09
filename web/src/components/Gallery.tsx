@@ -33,7 +33,7 @@ const galleryImageConfigs: GalleryImageConfig[] = [
   { id: "turkish-hammam", key: "turkishHammam", src: FACILITY_IMAGES.hammam },
   { id: "massage-suite", key: "massageSuite", src: FACILITY_IMAGES.massage },
   { id: "sauna", key: "sauna", src: FACILITY_IMAGES.sauna },
-  { id: "sauna-2", key: "sauna", src: FACILITY_IMAGES.sauna2 },
+  { id: "sauna-2", key: "sauna2", src: FACILITY_IMAGES.sauna2 },
   { id: "fitness-centre", key: "fitnessCentre", src: "/images/experience/gym.webp" },
   { id: "tennis-court", key: "tennisCourt", src: "/images/experience/tennis.webp" },
   { id: "padel-court", key: "padelCourt", src: "/images/experience/padel.webp" },
