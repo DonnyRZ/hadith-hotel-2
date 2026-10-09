@@ -1,6 +1,10 @@
 /** Best-effort append of guest registrations to the shared operations Google Sheet. */
 
-import { google } from "googleapis";
+// Load only Sheets; the full Google API index exhausts build memory on the VPS.
+import {
+  auth as googleAuth,
+  sheets as createSheets,
+} from "googleapis/build/src/apis/sheets";
 import type { GuestRegistration } from "@prisma/client";
 
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
@@ -72,12 +76,12 @@ async function appendGuestRegistrationRowUnsafe(
   const config = credentials();
   if (!config) return;
 
-  const auth = new google.auth.JWT({
+  const auth = new googleAuth.JWT({
     email: config.email,
     key: config.key,
     scopes: SCOPES,
   });
-  const sheets = google.sheets({ version: "v4", auth });
+  const sheets = createSheets({ version: "v4", auth });
 
   const row = [
     formatSubmittedAt(registration.createdAt),

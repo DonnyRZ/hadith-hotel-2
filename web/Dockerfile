@@ -9,8 +9,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npx prisma generate
-# Avoid Turbopack's Google Font query parsing failure in the Linux build.
-RUN npm run build -- --webpack
+# Avoid Turbopack's Google Font query parsing failure and limit build heap on the shared VPS.
+RUN NODE_OPTIONS=--max-old-space-size=1536 npm run build -- --webpack
 
 FROM node:22-alpine AS runner
 WORKDIR /app
