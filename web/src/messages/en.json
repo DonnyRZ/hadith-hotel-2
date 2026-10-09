@@ -379,7 +379,8 @@
           "A place to sit and stay awhile"
         ],
         "gallery": {
-          "interior": "7oz Espresso cafe"
+          "interior": "7oz Espresso cafe",
+          "counter": "Coffee and pastry counter at 7oz Espresso"
         }
       },
       "lounge": {
@@ -641,6 +642,7 @@
       "restaurant": "Restaurant dining room at HADITH Hotel",
       "buffet": "Buffet dining experience at HADITH Hotel",
       "cafe": "7oz Espresso at HADITH Hotel",
+      "cafeCounter": "Coffee and pastry counter at 7oz Espresso",
       "lounge": "Lounge Bar at HADITH Hotel",
       "eventsHall": "Events hall at HADITH Hotel",
       "outdoorWedding": "Outdoor wedding venue at HADITH Hotel",

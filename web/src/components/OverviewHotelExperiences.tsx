@@ -26,7 +26,7 @@ const slides: FeatureSlide[] = [
     id: "cafe-dining",
     key: "cafeDining",
     href: "/cafe-dining",
-    src: "/images/cafe-dining/resto-1.png",
+    src: FACILITY_IMAGES.restaurant,
   },
   {
     id: "experience",

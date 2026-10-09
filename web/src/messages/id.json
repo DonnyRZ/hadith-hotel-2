@@ -379,7 +379,8 @@
           "Tempat duduk dan tinggal sebentar"
         ],
         "gallery": {
-          "interior": "Kafe 7oz Espresso"
+          "interior": "Kafe 7oz Espresso",
+          "counter": "Counter kopi dan pastry di 7oz Espresso"
         }
       },
       "lounge": {
@@ -641,6 +642,7 @@
       "restaurant": "Ruang makan restoran di HADITH Hotel",
       "buffet": "Pengalaman bersantap buffet di HADITH Hotel",
       "cafe": "7oz Espresso di HADITH Hotel",
+      "cafeCounter": "Counter kopi dan pastry di 7oz Espresso",
       "lounge": "Lounge Bar di HADITH Hotel",
       "eventsHall": "Aula acara di HADITH Hotel",
       "outdoorWedding": "Venue pernikahan luar ruangan di HADITH Hotel",

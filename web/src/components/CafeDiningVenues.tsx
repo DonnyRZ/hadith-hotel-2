@@ -1,10 +1,11 @@
 "use client";
 
 import SiteImage from "@/components/SiteImage";
+import { FACILITY_IMAGES } from "@/lib/facilityImages";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
-type GallerySlide = { src?: string; labelKey: string };
+type GallerySlide = { src?: string; labelKey: string; position?: string };
 
 type Venue = {
   id: string;
@@ -36,8 +37,8 @@ const venues: Venue[] = [
     website: "https://saji-nusantara.com/",
     variant: "blue",
     gallery: [
-      { src: "/images/cafe-dining/resto-1.png", labelKey: "diningRoom" },
-      { src: "/images/cafe-dining/buffet.webp", labelKey: "buffetCounter" },
+      { src: FACILITY_IMAGES.restaurant, labelKey: "diningRoom", position: "50% 50%" },
+      { src: FACILITY_IMAGES.buffet, labelKey: "buffetCounter", position: "65% 50%" },
     ],
   },
   {
@@ -47,7 +48,8 @@ const venues: Venue[] = [
     variant: "paper",
     reversed: true,
     gallery: [
-      { src: "/images/cafe-dining/7oz.png", labelKey: "interior" },
+      { src: FACILITY_IMAGES.cafe, labelKey: "interior", position: "50% 50%" },
+      { src: FACILITY_IMAGES.cafeCounter, labelKey: "counter", position: "45% 50%" },
     ],
   },
   {
@@ -110,6 +112,7 @@ function VenueMediaCarousel({
           alt=""
           fill
           sizes="(max-width: 900px) 100vw, 58vw"
+          style={{ objectPosition: slide.position }}
           priority={venue.id === "restaurant"}
           aria-hidden="true"
         />

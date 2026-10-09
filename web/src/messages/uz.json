@@ -379,7 +379,8 @@
           "O'tirib qolish uchun joy"
         ],
         "gallery": {
-          "interior": "7oz Espresso kafesi"
+          "interior": "7oz Espresso kafesi",
+          "counter": "7oz Espresso qahva va pishiriqlar peshtaxtasi"
         }
       },
       "lounge": {
@@ -641,6 +642,7 @@
       "restaurant": "HADITH Hotel'dagi restoran ovqatlanish zali",
       "buffet": "HADITH Hotel'dagi bufet tajribasi",
       "cafe": "HADITH Hotel'dagi 7oz Espresso",
+      "cafeCounter": "7oz Espresso qahva va pishiriqlar peshtaxtasi",
       "lounge": "HADITH Hotel'dagi Lounge Bar",
       "eventsHall": "HADITH Hotel'dagi tadbirlar zali",
       "outdoorWedding": "HADITH Hoteldagi ochiq havodagi to‘y maydoni",
