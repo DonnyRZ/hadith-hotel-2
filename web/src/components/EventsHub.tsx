@@ -8,21 +8,20 @@ import { FACILITY_IMAGES } from "@/lib/facilityImages";
 
 const FEATURES = [
   {
-    id: "weddings", reversed: false, soon: true,
-    image: FACILITY_IMAGES.wedding, altKey: "weddingAlt", showPhoto: true,
+    id: "weddings", reversed: false,
+    image: FACILITY_IMAGES.wedding, altKey: "weddingAlt",
   },
   {
-    id: "meetings", reversed: true, soon: true,
-    image: FACILITY_IMAGES.hall, altKey: "hallAlt", showPhoto: true,
-  },
-  // Dedicated catering and restaurant-event photographs are still pending.
-  {
-    id: "catering", reversed: false, soon: true,
-    image: FACILITY_IMAGES.hall, altKey: "hallAlt", showPhoto: false,
+    id: "meetings", reversed: true,
+    image: FACILITY_IMAGES.hall, altKey: "hallAlt",
   },
   {
-    id: "social", reversed: true, soon: true,
-    image: FACILITY_IMAGES.hall, altKey: "hallAlt", showPhoto: false,
+    id: "catering", reversed: false,
+    image: FACILITY_IMAGES.hall, altKey: "hallAlt",
+  },
+  {
+    id: "social", reversed: true,
+    image: FACILITY_IMAGES.hall, altKey: "hallAlt",
   },
 ] as const;
 
@@ -65,7 +64,6 @@ function VirtualTourIcon() {
 
 export function EventsHub() {
   const t = useTranslations("events");
-  const tSoon = useTranslations("common.comingSoon");
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
 
   const openSoon = () => setComingSoonOpen(true);
@@ -124,26 +122,16 @@ export function EventsHub() {
             <SiteImage
               className="events-hub__media-image"
               src={feature.image}
-              alt={feature.showPhoto ? t(feature.altKey) : ""}
+              alt={t(feature.altKey)}
               fill
               sizes="(max-width: 900px) 100vw, 58vw"
             />
-            {feature.soon ? (
-              <span
-                className={`events-hub__soon${feature.showPhoto ? " events-hub__soon--badge" : ""}`}
-              >
-                {tSoon("title")}
-              </span>
-            ) : null}
           </div>
           <div className="events-hub__feature-copy">
             <h2 id={`events-feature-${feature.id}`} className="events-hub__feature-title">
               {t(`features.${feature.id}.title`)}
             </h2>
             <p>{t(`features.${feature.id}.body`)}</p>
-            <button type="button" className="events-hub__cta" onClick={openSoon}>
-              {t("learnMore")}
-            </button>
           </div>
         </section>
       ))}
