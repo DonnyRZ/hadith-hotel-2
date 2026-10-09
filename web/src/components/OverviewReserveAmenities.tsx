@@ -43,7 +43,6 @@ const leftGroups: AmenityGroup[] = [
       },
       ...roomTypes.map((room) => ({
         key: `groups.accommodation.roomTypes.${room.id}`,
-        value: room.size ?? undefined,
         href: `/suites-rooms#room-${room.id}`,
       })),
     ],
