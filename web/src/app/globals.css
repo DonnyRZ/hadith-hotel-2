@@ -3564,6 +3564,27 @@ body.has-room-lightbox .site-header__utility {
   object-position: 50% 50%;
 }
 
+.events-hub__soon {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(
+    to top,
+    rgba(12, 12, 12, 0.96) 0%,
+    rgba(12, 12, 12, 0.92) 45%,
+    rgba(12, 12, 12, 0.88) 100%
+  );
+  color: #fff;
+  font-family: var(--sans);
+  font-size: clamp(11px, 1.1vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
 .events-hub__plan {
   padding: clamp(72px, 10vh, 120px) var(--page-gutter) clamp(72px, 10vh, 120px);
   text-align: center;

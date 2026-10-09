@@ -8,20 +8,20 @@ import { FACILITY_IMAGES } from "@/lib/facilityImages";
 
 const FEATURES = [
   {
-    id: "weddings", reversed: false,
+    id: "weddings", reversed: false, soon: false,
     image: FACILITY_IMAGES.wedding, altKey: "weddingAlt",
   },
   {
-    id: "meetings", reversed: true,
+    id: "meetings", reversed: true, soon: false,
     image: FACILITY_IMAGES.hall, altKey: "hallAlt",
   },
   {
     id: "catering", reversed: false,
-    image: FACILITY_IMAGES.hall, altKey: "hallAlt",
+    image: FACILITY_IMAGES.hall, altKey: "hallAlt", soon: true,
   },
   {
     id: "social", reversed: true,
-    image: FACILITY_IMAGES.hall, altKey: "hallAlt",
+    image: FACILITY_IMAGES.hall, altKey: "hallAlt", soon: true,
   },
 ] as const;
 
@@ -64,6 +64,7 @@ function VirtualTourIcon() {
 
 export function EventsHub() {
   const t = useTranslations("events");
+  const tSoon = useTranslations("common.comingSoon");
   const [comingSoonOpen, setComingSoonOpen] = useState(false);
 
   const openSoon = () => setComingSoonOpen(true);
@@ -126,6 +127,9 @@ export function EventsHub() {
               fill
               sizes="(max-width: 900px) 100vw, 58vw"
             />
+            {feature.soon ? (
+              <span className="events-hub__soon">{tSoon("title")}</span>
+            ) : null}
           </div>
           <div className="events-hub__feature-copy">
             <h2 id={`events-feature-${feature.id}`} className="events-hub__feature-title">
