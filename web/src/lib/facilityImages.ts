@@ -4,6 +4,7 @@ export const FACILITY_IMAGES = {
   pool: "/images/facilities/pool.webp",
   massage: "/images/facilities/massage.webp",
   sauna: "/images/facilities/sauna.webp",
+  sauna2: "/images/facilities/sauna-2.webp",
   hammam: "/images/facilities/hammam.webp",
   wedding: "/images/facilities/wedding.webp",
   restaurant: "/images/cafe-dining/restaurant.webp",

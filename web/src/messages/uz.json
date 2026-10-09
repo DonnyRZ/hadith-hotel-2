@@ -68,8 +68,7 @@
       "massage": "Massaj xonasi",
       "sauna": "Mehmonxona saunasi",
       "hamam": "Turk hammomi",
-      "hall": "Uchrashuvlar va to'ylar zali",
-      "salon": "Go'zallik saloni"
+      "hall": "Uchrashuvlar va to'ylar zali"
     },
     "welcome": {
       "lede": "HADITH Hotelga xush kelibsiz",
@@ -119,7 +118,6 @@
           "sauna": "Sauna",
           "turkishHammam": "Turk hammomi",
           "fitnessCentre": "Fitnes markazi",
-          "beautySalon": "Go'zallik saloni",
           "tennisCourt": "Tennis korti",
           "kidsPlayground": "Bolalar o'yin maydonchasi",
           "padelCourt": "Padel korti"
@@ -428,7 +426,6 @@
         "sauna": "Sauna",
         "hammam": "Turk Hammomi",
         "pool": "Yopiq Basseyn",
-        "salon": "Go'zallik Saloni",
         "fitness": "Fitnes Markazi"
       }
     },

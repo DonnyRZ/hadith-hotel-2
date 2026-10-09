@@ -74,7 +74,6 @@ const rightGroups: AmenityGroup[] = [
       { key: "groups.wellness.sauna", href: "/experience" },
       { key: "groups.wellness.turkishHammam", href: "/experience" },
       { key: "groups.wellness.fitnessCentre", href: "/experience" },
-      { key: "groups.wellness.beautySalon", href: "/experience" },
       { key: "groups.wellness.tennisCourt", href: "/experience#active" },
       { key: "groups.wellness.kidsPlayground", href: "/experience#active" },
       { key: "groups.wellness.padelCourt", href: "/experience#active" },

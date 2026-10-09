@@ -68,8 +68,7 @@
       "massage": "Massage treatment room",
       "sauna": "Hotel sauna",
       "hamam": "Turkish hammam",
-      "hall": "Meetings and weddings hall",
-      "salon": "Beauty salon"
+      "hall": "Meetings and weddings hall"
     },
     "welcome": {
       "lede": "Welcome to HADITH Hotel",
@@ -119,7 +118,6 @@
           "sauna": "Sauna",
           "turkishHammam": "Turkish Hammam",
           "fitnessCentre": "Fitness Centre",
-          "beautySalon": "Beauty Salon",
           "tennisCourt": "Tennis Court",
           "kidsPlayground": "Kids’ Playground",
           "padelCourt": "Padel Court"
@@ -428,7 +426,6 @@
         "sauna": "Sauna",
         "hammam": "Turkish Hammam",
         "pool": "Indoor Pool",
-        "salon": "Beauty Salon",
         "fitness": "Fitness Centre"
       }
     },

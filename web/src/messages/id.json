@@ -68,8 +68,7 @@
       "massage": "Ruang perawatan pijat",
       "sauna": "Sauna hotel",
       "hamam": "Hamam Turki",
-      "hall": "Aula pertemuan dan pernikahan",
-      "salon": "Salon kecantikan"
+      "hall": "Aula pertemuan dan pernikahan"
     },
     "welcome": {
       "lede": "Selamat Datang di HADITH Hotel",
@@ -119,7 +118,6 @@
           "sauna": "Sauna",
           "turkishHammam": "Hamam Turki",
           "fitnessCentre": "Fitness Centre",
-          "beautySalon": "Salon Kecantikan",
           "tennisCourt": "Lapangan Tenis",
           "kidsPlayground": "Taman Bermain Anak",
           "padelCourt": "Lapangan Padel"
@@ -428,7 +426,6 @@
         "sauna": "Sauna",
         "hammam": "Hammam Turki",
         "pool": "Kolam Renang Indoor",
-        "salon": "Salon Kecantikan",
         "fitness": "Pusat Kebugaran"
       }
     },

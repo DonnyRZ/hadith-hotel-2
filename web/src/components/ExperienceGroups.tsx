@@ -15,9 +15,9 @@ type WellnessSlideConfig = {
 const wellnessSlideConfigs: WellnessSlideConfig[] = [
   { id: "spa", key: "spa", src: FACILITY_IMAGES.massage },
   { id: "sauna", key: "sauna", src: FACILITY_IMAGES.sauna },
+  { id: "sauna-2", key: "sauna", src: FACILITY_IMAGES.sauna2 },
   { id: "hammam", key: "hammam", src: FACILITY_IMAGES.hammam },
   { id: "pool", key: "pool", src: FACILITY_IMAGES.pool },
-  { id: "salon", key: "salon", src: "/images/experience/salon.jpeg" },
   { id: "fitness", key: "fitness", src: "/images/experience/gym.webp" },
 ];
 
