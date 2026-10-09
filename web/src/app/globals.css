@@ -3340,10 +3340,6 @@ body.has-room-lightbox .site-header__utility {
   object-position: 50% 45%;
 }
 
-.venue-carousel__image--bar {
-  object-position: 0% 50%;
-}
-
 .venue-carousel__slide--soon {
   display: grid;
   place-items: center;

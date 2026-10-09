@@ -56,7 +56,7 @@ const venues: Venue[] = [
     key: "lounge",
     variant: "stone",
     gallery: [
-      { src: "/images/cafe-dining/lounge-bar.png", labelKey: "interior" },
+      { src: FACILITY_IMAGES.lounge, labelKey: "interior", position: "50% 50%" },
     ],
   },
 ];
@@ -106,7 +106,7 @@ function VenueMediaCarousel({
         aria-label={slideLabel}
       >
         <SiteImage
-          className={`venue-carousel__image${venue.id === "lounge" ? " venue-carousel__image--bar" : ""}`}
+          className="venue-carousel__image"
           src={slide.src}
           alt=""
           fill

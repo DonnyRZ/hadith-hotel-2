@@ -9,4 +9,5 @@ export const FACILITY_IMAGES = {
   restaurant: "/images/cafe-dining/restaurant.webp",
   cafe: "/images/cafe-dining/7oz-interior.webp",
   cafeCounter: "/images/cafe-dining/7oz-counter.webp",
+  lounge: "/images/cafe-dining/lounge-bar.webp",
 } as const;

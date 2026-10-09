@@ -26,7 +26,7 @@ const galleryImageConfigs: GalleryImageConfig[] = [
   { id: "restaurant", key: "restaurant", src: FACILITY_IMAGES.restaurant },
   { id: "cafe", key: "cafe", src: FACILITY_IMAGES.cafe },
   { id: "cafe-counter", key: "cafeCounter", src: FACILITY_IMAGES.cafeCounter },
-  { id: "lounge", key: "lounge", src: "/images/cafe-dining/lounge-bar.png" },
+  { id: "lounge", key: "lounge", src: FACILITY_IMAGES.lounge },
   { id: "events-hall", key: "eventsHall", src: FACILITY_IMAGES.hall },
   { id: "outdoor-wedding", key: "outdoorWedding", src: FACILITY_IMAGES.wedding },
   { id: "indoor-pool", key: "indoorPool", src: FACILITY_IMAGES.pool },

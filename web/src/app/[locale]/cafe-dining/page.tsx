@@ -39,9 +39,9 @@ export default async function CafeDiningPage() {
     {
       id: "dining-hero-lounge",
       label: t("hero.lounge"),
-      src: "/images/cafe-dining/lounge-bar.png",
-      position: "0% 50%",
-      mobilePosition: "0% 50%",
+      src: FACILITY_IMAGES.lounge,
+      position: "50% 75%",
+      mobilePosition: "35% 60%",
     },
   ] as const;
 
