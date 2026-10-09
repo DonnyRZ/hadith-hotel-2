@@ -347,7 +347,6 @@
     "metaDescription": "HADITH Hotel, Samarqanddagi ovqatlanish — Saji Nusantara restorani, 7oz Espresso Cafe va Lounge Bar.",
     "hero": {
       "restaurant": "Saji Nusantara ovqatlanish zali",
-      "buffet": "Saji Nusantara bufet peshtaxtasi",
       "cafe": "7oz Espresso kafesi",
       "lounge": "Lounge Bar interyeri"
     },
@@ -365,8 +364,7 @@
           "Halol sertifikatlangan"
         ],
         "gallery": {
-          "diningRoom": "Saji Nusantara ovqatlanish zali",
-          "buffetCounter": "Saji Nusantara bufet peshtaxtasi"
+          "diningRoom": "Saji Nusantara ovqatlanish zali"
         }
       },
       "cafe": {
@@ -640,7 +638,6 @@
     "images": {
       "hotelExterior": "Quyosh botishida HADITH Hotel tashqi ko'rinishi",
       "restaurant": "HADITH Hotel'dagi restoran ovqatlanish zali",
-      "buffet": "HADITH Hotel'dagi bufet tajribasi",
       "cafe": "HADITH Hotel'dagi 7oz Espresso",
       "cafeCounter": "7oz Espresso qahva va pishiriqlar peshtaxtasi",
       "lounge": "HADITH Hotel'dagi Lounge Bar",

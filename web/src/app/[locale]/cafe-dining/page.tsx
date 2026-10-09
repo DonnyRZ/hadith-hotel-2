@@ -30,13 +30,6 @@ export default async function CafeDiningPage() {
       mobilePosition: "50% 50%",
     },
     {
-      id: "dining-hero-buffet",
-      label: t("hero.buffet"),
-      src: FACILITY_IMAGES.buffet,
-      position: "50% 50%",
-      mobilePosition: "70% 50%",
-    },
-    {
       id: "dining-hero-cafe",
       label: t("hero.cafe"),
       src: FACILITY_IMAGES.cafe,

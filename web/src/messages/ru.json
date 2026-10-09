@@ -347,7 +347,6 @@
     "metaDescription": "Рестораны HADITH Hotel в Самарканде — Saji Nusantara, 7oz Espresso Cafe и Lounge Bar.",
     "hero": {
       "restaurant": "Обеденный зал Saji Nusantara",
-      "buffet": "Буфетная стойка Saji Nusantara",
       "cafe": "Кафе 7oz Espresso",
       "lounge": "Интерьер Lounge Bar"
     },
@@ -365,8 +364,7 @@
           "Сертифицировано халяль"
         ],
         "gallery": {
-          "diningRoom": "Обеденный зал Saji Nusantara",
-          "buffetCounter": "Буфетная стойка Saji Nusantara"
+          "diningRoom": "Обеденный зал Saji Nusantara"
         }
       },
       "cafe": {
@@ -640,7 +638,6 @@
     "images": {
       "hotelExterior": "Фасад HADITH Hotel на закате",
       "restaurant": "Обеденный зал ресторана в HADITH Hotel",
-      "buffet": "Буфетное угощение в HADITH Hotel",
       "cafe": "7oz Espresso в HADITH Hotel",
       "cafeCounter": "Кофейная стойка и витрина с выпечкой в 7oz Espresso",
       "lounge": "Lounge Bar в HADITH Hotel",

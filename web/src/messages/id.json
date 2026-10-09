@@ -347,7 +347,6 @@
     "metaDescription": "Kuliner di HADITH Hotel, Samarkand — restoran Saji Nusantara, 7oz Espresso Cafe, dan Lounge Bar.",
     "hero": {
       "restaurant": "Ruang makan Saji Nusantara",
-      "buffet": "Counter buffet Saji Nusantara",
       "cafe": "Kafe 7oz Espresso",
       "lounge": "Interior Lounge Bar"
     },
@@ -365,8 +364,7 @@
           "Bersertifikat halal"
         ],
         "gallery": {
-          "diningRoom": "Ruang makan Saji Nusantara",
-          "buffetCounter": "Counter buffet Saji Nusantara"
+          "diningRoom": "Ruang makan Saji Nusantara"
         }
       },
       "cafe": {
@@ -640,7 +638,6 @@
     "images": {
       "hotelExterior": "Eksterior HADITH Hotel saat matahari terbenam",
       "restaurant": "Ruang makan restoran di HADITH Hotel",
-      "buffet": "Pengalaman bersantap buffet di HADITH Hotel",
       "cafe": "7oz Espresso di HADITH Hotel",
       "cafeCounter": "Counter kopi dan pastry di 7oz Espresso",
       "lounge": "Lounge Bar di HADITH Hotel",

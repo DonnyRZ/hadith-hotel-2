@@ -7,7 +7,6 @@ export const FACILITY_IMAGES = {
   hammam: "/images/facilities/hammam.webp",
   wedding: "/images/facilities/wedding.webp",
   restaurant: "/images/cafe-dining/restaurant.webp",
-  buffet: "/images/cafe-dining/restaurant-buffet.webp",
   cafe: "/images/cafe-dining/7oz-interior.webp",
   cafeCounter: "/images/cafe-dining/7oz-counter.webp",
 } as const;

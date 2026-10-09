@@ -24,7 +24,6 @@ const galleryImageConfigs: GalleryImageConfig[] = [
     roomTypeId: "president-suite",
   })),
   { id: "restaurant", key: "restaurant", src: FACILITY_IMAGES.restaurant },
-  { id: "buffet", key: "buffet", src: FACILITY_IMAGES.buffet },
   { id: "cafe", key: "cafe", src: FACILITY_IMAGES.cafe },
   { id: "cafe-counter", key: "cafeCounter", src: FACILITY_IMAGES.cafeCounter },
   { id: "lounge", key: "lounge", src: "/images/cafe-dining/lounge-bar.png" },

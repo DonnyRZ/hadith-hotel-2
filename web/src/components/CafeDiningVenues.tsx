@@ -38,7 +38,6 @@ const venues: Venue[] = [
     variant: "blue",
     gallery: [
       { src: FACILITY_IMAGES.restaurant, labelKey: "diningRoom", position: "50% 50%" },
-      { src: FACILITY_IMAGES.buffet, labelKey: "buffetCounter", position: "65% 50%" },
     ],
   },
   {
