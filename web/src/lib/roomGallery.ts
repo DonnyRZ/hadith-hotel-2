@@ -22,6 +22,7 @@ export const ALL_ROOMS_GALLERY_IMAGES: Partial<
   "deluxe-double-balcony": [
     "/images/rooms/deluxe-double-balcony-1.webp",
     "/images/rooms/deluxe-double-balcony-2.webp",
+    "/images/rooms/deluxe-balcony-panorama.webp",
   ],
   "deluxe-king": [
     "/images/rooms/deluxe-king-1.webp",
@@ -30,5 +31,6 @@ export const ALL_ROOMS_GALLERY_IMAGES: Partial<
   "deluxe-king-balcony": [
     "/images/rooms/deluxe-king-balcony-1.webp",
     "/images/rooms/deluxe-king-balcony-2.webp",
+    "/images/rooms/deluxe-balcony-panorama.webp",
   ],
 };
