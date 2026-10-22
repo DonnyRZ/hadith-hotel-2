@@ -38,6 +38,11 @@ const galleryImageConfigs: GalleryImageConfig[] = [
   { id: "tennis-court", key: "tennisCourt", src: "/images/experience/tennis.webp" },
   { id: "padel-court", key: "padelCourt", src: "/images/experience/padel.webp" },
   { id: "playground", key: "playground", src: "/images/experience/playground.webp" },
+  {
+    id: "imam-bukhari-courtyard-night",
+    key: "courtyardGathering",
+    src: "/images/gallery/imam-bukhari-courtyard-night.png",
+  },
 ];
 
 function GalleryLightbox({
