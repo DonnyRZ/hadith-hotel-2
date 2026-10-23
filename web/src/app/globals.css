@@ -4709,6 +4709,10 @@ body.has-room-lightbox .site-header__utility {
   user-select: none;
 }
 
+.video-reviews__video-preview--edge-crop {
+  transform: scale(1.035);
+}
+
 .video-reviews__play {
   position: absolute;
   left: 50%;

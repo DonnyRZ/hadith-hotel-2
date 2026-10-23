@@ -570,7 +570,11 @@ function VideoReviewsCarousel({
                   />
                 ) : (
                   <video
-                    className="video-reviews__video-preview"
+                    className={`video-reviews__video-preview${
+                      review.id === "vahap-sanal"
+                        ? " video-reviews__video-preview--edge-crop"
+                        : ""
+                    }`}
                     src={asset(review.src)}
                     muted
                     autoPlay
