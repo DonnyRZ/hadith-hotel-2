@@ -104,6 +104,11 @@ const videoReviewConfigs: VideoReviewConfig[] = [
     src: "/videos/mochamad-irfan-yusuf-hasyim.mp4",
     poster: "/images/testimonials/mochamad-irfan-yusuf-hasyim.webp",
   },
+  {
+    id: "vahap-sanal",
+    personKey: "vahapSanal",
+    src: "/videos/vahap-sanal-gm.mp4",
+  },
 ];
 
 const landscapeReviewConfig: VideoReviewConfig = {
@@ -199,6 +204,12 @@ const testimonialConfigs: TestimonialConfig[] = [
     personKey: "mochamadIrfanYusufHasyim",
     quoteKey: "mochamadIrfanYusufHasyim",
     photo: "/images/testimonials/mochamad-irfan-yusuf-hasyim.webp",
+  },
+  {
+    id: "vahap-sanal",
+    personKey: "vahapSanal",
+    quoteKey: "vahapSanal",
+    photo: "/images/testimonials/vahap-sanal.png",
   },
 ];
 

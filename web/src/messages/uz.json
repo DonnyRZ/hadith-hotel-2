@@ -563,7 +563,8 @@
       "muhamadRozaimiBinRamle": { "name": "Prof. Dr. Muhamad Rozaimi bin Ramle", "role": "Tuanku Syed Sirajuddin Islom Xalqaro Universiteti (UniSIRAJ) prorektori, Perlis, Malayziya" },
       "mohdAsriBinZainulAbidin": { "name": "Dr. Mohd Asri bin Zainul Abidin (Dr. MAZA)", "role": "Perlis shtati muftiysi, Malayziya" },
       "rafedahBintiAbdulAziz": { "name": "Rafedah binti Abdul Aziz", "role": "Malayziyaning O‘zbekistondagi elchisi" },
-      "mochamadIrfanYusufHasyim": { "name": "K.H. Mochamad Irfan Yusuf Hasyim", "role": "Indoneziya Respublikasi Haj va Umra vaziri" }
+      "mochamadIrfanYusufHasyim": { "name": "K.H. Mochamad Irfan Yusuf Hasyim", "role": "Indoneziya Respublikasi Haj va Umra vaziri" },
+      "vahapSanal": { "name": "Vahap Sanal", "role": "GM Turkey" }
     },
     "testimonialQuotes": {
       "syekhMohamedElDuwaini": "Ajoyib xizmat ko'rsatuvchi zo'r mehmonxona. Alloh uning davomli muvaffaqiyatini barakali qilsin.",
@@ -578,7 +579,8 @@
       "muhamadRozaimiBinRamle": "Chiroyli mehmonxona, samimiy mehmondo'stlik va e'tiborli xizmat.",
       "mohdAsriBinZainulAbidin": "Nafis muhit va e'tiborli xizmat tashrifimizni yoqimli qildi.",
       "rafedahBintiAbdulAziz": "Shinam turar joy va samimiy mehmondo'stlik tashrifimizni esda qolarli qildi.",
-      "mochamadIrfanYusufHasyim": "HADITH Hotel — Indoneziya muhitiga ega besh yulduzli mehmonxona. Imom Buxoriy muzeyiga yaqin strategik joylashuvi uni turizm va diniy turizmni, ayniqsa Indoneziyadan keladigan ziyoratchilar uchun, rivojlantirishda muhim o‘ringa ega qiladi."
+      "mochamadIrfanYusufHasyim": "HADITH Hotel — Indoneziya muhitiga ega besh yulduzli mehmonxona. Imom Buxoriy muzeyiga yaqin strategik joylashuvi uni turizm va diniy turizmni, ayniqsa Indoneziyadan keladigan ziyoratchilar uchun, rivojlantirishda muhim o‘ringa ega qiladi.",
+      "vahapSanal": "7oz Espresso’da hamma narsa juda sifatli — finjondan tortib qahvagacha."
     },
     "videoReviews": {
       "ariaLabel": "Mehmonlarning video sharhlari",
