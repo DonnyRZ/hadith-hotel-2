@@ -564,7 +564,8 @@
       "mohdAsriBinZainulAbidin": { "name": "Dr. Mohd Asri bin Zainul Abidin (Dr. MAZA)", "role": "Mufti Kerajaan Negeri Perlis, Malaysia" },
       "rafedahBintiAbdulAziz": { "name": "Rafedah binti Abdul Aziz", "role": "Duta Besar Malaysia untuk Uzbekistan" },
       "mochamadIrfanYusufHasyim": { "name": "K.H. Mochamad Irfan Yusuf Hasyim", "role": "Menteri Haji dan Umrah, Republik Indonesia" },
-      "vahapSanal": { "name": "Vahap Sanal", "role": "Chess Grand Master, Turkey" }
+      "vahapSanal": { "name": "Vahap Sanal", "role": "Chess Grand Master, Turkey" },
+      "ustazAdiHidayat": { "name": "Ustaz Adi Hidayat", "role": "Ulama Indonesia" }
     },
     "testimonialQuotes": {
       "syekhMohamedElDuwaini": "Hotel yang luar biasa dengan pelayanan yang sangat baik. Semoga Allah senantiasa memberkati kesuksesannya.",
@@ -580,7 +581,8 @@
       "mohdAsriBinZainulAbidin": "Suasana elegan dan pelayanan penuh perhatian membuat kunjungan terasa menyenangkan.",
       "rafedahBintiAbdulAziz": "Menginap dengan nyaman dan keramahan yang baik membuat kunjungan berkesan.",
       "mochamadIrfanYusufHasyim": "HADITH Hotel adalah hotel bintang lima dengan suasana Indonesia. Lokasinya yang strategis, dekat Museum Imam Bukhari, menjadikannya bagian penting dalam pengembangan pariwisata dan wisata religi, terutama bagi jemaah dari Indonesia.",
-      "vahapSanal": "Kualitas semuanya sangat bagus di 7oz Espresso, mulai dari cangkir hingga kopinya."
+      "vahapSanal": "Kualitas semuanya sangat bagus di 7oz Espresso, mulai dari cangkir hingga kopinya.",
+      "ustazAdiHidayat": "Sambutan hangat untuk HADITH Hotel, dengan harapan dapat memberi kenyamanan fisik dan spiritual bagi umat Islam yang berkunjung ke kompleks Imam Bukhari."
     },
     "videoReviews": {
       "ariaLabel": "Ulasan video tamu",
@@ -768,6 +770,20 @@
         "p1": "Hadith Hotel resmi menggelar soft opening di kawasan prestisius Kompleks Imam Al-Bukhari, Samarkand, Uzbekistan, Sabtu (5/9/2026). Berjarak kurang dari satu kilometer dari pusat ziarah Makam Imam Muhammad Al-Bukhari, hotel yang dikembangkan PT EGI Resources ini menawarkan konsep akomodasi modern yang memadukan nuansa Uzbekistan dengan kenyamanan berstandar internasional.",
         "p2": "Hadith Hotel memiliki 114 kamar dan suite dengan kapasitas okupansi hingga 250 orang. Tujuh tipe kamar disiapkan untuk memenuhi kebutuhan peziarah, wisatawan, hingga tamu VIP: President Suite, Junior Suite, Suite, Deluxe Twin, Deluxe Twin with Balcony, Deluxe King, dan Deluxe King with Balcony. Lokasinya yang berada di kawasan Imam Al-Bukhari menjadikan hotel ini memiliki posisi strategis bagi wisatawan yang datang untuk melakukan ziarah sekaligus menjelajahi kekayaan sejarah dan budaya Samarkand.",
         "p3": "Selain akomodasi, Hadith Hotel menawarkan berbagai fasilitas premium, di antaranya Saji Nusantara Restaurant yang membawa cita rasa kuliner Indonesia, Uzbek Cuisine Bar & Lounge, kolam renang indoor, pusat kebugaran, spa, sauna, Turkish Hammam, serta fasilitas olahraga berupa lapangan tenis dan padel court. Kehadiran hotel ini diharapkan tidak hanya memperkuat sektor hospitality di Samarkand, tetapi juga menjadi jembatan pertukaran budaya antara Indonesia dan Uzbekistan melalui pariwisata dan keramahan khas Nusantara."
+      }
+    },
+    "ustazAdiHidayat": {
+      "title": "Ustaz Adi Hidayat Apresiasi Hadith Hotel dan Hotel Kampoeng Indonesia di Samarkand",
+      "body": "Ustaz Adi Hidayat bersama rombongan mengunjungi Hadith Hotel dan Hotel Kampoeng Indonesia di kompleks makam Imam Bukhari, Samarkand, Uzbekistan, pada Kamis, 29 Oktober 2026.",
+      "cta": "Baca Artikel",
+      "kicker": "Berita Samarkand",
+      "date": "29 Oktober 2026",
+      "imageAlt": "Ustaz Adi Hidayat bersama rombongan di depan hotel di Samarkand.",
+      "article": {
+        "heading": "Kunjungan ke dua hotel Indonesia di Samarkand",
+        "p1": "Ustaz Adi Hidayat bersama rombongan mengunjungi Hadith Hotel dan Hotel Kampoeng Indonesia di kompleks makam Imam Bukhari, Samarkand, Uzbekistan, pada Kamis, 29 Oktober 2026. Kunjungan diawali dengan menyambangi Hadith Hotel, kemudian dilanjutkan ke Hotel Kampoeng Indonesia. Dalam kunjungan tersebut, Ustaz Adi Hidayat dan rombongan didampingi oleh Erslan Ibrahim, Founder & CEO EGI Resources, perusahaan investasi asal Indonesia yang memiliki kedua hotel tersebut.",
+        "p2": "Saat mengunjungi Hadith Hotel, Ustaz Adi Hidayat menyambut hangat kehadiran hotel tersebut. Ia berharap Hadith Hotel tidak hanya memberikan kenyamanan secara fisik bagi para tamu, tetapi juga menghadirkan kenyamanan secara spiritual, terutama bagi umat Islam yang berkunjung ke kawasan bersejarah makam Imam Bukhari.",
+        "p3": "Sementara itu, saat berkunjung ke Hotel Kampoeng Indonesia, Ustaz Adi Hidayat menyampaikan apresiasi atas upaya menghadirkan khazanah Indonesia di Samarkand. Kehadiran hotel ini dinilai membawa identitas dan kekayaan budaya Nusantara ke luar negeri, sekaligus memperkenalkan nuansa Indonesia kepada para pengunjung di salah satu kawasan penting dalam sejarah peradaban Islam."
       }
     }
   }

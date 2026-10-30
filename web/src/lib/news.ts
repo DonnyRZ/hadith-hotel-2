@@ -1,4 +1,5 @@
 export type NewsStoryId =
+  | "ustaz-adi-hidayat"
   | "swan-x-2026"
   | "soft-opening"
   | "indonesian-touch"
@@ -9,6 +10,7 @@ export type NewsStory = {
   id: NewsStoryId;
   href:
     | "/stories/swan-x-2026"
+    | "/stories/ustaz-adi-hidayat"
     | "/stories/soft-opening"
     | "/stories/indonesian-touch"
     | "/stories/chess-olympiad"
@@ -19,6 +21,7 @@ export type NewsStory = {
   uncropped: boolean;
   dateISO?: string;
   namespace:
+    | "stories.ustazAdiHidayat"
     | "stories.swanX2026"
     | "stories.softOpening"
     | "stories.indonesianTouch"
@@ -27,6 +30,16 @@ export type NewsStory = {
 };
 
 export const NEWS_STORIES: readonly NewsStory[] = [
+  {
+    id: "ustaz-adi-hidayat",
+    href: "/stories/ustaz-adi-hidayat",
+    image: "/images/news/ustaz-adi-hidayat-samarkand.png",
+    width: 1040,
+    height: 585,
+    uncropped: true,
+    dateISO: "2026-10-29",
+    namespace: "stories.ustazAdiHidayat",
+  },
   {
     id: "swan-x-2026",
     href: "/stories/swan-x-2026",

@@ -109,6 +109,12 @@ const videoReviewConfigs: VideoReviewConfig[] = [
     personKey: "vahapSanal",
     src: "/videos/vahap-sanal-gm.mp4",
   },
+  {
+    id: "ustaz-adi-hidayat",
+    personKey: "ustazAdiHidayat",
+    src: "/videos/ustaz-adi-hidayat-indonesia.mp4",
+    poster: "/images/testimonials/ustaz-adi-hidayat.png",
+  },
 ];
 
 const landscapeReviewConfig: VideoReviewConfig = {
@@ -210,6 +216,12 @@ const testimonialConfigs: TestimonialConfig[] = [
     personKey: "vahapSanal",
     quoteKey: "vahapSanal",
     photo: "/images/testimonials/vahap-sanal.png",
+  },
+  {
+    id: "ustaz-adi-hidayat",
+    personKey: "ustazAdiHidayat",
+    quoteKey: "ustazAdiHidayat",
+    photo: "/images/testimonials/ustaz-adi-hidayat.png",
   },
 ];
 
