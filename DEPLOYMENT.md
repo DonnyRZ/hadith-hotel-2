@@ -38,4 +38,6 @@ An older CI run is skipped if `main` has moved forward. Commits containing `[ski
 - The app directory writable by `VPS_USER`; `VPS_APP_DIR` must be an absolute path without spaces.
 - Any reverse proxy should route to `127.0.0.1:3006`.
 
+For the `hadith-hotel.com` Nginx virtual host, set `proxy_max_temp_file_size 0;` in the `location /` block that proxies to `127.0.0.1:3006`. This keeps proxied responses out of the shared temporary directory. If Nginx cannot write to that directory, a large image can be cut off after Nginx has already sent HTTP 200. After changing the virtual host, validate with `nginx -t`, reload Nginx, and confirm a full download of a large image from the public site.
+
 The VPS and PostgreSQL passwords were shared in chat. Rotate them and update the GitHub environment secrets before production use. Confirm that the PostgreSQL secret belongs to the `hadith` role expected by `docker-compose.yml`.
