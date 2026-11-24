@@ -94,6 +94,7 @@
         "accommodation": {
           "title": "Номерной фонд",
           "roomsSuites": "Номера и люксы",
+          "roomHeating": "Отопление в номерах",
           "roomTypes": {
             "president-suite": "President Suite",
             "junior-suite": "Junior Suite",
@@ -305,6 +306,7 @@
         "Тапочки"
       ],
       "foodBeverages": ["Электрочайник", "Холодильник"],
+      "roomHeating": "Отопление в номерах",
       "baseRoomFeatures": [
         "Кондиционер",
         "Сейф",
@@ -331,6 +333,7 @@
       }
     },
     "detail": {
+      "roomHeatingImageAlt": "Настенная панель управления отоплением в номере",
       "closeDetails": "Закрыть информацию о номере",
       "close": "Закрыть",
       "galleryAria": "Фотогалерея: {name}",

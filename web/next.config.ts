@@ -5,6 +5,16 @@ const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  async redirects() {
+    return [
+      {
+        // Keep previously shared Lounge Bar photo URLs working.
+        source: "/images/cafe-dining/lounge-bar.png",
+        destination: "/images/cafe-dining/lounge-bar.webp",
+        permanent: true,
+      },
+    ];
+  },
   async rewrites() {
     // Serve the default locale ([locale]=en) without a middleware rewrite.
     // Next 16.2+ leaks next-intl's "/" → "/en" rewrite as `307 Location: /`.

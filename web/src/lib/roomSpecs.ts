@@ -33,7 +33,10 @@ export function getRoomSpecs(t: Translator, room: RoomType): SpecGroup[] | null 
       title: t("specs.groupTitles.bedsAndBedding"),
       items: t.raw("specs.bedding") as string[],
     },
-    { title: t("specs.groupTitles.roomFeatures"), items: roomFeatures },
+    {
+      title: t("specs.groupTitles.roomFeatures"),
+      items: [t("specs.roomHeating"), ...roomFeatures],
+    },
     {
       title: t("specs.groupTitles.bathroom"),
       items: t.raw("specs.bathroom") as string[],

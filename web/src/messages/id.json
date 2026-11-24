@@ -94,6 +94,7 @@
         "accommodation": {
           "title": "Akomodasi",
           "roomsSuites": "Kamar & Suite",
+          "roomHeating": "Pemanas kamar",
           "roomTypes": {
             "president-suite": "President Suite",
             "junior-suite": "Junior Suite",
@@ -305,6 +306,7 @@
         "Sandal"
       ],
       "foodBeverages": ["Ketel listrik", "Kulkas"],
+      "roomHeating": "Pemanas kamar",
       "baseRoomFeatures": [
         "Berpendingin udara",
         "Kotak penyimpanan aman",
@@ -331,6 +333,7 @@
       }
     },
     "detail": {
+      "roomHeatingImageAlt": "Panel pengatur pemanas kamar di dinding",
       "closeDetails": "Tutup detail kamar",
       "close": "Tutup",
       "galleryAria": "Galeri foto {name}",

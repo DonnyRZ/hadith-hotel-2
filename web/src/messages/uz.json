@@ -94,6 +94,7 @@
         "accommodation": {
           "title": "Turar joy",
           "roomsSuites": "Xonalar va lyukslar",
+          "roomHeating": "Xonani isitish",
           "roomTypes": {
             "president-suite": "President Suite",
             "junior-suite": "Junior Suite",
@@ -305,6 +306,7 @@
         "Shippak"
       ],
       "foodBeverages": ["Elektr choynak", "Muzlatgich"],
+      "roomHeating": "Xonani isitish",
       "baseRoomFeatures": [
         "Konditsioner",
         "Seyf",
@@ -331,6 +333,7 @@
       }
     },
     "detail": {
+      "roomHeatingImageAlt": "Xona isitishini boshqarish uchun devorga o‘rnatilgan panel",
       "closeDetails": "Xona tafsilotlarini yopish",
       "close": "Yopish",
       "galleryAria": "{name} foto galereyasi",

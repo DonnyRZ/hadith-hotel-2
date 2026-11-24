@@ -94,6 +94,7 @@
         "accommodation": {
           "title": "Accommodation",
           "roomsSuites": "Rooms & Suites",
+          "roomHeating": "In-room heating",
           "roomTypes": {
             "president-suite": "President Suite",
             "junior-suite": "Junior Suite",
@@ -305,6 +306,7 @@
         "Slippers"
       ],
       "foodBeverages": ["Electric kettle", "Refrigerator"],
+      "roomHeating": "In-room heating",
       "baseRoomFeatures": [
         "Air-conditioned",
         "Safe deposit box",
@@ -331,6 +333,7 @@
       }
     },
     "detail": {
+      "roomHeatingImageAlt": "Wall-mounted room heating controls",
       "closeDetails": "Close room details",
       "close": "Close",
       "galleryAria": "{name} photo gallery",

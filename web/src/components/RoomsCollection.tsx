@@ -6,14 +6,14 @@ import { RoomDetailModal } from "@/components/RoomDetailModal";
 import SiteImage from "@/components/SiteImage";
 import { RoomImagePlaceholder } from "@/components/RoomImagePlaceholder";
 import { getRoomName, getRoomSpecs } from "@/lib/roomSpecs";
-import { ALL_ROOMS_GALLERY_IMAGES } from "@/lib/roomGallery";
+import { ALL_ROOMS_GALLERY_IMAGES, ROOM_HEATING_IMAGE } from "@/lib/roomGallery";
 import { roomTypes, type RoomType } from "@/lib/rooms";
 
 type Tab = "all" | "accessible";
 
 const allRoomsTypes = roomTypes.map((room) => ({
   ...room,
-  images: ALL_ROOMS_GALLERY_IMAGES[room.id] ?? room.images,
+  images: [...(ALL_ROOMS_GALLERY_IMAGES[room.id] ?? room.images), ROOM_HEATING_IMAGE],
 }));
 const presidentSuite = allRoomsTypes.find((room) => room.id === "president-suite")!;
 const collectionRoomTypes = allRoomsTypes.filter((room) => room.id !== "president-suite");

@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 import SiteImage from "@/components/SiteImage";
 import { RoomImagePlaceholder } from "@/components/RoomImagePlaceholder";
+import { ROOM_HEATING_IMAGE } from "@/lib/roomGallery";
 import type { RoomType } from "@/lib/rooms";
 import type { SpecGroup } from "@/lib/roomSpecs";
 
@@ -74,6 +75,8 @@ export function RoomDetailModal({ room, name, specs, onClose }: RoomDetailModalP
 
   if (!room || !specs) return null;
 
+  const activeImage = room.images[imageIndex] ?? room.images[0];
+
   return createPortal(
     <div className="room-detail" role="presentation">
       <button
@@ -111,10 +114,10 @@ export function RoomDetailModal({ room, name, specs, onClose }: RoomDetailModalP
             aria-label={imageCount > 0 ? t("galleryAria", { name }) : undefined}
           >
             <div className="room-detail__photo">
-              {imageCount > 0 ? <SiteImage
+              {activeImage ? <SiteImage
                 className="room-detail__image"
-                src={room.images[imageIndex] ?? room.images[0]!}
-                alt={name}
+                src={activeImage}
+                alt={activeImage === ROOM_HEATING_IMAGE ? t("roomHeatingImageAlt") : name}
                 fill
                 sizes="100vw"
               /> : <RoomImagePlaceholder />}

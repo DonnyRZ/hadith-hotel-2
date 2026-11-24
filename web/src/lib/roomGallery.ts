@@ -1,5 +1,7 @@
 import type { RoomType } from "@/lib/rooms";
 
+export const ROOM_HEATING_IMAGE = "/images/rooms/room-heating-controls.jpeg";
+
 export const PRESIDENT_SUITE_IMAGES = [
   "/images/rooms/president-suite-1.webp",
   "/images/rooms/president-suite-2.webp",

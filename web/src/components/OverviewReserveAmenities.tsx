@@ -45,6 +45,7 @@ const leftGroups: AmenityGroup[] = [
         key: `groups.accommodation.roomTypes.${room.id}`,
         href: `/suites-rooms#room-${room.id}`,
       })),
+      { key: "groups.accommodation.roomHeating", href: "/suites-rooms" },
     ],
   },
   {
